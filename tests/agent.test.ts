@@ -145,6 +145,7 @@ describe("agent, LLM planner", () => {
     const result = await runAgent(normaliseInput({ artist: "Noah Kahan", region: "north-america" }), { client, bindCalls: () => {}, emit: (e) => events.push(e), runId: "t", today: TODAY, llm });
     expect(result.mode.planner).toBe("llm");
     expect(result.brief.headline).toBe("Model headline");
+    expect(result.brief.routing).toMatch(/^r Full route \(8 dates/);
     expect(result.steps[0].thought).toBe("I need the artist ID first.");
     expect(result.steps[0].args).toEqual({ name: "Noah Kahan" });
     // finish was called early, so the guard ran the missing decisions itself

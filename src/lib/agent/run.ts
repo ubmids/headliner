@@ -192,7 +192,7 @@ export async function runAgent(input: RunInput, deps: RunDeps): Promise<RunResul
     const template = templateBrief(plan, contrast);
     const brief: BriefText = {
       headline: finishArgs?.headline?.trim() || template.headline,
-      routing: finishArgs?.routing?.trim() || template.routing,
+      routing: withFullRoute(finishArgs?.routing?.trim(), plan) || template.routing,
       support: finishArgs?.support?.trim() || template.support,
       sponsors: finishArgs?.sponsors?.trim() || template.sponsors,
     };
@@ -218,6 +218,14 @@ export async function runAgent(input: RunInput, deps: RunDeps): Promise<RunResul
     deps.emit({ type: "error", message });
     throw err;
   }
+}
+
+/** The LLM writes its paragraph before the route is final; make sure every stop is named. */
+export function withFullRoute(text: string | undefined, plan: TourPlan): string | undefined {
+  if (!text) return undefined;
+  const cities = plan.route.order.map((k) => k.split(",")[0]);
+  const missing = cities.filter((c) => !text.includes(c));
+  return missing.length ? `${text} Full route (${cities.length} dates, ${plan.route.km.toLocaleString("en-US")} km): ${cities.join(" → ")}.` : text;
 }
 
 /** Pick the tour: top N markets by score, ordered into a drivable route. */

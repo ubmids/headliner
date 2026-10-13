@@ -1,0 +1,26 @@
+# Example: LLM-planned run (fixture mode)
+
+A real tool-calling LLM (Qwen3-VL-4B-Instruct Q4_K_M on CPU via llama.cpp `llama-server --jinja`) planning Noah Kahan's tour through Headliner's tools on 13 Oct 2026. Every tool name, argument and reason below was chosen by the model. Qloo answers came from **fixture mode**, so the names and scores are illustrative placeholders, not Qloo data. Steps 11–13 are Headliner's own fact-check and gap-filling steps, which run after the model calls `finish`.
+
+```
+ [42s] 1. resolve_artist {"name":"Noah Kahan"} :: Start by resolving Noah Kahan as the headliner in Qloo to get his entity ID and popularity for subsequent analysis. => Matched "Noah Kahan" (popularity percentile 96).
+ [52s] 2. discover_markets {"limit":14} :: Discover the markets where Noah Kahan's fans concentrate across the US and Canada using Qloo's heatmap. => 50 heatmap points → 14 cities. Hottest: Burlington 99, Portland 97, Portsmouth 95, Boston 94, Albany 90.
+ [80s] 3. rank_cities {"cities":["Burlington, VT","Portland, ME","Portsmouth, NH","Boston, MA","Albany, NY","Seattle, WA", :: Rank the top 14 cities from the heatmap to confirm affinity scores for Noah Kahan's tour routing. => Scored 11/14 cities. Burlington 96, Boston 92, Portsmouth 91, Portland 90, Albany 87, Denver 77. 3 lookups failed
+ [100s] 4. find_venues {"markets":["Burlington, VT","Boston, MA","Portsmouth, NH","Portland, ME","Albany, NY"]} :: Identify venues in the top 5 cities (Burlington, Boston, Portsmouth, Portland, Albany) that align with Noah Kahan’s audi => Burlington: Higher Ground; Boston: MGM Music Hall at Fenway; Portsmouth: The Music Hall; Portland: Thompson's Point; Albany: MVP Arena
+ [113s] 5. find_support_acts {"max_popularity":0.96} :: Find support acts that Noah Kahan’s fans also love but who are less popular, to ensure fan overlap. => 7 candidates under popularity 96: Gregory Alan Isakov, Caamp, Gracie Abrams, Lizzy McAlpine, Wild Rivers.
+ [133s] 6. support_overlap_by_market {"markets":["Burlington, VT","Boston, MA","Portsmouth, NH","Portland, ME","Albany, NY"]} :: Rank the support act candidates by how much Noah Kahan’s fans in each of the top 5 cities like them. => Best local fit → Burlington: Gregory Alan Isakov; Boston: Lizzy McAlpine; Portsmouth: Caamp; Portland: Gregory Alan Isakov; Albany: Gregory 
+ [149s] 7. explain_overlap {"support_act_ids":["Gregory Alan Isakov","Lizzy McAlpine","Caamp"]} :: Explain why the selected support acts overlap with Noah Kahan’s fanbase in each market using Qloo’s audience comparison. => Gregory Alan Isakov: Indie Folk, Rural Nostalgia, Acoustic, Storytelling | Caamp: Folk Pop, Banjo, Singalong, Road Trip | Lizzy McAlpine: no
+ [178s] 8. find_sponsors {"markets":["Burlington, VT","Boston, MA","Portsmouth, NH","Portland, ME","Albany, NY"],"categories" :: Identify brands Noah Kahan’s audience over-indexes on, region-wide and per market, to guide sponsorship and merch strate => Food & drink: Cabot Creamery, Ben & Jerry's, Liquid Death (+2 local-only leads) | Fashion & apparel: L.L.Bean, Patagonia, Carhartt (+1 local
+ [208s] 9. find_local_partners {"markets":["Burlington, VT","Boston, MA","Portsmouth, NH","Portland, ME","Albany, NY"]} :: Identify bars near each of the top 5 cities that align with Noah Kahan’s audience taste for pre/post-show hospitality. => Burlington: Radio Bean, Foam Brewers; Boston: none; Portsmouth: none; Portland: Oxbow Blending & Bottling, Novare Res; Albany: none
+ [225s] 10. audience_trend {} :: Check if Noah Kahan’s audience is growing to size the tour appropriately (rooms vs. arenas). => 12 data points; audience rising, now at the 94th percentile.
+ [297s] 11. rank_cities {"cities":["Toronto, ON"]} :: Fact-checking the plain LLM: scoring its 1 unscored cities with the same Qloo affinity call I used for mine. => Scored 1/1 cities. Toronto 67
+ [297s] 12. find_venues {"markets":["Providence, RI","Minneapolis, MN","Denver, CO"]} :: The final route includes 3 stops I haven't looked at venues for yet (Providence, Minneapolis, Denver); filling those in. => Providence: The Strand; Minneapolis: Placeholder venue A (Minneapolis); Denver: Placeholder venue A (Denver)
+ [297s] 13. score_named_artists {"names":["Lilith Saltwell","Jesse Rutherford"]} :: Checking the plain LLM's opening-act picks against the headliner's real audience overlap. => Lilith Saltwell: not found, Jesse Rutherford: not found
+ BRIEF {
+  "headline": "Noah Kahan: The Acoustic Heart of America Tour",
+  "routing": "Qloo data confirms top affinity in Burlington, VT (96), Boston, MA (92), Portsmouth, NH (91), Portland, ME (90), and Albany, NY (87) — venues include Higher Ground, MGM Music Hall at Fenway, The Music Hall, Thompson’s Point, and MVP Arena.",
+  "support": "Support acts selected for maximum overlap: Gregory Alan Isakov (Burlington, Boston, Portland, Albany), Lizzy McAlpine (Boston), and Caamp (Portsmouth), all sharing core taste tags like Indie Folk, Storytelling, and Banjo.",
+  "sponsors": "Audience over-indexes on Cabot Creamery, Ben & Jerry’s, L.L.Bean, Patagonia, Heady Topper, and Allagash Brewing — ideal for merch and sponsor alignment across all five markets."
+ }
+ route Boston, MA > Providence, RI > Portsmouth, NH > Portland, ME > Burlington, VT > Albany, NY > Minneapolis, MN > Denver, CO calls 65 secs 297
+```
