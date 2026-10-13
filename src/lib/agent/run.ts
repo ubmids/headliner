@@ -117,7 +117,7 @@ export async function runAgent(input: RunInput, deps: RunDeps): Promise<RunResul
     try {
       if (!def) throw new Error(`Unknown tool ${tool}`);
       const res = await def.run(ctx, args);
-      if (["discover_markets", "rank_cities"].includes(tool)) plan.markets = scoreMarkets(plan.markets);
+      if (["discover_markets", "rank_cities"].includes(tool)) plan.markets = scoreMarkets(plan.markets, plan.heat);
       if (tool === "support_overlap_by_market" || tool === "find_support_acts") plan.supportActs = scoreSupportActs(plan.supportActs);
       step.status = "done";
       step.summary = res.summary;
@@ -215,7 +215,7 @@ export async function runAgent(input: RunInput, deps: RunDeps): Promise<RunResul
 
 /** Pick the tour: top N markets by score, ordered into a drivable route. */
 export function finalise(plan: TourPlan) {
-  plan.markets = scoreMarkets(plan.markets);
+  plan.markets = scoreMarkets(plan.markets, plan.heat);
   plan.supportActs = scoreSupportActs(plan.supportActs);
   const picks = plan.markets.filter((m) => m.tier !== "skip").slice(0, plan.dates);
   const chosen = picks.length >= Math.min(3, plan.markets.length) ? picks : plan.markets.slice(0, plan.dates);
@@ -241,8 +241,8 @@ export async function rulesPlanner(input: RunInput, plan: TourPlan, exec: Exec, 
     const top = plan.markets.slice(0, 12).map((m) => m.key);
     if (top.length) await exec("rank_cities", { cities: top }, "Confirming the heatmap's top cities with a second, independent Qloo signal: the artist's affinity when each city is the location signal.");
   }
-  const top5 = plan.markets.slice(0, 5).map((m) => m.key);
-  await exec("find_venues", { markets: top5 }, `Now venues: in the top ${top5.length} markets, which music venues draw people with this taste?`);
+  const stops = plan.markets.filter((m) => m.tier !== "skip").slice(0, Math.min(input.dates, 10)).map((m) => m.key);
+  await exec("find_venues", { markets: stops }, `Now venues: in the ${stops.length} markets likely to make the tour, which music venues draw people with this taste?`);
   await exec("find_support_acts", {}, "Opening act: artists these fans also love, capped below the headliner's popularity so they open rather than compete.");
   const top4 = plan.markets.slice(0, 4).map((m) => m.key);
   await exec("support_overlap_by_market", { markets: top4 }, "Overlap can differ city to city, so I'll re-rank the candidates against the headliner's fans in each top market.");

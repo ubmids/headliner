@@ -71,8 +71,18 @@ export interface SponsorCategory {
   localOnly: Array<{ market: string; brand: string }>;
 }
 
+export interface HeatCity {
+  key: string;
+  lat: number;
+  lon: number;
+  affinity: number;
+  popularity?: number;
+}
+
 export interface TourPlan {
   artist?: ArtistRef;
+  /** Every heatmap point Qloo returned for the region, folded to cities (drawn on the map, and the scale for scoring). */
+  heat: HeatCity[];
   regionId: RegionId;
   dates: number;
   candidateCities: string[];
@@ -92,6 +102,7 @@ export function emptyPlan(regionId: RegionId, dates: number, candidateCities: st
     regionId,
     dates,
     candidateCities,
+    heat: [],
     tasteTags: [],
     markets: [],
     route: { order: [], km: 0 },
@@ -114,11 +125,13 @@ function minMax(values: number[]): (v: number) => number {
  * Tiers: anchor (both high), sleeper (concentration high, volume low: the secondary market
  * an LLM overlooks), volume (big but diluted), skip.
  */
-export function scoreMarkets(markets: Market[]): Market[] {
+export function scoreMarkets(markets: Market[], heatScale: HeatCity[] = []): Market[] {
   if (markets.length === 0) return markets;
-  const heat = markets.filter((m) => m.heatAffinity !== undefined).map((m) => m.heatAffinity!);
+  // Scale against the whole region's heatmap when we have it, so "0" means "coldest city in the region",
+  // not "coldest of the handful we shortlisted".
+  const heat = [...heatScale.map((h) => h.affinity), ...markets.filter((m) => m.heatAffinity !== undefined).map((m) => m.heatAffinity!)];
   const local = markets.filter((m) => m.localAffinity !== undefined).map((m) => m.localAffinity!);
-  const pop = markets.filter((m) => m.heatPopularity !== undefined).map((m) => m.heatPopularity!);
+  const pop = [...heatScale.filter((h) => h.popularity !== undefined).map((h) => h.popularity!), ...markets.filter((m) => m.heatPopularity !== undefined).map((m) => m.heatPopularity!)];
   const nHeat = heat.length ? minMax(heat) : () => 0.5;
   const nLocal = local.length ? minMax(local) : () => 0.5;
   const nPop = pop.length ? minMax(pop) : () => 0.5;
@@ -129,10 +142,10 @@ export function scoreMarkets(markets: Market[]): Market[] {
     if (m.localAffinity !== undefined) parts.push([nLocal(m.localAffinity), m.heatAffinity !== undefined ? 0.4 : 1]);
     const w = parts.reduce((s, [, wt]) => s + wt, 0);
     const concentration = w ? parts.reduce((s, [v, wt]) => s + v * wt, 0) / w : 0;
-    const volume = m.heatPopularity !== undefined ? nPop(m.heatPopularity) : concentration;
+    const volume = m.heatPopularity !== undefined ? nPop(m.heatPopularity) : undefined;
     // Concentration drives the decision; volume nudges it (a full room beats a passionate empty one).
-    const score = Math.round((0.75 * concentration + 0.25 * volume) * 100);
-    const overIndex = Math.round((concentration - volume) * 100) / 100;
+    const score = Math.round((volume === undefined ? concentration : 0.75 * concentration + 0.25 * volume) * 100);
+    const overIndex = volume === undefined ? 0 : Math.round((concentration - volume) * 100) / 100;
     return { ...m, score, overIndex, concentration, volume };
   });
 
@@ -140,7 +153,8 @@ export function scoreMarkets(markets: Market[]): Market[] {
   return scored
     .map(({ concentration, volume, ...m }) => {
       let tier: MarketTier;
-      if (concentration >= 0.6 && volume >= 0.5) tier = "anchor";
+      if (volume === undefined) tier = m.score >= Math.max(55, medianScore) ? "anchor" : "skip";
+      else if (concentration >= 0.6 && volume >= 0.5) tier = "anchor";
       else if (concentration >= 0.55 && m.overIndex >= 0.15) tier = "sleeper";
       else if (volume >= 0.6) tier = "volume";
       else tier = m.score >= medianScore ? "anchor" : "skip";

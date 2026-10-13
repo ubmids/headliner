@@ -52,6 +52,12 @@ function marketFor(ctx: ToolContext, city: City): Market {
   let m = ctx.plan.markets.find((x) => x.key === key);
   if (!m) {
     m = { key, city: city.name, admin: city.admin, country: city.country, lat: city.lat, lon: city.lon, score: 0, overIndex: 0, tier: "skip", venues: [], localSpots: [], sources: [] };
+    const heat = ctx.plan.heat.find((h) => h.key === key);
+    if (heat) {
+      m.heatAffinity = heat.affinity;
+      m.heatPopularity = heat.popularity;
+      m.sources.push("heatmap");
+    }
     ctx.plan.markets.push(m);
   }
   return m;
@@ -81,7 +87,7 @@ function resolveMarkets(ctx: ToolContext, names: string[]): { markets: Market[];
 /** Markets the agent should go deep on: explicit list, else the current top N by score/affinity. */
 function topMarkets(ctx: ToolContext, args: Record<string, unknown>, n: number): Market[] {
   const named = strArr(args.markets);
-  if (named.length) return resolveMarkets(ctx, named).markets.slice(0, 8);
+  if (named.length) return resolveMarkets(ctx, named).markets.slice(0, 10);
   return [...ctx.plan.markets]
     .sort((a, b) => (b.score || 0) - (a.score || 0) || (b.heatAffinity ?? b.localAffinity ?? 0) - (a.heatAffinity ?? a.localAffinity ?? 0))
     .slice(0, n);
@@ -202,11 +208,21 @@ export const TOOLS: ToolDef[] = [
         if (p.query.popularity !== undefined) cur.pop.push(p.query.popularity);
         byCity.set(k, cur);
       }
-      const ranked = [...byCity.values()].sort((a, b) => b.aff - a.aff).slice(0, limit);
+      const all = [...byCity.values()].sort((a, b) => b.aff - a.aff);
+      const avg = (xs: number[]) => (xs.length ? xs.reduce((s, v) => s + v, 0) / xs.length : undefined);
+      ctx.plan.heat = all.map((r) => ({ key: cityLabel(r.city), lat: r.city.lat, lon: r.city.lon, affinity: r.aff, popularity: avg(r.pop) }));
+      // Markets that already exist (e.g. from the promoter's shortlist) pick up their heat values too.
+      for (const m of ctx.plan.markets) {
+        const h = ctx.plan.heat.find((x) => x.key === m.key);
+        if (h) {
+          m.heatAffinity = h.affinity;
+          m.heatPopularity = h.popularity;
+          if (!m.sources.includes("heatmap")) m.sources.push("heatmap");
+        }
+      }
+      const ranked = all.slice(0, limit);
       for (const r of ranked) {
         const m = marketFor(ctx, r.city);
-        m.heatAffinity = r.aff;
-        m.heatPopularity = r.pop.length ? r.pop.reduce((s, v) => s + v, 0) / r.pop.length : undefined;
         if (!m.sources.includes("heatmap")) m.sources.push("heatmap");
       }
       return {
