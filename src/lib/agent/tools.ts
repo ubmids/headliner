@@ -354,7 +354,9 @@ export const TOOLS: ToolDef[] = [
       const artist = requireArtist(ctx);
       let ids = strArr(args.support_act_ids);
       if (!ids.length) ids = ctx.plan.supportActs.slice(0, 2).map((a) => a.id);
-      const acts = ctx.plan.supportActs.filter((a) => ids.includes(a.id) || ids.includes(a.name)).slice(0, 3);
+      let acts = ctx.plan.supportActs.filter((a) => ids.includes(a.id) || ids.includes(a.name)).slice(0, 3);
+      if (!acts.length) acts = ctx.plan.supportActs.slice(0, 2); // e.g. the planner passed the headliner's own ID
+      if (!acts.length) throw new Error("Find support-act candidates first (find_support_acts).");
       await settle(acts, async (act) => {
         const res = await ctx.client.compare([artist.id], [act.id], { take: 8 });
         const r = res.results as unknown;

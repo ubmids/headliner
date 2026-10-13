@@ -1,0 +1,40 @@
+# Fly.io config for Headliner. Always on: judging runs 2-16 Nov 2026 and cold starts lose points.
+app = "headliner-qloo"            # change if the name is taken
+primary_region = "iad"            # US East, close to the judges
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "8080"
+  DATA_DIR = "/data"
+  QLOO_BASE_URL = "https://hackathon.api.qloo.com"
+  MAX_ACTIVE_RUNS = "3"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "off"      # never sleep
+  auto_start_machines = true
+  min_machines_running = 1        # no cold starts
+
+  [http_service.concurrency]
+    type = "requests"
+    soft_limit = 40
+    hard_limit = 80
+
+  [[http_service.checks]]
+    interval = "30s"
+    timeout = "5s"
+    grace_period = "20s"
+    method = "GET"
+    path = "/api/health"
+
+# Server-side cache of Qloo responses and finished runs survives deploys and restarts.
+[mounts]
+  source = "headliner_data"
+  destination = "/data"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "512mb"

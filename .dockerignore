@@ -1,0 +1,11 @@
+node_modules
+.next
+.data
+.env
+.env.*
+!.env.example
+fixtures/live
+docs/img
+tests
+coverage
+*.log

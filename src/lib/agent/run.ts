@@ -269,12 +269,25 @@ const SYSTEM_PROMPT = `You are Headliner, a tour-planning agent for live-music p
 Rules:
 - Every claim must come from a tool result. Do not name cities, artists or brands from memory.
 - Start with resolve_artist. Then build up evidence: taste/demographics, markets (discover_markets and/or rank_cities), venues, support acts (find_support_acts → support_overlap_by_market → explain_overlap), sponsors, local partners, trend.
-- Before each tool call, say in one short sentence why you are calling it.
+- Every tool call carries a one-sentence "reason": it is shown to the promoter as your reasoning.
 - Market names you pass to tools must be ones that tools returned (format "City, ST" or "City, UK").
 - When the evidence covers all three decisions, call finish with a headline and a short paragraph per decision that cites the Qloo scores you saw.`;
 
+/** Every tool (except finish) also takes a required `reason`, which becomes the step's line in the reasoning trace. */
 export function toolSpecs(): ToolSpec[] {
-  return [...TOOLS, FINISH_TOOL].map((t) => ({ type: "function", function: { name: t.name, description: t.description, parameters: t.parameters } }));
+  return [...TOOLS, FINISH_TOOL].map((t) => {
+    const params = t.parameters as { properties?: Record<string, unknown>; required?: string[] };
+    const parameters =
+      t.name === "finish"
+        ? t.parameters
+        : {
+            ...params,
+            type: "object",
+            properties: { reason: { type: "string", description: "One sentence: why you are making this call now." }, ...(params.properties ?? {}) },
+            required: ["reason", ...(params.required ?? [])],
+          };
+    return { type: "function", function: { name: t.name, description: t.description, parameters } };
+  });
 }
 
 /** LLM planner: a plain tool-calling loop. The model decides which Qloo-backed tool to call next. */
@@ -309,8 +322,12 @@ export async function llmPlanner(input: RunInput, llm: LlmClient, exec: Exec, st
       if (call.function.name === "finish") {
         return args as Partial<BriefText>;
       }
-      const thought = (res.content ?? "").trim().split("\n").filter(Boolean).pop()?.slice(0, 280) || `Calling ${call.function.name}.`;
-      const out = await exec(call.function.name, args, thought);
+      const { reason, ...toolArgs } = args as { reason?: unknown } & Record<string, unknown>;
+      const thought =
+        (typeof reason === "string" && reason.trim().slice(0, 280)) ||
+        (res.content ?? "").trim().split("\n").filter(Boolean).pop()?.slice(0, 280) ||
+        `Calling ${call.function.name}.`;
+      const out = await exec(call.function.name, toolArgs, thought);
       messages.push({ role: "tool", tool_call_id: call.id, name: call.function.name, content: out.slice(0, 1500) });
     }
   }
