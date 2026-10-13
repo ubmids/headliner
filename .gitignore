@@ -1,0 +1,11 @@
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+.env
+.env.local
+# Server-side caches and recordings of real Qloo responses. Qloo's terms forbid
+# publishing their response data in a public repository, so these never get committed.
+.data/
+fixtures/live/
+coverage/
