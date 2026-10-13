@@ -3894,6 +3894,66 @@
   },
   {
    "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location.query": "Denver, CO",
+     "filter.tags": "urn:tag:category:place:music_venue",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "EC19226C-5D0D-A976-269D-CF195B3ED419",
+     "take": "5"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Placeholder venue A (Denver)",
+       "entity_id": "B89AF48B-727D-8A11-8DF0-76AF9DF98C2A",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.751,
+       "location": {
+        "lat": 39.749199999999995,
+        "lon": -104.9983
+       },
+       "properties": {
+        "address": "433 Main St, Denver",
+        "geocode": {
+         "name": "Denver"
+        }
+       },
+       "query": {
+        "affinity": 0.95
+       }
+      },
+      {
+       "name": "Placeholder venue B (Denver)",
+       "entity_id": "436A8C52-242F-F6A4-C42B-9534ADF1E2F4",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.723,
+       "location": {
+        "lat": 39.7592,
+        "lon": -105.00630000000001
+       },
+       "properties": {
+        "address": "795 Main St, Denver",
+        "geocode": {
+         "name": "Denver"
+        }
+       },
+       "query": {
+        "affinity": 0.89
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
     "path": "/search",
     "params": {
      "query": "Lilith Saltman",

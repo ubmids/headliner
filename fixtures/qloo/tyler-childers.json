@@ -3913,6 +3913,66 @@
   },
   {
    "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location.query": "Columbus, OH",
+     "filter.tags": "urn:tag:category:place:music_venue",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "take": "5"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Placeholder venue A (Columbus)",
+       "entity_id": "829FF8F2-410C-7DCA-79B9-FA83FF796DC0",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.863,
+       "location": {
+        "lat": 39.971199999999996,
+        "lon": -83.0068
+       },
+       "properties": {
+        "address": "387 Main St, Columbus",
+        "geocode": {
+         "name": "Columbus"
+        }
+       },
+       "query": {
+        "affinity": 0.95
+       }
+      },
+      {
+       "name": "Placeholder venue B (Columbus)",
+       "entity_id": "29F4FB68-2A8E-94F8-B12B-33F83F788CA0",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.71,
+       "location": {
+        "lat": 39.9812,
+        "lon": -83.01480000000001
+       },
+       "properties": {
+        "address": "107 Main St, Columbus",
+        "geocode": {
+         "name": "Columbus"
+        }
+       },
+       "query": {
+        "affinity": 0.89
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
     "path": "/search",
     "params": {
      "query": "Margo Price",
