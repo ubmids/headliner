@@ -51,7 +51,7 @@ Every Qloo request (endpoint, parameters, result count, latency) streams into a 
 - **Qloo client:** typed endpoints validated with zod, the `hackathon.api.qloo.com` host enforced, retries on 429/5xx, empty-result flagging (Qloo silently ignores invalid parameters), and a server-side cache of responses and finished runs, so judges get instant replays.
 - **Qloo endpoints:** `/search`, `/v2/tags`, `/v2/insights` (heatmap, artist, place, brand, tag, demographics), `/v2/analysis/compare`, `/v2/trending`. About 60 requests per plan.
 - **Scoring:** fan score blends heatmap affinity with location-conditioned artist affinity, normalised across the whole region. Over-index = concentration minus volume (heatmap popularity).
-- **Tests:** 47 unit and integration tests (client, fixtures, scoring, contrast, CSV, the LLM loop with a scripted model, and the full agent on fixtures). One test asserts that every request uses only documented Qloo parameters.
+- **Tests:** 49 unit and integration tests (client, fixtures, scoring, contrast, CSV, the LLM loop with a scripted model, and the full agent on fixtures). One test asserts that every request uses only documented Qloo parameters.
 
 ### Challenges we ran into
 - **No API key for most of the build.** We wrote the client against the published reference and Qloo's own harness, then built a fixture mode by running the real agent against a schema-faithful stand-in. `scripts/qloo-smoke.sh` validated every call the moment the key arrived.

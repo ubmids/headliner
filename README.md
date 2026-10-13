@@ -73,7 +73,7 @@ Full page: [desktop](docs/img/full-desktop.png) · [mobile](docs/img/mobile.png)
 npm ci
 cp .env.example .env      # leave QLOO_API_KEY empty for fixture mode
 npm run dev               # http://localhost:3000, then click a sample artist
-npm test                  # 47 tests
+npm test                  # 49 tests
 ```
 
 With a key: `QLOO_API_KEY=... scripts/qloo-smoke.sh` checks every endpoint and parameter the app uses, then re-records fixtures. Deploy: see [docs/DEPLOY.md](docs/DEPLOY.md).
