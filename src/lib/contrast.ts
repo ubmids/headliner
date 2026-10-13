@@ -46,7 +46,7 @@ export function buildContrast(args: {
   const missedByLlm = route
     .filter((m) => !llmKeys.has(m.key))
     .map((m) => ({ market: m.key, score: m.score, tier: m.tier, overIndex: m.overIndex }))
-    .sort((a, b) => b.score - a.score);
+    .sort((a, b) => b.score - a.score || b.overIndex - a.overIndex);
   const half = Math.ceil(ranked.length / 2);
   const weakLlmPicks = llmCities.filter((c) => c.rank !== undefined && c.rank > half);
   const avg = (xs: number[]) => (xs.length ? Math.round(xs.reduce((s, v) => s + v, 0) / xs.length) : undefined);

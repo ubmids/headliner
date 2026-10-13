@@ -24,7 +24,7 @@ export function templateBrief(plan: TourPlan, contrast?: Contrast): BriefText {
   const name = plan.artist?.name ?? "the artist";
   const route = plan.route.order.map((k) => plan.markets.find((m) => m.key === k)).filter((m): m is Market => !!m);
   const best = [...route].sort((a, b) => b.score - a.score)[0];
-  const sleeper = route.filter((m) => m.tier === "sleeper").sort((a, b) => b.overIndex - a.overIndex)[0];
+  const sleeper = route.filter((m) => m.tier === "sleeper").sort((a, b) => b.score - a.score || b.overIndex - a.overIndex)[0];
   const act = plan.supportActs[0];
   const sponsorLeads = plan.sponsors.flatMap((c) => c.national.slice(0, 1).map((b) => b.name));
 
