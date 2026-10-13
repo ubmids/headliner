@@ -111,6 +111,13 @@ describe("QlooClient (fixture mode)", () => {
     expect(hit?.source).toBe("recorded");
     expect((hit?.response as { results: Array<{ name: string }> }).results[0].name).toBe("real");
   });
+  it("answers a re-tuned request (different take / popularity cap) from the nearest fixture", async () => {
+    const c = new QlooClient({});
+    const s = await c.search("Noah Kahan", "urn:entity:artist", 5);
+    const id = s.results[0].entity_id!;
+    const res = await c.insightsEntities({ "filter.type": "urn:entity:artist", "signal.interests.entities": id, "filter.exclude.entities": id, "filter.popularity.max": 0.71, "feature.explainability": true, take: 3 });
+    expect(res.results.entities.length).toBeGreaterThan(0);
+  });
   it("matches trending fixtures regardless of the date window", async () => {
     const store = FixtureStore.default();
     const c = new QlooClient({ fixtures: store });

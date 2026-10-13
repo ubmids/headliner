@@ -37,6 +37,13 @@ export function fixtureKey(pathname: string, params: QlooParams): string {
   return requestKey(pathname, kept);
 }
 
+/** Parameters an LLM planner tunes freely. A fixture recorded with other values still answers the request (fixture mode only). */
+const TUNABLE = ["take", "page", "filter.popularity.max", "filter.popularity.min", "feature.explainability"];
+
+export function looseFixtureKey(pathname: string, params: QlooParams): string {
+  return fixtureKey(pathname, Object.fromEntries(Object.entries(params).filter(([k]) => !TUNABLE.includes(k))));
+}
+
 export interface FixtureHit {
   response: unknown;
   source: FixtureFile["source"];
@@ -45,6 +52,7 @@ export interface FixtureHit {
 
 export class FixtureStore {
   private map: Map<string, FixtureHit> | null = null;
+  private loose = new Map<string, FixtureHit>();
 
   constructor(private dirs: string[]) {}
 
@@ -69,11 +77,9 @@ export class FixtureStore {
           const f = JSON.parse(await fs.readFile(file, "utf8")) as FixtureFile;
           for (const e of f.entries ?? []) {
             if (!e.request?.path) continue;
-            map.set(fixtureKey(e.request.path, e.request.params ?? {}), {
-              response: e.response,
-              source: f.source ?? "illustrative",
-              file: path.relative(process.cwd(), file),
-            });
+            const hit: FixtureHit = { response: e.response, source: f.source ?? "illustrative", file: path.relative(process.cwd(), file) };
+            map.set(fixtureKey(e.request.path, e.request.params ?? {}), hit);
+            this.loose.set(looseFixtureKey(e.request.path, e.request.params ?? {}), hit);
           }
         } catch {
           // A malformed fixture is skipped; the smoke test reports it.
@@ -85,7 +91,8 @@ export class FixtureStore {
   }
 
   async lookup(pathname: string, params: QlooParams): Promise<FixtureHit | undefined> {
-    return (await this.load()).get(fixtureKey(pathname, params));
+    const exact = (await this.load()).get(fixtureKey(pathname, params));
+    return exact ?? this.loose.get(looseFixtureKey(pathname, params));
   }
 
   async size(): Promise<number> {
