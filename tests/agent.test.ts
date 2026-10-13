@@ -126,9 +126,17 @@ function scriptedLlm(script: Array<Partial<ChatResult> & { tool?: string; args?:
 }
 
 describe("agent, LLM planner", () => {
+  it("requires a reason on every tool except finish", async () => {
+    const { toolSpecs } = await import("@/lib/agent/run");
+    for (const t of toolSpecs()) {
+      const req = (t.function.parameters as { required?: string[] }).required ?? [];
+      expect(req.includes("reason")).toBe(t.function.name !== "finish");
+    }
+  });
+
   it("lets the model choose tools and write the brief, and the coverage guard fills gaps", async () => {
     const llm = scriptedLlm([
-      { content: "I need the artist ID first.", tool: "resolve_artist", args: { name: "Noah Kahan" } },
+      { content: null, tool: "resolve_artist", args: { name: "Noah Kahan", reason: "I need the artist ID first." } },
       { content: "Where do fans concentrate?", tool: "discover_markets", args: {} },
       { content: "Done.", tool: "finish", args: { headline: "Model headline", routing: "r", support: "s", sponsors: "p" } },
     ]);
@@ -138,6 +146,7 @@ describe("agent, LLM planner", () => {
     expect(result.mode.planner).toBe("llm");
     expect(result.brief.headline).toBe("Model headline");
     expect(result.steps[0].thought).toBe("I need the artist ID first.");
+    expect(result.steps[0].args).toEqual({ name: "Noah Kahan" });
     // finish was called early, so the guard ran the missing decisions itself
     const auto = result.steps.filter((s) => s.auto).map((s) => s.tool);
     expect(auto).toEqual(expect.arrayContaining(["find_venues", "find_support_acts", "support_overlap_by_market", "find_sponsors"]));
@@ -147,6 +156,19 @@ describe("agent, LLM planner", () => {
     // the live baseline came from the same LLM, without tools
     expect(result.baseline?.source).toBe("llm");
     expect(result.contrast?.llmCities.length).toBe(3);
+  });
+
+  it("tells the model to stop retrying a tool that keeps failing", async () => {
+    const llm = scriptedLlm([
+      { tool: "find_venues", args: {} },
+      { tool: "find_venues", args: {} },
+      { tool: "resolve_artist", args: { name: "Noah Kahan" } },
+      { tool: "finish", args: { headline: "h", routing: "r", support: "s", sponsors: "p" } },
+    ]);
+    const client = new QlooClient({});
+    await runAgent(normaliseInput({ artist: "Noah Kahan", region: "north-america" }), { client, bindCalls: () => {}, emit: () => {}, runId: "t", today: TODAY, llm });
+    const toolMsgs = llm.seen.flat().filter((m) => m.role === "tool" && m.name === "find_venues");
+    expect(toolMsgs.some((m) => String(m.content).includes("Do not retry"))).toBe(true);
   });
 
   it("reports unknown tools as errors without crashing", async () => {

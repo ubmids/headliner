@@ -301,6 +301,7 @@ export async function llmPlanner(input: RunInput, llm: LlmClient, exec: Exec, st
     },
   ];
   const tools = toolSpecs();
+  const failures = new Map<string, number>();
   let nudged = false;
   for (let turn = 0; turn < maxTurns; turn++) {
     if (stop()) return undefined;
@@ -327,7 +328,12 @@ export async function llmPlanner(input: RunInput, llm: LlmClient, exec: Exec, st
         (typeof reason === "string" && reason.trim().slice(0, 280)) ||
         (res.content ?? "").trim().split("\n").filter(Boolean).pop()?.slice(0, 280) ||
         `Calling ${call.function.name}.`;
-      const out = await exec(call.function.name, toolArgs, thought);
+      let out = await exec(call.function.name, toolArgs, thought);
+      if (out.startsWith("ERROR")) {
+        const n = (failures.get(call.function.name) ?? 0) + 1;
+        failures.set(call.function.name, n);
+        if (n >= 2) out += `\nThis tool has now failed ${n} times. Do not retry it; move on to the next decision (the system will fill gaps).`;
+      }
       messages.push({ role: "tool", tool_call_id: call.id, name: call.function.name, content: out.slice(0, 1500) });
     }
   }
