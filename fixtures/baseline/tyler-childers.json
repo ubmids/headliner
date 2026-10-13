@@ -1,0 +1,29 @@
+{
+  "source": "recorded-llm",
+  "model": "qwen3-vl-4b-instruct-q4km",
+  "cities": [
+    "Nashville, TN",
+    "Austin, TX",
+    "Denver, CO",
+    "Chicago, IL",
+    "New York, NY",
+    "Portland, OR",
+    "Toronto, ON",
+    "Vancouver, BC"
+  ],
+  "supportActs": [
+    "Margo Price",
+    "Kacey Musgraves",
+    "Lil Nas X"
+  ],
+  "sponsors": [
+    "Coca-Cola",
+    "Red Bull",
+    "Budweiser",
+    "Crate & Barrel",
+    "Fender"
+  ],
+  "reasoning": "Tyler Childers’ fanbase is strongest in major music hubs with strong Americana and country scenes, and the tour prioritizes cities with high ticket demand and cultural resonance. Strategic partnerships with beverage, music, and lifestyle brands enhance fan experience and revenue potential.",
+  "recordedAt": "2026-10-13T23:24:09.725Z",
+  "prompt": "src/lib/agent/baseline.ts baselinePrompt(artist, region, 8, [])"
+}

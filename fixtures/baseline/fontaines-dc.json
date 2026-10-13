@@ -1,0 +1,29 @@
+{
+  "source": "recorded-llm",
+  "model": "qwen3-vl-4b-instruct-q4km",
+  "cities": [
+    "London, ENG",
+    "Birmingham, ENG",
+    "Manchester, ENG",
+    "Edinburgh, SCO",
+    "Glasgow, SCO",
+    "Berlin, GER",
+    "Cologne, GER",
+    "Paris, FRA"
+  ],
+  "supportActs": [
+    "Thee Oh Sees",
+    "Bleach",
+    "The Men They Couldn’t Hang"
+  ],
+  "sponsors": [
+    "Sennheiser",
+    "Pepsi",
+    "Budweiser",
+    "Vans",
+    "Dewar’s"
+  ],
+  "reasoning": "Fontaines D.C. are a high-energy, UK-based indie rock act with strong European appeal, so prioritizing major UK cities ensures maximum fan engagement. The tour balances UK and European markets with key festival-friendly cities and iconic venues, while supporting acts complement their sound and broaden audience reach.",
+  "recordedAt": "2026-10-13T23:24:30.803Z",
+  "prompt": "src/lib/agent/baseline.ts baselinePrompt(artist, region, 8, [])"
+}

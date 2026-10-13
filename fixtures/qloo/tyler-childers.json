@@ -1,0 +1,3901 @@
+{
+ "fixture": true,
+ "source": "illustrative",
+ "note": "ILLUSTRATIVE FIXTURE, NOT QLOO DATA. Shapes follow the Qloo hackathon API reference; names and scores are placeholders from scripts/fixtures/seeds.ts. Replace by running scripts/qloo-smoke.sh once QLOO_API_KEY exists.",
+ "entries": [
+  {
+   "request": {
+    "path": "/search",
+    "params": {
+     "query": "Tyler Childers",
+     "take": "5",
+     "types": "urn:entity:artist"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": [
+     {
+      "name": "Tyler Childers",
+      "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+      "type": "urn:entity",
+      "subtype": "urn:entity:artist",
+      "types": [
+       "urn:entity:artist"
+      ],
+      "popularity": 0.951,
+      "disambiguation": "American country singer-songwriter from Lawrence County, Kentucky",
+      "properties": {
+       "short_description": "American country singer-songwriter from Lawrence County, Kentucky"
+      },
+      "tags": [
+       {
+        "id": "urn:tag:genre:music:country",
+        "name": "Country",
+        "type": "urn:tag:genre:music"
+       },
+       {
+        "id": "urn:tag:genre:music:bluegrass",
+        "name": "Bluegrass",
+        "type": "urn:tag:genre:music"
+       },
+       {
+        "id": "urn:tag:genre:music:americana",
+        "name": "Americana",
+        "type": "urn:tag:genre:music"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.parents.types": "urn:entity:artist",
+     "filter.type": "urn:tag",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "take": "12"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "tags": [
+      {
+       "tag_id": "urn:tag:genre:music:country",
+       "name": "Country",
+       "types": [
+        "urn:entity:artist"
+       ],
+       "subtype": "urn:tag:genre:music",
+       "query": {
+        "affinity": 0.95
+       }
+      },
+      {
+       "tag_id": "urn:tag:genre:music:bluegrass",
+       "name": "Bluegrass",
+       "types": [
+        "urn:entity:artist"
+       ],
+       "subtype": "urn:tag:genre:music",
+       "query": {
+        "affinity": 0.91
+       }
+      },
+      {
+       "tag_id": "urn:tag:genre:music:americana",
+       "name": "Americana",
+       "types": [
+        "urn:entity:artist"
+       ],
+       "subtype": "urn:tag:genre:music",
+       "query": {
+        "affinity": 0.87
+       }
+      },
+      {
+       "tag_id": "urn:tag:genre:music:appalachian",
+       "name": "Appalachian",
+       "types": [
+        "urn:entity:artist"
+       ],
+       "subtype": "urn:tag:genre:music",
+       "query": {
+        "affinity": 0.83
+       }
+      },
+      {
+       "tag_id": "urn:tag:genre:music:outlaw_country",
+       "name": "Outlaw Country",
+       "types": [
+        "urn:entity:artist"
+       ],
+       "subtype": "urn:tag:genre:music",
+       "query": {
+        "affinity": 0.79
+       }
+      },
+      {
+       "tag_id": "urn:tag:genre:music:honky_tonk",
+       "name": "Honky Tonk",
+       "types": [
+        "urn:entity:artist"
+       ],
+       "subtype": "urn:tag:genre:music",
+       "query": {
+        "affinity": 0.75
+       }
+      },
+      {
+       "tag_id": "urn:tag:genre:music:fiddle",
+       "name": "Fiddle",
+       "types": [
+        "urn:entity:artist"
+       ],
+       "subtype": "urn:tag:genre:music",
+       "query": {
+        "affinity": 0.71
+       }
+      },
+      {
+       "tag_id": "urn:tag:genre:music:southern_rock",
+       "name": "Southern Rock",
+       "types": [
+        "urn:entity:artist"
+       ],
+       "subtype": "urn:tag:genre:music",
+       "query": {
+        "affinity": 0.67
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.type": "urn:demographics",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "demographics": [
+      {
+       "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+       "query": {
+        "age": {
+         "24_and_younger": 0.12,
+         "25_to_29": 0.34,
+         "30_to_34": 0.29,
+         "35_to_44": 0.06,
+         "45_to_54": -0.21,
+         "55_and_older": -0.3
+        },
+        "gender": {
+         "male": 0.18,
+         "female": -0.18
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location": "POLYGON((-125 24, -66 24, -66 50, -125 50, -125 24))",
+     "filter.type": "urn:heatmap",
+     "output.heatmap.boundary": "urn:entity:locality",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "take": "50"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "heatmap": [
+      {
+       "location": {
+        "latitude": 38.050599999999996,
+        "longitude": -84.5137,
+        "geohash": "c9e046"
+       },
+       "query": {
+        "affinity": 0.99,
+        "affinity_rank": 0.98,
+        "popularity": 0.182
+       }
+      },
+      {
+       "location": {
+        "latitude": 38.262699999999995,
+        "longitude": -85.7685,
+        "geohash": "75bba4"
+       },
+       "query": {
+        "affinity": 0.96,
+        "affinity_rank": 0.95,
+        "popularity": 0.622
+       }
+      },
+      {
+       "location": {
+        "latitude": 35.9706,
+        "longitude": -83.9307,
+        "geohash": "0c6bb3"
+       },
+       "query": {
+        "affinity": 0.95,
+        "affinity_rank": 0.94,
+        "popularity": 0.197
+       }
+      },
+      {
+       "location": {
+        "latitude": 35.6051,
+        "longitude": -82.56150000000001,
+        "geohash": "d0593e"
+       },
+       "query": {
+        "affinity": 0.93,
+        "affinity_rank": 0.92,
+        "popularity": 0.377
+       }
+      },
+      {
+       "location": {
+        "latitude": 36.1727,
+        "longitude": -86.7916,
+        "geohash": "b49b3a"
+       },
+       "query": {
+        "affinity": 0.92,
+        "affinity_rank": 0.91,
+        "popularity": 0.581
+       }
+      },
+      {
+       "location": {
+        "latitude": 39.113099999999996,
+        "longitude": -84.522,
+        "geohash": "913606"
+       },
+       "query": {
+        "affinity": 0.89,
+        "affinity_rank": 0.88,
+        "popularity": 0.66
+       }
+      },
+      {
+       "location": {
+        "latitude": 39.971199999999996,
+        "longitude": -83.00880000000001,
+        "geohash": "31f009"
+       },
+       "query": {
+        "affinity": 0.88,
+        "affinity_rank": 0.87,
+        "popularity": 0.564
+       }
+      },
+      {
+       "location": {
+        "latitude": 38.0393,
+        "longitude": -78.4867,
+        "geohash": "926e11"
+       },
+       "query": {
+        "affinity": 0.86,
+        "affinity_rank": 0.85,
+        "popularity": 0.319
+       }
+      },
+      {
+       "location": {
+        "latitude": 37.5507,
+        "longitude": -77.44600000000001,
+        "geohash": "808962"
+       },
+       "query": {
+        "affinity": 0.85,
+        "affinity_rank": 0.84,
+        "popularity": 0.344
+       }
+      },
+      {
+       "location": {
+        "latitude": 39.7784,
+        "longitude": -86.16810000000001,
+        "geohash": "bd0bed"
+       },
+       "query": {
+        "affinity": 0.84,
+        "affinity_rank": 0.83,
+        "popularity": 0.725
+       }
+      },
+      {
+       "location": {
+        "latitude": 46.8821,
+        "longitude": -114.004,
+        "geohash": "31fcbb"
+       },
+       "query": {
+        "affinity": 0.82,
+        "affinity_rank": 0.81,
+        "popularity": 0.26
+       }
+      },
+      {
+       "location": {
+        "latitude": 35.7896,
+        "longitude": -78.6482,
+        "geohash": "b64bde"
+       },
+       "query": {
+        "affinity": 0.81,
+        "affinity_rank": 0.8,
+        "popularity": 0.724
+       }
+      },
+      {
+       "location": {
+        "latitude": 40.4506,
+        "longitude": -80.00590000000001,
+        "geohash": "0eff95"
+       },
+       "query": {
+        "affinity": 0.8,
+        "affinity_rank": 0.79,
+        "popularity": 0.79
+       }
+      },
+      {
+       "location": {
+        "latitude": 39.749199999999995,
+        "longitude": -105.00030000000001,
+        "geohash": "00110d"
+       },
+       "query": {
+        "affinity": 0.79,
+        "affinity_rank": 0.78,
+        "popularity": 0.866
+       }
+      },
+      {
+       "location": {
+        "latitude": 33.5286,
+        "longitude": -86.8204,
+        "geohash": "c13361"
+       },
+       "query": {
+        "affinity": 0.78,
+        "affinity_rank": 0.77,
+        "popularity": 0.967
+       }
+      },
+      {
+       "location": {
+        "latitude": 38.637,
+        "longitude": -90.2094,
+        "geohash": "da8c48"
+       },
+       "query": {
+        "affinity": 0.77,
+        "affinity_rank": 0.76,
+        "popularity": 0.626
+       }
+      },
+      {
+       "location": {
+        "latitude": 30.2772,
+        "longitude": -97.7531,
+        "geohash": "5b06f1"
+       },
+       "query": {
+        "affinity": 0.75,
+        "affinity_rank": 0.74,
+        "popularity": 0.758
+       }
+      },
+      {
+       "location": {
+        "latitude": 33.759,
+        "longitude": -84.39800000000001,
+        "geohash": "72af4c"
+       },
+       "query": {
+        "affinity": 0.7,
+        "affinity_rank": 0.69,
+        "popularity": 0.941
+       }
+      },
+      {
+       "location": {
+        "latitude": 41.8881,
+        "longitude": -87.63980000000001,
+        "geohash": "34971b"
+       },
+       "query": {
+        "affinity": 0.62,
+        "affinity_rank": 0.61,
+        "popularity": 0.989
+       }
+      },
+      {
+       "location": {
+        "latitude": 35.477599999999995,
+        "longitude": -97.52640000000001,
+        "geohash": "7d91dc"
+       },
+       "query": {
+        "affinity": 0.54,
+        "affinity_rank": 0.53,
+        "popularity": 0.272
+       }
+      },
+      {
+       "location": {
+        "latitude": 43.083099999999995,
+        "longitude": -89.41120000000001,
+        "geohash": "2de690"
+       },
+       "query": {
+        "affinity": 0.538,
+        "affinity_rank": 0.528,
+        "popularity": 0.239
+       }
+      },
+      {
+       "location": {
+        "latitude": 45.5117,
+        "longitude": -73.57730000000001,
+        "geohash": "95da88"
+       },
+       "query": {
+        "affinity": 0.525,
+        "affinity_rank": 0.515,
+        "popularity": 0.899
+       }
+      },
+      {
+       "location": {
+        "latitude": 42.3701,
+        "longitude": -71.0689,
+        "geohash": "1e377a"
+       },
+       "query": {
+        "affinity": 0.52,
+        "affinity_rank": 0.51,
+        "popularity": 0.969
+       }
+      },
+      {
+       "location": {
+        "latitude": 39.962599999999995,
+        "longitude": -75.1752,
+        "geohash": "70ad09"
+       },
+       "query": {
+        "affinity": 0.503,
+        "affinity_rank": 0.493,
+        "popularity": 0.95
+       }
+      },
+      {
+       "location": {
+        "latitude": 35.2371,
+        "longitude": -80.85310000000001,
+        "geohash": "aa56e0"
+       },
+       "query": {
+        "affinity": 0.501,
+        "affinity_rank": 0.491,
+        "popularity": 0.718
+       }
+      },
+      {
+       "location": {
+        "latitude": 40.7708,
+        "longitude": -111.90100000000001,
+        "geohash": "494052"
+       },
+       "query": {
+        "affinity": 0.499,
+        "affinity_rank": 0.489,
+        "popularity": 0.351
+       }
+      },
+      {
+       "location": {
+        "latitude": 43.058099999999996,
+        "longitude": -76.15740000000001,
+        "geohash": "efab3b"
+       },
+       "query": {
+        "affinity": 0.499,
+        "affinity_rank": 0.489,
+        "popularity": 0.321
+       }
+      },
+      {
+       "location": {
+        "latitude": 29.4341,
+        "longitude": -98.5036,
+        "geohash": "3fc530"
+       },
+       "query": {
+        "affinity": 0.495,
+        "affinity_rank": 0.485,
+        "popularity": 0.314
+       }
+      },
+      {
+       "location": {
+        "latitude": 44.0682,
+        "longitude": -121.3253,
+        "geohash": "6ea3e3"
+       },
+       "query": {
+        "affinity": 0.489,
+        "affinity_rank": 0.479,
+        "popularity": 0.244
+       }
+      },
+      {
+       "location": {
+        "latitude": 40.688199999999995,
+        "longitude": -73.9542,
+        "geohash": "1ceae6"
+       },
+       "query": {
+        "affinity": 0.484,
+        "affinity_rank": 0.474,
+        "popularity": 0.433
+       }
+      },
+      {
+       "location": {
+        "latitude": 44.4859,
+        "longitude": -73.22210000000001,
+        "geohash": "56926f"
+       },
+       "query": {
+        "affinity": 0.482,
+        "affinity_rank": 0.472,
+        "popularity": 0.393
+       }
+      },
+      {
+       "location": {
+        "latitude": 40.7228,
+        "longitude": -74.016,
+        "geohash": "3dddf7"
+       },
+       "query": {
+        "affinity": 0.48,
+        "affinity_rank": 0.47,
+        "popularity": 0.971
+       }
+      },
+      {
+       "location": {
+        "latitude": 47.6162,
+        "longitude": -122.3421,
+        "geohash": "26bcae"
+       },
+       "query": {
+        "affinity": 0.468,
+        "affinity_rank": 0.458,
+        "popularity": 0.971
+       }
+      },
+      {
+       "location": {
+        "latitude": 42.3414,
+        "longitude": -83.0558,
+        "geohash": "d7da5f"
+       },
+       "query": {
+        "affinity": 0.465,
+        "affinity_rank": 0.455,
+        "popularity": 0.489
+       }
+      },
+      {
+       "location": {
+        "latitude": 32.725699999999996,
+        "longitude": -117.17110000000001,
+        "geohash": "acb342"
+       },
+       "query": {
+        "affinity": 0.452,
+        "affinity_rank": 0.442,
+        "popularity": 0.322
+       }
+      },
+      {
+       "location": {
+        "latitude": 42.9734,
+        "longitude": -85.6781,
+        "geohash": "c9f611"
+       },
+       "query": {
+        "affinity": 0.452,
+        "affinity_rank": 0.442,
+        "popularity": 0.495
+       }
+      },
+      {
+       "location": {
+        "latitude": 42.2908,
+        "longitude": -83.753,
+        "geohash": "9b84f6"
+       },
+       "query": {
+        "affinity": 0.451,
+        "affinity_rank": 0.441,
+        "popularity": 0.22
+       }
+      },
+      {
+       "location": {
+        "latitude": 34.0622,
+        "longitude": -118.25370000000001,
+        "geohash": "96d0aa"
+       },
+       "query": {
+        "affinity": 0.45,
+        "affinity_rank": 0.44,
+        "popularity": 0.931
+       }
+      },
+      {
+       "location": {
+        "latitude": 42.8964,
+        "longitude": -78.8884,
+        "geohash": "68587b"
+       },
+       "query": {
+        "affinity": 0.449,
+        "affinity_rank": 0.439,
+        "popularity": 0.215
+       }
+      },
+      {
+       "location": {
+        "latitude": 29.770400000000002,
+        "longitude": -95.3798,
+        "geohash": "3ac6c1"
+       },
+       "query": {
+        "affinity": 0.429,
+        "affinity_rank": 0.419,
+        "popularity": 0.923
+       }
+      },
+      {
+       "location": {
+        "latitude": 32.765499999999996,
+        "longitude": -97.3408,
+        "geohash": "64ca00"
+       },
+       "query": {
+        "affinity": 0.428,
+        "affinity_rank": 0.418,
+        "popularity": 0.487
+       }
+      },
+      {
+       "location": {
+        "latitude": 44.0621,
+        "longitude": -123.0968,
+        "geohash": "06de62"
+       },
+       "query": {
+        "affinity": 0.423,
+        "affinity_rank": 0.413,
+        "popularity": 0.243
+       }
+      },
+      {
+       "location": {
+        "latitude": 34.8626,
+        "longitude": -82.40400000000001,
+        "geohash": "862738"
+       },
+       "query": {
+        "affinity": 0.42,
+        "affinity_rank": 0.41,
+        "popularity": 0.441
+       }
+      },
+      {
+       "location": {
+        "latitude": 49.9051,
+        "longitude": -97.14840000000001,
+        "geohash": "333a6c"
+       },
+       "query": {
+        "affinity": 0.42,
+        "affinity_rank": 0.41,
+        "popularity": 0.275
+       }
+      },
+      {
+       "location": {
+        "latitude": 36.004,
+        "longitude": -78.9086,
+        "geohash": "b1c3f3"
+       },
+       "query": {
+        "affinity": 0.415,
+        "affinity_rank": 0.405,
+        "popularity": 0.154
+       }
+      },
+      {
+       "location": {
+        "latitude": 37.7849,
+        "longitude": -122.4294,
+        "geohash": "a70c3b"
+       },
+       "query": {
+        "affinity": 0.41,
+        "affinity_rank": 0.4,
+        "popularity": 0.889
+       }
+      },
+      {
+       "location": {
+        "latitude": 32.7865,
+        "longitude": -79.9411,
+        "geohash": "a21a0f"
+       },
+       "query": {
+        "affinity": 0.41,
+        "affinity_rank": 0.4,
+        "popularity": 0.24
+       }
+      },
+      {
+       "location": {
+        "latitude": 43.663199999999996,
+        "longitude": -79.39320000000001,
+        "geohash": "b7e31f"
+       },
+       "query": {
+        "affinity": 0.408,
+        "affinity_rank": 0.398,
+        "popularity": 0.927
+       }
+      },
+      {
+       "location": {
+        "latitude": 33.4584,
+        "longitude": -112.084,
+        "geohash": "3e978f"
+       },
+       "query": {
+        "affinity": 0.407,
+        "affinity_rank": 0.397,
+        "popularity": 0.929
+       }
+      },
+      {
+       "location": {
+        "latitude": 33.9619,
+        "longitude": -83.36760000000001,
+        "geohash": "b85c37"
+       },
+       "query": {
+        "affinity": 0.403,
+        "affinity_rank": 0.393,
+        "popularity": 0.236
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Louisville, KY",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Tyler Childers",
+       "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.951,
+       "properties": {},
+       "query": {
+        "affinity": 0.893
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Lexington, KY",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Tyler Childers",
+       "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.951,
+       "properties": {},
+       "query": {
+        "affinity": 0.949
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Nashville, TN",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Tyler Childers",
+       "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.951,
+       "properties": {},
+       "query": {
+        "affinity": 0.862
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Knoxville, TN",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Tyler Childers",
+       "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.951,
+       "properties": {},
+       "query": {
+        "affinity": 0.91
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Asheville, NC",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Tyler Childers",
+       "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.951,
+       "properties": {},
+       "query": {
+        "affinity": 0.897
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Cincinnati, OH",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Tyler Childers",
+       "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.951,
+       "properties": {},
+       "query": {
+        "affinity": 0.829
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Columbus, OH",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Tyler Childers",
+       "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.951,
+       "properties": {},
+       "query": {
+        "affinity": 0.813
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Indianapolis, IN",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Tyler Childers",
+       "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.951,
+       "properties": {},
+       "query": {
+        "affinity": 0.833
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Charlottesville, VA",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Tyler Childers",
+       "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.951,
+       "properties": {},
+       "query": {
+        "affinity": 0.849
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Richmond, VA",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Tyler Childers",
+       "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.951,
+       "properties": {},
+       "query": {
+        "affinity": 0.825
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Raleigh, NC",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Tyler Childers",
+       "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.951,
+       "properties": {},
+       "query": {
+        "affinity": 0.746
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Pittsburgh, PA",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Tyler Childers",
+       "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.951,
+       "properties": {},
+       "query": {
+        "affinity": 0.769
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/tags",
+    "params": {
+     "feature.semantic_search": "true",
+     "filter.query": "music venue",
+     "take": "20"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "tags": [
+      {
+       "id": "urn:tag:category:place:music_venue",
+       "name": "Music Venue",
+       "type": "urn:tag:category:place",
+       "parents": [
+        {
+         "type": "urn:entity:place"
+        }
+       ]
+      },
+      {
+       "id": "urn:tag:category:place:concert_hall",
+       "name": "Concert Hall",
+       "type": "urn:tag:category:place",
+       "parents": [
+        {
+         "type": "urn:entity:place"
+        }
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location.query": "Louisville, KY",
+     "filter.tags": "urn:tag:category:place:music_venue",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "take": "5"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Louisville Palace",
+       "entity_id": "0AD4A743-ED9D-956F-0D3C-D9F52F074011",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.786,
+       "location": {
+        "lat": 38.262699999999995,
+        "lon": -85.7665
+       },
+       "properties": {
+        "address": "200 Main St, Louisville",
+        "geocode": {
+         "name": "Louisville"
+        }
+       },
+       "query": {
+        "affinity": 0.95
+       }
+      },
+      {
+       "name": "Iroquois Amphitheater",
+       "entity_id": "764F0B9D-7583-8556-EB05-ABCDDAD30AA2",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.786,
+       "location": {
+        "lat": 38.2727,
+        "lon": -85.7745
+       },
+       "properties": {
+        "address": "785 Main St, Louisville",
+        "geocode": {
+         "name": "Louisville"
+        }
+       },
+       "query": {
+        "affinity": 0.89
+       }
+      },
+      {
+       "name": "KFC Yum! Center",
+       "entity_id": "D2020FF1-8D58-7FDF-2843-3A8F497E4E73",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.717,
+       "location": {
+        "lat": 38.2827,
+        "lon": -85.7825
+       },
+       "properties": {
+        "address": "529 Main St, Louisville",
+        "geocode": {
+         "name": "Louisville"
+        }
+       },
+       "query": {
+        "affinity": 0.83
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location.query": "Lexington, KY",
+     "filter.tags": "urn:tag:category:place:music_venue",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "take": "5"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Rupp Arena",
+       "entity_id": "BF4791FF-6A0A-F4E1-EC55-FCAB2D2E025B",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.852,
+       "location": {
+        "lat": 38.050599999999996,
+        "lon": -84.51169999999999
+       },
+       "properties": {
+        "address": "236 Main St, Lexington",
+        "geocode": {
+         "name": "Lexington"
+        }
+       },
+       "query": {
+        "affinity": 0.95
+       }
+      },
+      {
+       "name": "The Burl",
+       "entity_id": "97CAF2C2-0D05-5F34-1E0B-045EBC887A23",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.775,
+       "location": {
+        "lat": 38.0606,
+        "lon": -84.5197
+       },
+       "properties": {
+        "address": "459 Main St, Lexington",
+        "geocode": {
+         "name": "Lexington"
+        }
+       },
+       "query": {
+        "affinity": 0.89
+       }
+      },
+      {
+       "name": "Lexington Opera House",
+       "entity_id": "6DB34702-8CE1-975C-37A6-EF3A448EC98B",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.727,
+       "location": {
+        "lat": 38.0706,
+        "lon": -84.5277
+       },
+       "properties": {
+        "address": "104 Main St, Lexington",
+        "geocode": {
+         "name": "Lexington"
+        }
+       },
+       "query": {
+        "affinity": 0.83
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location.query": "Nashville, TN",
+     "filter.tags": "urn:tag:category:place:music_venue",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "take": "5"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Ryman Auditorium",
+       "entity_id": "050FD1A9-45D2-A22B-FD92-60AAACC51908",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.817,
+       "location": {
+        "lat": 36.1727,
+        "lon": -86.7896
+       },
+       "properties": {
+        "address": "848 Main St, Nashville",
+        "geocode": {
+         "name": "Nashville"
+        }
+       },
+       "query": {
+        "affinity": 0.95
+       }
+      },
+      {
+       "name": "Bridgestone Arena",
+       "entity_id": "2C5C0789-3F67-C84E-B4BF-56B22EBB18A9",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.748,
+       "location": {
+        "lat": 36.182700000000004,
+        "lon": -86.7976
+       },
+       "properties": {
+        "address": "325 Main St, Nashville",
+        "geocode": {
+         "name": "Nashville"
+        }
+       },
+       "query": {
+        "affinity": 0.89
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location.query": "Knoxville, TN",
+     "filter.tags": "urn:tag:category:place:music_venue",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "take": "5"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Thompson-Boling Arena",
+       "entity_id": "72DD9A72-3A09-A310-CA95-48F38635DCCE",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.819,
+       "location": {
+        "lat": 35.9706,
+        "lon": -83.92869999999999
+       },
+       "properties": {
+        "address": "384 Main St, Knoxville",
+        "geocode": {
+         "name": "Knoxville"
+        }
+       },
+       "query": {
+        "affinity": 0.95
+       }
+      },
+      {
+       "name": "Tennessee Theatre",
+       "entity_id": "6A1E493E-5EA5-9D2B-0E86-808753BDFD14",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.864,
+       "location": {
+        "lat": 35.9806,
+        "lon": -83.9367
+       },
+       "properties": {
+        "address": "412 Main St, Knoxville",
+        "geocode": {
+         "name": "Knoxville"
+        }
+       },
+       "query": {
+        "affinity": 0.89
+       }
+      },
+      {
+       "name": "The Mill & Mine",
+       "entity_id": "5A0E44ED-1B79-0A5A-603C-3F790DBF33AE",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.776,
+       "location": {
+        "lat": 35.9906,
+        "lon": -83.9447
+       },
+       "properties": {
+        "address": "755 Main St, Knoxville",
+        "geocode": {
+         "name": "Knoxville"
+        }
+       },
+       "query": {
+        "affinity": 0.83
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location.query": "Asheville, NC",
+     "filter.tags": "urn:tag:category:place:music_venue",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "take": "5"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "ExploreAsheville.com Arena",
+       "entity_id": "30AF300E-EC5E-585A-ACC6-D2181935DD67",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.772,
+       "location": {
+        "lat": 35.6051,
+        "lon": -82.5595
+       },
+       "properties": {
+        "address": "763 Main St, Asheville",
+        "geocode": {
+         "name": "Asheville"
+        }
+       },
+       "query": {
+        "affinity": 0.95
+       }
+      },
+      {
+       "name": "The Orange Peel",
+       "entity_id": "DF265681-D8BB-F97E-9AAE-DC5EA549CDFB",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.883,
+       "location": {
+        "lat": 35.615100000000005,
+        "lon": -82.56750000000001
+       },
+       "properties": {
+        "address": "809 Main St, Asheville",
+        "geocode": {
+         "name": "Asheville"
+        }
+       },
+       "query": {
+        "affinity": 0.89
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "feature.explainability": "true",
+     "filter.exclude.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "filter.popularity.max": "0.93",
+     "filter.type": "urn:entity:artist",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "take": "10"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Charles Wesley Godwin",
+       "entity_id": "98740ECB-C50E-9AEE-1324-2A8E906C51B3",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.8,
+       "properties": {},
+       "query": {
+        "affinity": 0.89,
+        "explainability": {
+         "signal.interests.entities": [
+          {
+           "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+           "score": 0.89
+          }
+         ]
+        }
+       }
+      },
+      {
+       "name": "Colter Wall",
+       "entity_id": "00F927AB-60A2-2EDA-276E-5FA197212A1B",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.88,
+       "properties": {},
+       "query": {
+        "affinity": 0.86,
+        "explainability": {
+         "signal.interests.entities": [
+          {
+           "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+           "score": 0.86
+          }
+         ]
+        }
+       }
+      },
+      {
+       "name": "Sierra Ferrell",
+       "entity_id": "F9E0CB1E-39E0-D8D2-083F-79748066B652",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.84,
+       "properties": {},
+       "query": {
+        "affinity": 0.85,
+        "explainability": {
+         "signal.interests.entities": [
+          {
+           "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+           "score": 0.85
+          }
+         ]
+        }
+       }
+      },
+      {
+       "name": "Billy Strings",
+       "entity_id": "5D136DC5-4F61-77BA-77D5-305DA5E87A5F",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.93,
+       "properties": {},
+       "query": {
+        "affinity": 0.84,
+        "explainability": {
+         "signal.interests.entities": [
+          {
+           "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+           "score": 0.84
+          }
+         ]
+        }
+       }
+      },
+      {
+       "name": "Ian Noe",
+       "entity_id": "8E256FF8-1FA6-8CD9-83A9-D1CBF1CAA765",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.7,
+       "properties": {},
+       "query": {
+        "affinity": 0.83,
+        "explainability": {
+         "signal.interests.entities": [
+          {
+           "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+           "score": 0.83
+          }
+         ]
+        }
+       }
+      },
+      {
+       "name": "49 Winchester",
+       "entity_id": "B8B7E5C0-C3B7-DF25-1FC0-E3A0AFA2D54C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.74,
+       "properties": {},
+       "query": {
+        "affinity": 0.82,
+        "explainability": {
+         "signal.interests.entities": [
+          {
+           "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+           "score": 0.82
+          }
+         ]
+        }
+       }
+      },
+      {
+       "name": "Turnpike Troubadours",
+       "entity_id": "5FE133A0-BA5B-78F6-AF59-A972B891310B",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.9,
+       "properties": {},
+       "query": {
+        "affinity": 0.81,
+        "explainability": {
+         "signal.interests.entities": [
+          {
+           "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+           "score": 0.81
+          }
+         ]
+        }
+       }
+      },
+      {
+       "name": "Vincent Neil Emerson",
+       "entity_id": "D0308A98-02AA-23EB-8D8B-924338C38507",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.72,
+       "properties": {},
+       "query": {
+        "affinity": 0.8,
+        "explainability": {
+         "signal.interests.entities": [
+          {
+           "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+           "score": 0.8
+          }
+         ]
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "98740ECB-C50E-9AEE-1324-2A8E906C51B3,00F927AB-60A2-2EDA-276E-5FA197212A1B,F9E0CB1E-39E0-D8D2-083F-79748066B652,5D136DC5-4F61-77BA-77D5-305DA5E87A5F,8E256FF8-1FA6-8CD9-83A9-D1CBF1CAA765,B8B7E5C0-C3B7-DF25-1FC0-E3A0AFA2D54C,5FE133A0-BA5B-78F6-AF59-A972B891310B,D0308A98-02AA-23EB-8D8B-924338C38507",
+     "filter.type": "urn:entity:artist",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "signal.location.query": "Louisville, KY",
+     "take": "8"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Ian Noe",
+       "entity_id": "8E256FF8-1FA6-8CD9-83A9-D1CBF1CAA765",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.7,
+       "properties": {},
+       "query": {
+        "affinity": 0.841
+       }
+      },
+      {
+       "name": "Charles Wesley Godwin",
+       "entity_id": "98740ECB-C50E-9AEE-1324-2A8E906C51B3",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.8,
+       "properties": {},
+       "query": {
+        "affinity": 0.793
+       }
+      },
+      {
+       "name": "49 Winchester",
+       "entity_id": "B8B7E5C0-C3B7-DF25-1FC0-E3A0AFA2D54C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.74,
+       "properties": {},
+       "query": {
+        "affinity": 0.771
+       }
+      },
+      {
+       "name": "Turnpike Troubadours",
+       "entity_id": "5FE133A0-BA5B-78F6-AF59-A972B891310B",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.9,
+       "properties": {},
+       "query": {
+        "affinity": 0.753
+       }
+      },
+      {
+       "name": "Vincent Neil Emerson",
+       "entity_id": "D0308A98-02AA-23EB-8D8B-924338C38507",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.72,
+       "properties": {},
+       "query": {
+        "affinity": 0.74
+       }
+      },
+      {
+       "name": "Colter Wall",
+       "entity_id": "00F927AB-60A2-2EDA-276E-5FA197212A1B",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.88,
+       "properties": {},
+       "query": {
+        "affinity": 0.723
+       }
+      },
+      {
+       "name": "Sierra Ferrell",
+       "entity_id": "F9E0CB1E-39E0-D8D2-083F-79748066B652",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.84,
+       "properties": {},
+       "query": {
+        "affinity": 0.704
+       }
+      },
+      {
+       "name": "Billy Strings",
+       "entity_id": "5D136DC5-4F61-77BA-77D5-305DA5E87A5F",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.93,
+       "properties": {},
+       "query": {
+        "affinity": 0.697
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "98740ECB-C50E-9AEE-1324-2A8E906C51B3,00F927AB-60A2-2EDA-276E-5FA197212A1B,F9E0CB1E-39E0-D8D2-083F-79748066B652,5D136DC5-4F61-77BA-77D5-305DA5E87A5F,8E256FF8-1FA6-8CD9-83A9-D1CBF1CAA765,B8B7E5C0-C3B7-DF25-1FC0-E3A0AFA2D54C,5FE133A0-BA5B-78F6-AF59-A972B891310B,D0308A98-02AA-23EB-8D8B-924338C38507",
+     "filter.type": "urn:entity:artist",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "signal.location.query": "Lexington, KY",
+     "take": "8"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Ian Noe",
+       "entity_id": "8E256FF8-1FA6-8CD9-83A9-D1CBF1CAA765",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.7,
+       "properties": {},
+       "query": {
+        "affinity": 0.842
+       }
+      },
+      {
+       "name": "Charles Wesley Godwin",
+       "entity_id": "98740ECB-C50E-9AEE-1324-2A8E906C51B3",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.8,
+       "properties": {},
+       "query": {
+        "affinity": 0.832
+       }
+      },
+      {
+       "name": "Sierra Ferrell",
+       "entity_id": "F9E0CB1E-39E0-D8D2-083F-79748066B652",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.84,
+       "properties": {},
+       "query": {
+        "affinity": 0.784
+       }
+      },
+      {
+       "name": "Billy Strings",
+       "entity_id": "5D136DC5-4F61-77BA-77D5-305DA5E87A5F",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.93,
+       "properties": {},
+       "query": {
+        "affinity": 0.738
+       }
+      },
+      {
+       "name": "Colter Wall",
+       "entity_id": "00F927AB-60A2-2EDA-276E-5FA197212A1B",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.88,
+       "properties": {},
+       "query": {
+        "affinity": 0.713
+       }
+      },
+      {
+       "name": "49 Winchester",
+       "entity_id": "B8B7E5C0-C3B7-DF25-1FC0-E3A0AFA2D54C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.74,
+       "properties": {},
+       "query": {
+        "affinity": 0.708
+       }
+      },
+      {
+       "name": "Vincent Neil Emerson",
+       "entity_id": "D0308A98-02AA-23EB-8D8B-924338C38507",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.72,
+       "properties": {},
+       "query": {
+        "affinity": 0.689
+       }
+      },
+      {
+       "name": "Turnpike Troubadours",
+       "entity_id": "5FE133A0-BA5B-78F6-AF59-A972B891310B",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.9,
+       "properties": {},
+       "query": {
+        "affinity": 0.688
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "98740ECB-C50E-9AEE-1324-2A8E906C51B3,00F927AB-60A2-2EDA-276E-5FA197212A1B,F9E0CB1E-39E0-D8D2-083F-79748066B652,5D136DC5-4F61-77BA-77D5-305DA5E87A5F,8E256FF8-1FA6-8CD9-83A9-D1CBF1CAA765,B8B7E5C0-C3B7-DF25-1FC0-E3A0AFA2D54C,5FE133A0-BA5B-78F6-AF59-A972B891310B,D0308A98-02AA-23EB-8D8B-924338C38507",
+     "filter.type": "urn:entity:artist",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "signal.location.query": "Nashville, TN",
+     "take": "8"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Sierra Ferrell",
+       "entity_id": "F9E0CB1E-39E0-D8D2-083F-79748066B652",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.84,
+       "properties": {},
+       "query": {
+        "affinity": 0.855
+       }
+      },
+      {
+       "name": "Charles Wesley Godwin",
+       "entity_id": "98740ECB-C50E-9AEE-1324-2A8E906C51B3",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.8,
+       "properties": {},
+       "query": {
+        "affinity": 0.803
+       }
+      },
+      {
+       "name": "Colter Wall",
+       "entity_id": "00F927AB-60A2-2EDA-276E-5FA197212A1B",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.88,
+       "properties": {},
+       "query": {
+        "affinity": 0.78
+       }
+      },
+      {
+       "name": "49 Winchester",
+       "entity_id": "B8B7E5C0-C3B7-DF25-1FC0-E3A0AFA2D54C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.74,
+       "properties": {},
+       "query": {
+        "affinity": 0.754
+       }
+      },
+      {
+       "name": "Ian Noe",
+       "entity_id": "8E256FF8-1FA6-8CD9-83A9-D1CBF1CAA765",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.7,
+       "properties": {},
+       "query": {
+        "affinity": 0.747
+       }
+      },
+      {
+       "name": "Turnpike Troubadours",
+       "entity_id": "5FE133A0-BA5B-78F6-AF59-A972B891310B",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.9,
+       "properties": {},
+       "query": {
+        "affinity": 0.725
+       }
+      },
+      {
+       "name": "Vincent Neil Emerson",
+       "entity_id": "D0308A98-02AA-23EB-8D8B-924338C38507",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.72,
+       "properties": {},
+       "query": {
+        "affinity": 0.7
+       }
+      },
+      {
+       "name": "Billy Strings",
+       "entity_id": "5D136DC5-4F61-77BA-77D5-305DA5E87A5F",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.93,
+       "properties": {},
+       "query": {
+        "affinity": 0.697
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "98740ECB-C50E-9AEE-1324-2A8E906C51B3,00F927AB-60A2-2EDA-276E-5FA197212A1B,F9E0CB1E-39E0-D8D2-083F-79748066B652,5D136DC5-4F61-77BA-77D5-305DA5E87A5F,8E256FF8-1FA6-8CD9-83A9-D1CBF1CAA765,B8B7E5C0-C3B7-DF25-1FC0-E3A0AFA2D54C,5FE133A0-BA5B-78F6-AF59-A972B891310B,D0308A98-02AA-23EB-8D8B-924338C38507",
+     "filter.type": "urn:entity:artist",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "signal.location.query": "Knoxville, TN",
+     "take": "8"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Charles Wesley Godwin",
+       "entity_id": "98740ECB-C50E-9AEE-1324-2A8E906C51B3",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.8,
+       "properties": {},
+       "query": {
+        "affinity": 0.857
+       }
+      },
+      {
+       "name": "Colter Wall",
+       "entity_id": "00F927AB-60A2-2EDA-276E-5FA197212A1B",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.88,
+       "properties": {},
+       "query": {
+        "affinity": 0.795
+       }
+      },
+      {
+       "name": "Ian Noe",
+       "entity_id": "8E256FF8-1FA6-8CD9-83A9-D1CBF1CAA765",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.7,
+       "properties": {},
+       "query": {
+        "affinity": 0.761
+       }
+      },
+      {
+       "name": "Turnpike Troubadours",
+       "entity_id": "5FE133A0-BA5B-78F6-AF59-A972B891310B",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.9,
+       "properties": {},
+       "query": {
+        "affinity": 0.759
+       }
+      },
+      {
+       "name": "49 Winchester",
+       "entity_id": "B8B7E5C0-C3B7-DF25-1FC0-E3A0AFA2D54C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.74,
+       "properties": {},
+       "query": {
+        "affinity": 0.725
+       }
+      },
+      {
+       "name": "Sierra Ferrell",
+       "entity_id": "F9E0CB1E-39E0-D8D2-083F-79748066B652",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.84,
+       "properties": {},
+       "query": {
+        "affinity": 0.714
+       }
+      },
+      {
+       "name": "Billy Strings",
+       "entity_id": "5D136DC5-4F61-77BA-77D5-305DA5E87A5F",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.93,
+       "properties": {},
+       "query": {
+        "affinity": 0.696
+       }
+      },
+      {
+       "name": "Vincent Neil Emerson",
+       "entity_id": "D0308A98-02AA-23EB-8D8B-924338C38507",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.72,
+       "properties": {},
+       "query": {
+        "affinity": 0.674
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/analysis/compare",
+    "params": {
+     "a.signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "b.signal.interests.entities": "98740ECB-C50E-9AEE-1324-2A8E906C51B3",
+     "take": "8"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "tags": [
+      {
+       "tag_id": "urn:tag:keyword:music:appalachian",
+       "name": "Appalachian",
+       "subtype": "urn:tag:keyword:music",
+       "query": {
+        "affinity": 0.9,
+        "a": {
+         "affinity": 0.88
+        },
+        "b": {
+         "affinity": 0.85
+        }
+       }
+      },
+      {
+       "tag_id": "urn:tag:keyword:music:coal_country",
+       "name": "Coal Country",
+       "subtype": "urn:tag:keyword:music",
+       "query": {
+        "affinity": 0.83,
+        "a": {
+         "affinity": 0.83
+        },
+        "b": {
+         "affinity": 0.79
+        }
+       }
+      },
+      {
+       "tag_id": "urn:tag:keyword:music:americana",
+       "name": "Americana",
+       "subtype": "urn:tag:keyword:music",
+       "query": {
+        "affinity": 0.76,
+        "a": {
+         "affinity": 0.78
+        },
+        "b": {
+         "affinity": 0.73
+        }
+       }
+      },
+      {
+       "tag_id": "urn:tag:keyword:music:storytelling",
+       "name": "Storytelling",
+       "subtype": "urn:tag:keyword:music",
+       "query": {
+        "affinity": 0.69,
+        "a": {
+         "affinity": 0.73
+        },
+        "b": {
+         "affinity": 0.67
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/analysis/compare",
+    "params": {
+     "a.signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "b.signal.interests.entities": "8E256FF8-1FA6-8CD9-83A9-D1CBF1CAA765",
+     "take": "8"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "tags": [
+      {
+       "tag_id": "urn:tag:keyword:music:appalachian",
+       "name": "Appalachian",
+       "subtype": "urn:tag:keyword:music",
+       "query": {
+        "affinity": 0.9,
+        "a": {
+         "affinity": 0.88
+        },
+        "b": {
+         "affinity": 0.85
+        }
+       }
+      },
+      {
+       "tag_id": "urn:tag:keyword:music:folk",
+       "name": "Folk",
+       "subtype": "urn:tag:keyword:music",
+       "query": {
+        "affinity": 0.83,
+        "a": {
+         "affinity": 0.83
+        },
+        "b": {
+         "affinity": 0.79
+        }
+       }
+      },
+      {
+       "tag_id": "urn:tag:keyword:music:kentucky",
+       "name": "Kentucky",
+       "subtype": "urn:tag:keyword:music",
+       "query": {
+        "affinity": 0.76,
+        "a": {
+         "affinity": 0.78
+        },
+        "b": {
+         "affinity": 0.73
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/tags",
+    "params": {
+     "feature.semantic_search": "true",
+     "filter.query": "food and beverage",
+     "take": "20"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "tags": [
+      {
+       "id": "urn:tag:genre:brand:food_beverage",
+       "name": "Food & Beverage",
+       "type": "urn:tag:genre:brand",
+       "parents": [
+        {
+         "type": "urn:entity:brand"
+        }
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:food_beverage",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Duke's Mayonnaise",
+       "entity_id": "337D652A-8CB2-0982-AD52-049D4C0E791B",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.729,
+       "query": {
+        "affinity": 0.93
+       }
+      },
+      {
+       "name": "Cracker Barrel",
+       "entity_id": "483ADF91-18FC-D154-1380-7F7B03BED400",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.89,
+       "query": {
+        "affinity": 0.88
+       }
+      },
+      {
+       "name": "Waffle House",
+       "entity_id": "CA57D269-9200-9920-4E93-335C4C62E18C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.896,
+       "query": {
+        "affinity": 0.83
+       }
+      },
+      {
+       "name": "Grippo's",
+       "entity_id": "D126011C-53FB-273E-C9B9-91234FE57A04",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.684,
+       "query": {
+        "affinity": 0.78
+       }
+      },
+      {
+       "name": "Ale-8-One",
+       "entity_id": "2205EB87-FFF3-D4E8-5058-06C554A63404",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.765,
+       "query": {
+        "affinity": 0.73
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:food_beverage",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "signal.location.query": "Louisville, KY",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Duke's Mayonnaise",
+       "entity_id": "337D652A-8CB2-0982-AD52-049D4C0E791B",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.729,
+       "query": {
+        "affinity": 0.927
+       }
+      },
+      {
+       "name": "Cracker Barrel",
+       "entity_id": "483ADF91-18FC-D154-1380-7F7B03BED400",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.89,
+       "query": {
+        "affinity": 0.876
+       }
+      },
+      {
+       "name": "Waffle House",
+       "entity_id": "CA57D269-9200-9920-4E93-335C4C62E18C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.896,
+       "query": {
+        "affinity": 0.829
+       }
+      },
+      {
+       "name": "Grippo's",
+       "entity_id": "D126011C-53FB-273E-C9B9-91234FE57A04",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.684,
+       "query": {
+        "affinity": 0.77
+       }
+      },
+      {
+       "name": "Ale-8-One",
+       "entity_id": "2205EB87-FFF3-D4E8-5058-06C554A63404",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.765,
+       "query": {
+        "affinity": 0.725
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:food_beverage",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "signal.location.query": "Lexington, KY",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Ale-8-One",
+       "entity_id": "2205EB87-FFF3-D4E8-5058-06C554A63404",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.765,
+       "query": {
+        "affinity": 0.918
+       }
+      },
+      {
+       "name": "Grippo's",
+       "entity_id": "D126011C-53FB-273E-C9B9-91234FE57A04",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.684,
+       "query": {
+        "affinity": 0.867
+       }
+      },
+      {
+       "name": "Duke's Mayonnaise",
+       "entity_id": "337D652A-8CB2-0982-AD52-049D4C0E791B",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.729,
+       "query": {
+        "affinity": 0.824
+       }
+      },
+      {
+       "name": "Cracker Barrel",
+       "entity_id": "483ADF91-18FC-D154-1380-7F7B03BED400",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.89,
+       "query": {
+        "affinity": 0.773
+       }
+      },
+      {
+       "name": "Waffle House",
+       "entity_id": "CA57D269-9200-9920-4E93-335C4C62E18C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.896,
+       "query": {
+        "affinity": 0.711
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:food_beverage",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "signal.location.query": "Nashville, TN",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Duke's Mayonnaise",
+       "entity_id": "337D652A-8CB2-0982-AD52-049D4C0E791B",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.729,
+       "query": {
+        "affinity": 0.919
+       }
+      },
+      {
+       "name": "Cracker Barrel",
+       "entity_id": "483ADF91-18FC-D154-1380-7F7B03BED400",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.89,
+       "query": {
+        "affinity": 0.864
+       }
+      },
+      {
+       "name": "Waffle House",
+       "entity_id": "CA57D269-9200-9920-4E93-335C4C62E18C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.896,
+       "query": {
+        "affinity": 0.82
+       }
+      },
+      {
+       "name": "Grippo's",
+       "entity_id": "D126011C-53FB-273E-C9B9-91234FE57A04",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.684,
+       "query": {
+        "affinity": 0.762
+       }
+      },
+      {
+       "name": "Ale-8-One",
+       "entity_id": "2205EB87-FFF3-D4E8-5058-06C554A63404",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.765,
+       "query": {
+        "affinity": 0.723
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/tags",
+    "params": {
+     "feature.semantic_search": "true",
+     "filter.query": "apparel and fashion",
+     "take": "20"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "tags": [
+      {
+       "id": "urn:tag:genre:brand:fashion",
+       "name": "Fashion",
+       "type": "urn:tag:genre:brand",
+       "parents": [
+        {
+         "type": "urn:entity:brand"
+        }
+       ]
+      },
+      {
+       "id": "urn:tag:genre:brand:apparel",
+       "name": "Apparel",
+       "type": "urn:tag:genre:brand",
+       "parents": [
+        {
+         "type": "urn:entity:brand"
+        }
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:fashion",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Carhartt",
+       "entity_id": "F1D7EC17-8270-F131-600D-79D1EC99C73A",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.747,
+       "query": {
+        "affinity": 0.93
+       }
+      },
+      {
+       "name": "Wrangler",
+       "entity_id": "5C601069-0783-7A2F-FE21-731062E60180",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.84,
+       "query": {
+        "affinity": 0.88
+       }
+      },
+      {
+       "name": "Ariat",
+       "entity_id": "E6707E85-7B08-7F06-0AB0-F50F9AA29DC0",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.745,
+       "query": {
+        "affinity": 0.83
+       }
+      },
+      {
+       "name": "Filson",
+       "entity_id": "0C4DDB2B-235B-4FAF-A4DA-D9C47DE9447E",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.861,
+       "query": {
+        "affinity": 0.78
+       }
+      },
+      {
+       "name": "Red Wing Shoes",
+       "entity_id": "E9CAC870-CB26-6E27-EC97-C047D0B1CD6B",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.757,
+       "query": {
+        "affinity": 0.73
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:fashion",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "signal.location.query": "Louisville, KY",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Carhartt",
+       "entity_id": "F1D7EC17-8270-F131-600D-79D1EC99C73A",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.747,
+       "query": {
+        "affinity": 0.923
+       }
+      },
+      {
+       "name": "Wrangler",
+       "entity_id": "5C601069-0783-7A2F-FE21-731062E60180",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.84,
+       "query": {
+        "affinity": 0.863
+       }
+      },
+      {
+       "name": "Ariat",
+       "entity_id": "E6707E85-7B08-7F06-0AB0-F50F9AA29DC0",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.745,
+       "query": {
+        "affinity": 0.814
+       }
+      },
+      {
+       "name": "Filson",
+       "entity_id": "0C4DDB2B-235B-4FAF-A4DA-D9C47DE9447E",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.861,
+       "query": {
+        "affinity": 0.777
+       }
+      },
+      {
+       "name": "Red Wing Shoes",
+       "entity_id": "E9CAC870-CB26-6E27-EC97-C047D0B1CD6B",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.757,
+       "query": {
+        "affinity": 0.724
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:fashion",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "signal.location.query": "Lexington, KY",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Carhartt",
+       "entity_id": "F1D7EC17-8270-F131-600D-79D1EC99C73A",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.747,
+       "query": {
+        "affinity": 0.929
+       }
+      },
+      {
+       "name": "Wrangler",
+       "entity_id": "5C601069-0783-7A2F-FE21-731062E60180",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.84,
+       "query": {
+        "affinity": 0.875
+       }
+      },
+      {
+       "name": "Ariat",
+       "entity_id": "E6707E85-7B08-7F06-0AB0-F50F9AA29DC0",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.745,
+       "query": {
+        "affinity": 0.811
+       }
+      },
+      {
+       "name": "Filson",
+       "entity_id": "0C4DDB2B-235B-4FAF-A4DA-D9C47DE9447E",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.861,
+       "query": {
+        "affinity": 0.774
+       }
+      },
+      {
+       "name": "Red Wing Shoes",
+       "entity_id": "E9CAC870-CB26-6E27-EC97-C047D0B1CD6B",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.757,
+       "query": {
+        "affinity": 0.726
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:fashion",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "signal.location.query": "Nashville, TN",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Carhartt",
+       "entity_id": "F1D7EC17-8270-F131-600D-79D1EC99C73A",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.747,
+       "query": {
+        "affinity": 0.914
+       }
+      },
+      {
+       "name": "Wrangler",
+       "entity_id": "5C601069-0783-7A2F-FE21-731062E60180",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.84,
+       "query": {
+        "affinity": 0.867
+       }
+      },
+      {
+       "name": "Ariat",
+       "entity_id": "E6707E85-7B08-7F06-0AB0-F50F9AA29DC0",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.745,
+       "query": {
+        "affinity": 0.822
+       }
+      },
+      {
+       "name": "Filson",
+       "entity_id": "0C4DDB2B-235B-4FAF-A4DA-D9C47DE9447E",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.861,
+       "query": {
+        "affinity": 0.762
+       }
+      },
+      {
+       "name": "Red Wing Shoes",
+       "entity_id": "E9CAC870-CB26-6E27-EC97-C047D0B1CD6B",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.757,
+       "query": {
+        "affinity": 0.718
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/tags",
+    "params": {
+     "feature.semantic_search": "true",
+     "filter.query": "alcoholic beverages",
+     "take": "20"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "tags": [
+      {
+       "id": "urn:tag:genre:brand:alcoholic_beverages",
+       "name": "Alcoholic Beverages",
+       "type": "urn:tag:genre:brand",
+       "parents": [
+        {
+         "type": "urn:entity:brand"
+        }
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:alcoholic_beverages",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Buffalo Trace",
+       "entity_id": "3AC49081-C44B-0048-0F0B-FF624CB07896",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.718,
+       "query": {
+        "affinity": 0.93
+       }
+      },
+      {
+       "name": "Wild Turkey",
+       "entity_id": "D41BFED6-CAB7-AFF2-C7A9-3DD33C960927",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.893,
+       "query": {
+        "affinity": 0.88
+       }
+      },
+      {
+       "name": "Ale-8-One",
+       "entity_id": "2205EB87-FFF3-D4E8-5058-06C554A63404",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.765,
+       "query": {
+        "affinity": 0.83
+       }
+      },
+      {
+       "name": "Busch Light",
+       "entity_id": "6B04F728-F638-760C-C21B-8B43DA341DF2",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.687,
+       "query": {
+        "affinity": 0.78
+       }
+      },
+      {
+       "name": "West Sixth Brewing",
+       "entity_id": "64E69111-665A-E886-8357-F2774556153A",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.743,
+       "query": {
+        "affinity": 0.73
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:alcoholic_beverages",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "signal.location.query": "Louisville, KY",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Rabbit Hole Distillery",
+       "entity_id": "D58B1E41-B963-0F80-BA59-9F0C7DEC855C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.713,
+       "query": {
+        "affinity": 0.921
+       }
+      },
+      {
+       "name": "Buffalo Trace",
+       "entity_id": "3AC49081-C44B-0048-0F0B-FF624CB07896",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.718,
+       "query": {
+        "affinity": 0.87
+       }
+      },
+      {
+       "name": "Wild Turkey",
+       "entity_id": "D41BFED6-CAB7-AFF2-C7A9-3DD33C960927",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.893,
+       "query": {
+        "affinity": 0.813
+       }
+      },
+      {
+       "name": "Ale-8-One",
+       "entity_id": "2205EB87-FFF3-D4E8-5058-06C554A63404",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.765,
+       "query": {
+        "affinity": 0.775
+       }
+      },
+      {
+       "name": "Busch Light",
+       "entity_id": "6B04F728-F638-760C-C21B-8B43DA341DF2",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.687,
+       "query": {
+        "affinity": 0.728
+       }
+      },
+      {
+       "name": "West Sixth Brewing",
+       "entity_id": "64E69111-665A-E886-8357-F2774556153A",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.743,
+       "query": {
+        "affinity": 0.661
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:alcoholic_beverages",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "signal.location.query": "Lexington, KY",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "West Sixth Brewing",
+       "entity_id": "64E69111-665A-E886-8357-F2774556153A",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.743,
+       "query": {
+        "affinity": 0.925
+       }
+      },
+      {
+       "name": "Town Branch",
+       "entity_id": "41006B4C-3D5B-CA0D-8D24-0514BDF19256",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.886,
+       "query": {
+        "affinity": 0.875
+       }
+      },
+      {
+       "name": "Buffalo Trace",
+       "entity_id": "3AC49081-C44B-0048-0F0B-FF624CB07896",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.718,
+       "query": {
+        "affinity": 0.811
+       }
+      },
+      {
+       "name": "Wild Turkey",
+       "entity_id": "D41BFED6-CAB7-AFF2-C7A9-3DD33C960927",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.893,
+       "query": {
+        "affinity": 0.769
+       }
+      },
+      {
+       "name": "Ale-8-One",
+       "entity_id": "2205EB87-FFF3-D4E8-5058-06C554A63404",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.765,
+       "query": {
+        "affinity": 0.718
+       }
+      },
+      {
+       "name": "Busch Light",
+       "entity_id": "6B04F728-F638-760C-C21B-8B43DA341DF2",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.687,
+       "query": {
+        "affinity": 0.672
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:alcoholic_beverages",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "signal.location.query": "Nashville, TN",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Buffalo Trace",
+       "entity_id": "3AC49081-C44B-0048-0F0B-FF624CB07896",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.718,
+       "query": {
+        "affinity": 0.912
+       }
+      },
+      {
+       "name": "Wild Turkey",
+       "entity_id": "D41BFED6-CAB7-AFF2-C7A9-3DD33C960927",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.893,
+       "query": {
+        "affinity": 0.869
+       }
+      },
+      {
+       "name": "Ale-8-One",
+       "entity_id": "2205EB87-FFF3-D4E8-5058-06C554A63404",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.765,
+       "query": {
+        "affinity": 0.823
+       }
+      },
+      {
+       "name": "Busch Light",
+       "entity_id": "6B04F728-F638-760C-C21B-8B43DA341DF2",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.687,
+       "query": {
+        "affinity": 0.768
+       }
+      },
+      {
+       "name": "West Sixth Brewing",
+       "entity_id": "64E69111-665A-E886-8357-F2774556153A",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.743,
+       "query": {
+        "affinity": 0.725
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/tags",
+    "params": {
+     "feature.semantic_search": "true",
+     "filter.query": "bar",
+     "take": "20"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "tags": [
+      {
+       "id": "urn:tag:category:place:bar",
+       "name": "Bar",
+       "type": "urn:tag:category:place",
+       "parents": [
+        {
+         "type": "urn:entity:place"
+        }
+       ]
+      },
+      {
+       "id": "urn:tag:category:place:cocktail_bar",
+       "name": "Cocktail Bar",
+       "type": "urn:tag:category:place",
+       "parents": [
+        {
+         "type": "urn:entity:place"
+        }
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location.query": "Louisville, KY",
+     "filter.tags": "urn:tag:category:place:bar",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "take": "3"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Zanzabar",
+       "entity_id": "F2C44D39-143E-F470-9D3D-4627B1144888",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.774,
+       "location": {
+        "lat": 38.262699999999995,
+        "lon": -85.7665
+       },
+       "properties": {
+        "address": "870 Main St, Louisville",
+        "geocode": {
+         "name": "Louisville"
+        }
+       },
+       "query": {
+        "affinity": 0.95
+       }
+      },
+      {
+       "name": "Mag Bar",
+       "entity_id": "03D553BC-B6B4-D5B7-266C-637D2EE2B36B",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.722,
+       "location": {
+        "lat": 38.2727,
+        "lon": -85.7745
+       },
+       "properties": {
+        "address": "880 Main St, Louisville",
+        "geocode": {
+         "name": "Louisville"
+        }
+       },
+       "query": {
+        "affinity": 0.89
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location.query": "Lexington, KY",
+     "filter.tags": "urn:tag:category:place:bar",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "take": "3"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Willie's Locally Known",
+       "entity_id": "E5D0B9AF-B450-2A0E-C5DE-A05A8B6CC299",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.832,
+       "location": {
+        "lat": 38.050599999999996,
+        "lon": -84.51169999999999
+       },
+       "properties": {
+        "address": "841 Main St, Lexington",
+        "geocode": {
+         "name": "Lexington"
+        }
+       },
+       "query": {
+        "affinity": 0.95
+       }
+      },
+      {
+       "name": "The Green Lantern",
+       "entity_id": "FE090174-2747-8E96-20F5-94A16819024E",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.787,
+       "location": {
+        "lat": 38.0606,
+        "lon": -84.5197
+       },
+       "properties": {
+        "address": "777 Main St, Lexington",
+        "geocode": {
+         "name": "Lexington"
+        }
+       },
+       "query": {
+        "affinity": 0.89
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location.query": "Nashville, TN",
+     "filter.tags": "urn:tag:category:place:bar",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "take": "3"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": []
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/trending",
+    "params": {
+     "filter.end_date": "2026-10-13",
+     "filter.start_date": "2026-04-14",
+     "filter.type": "urn:entity:artist",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "trending": [
+      {
+       "date": "2026-05-01",
+       "population_percentile": 88,
+       "population_rank": 1440,
+       "population_rank_velocity": 0,
+       "velocity_fold_change": 1,
+       "population_percent_delta": 0
+      },
+      {
+       "date": "2026-05-16",
+       "population_percentile": 88,
+       "population_rank": 1440,
+       "population_rank_velocity": 0,
+       "velocity_fold_change": 1,
+       "population_percent_delta": 0
+      },
+      {
+       "date": "2026-05-31",
+       "population_percentile": 89,
+       "population_rank": 1320,
+       "population_rank_velocity": 40,
+       "velocity_fold_change": 1.011,
+       "population_percent_delta": 1
+      },
+      {
+       "date": "2026-06-15",
+       "population_percentile": 89,
+       "population_rank": 1320,
+       "population_rank_velocity": 0,
+       "velocity_fold_change": 1,
+       "population_percent_delta": 0
+      },
+      {
+       "date": "2026-06-30",
+       "population_percentile": 88,
+       "population_rank": 1440,
+       "population_rank_velocity": -40,
+       "velocity_fold_change": 0.989,
+       "population_percent_delta": -1
+      },
+      {
+       "date": "2026-07-15",
+       "population_percentile": 89,
+       "population_rank": 1320,
+       "population_rank_velocity": 40,
+       "velocity_fold_change": 1.011,
+       "population_percent_delta": 1
+      },
+      {
+       "date": "2026-07-30",
+       "population_percentile": 90,
+       "population_rank": 1200,
+       "population_rank_velocity": 40,
+       "velocity_fold_change": 1.011,
+       "population_percent_delta": 1
+      },
+      {
+       "date": "2026-08-14",
+       "population_percentile": 90,
+       "population_rank": 1200,
+       "population_rank_velocity": 0,
+       "velocity_fold_change": 1,
+       "population_percent_delta": 0
+      },
+      {
+       "date": "2026-08-29",
+       "population_percentile": 90,
+       "population_rank": 1200,
+       "population_rank_velocity": 0,
+       "velocity_fold_change": 1,
+       "population_percent_delta": 0
+      },
+      {
+       "date": "2026-09-13",
+       "population_percentile": 91,
+       "population_rank": 1080,
+       "population_rank_velocity": 40,
+       "velocity_fold_change": 1.011,
+       "population_percent_delta": 1
+      },
+      {
+       "date": "2026-09-28",
+       "population_percentile": 91,
+       "population_rank": 1080,
+       "population_rank_velocity": 0,
+       "velocity_fold_change": 1,
+       "population_percent_delta": 0
+      },
+      {
+       "date": "2026-10-13",
+       "population_percentile": 91,
+       "population_rank": 1080,
+       "population_rank_velocity": 0,
+       "velocity_fold_change": 1,
+       "population_percent_delta": 0
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Austin, TX",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Tyler Childers",
+       "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.951,
+       "properties": {},
+       "query": {
+        "affinity": 0.723
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Denver, CO",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Tyler Childers",
+       "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.951,
+       "properties": {},
+       "query": {
+        "affinity": 0.74
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Chicago, IL",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Tyler Childers",
+       "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.951,
+       "properties": {},
+       "query": {
+        "affinity": 0.604
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "New York, NY",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Tyler Childers",
+       "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.951,
+       "properties": {},
+       "query": {
+        "affinity": 0.479
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Portland, OR",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Tyler Childers",
+       "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.951,
+       "properties": {},
+       "query": {
+        "affinity": 0.237
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Toronto, ON",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Tyler Childers",
+       "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.951,
+       "properties": {},
+       "query": {
+        "affinity": 0.422
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Vancouver, BC",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Tyler Childers",
+       "entity_id": "38975284-2284-0E53-13FB-F039DC7AF544",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.951,
+       "properties": {},
+       "query": {
+        "affinity": 0.294
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/search",
+    "params": {
+     "query": "Margo Price",
+     "take": "1",
+     "types": "urn:entity:artist"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": [
+     {
+      "name": "Margo Price",
+      "entity_id": "20C12A2B-23CD-DBAF-AB58-35288453D135",
+      "type": "urn:entity",
+      "subtype": "urn:entity:artist",
+      "types": [
+       "urn:entity:artist"
+      ],
+      "popularity": 0.95,
+      "properties": {},
+      "tags": []
+     }
+    ]
+   }
+  },
+  {
+   "request": {
+    "path": "/search",
+    "params": {
+     "query": "Kacey Musgraves",
+     "take": "1",
+     "types": "urn:entity:artist"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": [
+     {
+      "name": "Kacey Musgraves",
+      "entity_id": "64DAA5FC-19AC-0E47-E1B9-501E274D5D23",
+      "type": "urn:entity",
+      "subtype": "urn:entity:artist",
+      "types": [
+       "urn:entity:artist"
+      ],
+      "popularity": 0.95,
+      "properties": {},
+      "tags": []
+     }
+    ]
+   }
+  },
+  {
+   "request": {
+    "path": "/search",
+    "params": {
+     "query": "Lil Nas X",
+     "take": "1",
+     "types": "urn:entity:artist"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": [
+     {
+      "name": "Lil Nas X",
+      "entity_id": "E871C612-67E6-9583-9B0F-9311A5D3ED4D",
+      "type": "urn:entity",
+      "subtype": "urn:entity:artist",
+      "types": [
+       "urn:entity:artist"
+      ],
+      "popularity": 0.95,
+      "properties": {},
+      "tags": []
+     }
+    ]
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "20C12A2B-23CD-DBAF-AB58-35288453D135,64DAA5FC-19AC-0E47-E1B9-501E274D5D23,E871C612-67E6-9583-9B0F-9311A5D3ED4D",
+     "filter.type": "urn:entity:artist",
+     "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
+     "take": "3"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Margo Price",
+       "entity_id": "20C12A2B-23CD-DBAF-AB58-35288453D135",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.95,
+       "properties": {},
+       "query": {
+        "affinity": 0.71
+       }
+      },
+      {
+       "name": "Kacey Musgraves",
+       "entity_id": "64DAA5FC-19AC-0E47-E1B9-501E274D5D23",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.95,
+       "properties": {},
+       "query": {
+        "affinity": 0.55
+       }
+      },
+      {
+       "name": "Lil Nas X",
+       "entity_id": "E871C612-67E6-9583-9B0F-9311A5D3ED4D",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.95,
+       "properties": {},
+       "query": {
+        "affinity": 0.18
+       }
+      }
+     ]
+    }
+   }
+  }
+ ]
+}

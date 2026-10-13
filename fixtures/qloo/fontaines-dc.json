@@ -1,0 +1,3700 @@
+{
+ "fixture": true,
+ "source": "illustrative",
+ "note": "ILLUSTRATIVE FIXTURE, NOT QLOO DATA. Shapes follow the Qloo hackathon API reference; names and scores are placeholders from scripts/fixtures/seeds.ts. Replace by running scripts/qloo-smoke.sh once QLOO_API_KEY exists.",
+ "entries": [
+  {
+   "request": {
+    "path": "/search",
+    "params": {
+     "query": "Fontaines D.C.",
+     "take": "5",
+     "types": "urn:entity:artist"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": [
+     {
+      "name": "Fontaines D.C.",
+      "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+      "type": "urn:entity",
+      "subtype": "urn:entity:artist",
+      "types": [
+       "urn:entity:artist"
+      ],
+      "popularity": 0.931,
+      "disambiguation": "Irish post-punk band from Dublin",
+      "properties": {
+       "short_description": "Irish post-punk band from Dublin"
+      },
+      "tags": [
+       {
+        "id": "urn:tag:genre:music:post_punk",
+        "name": "Post-Punk",
+        "type": "urn:tag:genre:music"
+       },
+       {
+        "id": "urn:tag:genre:music:indie_rock",
+        "name": "Indie Rock",
+        "type": "urn:tag:genre:music"
+       },
+       {
+        "id": "urn:tag:genre:music:irish_rock",
+        "name": "Irish Rock",
+        "type": "urn:tag:genre:music"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.parents.types": "urn:entity:artist",
+     "filter.type": "urn:tag",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "take": "12"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "tags": [
+      {
+       "tag_id": "urn:tag:genre:music:post_punk",
+       "name": "Post-Punk",
+       "types": [
+        "urn:entity:artist"
+       ],
+       "subtype": "urn:tag:genre:music",
+       "query": {
+        "affinity": 0.95
+       }
+      },
+      {
+       "tag_id": "urn:tag:genre:music:indie_rock",
+       "name": "Indie Rock",
+       "types": [
+        "urn:entity:artist"
+       ],
+       "subtype": "urn:tag:genre:music",
+       "query": {
+        "affinity": 0.91
+       }
+      },
+      {
+       "tag_id": "urn:tag:genre:music:irish_rock",
+       "name": "Irish Rock",
+       "types": [
+        "urn:entity:artist"
+       ],
+       "subtype": "urn:tag:genre:music",
+       "query": {
+        "affinity": 0.87
+       }
+      },
+      {
+       "tag_id": "urn:tag:genre:music:post_punk_revival",
+       "name": "Post-Punk Revival",
+       "types": [
+        "urn:entity:artist"
+       ],
+       "subtype": "urn:tag:genre:music",
+       "query": {
+        "affinity": 0.83
+       }
+      },
+      {
+       "tag_id": "urn:tag:genre:music:alternative",
+       "name": "Alternative",
+       "types": [
+        "urn:entity:artist"
+       ],
+       "subtype": "urn:tag:genre:music",
+       "query": {
+        "affinity": 0.79
+       }
+      },
+      {
+       "tag_id": "urn:tag:genre:music:garage_rock",
+       "name": "Garage Rock",
+       "types": [
+        "urn:entity:artist"
+       ],
+       "subtype": "urn:tag:genre:music",
+       "query": {
+        "affinity": 0.75
+       }
+      },
+      {
+       "tag_id": "urn:tag:genre:music:poetry",
+       "name": "Poetry",
+       "types": [
+        "urn:entity:artist"
+       ],
+       "subtype": "urn:tag:genre:music",
+       "query": {
+        "affinity": 0.71
+       }
+      },
+      {
+       "tag_id": "urn:tag:genre:music:noise_rock",
+       "name": "Noise Rock",
+       "types": [
+        "urn:entity:artist"
+       ],
+       "subtype": "urn:tag:genre:music",
+       "query": {
+        "affinity": 0.67
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.type": "urn:demographics",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "demographics": [
+      {
+       "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+       "query": {
+        "age": {
+         "24_and_younger": 0.21,
+         "25_to_29": 0.33,
+         "30_to_34": 0.24,
+         "35_to_44": 0.02,
+         "45_to_54": -0.24,
+         "55_and_older": -0.31
+        },
+        "gender": {
+         "male": 0.26,
+         "female": -0.26
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location": "POLYGON((-10.5 36, 24 36, 24 60, -10.5 60, -10.5 36))",
+     "filter.type": "urn:heatmap",
+     "output.heatmap.boundary": "urn:entity:locality",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "take": "50"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "heatmap": [
+      {
+       "location": {
+        "latitude": 53.3598,
+        "longitude": -6.2703,
+        "geohash": "c4a265"
+       },
+       "query": {
+        "affinity": 0.99,
+        "affinity_rank": 0.98,
+        "popularity": 0.638
+       }
+      },
+      {
+       "location": {
+        "latitude": 55.874199999999995,
+        "longitude": -4.2618,
+        "geohash": "c09793"
+       },
+       "query": {
+        "affinity": 0.95,
+        "affinity_rank": 0.94,
+        "popularity": 0.749
+       }
+      },
+      {
+       "location": {
+        "latitude": 53.4908,
+        "longitude": -2.2525999999999997,
+        "geohash": "a9ef72"
+       },
+       "query": {
+        "affinity": 0.94,
+        "affinity_rank": 0.93,
+        "popularity": 0.909
+       }
+      },
+      {
+       "location": {
+        "latitude": 54.607299999999995,
+        "longitude": -5.9401,
+        "geohash": "1a3680"
+       },
+       "query": {
+        "affinity": 0.92,
+        "affinity_rank": 0.91,
+        "popularity": 0.494
+       }
+      },
+      {
+       "location": {
+        "latitude": 51.4645,
+        "longitude": -2.5978999999999997,
+        "geohash": "0f8f98"
+       },
+       "query": {
+        "affinity": 0.91,
+        "affinity_rank": 0.9,
+        "popularity": 0.785
+       }
+      },
+      {
+       "location": {
+        "latitude": 53.8108,
+        "longitude": -1.5591,
+        "geohash": "951f93"
+       },
+       "query": {
+        "affinity": 0.9,
+        "affinity_rank": 0.89,
+        "popularity": 0.767
+       }
+      },
+      {
+       "location": {
+        "latitude": 53.4184,
+        "longitude": -3.0016,
+        "geohash": "a7e67f"
+       },
+       "query": {
+        "affinity": 0.88,
+        "affinity_rank": 0.87,
+        "popularity": 0.664
+       }
+      },
+      {
+       "location": {
+        "latitude": 54.988299999999995,
+        "longitude": -1.6278,
+        "geohash": "d6473e"
+       },
+       "query": {
+        "affinity": 0.87,
+        "affinity_rank": 0.86,
+        "popularity": 0.562
+       }
+      },
+      {
+       "location": {
+        "latitude": 51.517399999999995,
+        "longitude": -0.1378,
+        "geohash": "4c57f0"
+       },
+       "query": {
+        "affinity": 0.86,
+        "affinity_rank": 0.85,
+        "popularity": 0.962
+       }
+      },
+      {
+       "location": {
+        "latitude": 52.9648,
+        "longitude": -1.1681,
+        "geohash": "7d4bd9"
+       },
+       "query": {
+        "affinity": 0.85,
+        "affinity_rank": 0.84,
+        "popularity": 0.429
+       }
+      },
+      {
+       "location": {
+        "latitude": 50.832499999999996,
+        "longitude": -0.1472,
+        "geohash": "72e817"
+       },
+       "query": {
+        "affinity": 0.84,
+        "affinity_rank": 0.83,
+        "popularity": 0.487
+       }
+      },
+      {
+       "location": {
+        "latitude": 52.3776,
+        "longitude": 4.8941,
+        "geohash": "2dce28"
+       },
+       "query": {
+        "affinity": 0.82,
+        "affinity_rank": 0.81,
+        "popularity": 0.654
+       }
+      },
+      {
+       "location": {
+        "latitude": 52.100699999999996,
+        "longitude": 5.111400000000001,
+        "geohash": "25f989"
+       },
+       "query": {
+        "affinity": 0.81,
+        "affinity_rank": 0.8,
+        "popularity": 0.188
+       }
+      },
+      {
+       "location": {
+        "latitude": 51.2294,
+        "longitude": 4.3925,
+        "geohash": "22172f"
+       },
+       "query": {
+        "affinity": 0.8,
+        "affinity_rank": 0.79,
+        "popularity": 0.357
+       }
+      },
+      {
+       "location": {
+        "latitude": 52.53,
+        "longitude": 13.395,
+        "geohash": "062b06"
+       },
+       "query": {
+        "affinity": 0.79,
+        "affinity_rank": 0.78,
+        "popularity": 0.869
+       }
+      },
+      {
+       "location": {
+        "latitude": 53.561099999999996,
+        "longitude": 9.9837,
+        "geohash": "155277"
+       },
+       "query": {
+        "affinity": 0.78,
+        "affinity_rank": 0.77,
+        "popularity": 0.78
+       }
+      },
+      {
+       "location": {
+        "latitude": 55.686099999999996,
+        "longitude": 12.558300000000001,
+        "geohash": "3f7c83"
+       },
+       "query": {
+        "affinity": 0.77,
+        "affinity_rank": 0.76,
+        "popularity": 0.556
+       }
+      },
+      {
+       "location": {
+        "latitude": 48.8666,
+        "longitude": 2.3422,
+        "geohash": "22390a"
+       },
+       "query": {
+        "affinity": 0.74,
+        "affinity_rank": 0.73,
+        "popularity": 0.86
+       }
+      },
+      {
+       "location": {
+        "latitude": 45.474199999999996,
+        "longitude": 9.18,
+        "geohash": "5380bc"
+       },
+       "query": {
+        "affinity": 0.58,
+        "affinity_rank": 0.57,
+        "popularity": 0.948
+       }
+      },
+      {
+       "location": {
+        "latitude": 40.4268,
+        "longitude": -3.7138,
+        "geohash": "7a2191"
+       },
+       "query": {
+        "affinity": 0.55,
+        "affinity_rank": 0.54,
+        "popularity": 0.884
+       }
+      },
+      {
+       "location": {
+        "latitude": 53.3911,
+        "longitude": -1.4801,
+        "geohash": "66a83e"
+       },
+       "query": {
+        "affinity": 0.511,
+        "affinity_rank": 0.501,
+        "popularity": 0.186
+       }
+      },
+      {
+       "location": {
+        "latitude": 50.9475,
+        "longitude": 6.9503,
+        "geohash": "f2cf5c"
+       },
+       "query": {
+        "affinity": 0.509,
+        "affinity_rank": 0.499,
+        "popularity": 0.16
+       }
+      },
+      {
+       "location": {
+        "latitude": 48.1451,
+        "longitude": 11.572000000000001,
+        "geohash": "4bb73f"
+       },
+       "query": {
+        "affinity": 0.502,
+        "affinity_rank": 0.492,
+        "popularity": 0.754
+       }
+      },
+      {
+       "location": {
+        "latitude": 52.496199999999995,
+        "longitude": -1.9004,
+        "geohash": "c13361"
+       },
+       "query": {
+        "affinity": 0.499,
+        "affinity_rank": 0.489,
+        "popularity": 0.967
+       }
+      },
+      {
+       "location": {
+        "latitude": 41.9128,
+        "longitude": 12.4864,
+        "geohash": "da7705"
+       },
+       "query": {
+        "affinity": 0.48,
+        "affinity_rank": 0.47,
+        "popularity": 0.94
+       }
+      },
+      {
+       "location": {
+        "latitude": 50.860299999999995,
+        "longitude": 4.3417,
+        "geohash": "2784e3"
+       },
+       "query": {
+        "affinity": 0.477,
+        "affinity_rank": 0.467,
+        "popularity": 0.41
+       }
+      },
+      {
+       "location": {
+        "latitude": 50.085499999999996,
+        "longitude": 14.4278,
+        "geohash": "f1ef17"
+       },
+       "query": {
+        "affinity": 0.474,
+        "affinity_rank": 0.464,
+        "popularity": 0.172
+       }
+      },
+      {
+       "location": {
+        "latitude": 45.774,
+        "longitude": 4.8257,
+        "geohash": "438a3f"
+       },
+       "query": {
+        "affinity": 0.446,
+        "affinity_rank": 0.436,
+        "popularity": 0.346
+       }
+      },
+      {
+       "location": {
+        "latitude": 48.218199999999996,
+        "longitude": 16.363799999999998,
+        "geohash": "8b6cea"
+       },
+       "query": {
+        "affinity": 0.433,
+        "affinity_rank": 0.423,
+        "popularity": 0.437
+       }
+      },
+      {
+       "location": {
+        "latitude": 59.923899999999996,
+        "longitude": 10.7422,
+        "geohash": "bcc481"
+       },
+       "query": {
+        "affinity": 0.432,
+        "affinity_rank": 0.422,
+        "popularity": 0.448
+       }
+      },
+      {
+       "location": {
+        "latitude": 41.3974,
+        "longitude": 2.1586000000000003,
+        "geohash": "122a41"
+       },
+       "query": {
+        "affinity": 0.429,
+        "affinity_rank": 0.419,
+        "popularity": 0.901
+       }
+      },
+      {
+       "location": {
+        "latitude": 51.4916,
+        "longitude": -3.1891,
+        "geohash": "0cbfb4"
+       },
+       "query": {
+        "affinity": 0.411,
+        "affinity_rank": 0.401,
+        "popularity": 0.259
+       }
+      },
+      {
+       "location": {
+        "latitude": 38.732299999999995,
+        "longitude": -9.1493,
+        "geohash": "848652"
+       },
+       "query": {
+        "affinity": 0.369,
+        "affinity_rank": 0.359,
+        "popularity": 0.783
+       }
+      },
+      {
+       "location": {
+        "latitude": 55.9633,
+        "longitude": -3.1982999999999997,
+        "geohash": "ea3774"
+       },
+       "query": {
+        "affinity": 0.308,
+        "affinity_rank": 0.298,
+        "popularity": 0.312
+       }
+      },
+      {
+       "location": {
+        "latitude": 52.2397,
+        "longitude": 21.0022,
+        "geohash": "706f63"
+       },
+       "query": {
+        "affinity": 0.277,
+        "affinity_rank": 0.267,
+        "popularity": 0.462
+       }
+      },
+      {
+       "location": {
+        "latitude": 50.1209,
+        "longitude": 8.6721,
+        "geohash": "d5d884"
+       },
+       "query": {
+        "affinity": 0.261,
+        "affinity_rank": 0.251,
+        "popularity": 0.266
+       }
+      },
+      {
+       "location": {
+        "latitude": 47.3869,
+        "longitude": 8.5317,
+        "geohash": "be1ac3"
+       },
+       "query": {
+        "affinity": 0.257,
+        "affinity_rank": 0.247,
+        "popularity": 0.42
+       }
+      },
+      {
+       "location": {
+        "latitude": 59.3393,
+        "longitude": 18.0586,
+        "geohash": "c62ff6"
+       },
+       "query": {
+        "affinity": 0.252,
+        "affinity_rank": 0.242,
+        "popularity": 0.447
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Dublin",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Fontaines D.C.",
+       "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.931,
+       "properties": {},
+       "query": {
+        "affinity": 0.951
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Manchester",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Fontaines D.C.",
+       "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.931,
+       "properties": {},
+       "query": {
+        "affinity": 0.873
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Glasgow",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Fontaines D.C.",
+       "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.931,
+       "properties": {},
+       "query": {
+        "affinity": 0.889
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Bristol",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Fontaines D.C.",
+       "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.931,
+       "properties": {},
+       "query": {
+        "affinity": 0.876
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Leeds",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Fontaines D.C.",
+       "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.931,
+       "properties": {},
+       "query": {
+        "affinity": 0.88
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Belfast",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Fontaines D.C.",
+       "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.931,
+       "properties": {},
+       "query": {
+        "affinity": 0.864
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "London",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Fontaines D.C.",
+       "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.931,
+       "properties": {},
+       "query": {
+        "affinity": 0.831
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Liverpool",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Fontaines D.C.",
+       "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.931,
+       "properties": {},
+       "query": {
+        "affinity": 0.854
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Newcastle",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Fontaines D.C.",
+       "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.931,
+       "properties": {},
+       "query": {
+        "affinity": 0.803
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Nottingham",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Fontaines D.C.",
+       "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.931,
+       "properties": {},
+       "query": {
+        "affinity": 0.816
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Brighton",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Fontaines D.C.",
+       "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.931,
+       "properties": {},
+       "query": {
+        "affinity": 0.786
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Amsterdam",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Fontaines D.C.",
+       "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.931,
+       "properties": {},
+       "query": {
+        "affinity": 0.77
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/tags",
+    "params": {
+     "feature.semantic_search": "true",
+     "filter.query": "music venue",
+     "take": "20"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "tags": [
+      {
+       "id": "urn:tag:category:place:music_venue",
+       "name": "Music Venue",
+       "type": "urn:tag:category:place",
+       "parents": [
+        {
+         "type": "urn:entity:place"
+        }
+       ]
+      },
+      {
+       "id": "urn:tag:category:place:concert_hall",
+       "name": "Concert Hall",
+       "type": "urn:tag:category:place",
+       "parents": [
+        {
+         "type": "urn:entity:place"
+        }
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location.query": "Dublin",
+     "filter.tags": "urn:tag:category:place:music_venue",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "take": "5"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "3Arena",
+       "entity_id": "27D27253-CF37-A9E7-7D1A-0E04B8A6D007",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.807,
+       "location": {
+        "lat": 53.3598,
+        "lon": -6.2683
+       },
+       "properties": {
+        "address": "384 Main St, Dublin",
+        "geocode": {
+         "name": "Dublin"
+        }
+       },
+       "query": {
+        "affinity": 0.95
+       }
+      },
+      {
+       "name": "Vicar Street",
+       "entity_id": "A83CBED7-F67D-0577-026E-7E6B5E9A6A29",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.853,
+       "location": {
+        "lat": 53.369800000000005,
+        "lon": -6.2763
+       },
+       "properties": {
+        "address": "674 Main St, Dublin",
+        "geocode": {
+         "name": "Dublin"
+        }
+       },
+       "query": {
+        "affinity": 0.89
+       }
+      },
+      {
+       "name": "Olympia Theatre",
+       "entity_id": "D78627B5-8561-0489-9057-A6CAB2BF49C8",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.855,
+       "location": {
+        "lat": 53.3798,
+        "lon": -6.2843
+       },
+       "properties": {
+        "address": "721 Main St, Dublin",
+        "geocode": {
+         "name": "Dublin"
+        }
+       },
+       "query": {
+        "affinity": 0.83
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location.query": "Manchester",
+     "filter.tags": "urn:tag:category:place:music_venue",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "take": "5"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "O2 Victoria Warehouse",
+       "entity_id": "11F8D030-0791-966C-C97F-2A7C6BC7C8ED",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.82,
+       "location": {
+        "lat": 53.4908,
+        "lon": -2.2506
+       },
+       "properties": {
+        "address": "146 Main St, Manchester",
+        "geocode": {
+         "name": "Manchester"
+        }
+       },
+       "query": {
+        "affinity": 0.95
+       }
+      },
+      {
+       "name": "Albert Hall",
+       "entity_id": "FE7446B0-5C1E-F456-E289-F110B06F8F3A",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.812,
+       "location": {
+        "lat": 53.500800000000005,
+        "lon": -2.2586
+       },
+       "properties": {
+        "address": "607 Main St, Manchester",
+        "geocode": {
+         "name": "Manchester"
+        }
+       },
+       "query": {
+        "affinity": 0.89
+       }
+      },
+      {
+       "name": "Co-op Live",
+       "entity_id": "8A262A38-987E-97C4-D531-B88F77AFA93F",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.714,
+       "location": {
+        "lat": 53.5108,
+        "lon": -2.2666
+       },
+       "properties": {
+        "address": "453 Main St, Manchester",
+        "geocode": {
+         "name": "Manchester"
+        }
+       },
+       "query": {
+        "affinity": 0.83
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location.query": "Glasgow",
+     "filter.tags": "urn:tag:category:place:music_venue",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "take": "5"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Barrowland Ballroom",
+       "entity_id": "9811D8AA-F9CC-BA4A-C25A-DFE76812FA9E",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.863,
+       "location": {
+        "lat": 55.874199999999995,
+        "lon": -4.2598
+       },
+       "properties": {
+        "address": "551 Main St, Glasgow",
+        "geocode": {
+         "name": "Glasgow"
+        }
+       },
+       "query": {
+        "affinity": 0.95
+       }
+      },
+      {
+       "name": "O2 Academy Glasgow",
+       "entity_id": "9D682986-D5AF-52B7-A71E-8246F592FE9A",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.884,
+       "location": {
+        "lat": 55.8842,
+        "lon": -4.2678
+       },
+       "properties": {
+        "address": "101 Main St, Glasgow",
+        "geocode": {
+         "name": "Glasgow"
+        }
+       },
+       "query": {
+        "affinity": 0.89
+       }
+      },
+      {
+       "name": "OVO Hydro",
+       "entity_id": "3EFF03DD-AF60-965D-F732-0A4C13A12F18",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.812,
+       "location": {
+        "lat": 55.8942,
+        "lon": -4.2758
+       },
+       "properties": {
+        "address": "248 Main St, Glasgow",
+        "geocode": {
+         "name": "Glasgow"
+        }
+       },
+       "query": {
+        "affinity": 0.83
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location.query": "Bristol",
+     "filter.tags": "urn:tag:category:place:music_venue",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "take": "5"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Bristol Beacon",
+       "entity_id": "5A9B7165-7310-5B90-3027-8EBC64A20723",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.709,
+       "location": {
+        "lat": 51.4645,
+        "lon": -2.5959
+       },
+       "properties": {
+        "address": "411 Main St, Bristol",
+        "geocode": {
+         "name": "Bristol"
+        }
+       },
+       "query": {
+        "affinity": 0.95
+       }
+      },
+      {
+       "name": "O2 Academy Bristol",
+       "entity_id": "EAA0A587-AE6C-85CD-3C0A-75F99DBD870A",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.762,
+       "location": {
+        "lat": 51.474500000000006,
+        "lon": -2.6039
+       },
+       "properties": {
+        "address": "195 Main St, Bristol",
+        "geocode": {
+         "name": "Bristol"
+        }
+       },
+       "query": {
+        "affinity": 0.89
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location.query": "Leeds",
+     "filter.tags": "urn:tag:category:place:music_venue",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "take": "5"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Leeds Music Hall",
+       "entity_id": "8348B97F-638C-3667-987B-DA0685F04332",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.777,
+       "location": {
+        "lat": 53.8108,
+        "lon": -1.5571
+       },
+       "properties": {
+        "address": "866 Main St, Leeds",
+        "geocode": {
+         "name": "Leeds"
+        }
+       },
+       "query": {
+        "affinity": 0.95
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "feature.explainability": "true",
+     "filter.exclude.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "filter.popularity.max": "0.91",
+     "filter.type": "urn:entity:artist",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "take": "10"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "English Teacher",
+       "entity_id": "5D96F0A4-4D35-05FF-E29B-41E72FC87E49",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.74,
+       "properties": {},
+       "query": {
+        "affinity": 0.87,
+        "explainability": {
+         "signal.interests.entities": [
+          {
+           "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+           "score": 0.87
+          }
+         ]
+        }
+       }
+      },
+      {
+       "name": "The Murder Capital",
+       "entity_id": "65D37749-FCD2-938E-F9ED-531335EB379A",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.72,
+       "properties": {},
+       "query": {
+        "affinity": 0.86,
+        "explainability": {
+         "signal.interests.entities": [
+          {
+           "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+           "score": 0.86
+          }
+         ]
+        }
+       }
+      },
+      {
+       "name": "Sprints",
+       "entity_id": "7B043FB3-9C58-43C9-9E32-4A9C5B4FEFF2",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.66,
+       "properties": {},
+       "query": {
+        "affinity": 0.85,
+        "explainability": {
+         "signal.interests.entities": [
+          {
+           "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+           "score": 0.85
+          }
+         ]
+        }
+       }
+      },
+      {
+       "name": "Kneecap",
+       "entity_id": "BB4C5E9F-64F1-3529-40B3-66C9F3FE3111",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.82,
+       "properties": {},
+       "query": {
+        "affinity": 0.84,
+        "explainability": {
+         "signal.interests.entities": [
+          {
+           "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+           "score": 0.84
+          }
+         ]
+        }
+       }
+      },
+      {
+       "name": "Shame",
+       "entity_id": "0203FAB9-B288-6848-1ECA-ADF8C2951056",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.78,
+       "properties": {},
+       "query": {
+        "affinity": 0.83,
+        "explainability": {
+         "signal.interests.entities": [
+          {
+           "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+           "score": 0.83
+          }
+         ]
+        }
+       }
+      },
+      {
+       "name": "Wet Leg",
+       "entity_id": "056B474B-546B-F8F4-CDCF-291896C9D1A8",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.86,
+       "properties": {},
+       "query": {
+        "affinity": 0.8,
+        "explainability": {
+         "signal.interests.entities": [
+          {
+           "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+           "score": 0.8
+          }
+         ]
+        }
+       }
+      },
+      {
+       "name": "Squid",
+       "entity_id": "12231BCB-982F-D465-F9DF-F6A30EFC72A3",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.73,
+       "properties": {},
+       "query": {
+        "affinity": 0.79,
+        "explainability": {
+         "signal.interests.entities": [
+          {
+           "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+           "score": 0.79
+          }
+         ]
+        }
+       }
+      },
+      {
+       "name": "Black Country, New Road",
+       "entity_id": "387591A3-CE7D-47F9-1466-DC054A488A2F",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.76,
+       "properties": {},
+       "query": {
+        "affinity": 0.78,
+        "explainability": {
+         "signal.interests.entities": [
+          {
+           "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+           "score": 0.78
+          }
+         ]
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "5D96F0A4-4D35-05FF-E29B-41E72FC87E49,65D37749-FCD2-938E-F9ED-531335EB379A,7B043FB3-9C58-43C9-9E32-4A9C5B4FEFF2,BB4C5E9F-64F1-3529-40B3-66C9F3FE3111,0203FAB9-B288-6848-1ECA-ADF8C2951056,056B474B-546B-F8F4-CDCF-291896C9D1A8,12231BCB-982F-D465-F9DF-F6A30EFC72A3,387591A3-CE7D-47F9-1466-DC054A488A2F",
+     "filter.type": "urn:entity:artist",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "signal.location.query": "Dublin",
+     "take": "8"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "The Murder Capital",
+       "entity_id": "65D37749-FCD2-938E-F9ED-531335EB379A",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.72,
+       "properties": {},
+       "query": {
+        "affinity": 0.871
+       }
+      },
+      {
+       "name": "Sprints",
+       "entity_id": "7B043FB3-9C58-43C9-9E32-4A9C5B4FEFF2",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.66,
+       "properties": {},
+       "query": {
+        "affinity": 0.854
+       }
+      },
+      {
+       "name": "English Teacher",
+       "entity_id": "5D96F0A4-4D35-05FF-E29B-41E72FC87E49",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.74,
+       "properties": {},
+       "query": {
+        "affinity": 0.796
+       }
+      },
+      {
+       "name": "Kneecap",
+       "entity_id": "BB4C5E9F-64F1-3529-40B3-66C9F3FE3111",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.82,
+       "properties": {},
+       "query": {
+        "affinity": 0.789
+       }
+      },
+      {
+       "name": "Squid",
+       "entity_id": "12231BCB-982F-D465-F9DF-F6A30EFC72A3",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.73,
+       "properties": {},
+       "query": {
+        "affinity": 0.714
+       }
+      },
+      {
+       "name": "Shame",
+       "entity_id": "0203FAB9-B288-6848-1ECA-ADF8C2951056",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.78,
+       "properties": {},
+       "query": {
+        "affinity": 0.693
+       }
+      },
+      {
+       "name": "Black Country, New Road",
+       "entity_id": "387591A3-CE7D-47F9-1466-DC054A488A2F",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.76,
+       "properties": {},
+       "query": {
+        "affinity": 0.683
+       }
+      },
+      {
+       "name": "Wet Leg",
+       "entity_id": "056B474B-546B-F8F4-CDCF-291896C9D1A8",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.86,
+       "properties": {},
+       "query": {
+        "affinity": 0.659
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "5D96F0A4-4D35-05FF-E29B-41E72FC87E49,65D37749-FCD2-938E-F9ED-531335EB379A,7B043FB3-9C58-43C9-9E32-4A9C5B4FEFF2,BB4C5E9F-64F1-3529-40B3-66C9F3FE3111,0203FAB9-B288-6848-1ECA-ADF8C2951056,056B474B-546B-F8F4-CDCF-291896C9D1A8,12231BCB-982F-D465-F9DF-F6A30EFC72A3,387591A3-CE7D-47F9-1466-DC054A488A2F",
+     "filter.type": "urn:entity:artist",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "signal.location.query": "Manchester",
+     "take": "8"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "English Teacher",
+       "entity_id": "5D96F0A4-4D35-05FF-E29B-41E72FC87E49",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.74,
+       "properties": {},
+       "query": {
+        "affinity": 0.885
+       }
+      },
+      {
+       "name": "Shame",
+       "entity_id": "0203FAB9-B288-6848-1ECA-ADF8C2951056",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.78,
+       "properties": {},
+       "query": {
+        "affinity": 0.765
+       }
+      },
+      {
+       "name": "Kneecap",
+       "entity_id": "BB4C5E9F-64F1-3529-40B3-66C9F3FE3111",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.82,
+       "properties": {},
+       "query": {
+        "affinity": 0.741
+       }
+      },
+      {
+       "name": "The Murder Capital",
+       "entity_id": "65D37749-FCD2-938E-F9ED-531335EB379A",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.72,
+       "properties": {},
+       "query": {
+        "affinity": 0.719
+       }
+      },
+      {
+       "name": "Sprints",
+       "entity_id": "7B043FB3-9C58-43C9-9E32-4A9C5B4FEFF2",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.66,
+       "properties": {},
+       "query": {
+        "affinity": 0.713
+       }
+      },
+      {
+       "name": "Wet Leg",
+       "entity_id": "056B474B-546B-F8F4-CDCF-291896C9D1A8",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.86,
+       "properties": {},
+       "query": {
+        "affinity": 0.703
+       }
+      },
+      {
+       "name": "Black Country, New Road",
+       "entity_id": "387591A3-CE7D-47F9-1466-DC054A488A2F",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.76,
+       "properties": {},
+       "query": {
+        "affinity": 0.701
+       }
+      },
+      {
+       "name": "Squid",
+       "entity_id": "12231BCB-982F-D465-F9DF-F6A30EFC72A3",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.73,
+       "properties": {},
+       "query": {
+        "affinity": 0.656
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "5D96F0A4-4D35-05FF-E29B-41E72FC87E49,65D37749-FCD2-938E-F9ED-531335EB379A,7B043FB3-9C58-43C9-9E32-4A9C5B4FEFF2,BB4C5E9F-64F1-3529-40B3-66C9F3FE3111,0203FAB9-B288-6848-1ECA-ADF8C2951056,056B474B-546B-F8F4-CDCF-291896C9D1A8,12231BCB-982F-D465-F9DF-F6A30EFC72A3,387591A3-CE7D-47F9-1466-DC054A488A2F",
+     "filter.type": "urn:entity:artist",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "signal.location.query": "Glasgow",
+     "take": "8"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "The Murder Capital",
+       "entity_id": "65D37749-FCD2-938E-F9ED-531335EB379A",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.72,
+       "properties": {},
+       "query": {
+        "affinity": 0.835
+       }
+      },
+      {
+       "name": "Kneecap",
+       "entity_id": "BB4C5E9F-64F1-3529-40B3-66C9F3FE3111",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.82,
+       "properties": {},
+       "query": {
+        "affinity": 0.828
+       }
+      },
+      {
+       "name": "English Teacher",
+       "entity_id": "5D96F0A4-4D35-05FF-E29B-41E72FC87E49",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.74,
+       "properties": {},
+       "query": {
+        "affinity": 0.778
+       }
+      },
+      {
+       "name": "Wet Leg",
+       "entity_id": "056B474B-546B-F8F4-CDCF-291896C9D1A8",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.86,
+       "properties": {},
+       "query": {
+        "affinity": 0.723
+       }
+      },
+      {
+       "name": "Shame",
+       "entity_id": "0203FAB9-B288-6848-1ECA-ADF8C2951056",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.78,
+       "properties": {},
+       "query": {
+        "affinity": 0.703
+       }
+      },
+      {
+       "name": "Sprints",
+       "entity_id": "7B043FB3-9C58-43C9-9E32-4A9C5B4FEFF2",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.66,
+       "properties": {},
+       "query": {
+        "affinity": 0.702
+       }
+      },
+      {
+       "name": "Squid",
+       "entity_id": "12231BCB-982F-D465-F9DF-F6A30EFC72A3",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.73,
+       "properties": {},
+       "query": {
+        "affinity": 0.702
+       }
+      },
+      {
+       "name": "Black Country, New Road",
+       "entity_id": "387591A3-CE7D-47F9-1466-DC054A488A2F",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.76,
+       "properties": {},
+       "query": {
+        "affinity": 0.651
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "5D96F0A4-4D35-05FF-E29B-41E72FC87E49,65D37749-FCD2-938E-F9ED-531335EB379A,7B043FB3-9C58-43C9-9E32-4A9C5B4FEFF2,BB4C5E9F-64F1-3529-40B3-66C9F3FE3111,0203FAB9-B288-6848-1ECA-ADF8C2951056,056B474B-546B-F8F4-CDCF-291896C9D1A8,12231BCB-982F-D465-F9DF-F6A30EFC72A3,387591A3-CE7D-47F9-1466-DC054A488A2F",
+     "filter.type": "urn:entity:artist",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "signal.location.query": "Bristol",
+     "take": "8"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "English Teacher",
+       "entity_id": "5D96F0A4-4D35-05FF-E29B-41E72FC87E49",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.74,
+       "properties": {},
+       "query": {
+        "affinity": 0.814
+       }
+      },
+      {
+       "name": "Sprints",
+       "entity_id": "7B043FB3-9C58-43C9-9E32-4A9C5B4FEFF2",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.66,
+       "properties": {},
+       "query": {
+        "affinity": 0.777
+       }
+      },
+      {
+       "name": "The Murder Capital",
+       "entity_id": "65D37749-FCD2-938E-F9ED-531335EB379A",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.72,
+       "properties": {},
+       "query": {
+        "affinity": 0.759
+       }
+      },
+      {
+       "name": "Kneecap",
+       "entity_id": "BB4C5E9F-64F1-3529-40B3-66C9F3FE3111",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.82,
+       "properties": {},
+       "query": {
+        "affinity": 0.724
+       }
+      },
+      {
+       "name": "Shame",
+       "entity_id": "0203FAB9-B288-6848-1ECA-ADF8C2951056",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.78,
+       "properties": {},
+       "query": {
+        "affinity": 0.708
+       }
+      },
+      {
+       "name": "Squid",
+       "entity_id": "12231BCB-982F-D465-F9DF-F6A30EFC72A3",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.73,
+       "properties": {},
+       "query": {
+        "affinity": 0.702
+       }
+      },
+      {
+       "name": "Wet Leg",
+       "entity_id": "056B474B-546B-F8F4-CDCF-291896C9D1A8",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.86,
+       "properties": {},
+       "query": {
+        "affinity": 0.671
+       }
+      },
+      {
+       "name": "Black Country, New Road",
+       "entity_id": "387591A3-CE7D-47F9-1466-DC054A488A2F",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.76,
+       "properties": {},
+       "query": {
+        "affinity": 0.668
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/analysis/compare",
+    "params": {
+     "a.signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "b.signal.interests.entities": "5D96F0A4-4D35-05FF-E29B-41E72FC87E49",
+     "take": "8"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "tags": [
+      {
+       "tag_id": "urn:tag:keyword:music:post_punk_revival",
+       "name": "Post-Punk Revival",
+       "subtype": "urn:tag:keyword:music",
+       "query": {
+        "affinity": 0.9,
+        "a": {
+         "affinity": 0.88
+        },
+        "b": {
+         "affinity": 0.85
+        }
+       }
+      },
+      {
+       "tag_id": "urn:tag:keyword:music:art_rock",
+       "name": "Art Rock",
+       "subtype": "urn:tag:keyword:music",
+       "query": {
+        "affinity": 0.83,
+        "a": {
+         "affinity": 0.83
+        },
+        "b": {
+         "affinity": 0.79
+        }
+       }
+      },
+      {
+       "tag_id": "urn:tag:keyword:music:spoken_word",
+       "name": "Spoken Word",
+       "subtype": "urn:tag:keyword:music",
+       "query": {
+        "affinity": 0.76,
+        "a": {
+         "affinity": 0.78
+        },
+        "b": {
+         "affinity": 0.73
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/analysis/compare",
+    "params": {
+     "a.signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "b.signal.interests.entities": "65D37749-FCD2-938E-F9ED-531335EB379A",
+     "take": "8"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "tags": [
+      {
+       "tag_id": "urn:tag:keyword:music:post_punk",
+       "name": "Post-Punk",
+       "subtype": "urn:tag:keyword:music",
+       "query": {
+        "affinity": 0.9,
+        "a": {
+         "affinity": 0.88
+        },
+        "b": {
+         "affinity": 0.85
+        }
+       }
+      },
+      {
+       "tag_id": "urn:tag:keyword:music:irish_rock",
+       "name": "Irish Rock",
+       "subtype": "urn:tag:keyword:music",
+       "query": {
+        "affinity": 0.83,
+        "a": {
+         "affinity": 0.83
+        },
+        "b": {
+         "affinity": 0.79
+        }
+       }
+      },
+      {
+       "tag_id": "urn:tag:keyword:music:dublin",
+       "name": "Dublin",
+       "subtype": "urn:tag:keyword:music",
+       "query": {
+        "affinity": 0.76,
+        "a": {
+         "affinity": 0.78
+        },
+        "b": {
+         "affinity": 0.73
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/tags",
+    "params": {
+     "feature.semantic_search": "true",
+     "filter.query": "food and beverage",
+     "take": "20"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "tags": [
+      {
+       "id": "urn:tag:genre:brand:food_beverage",
+       "name": "Food & Beverage",
+       "type": "urn:tag:genre:brand",
+       "parents": [
+        {
+         "type": "urn:entity:brand"
+        }
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:food_beverage",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Tayto",
+       "entity_id": "97DD6E73-3B25-839D-52AC-315F57F7C66F",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.818,
+       "query": {
+        "affinity": 0.93
+       }
+      },
+      {
+       "name": "Barry's Tea",
+       "entity_id": "31E5487A-FB7F-2FD4-C3A6-5888841011EA",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.879,
+       "query": {
+        "affinity": 0.88
+       }
+      },
+      {
+       "name": "Monster Energy",
+       "entity_id": "57932963-CFB1-5FF5-9112-61746F8CEE31",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.663,
+       "query": {
+        "affinity": 0.83
+       }
+      },
+      {
+       "name": "Greggs",
+       "entity_id": "36A05C35-E60B-1D19-062C-00E94AF54B10",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.669,
+       "query": {
+        "affinity": 0.78
+       }
+      },
+      {
+       "name": "Club Orange",
+       "entity_id": "AE72B7A7-6D5F-CA3F-5522-919AD71E4214",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.916,
+       "query": {
+        "affinity": 0.73
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:food_beverage",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "signal.location.query": "Dublin",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Tayto",
+       "entity_id": "97DD6E73-3B25-839D-52AC-315F57F7C66F",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.818,
+       "query": {
+        "affinity": 0.928
+       }
+      },
+      {
+       "name": "Club Orange",
+       "entity_id": "AE72B7A7-6D5F-CA3F-5522-919AD71E4214",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.916,
+       "query": {
+        "affinity": 0.868
+       }
+      },
+      {
+       "name": "Barry's Tea",
+       "entity_id": "31E5487A-FB7F-2FD4-C3A6-5888841011EA",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.879,
+       "query": {
+        "affinity": 0.828
+       }
+      },
+      {
+       "name": "Monster Energy",
+       "entity_id": "57932963-CFB1-5FF5-9112-61746F8CEE31",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.663,
+       "query": {
+        "affinity": 0.774
+       }
+      },
+      {
+       "name": "Greggs",
+       "entity_id": "36A05C35-E60B-1D19-062C-00E94AF54B10",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.669,
+       "query": {
+        "affinity": 0.723
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:food_beverage",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "signal.location.query": "Manchester",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Tayto",
+       "entity_id": "97DD6E73-3B25-839D-52AC-315F57F7C66F",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.818,
+       "query": {
+        "affinity": 0.916
+       }
+      },
+      {
+       "name": "Barry's Tea",
+       "entity_id": "31E5487A-FB7F-2FD4-C3A6-5888841011EA",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.879,
+       "query": {
+        "affinity": 0.873
+       }
+      },
+      {
+       "name": "Monster Energy",
+       "entity_id": "57932963-CFB1-5FF5-9112-61746F8CEE31",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.663,
+       "query": {
+        "affinity": 0.827
+       }
+      },
+      {
+       "name": "Greggs",
+       "entity_id": "36A05C35-E60B-1D19-062C-00E94AF54B10",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.669,
+       "query": {
+        "affinity": 0.77
+       }
+      },
+      {
+       "name": "Club Orange",
+       "entity_id": "AE72B7A7-6D5F-CA3F-5522-919AD71E4214",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.916,
+       "query": {
+        "affinity": 0.72
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:food_beverage",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "signal.location.query": "Glasgow",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Irn-Bru",
+       "entity_id": "0CAF3FBF-5EE4-5D15-0196-9F889B76FF11",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.648,
+       "query": {
+        "affinity": 0.912
+       }
+      },
+      {
+       "name": "Tunnock's",
+       "entity_id": "2156F9FB-7A3A-DB36-1077-4BC83778782C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.61,
+       "query": {
+        "affinity": 0.865
+       }
+      },
+      {
+       "name": "Tayto",
+       "entity_id": "97DD6E73-3B25-839D-52AC-315F57F7C66F",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.818,
+       "query": {
+        "affinity": 0.827
+       }
+      },
+      {
+       "name": "Barry's Tea",
+       "entity_id": "31E5487A-FB7F-2FD4-C3A6-5888841011EA",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.879,
+       "query": {
+        "affinity": 0.772
+       }
+      },
+      {
+       "name": "Monster Energy",
+       "entity_id": "57932963-CFB1-5FF5-9112-61746F8CEE31",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.663,
+       "query": {
+        "affinity": 0.714
+       }
+      },
+      {
+       "name": "Greggs",
+       "entity_id": "36A05C35-E60B-1D19-062C-00E94AF54B10",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.669,
+       "query": {
+        "affinity": 0.678
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/tags",
+    "params": {
+     "feature.semantic_search": "true",
+     "filter.query": "apparel and fashion",
+     "take": "20"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "tags": [
+      {
+       "id": "urn:tag:genre:brand:fashion",
+       "name": "Fashion",
+       "type": "urn:tag:genre:brand",
+       "parents": [
+        {
+         "type": "urn:entity:brand"
+        }
+       ]
+      },
+      {
+       "id": "urn:tag:genre:brand:apparel",
+       "name": "Apparel",
+       "type": "urn:tag:genre:brand",
+       "parents": [
+        {
+         "type": "urn:entity:brand"
+        }
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:fashion",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Dr. Martens",
+       "entity_id": "128AE499-906D-C476-DF0E-24D2C64FCE91",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.761,
+       "query": {
+        "affinity": 0.93
+       }
+      },
+      {
+       "name": "Fred Perry",
+       "entity_id": "AC8A5E07-F503-7B09-1346-439FC47D6A9A",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.861,
+       "query": {
+        "affinity": 0.88
+       }
+      },
+      {
+       "name": "Stone Island",
+       "entity_id": "358D2870-D7DF-07EB-8866-7A8D6386F22E",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.719,
+       "query": {
+        "affinity": 0.83
+       }
+      },
+      {
+       "name": "Carhartt WIP",
+       "entity_id": "DE30051F-D18D-CE57-6C59-1D5D0A7FEF2E",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.763,
+       "query": {
+        "affinity": 0.78
+       }
+      },
+      {
+       "name": "Adidas Originals",
+       "entity_id": "76BF86CF-B6CB-623C-F144-3F54EB4E811E",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.764,
+       "query": {
+        "affinity": 0.73
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:fashion",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "signal.location.query": "Dublin",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Dr. Martens",
+       "entity_id": "128AE499-906D-C476-DF0E-24D2C64FCE91",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.761,
+       "query": {
+        "affinity": 0.93
+       }
+      },
+      {
+       "name": "Fred Perry",
+       "entity_id": "AC8A5E07-F503-7B09-1346-439FC47D6A9A",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.861,
+       "query": {
+        "affinity": 0.88
+       }
+      },
+      {
+       "name": "Stone Island",
+       "entity_id": "358D2870-D7DF-07EB-8866-7A8D6386F22E",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.719,
+       "query": {
+        "affinity": 0.826
+       }
+      },
+      {
+       "name": "Carhartt WIP",
+       "entity_id": "DE30051F-D18D-CE57-6C59-1D5D0A7FEF2E",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.763,
+       "query": {
+        "affinity": 0.763
+       }
+      },
+      {
+       "name": "Adidas Originals",
+       "entity_id": "76BF86CF-B6CB-623C-F144-3F54EB4E811E",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.764,
+       "query": {
+        "affinity": 0.722
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:fashion",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "signal.location.query": "Manchester",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Private White V.C.",
+       "entity_id": "13729FE9-F1EF-D721-2B59-E953FF7C0DA6",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.93,
+       "query": {
+        "affinity": 0.928
+       }
+      },
+      {
+       "name": "Dr. Martens",
+       "entity_id": "128AE499-906D-C476-DF0E-24D2C64FCE91",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.761,
+       "query": {
+        "affinity": 0.872
+       }
+      },
+      {
+       "name": "Fred Perry",
+       "entity_id": "AC8A5E07-F503-7B09-1346-439FC47D6A9A",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.861,
+       "query": {
+        "affinity": 0.821
+       }
+      },
+      {
+       "name": "Stone Island",
+       "entity_id": "358D2870-D7DF-07EB-8866-7A8D6386F22E",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.719,
+       "query": {
+        "affinity": 0.772
+       }
+      },
+      {
+       "name": "Carhartt WIP",
+       "entity_id": "DE30051F-D18D-CE57-6C59-1D5D0A7FEF2E",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.763,
+       "query": {
+        "affinity": 0.721
+       }
+      },
+      {
+       "name": "Adidas Originals",
+       "entity_id": "76BF86CF-B6CB-623C-F144-3F54EB4E811E",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.764,
+       "query": {
+        "affinity": 0.672
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:fashion",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "signal.location.query": "Glasgow",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Dr. Martens",
+       "entity_id": "128AE499-906D-C476-DF0E-24D2C64FCE91",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.761,
+       "query": {
+        "affinity": 0.918
+       }
+      },
+      {
+       "name": "Fred Perry",
+       "entity_id": "AC8A5E07-F503-7B09-1346-439FC47D6A9A",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.861,
+       "query": {
+        "affinity": 0.867
+       }
+      },
+      {
+       "name": "Stone Island",
+       "entity_id": "358D2870-D7DF-07EB-8866-7A8D6386F22E",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.719,
+       "query": {
+        "affinity": 0.829
+       }
+      },
+      {
+       "name": "Carhartt WIP",
+       "entity_id": "DE30051F-D18D-CE57-6C59-1D5D0A7FEF2E",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.763,
+       "query": {
+        "affinity": 0.77
+       }
+      },
+      {
+       "name": "Adidas Originals",
+       "entity_id": "76BF86CF-B6CB-623C-F144-3F54EB4E811E",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.764,
+       "query": {
+        "affinity": 0.724
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/tags",
+    "params": {
+     "feature.semantic_search": "true",
+     "filter.query": "alcoholic beverages",
+     "take": "20"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "tags": [
+      {
+       "id": "urn:tag:genre:brand:alcoholic_beverages",
+       "name": "Alcoholic Beverages",
+       "type": "urn:tag:genre:brand",
+       "parents": [
+        {
+         "type": "urn:entity:brand"
+        }
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:alcoholic_beverages",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Guinness",
+       "entity_id": "6E3DB4C0-3504-4B0C-AFFD-C84040A28229",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.913,
+       "query": {
+        "affinity": 0.93
+       }
+      },
+      {
+       "name": "Jameson",
+       "entity_id": "33CB7491-7776-7738-D1F7-82E6FAF46245",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.783,
+       "query": {
+        "affinity": 0.88
+       }
+      },
+      {
+       "name": "Rockshore",
+       "entity_id": "E4EFB7F9-10DF-353A-E8F6-DAF7D5114BFD",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.788,
+       "query": {
+        "affinity": 0.83
+       }
+      },
+      {
+       "name": "Beavertown",
+       "entity_id": "54B9D96A-6EDB-6ED7-C388-B927ED3AE13C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.668,
+       "query": {
+        "affinity": 0.78
+       }
+      },
+      {
+       "name": "Camden Town Brewery",
+       "entity_id": "9DA085DC-F17A-EAE7-33B0-9958E66C2787",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.718,
+       "query": {
+        "affinity": 0.73
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:alcoholic_beverages",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "signal.location.query": "Dublin",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Rockshore",
+       "entity_id": "E4EFB7F9-10DF-353A-E8F6-DAF7D5114BFD",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.788,
+       "query": {
+        "affinity": 0.916
+       }
+      },
+      {
+       "name": "Teeling Whiskey",
+       "entity_id": "1BAF3FB3-A8F0-2C9E-FE3B-0C05A03A364A",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.892,
+       "query": {
+        "affinity": 0.86
+       }
+      },
+      {
+       "name": "Guinness",
+       "entity_id": "6E3DB4C0-3504-4B0C-AFFD-C84040A28229",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.913,
+       "query": {
+        "affinity": 0.813
+       }
+      },
+      {
+       "name": "Jameson",
+       "entity_id": "33CB7491-7776-7738-D1F7-82E6FAF46245",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.783,
+       "query": {
+        "affinity": 0.773
+       }
+      },
+      {
+       "name": "Beavertown",
+       "entity_id": "54B9D96A-6EDB-6ED7-C388-B927ED3AE13C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.668,
+       "query": {
+        "affinity": 0.72
+       }
+      },
+      {
+       "name": "Camden Town Brewery",
+       "entity_id": "9DA085DC-F17A-EAE7-33B0-9958E66C2787",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.718,
+       "query": {
+        "affinity": 0.677
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:alcoholic_beverages",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "signal.location.query": "Manchester",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Guinness",
+       "entity_id": "6E3DB4C0-3504-4B0C-AFFD-C84040A28229",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.913,
+       "query": {
+        "affinity": 0.919
+       }
+      },
+      {
+       "name": "Jameson",
+       "entity_id": "33CB7491-7776-7738-D1F7-82E6FAF46245",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.783,
+       "query": {
+        "affinity": 0.875
+       }
+      },
+      {
+       "name": "Rockshore",
+       "entity_id": "E4EFB7F9-10DF-353A-E8F6-DAF7D5114BFD",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.788,
+       "query": {
+        "affinity": 0.818
+       }
+      },
+      {
+       "name": "Beavertown",
+       "entity_id": "54B9D96A-6EDB-6ED7-C388-B927ED3AE13C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.668,
+       "query": {
+        "affinity": 0.768
+       }
+      },
+      {
+       "name": "Camden Town Brewery",
+       "entity_id": "9DA085DC-F17A-EAE7-33B0-9958E66C2787",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.718,
+       "query": {
+        "affinity": 0.719
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:alcoholic_beverages",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "signal.location.query": "Glasgow",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Tennent's Lager",
+       "entity_id": "C5792D48-A0D7-6F69-E2A7-DA9808FB999D",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.759,
+       "query": {
+        "affinity": 0.911
+       }
+      },
+      {
+       "name": "Drygate",
+       "entity_id": "AD765CD3-7E25-6EB0-40FA-CC55EEB1E2A1",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.743,
+       "query": {
+        "affinity": 0.866
+       }
+      },
+      {
+       "name": "Guinness",
+       "entity_id": "6E3DB4C0-3504-4B0C-AFFD-C84040A28229",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.913,
+       "query": {
+        "affinity": 0.819
+       }
+      },
+      {
+       "name": "Jameson",
+       "entity_id": "33CB7491-7776-7738-D1F7-82E6FAF46245",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.783,
+       "query": {
+        "affinity": 0.775
+       }
+      },
+      {
+       "name": "Rockshore",
+       "entity_id": "E4EFB7F9-10DF-353A-E8F6-DAF7D5114BFD",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.788,
+       "query": {
+        "affinity": 0.712
+       }
+      },
+      {
+       "name": "Beavertown",
+       "entity_id": "54B9D96A-6EDB-6ED7-C388-B927ED3AE13C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.668,
+       "query": {
+        "affinity": 0.664
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/tags",
+    "params": {
+     "feature.semantic_search": "true",
+     "filter.query": "bar",
+     "take": "20"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "tags": [
+      {
+       "id": "urn:tag:category:place:bar",
+       "name": "Bar",
+       "type": "urn:tag:category:place",
+       "parents": [
+        {
+         "type": "urn:entity:place"
+        }
+       ]
+      },
+      {
+       "id": "urn:tag:category:place:cocktail_bar",
+       "name": "Cocktail Bar",
+       "type": "urn:tag:category:place",
+       "parents": [
+        {
+         "type": "urn:entity:place"
+        }
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location.query": "Dublin",
+     "filter.tags": "urn:tag:category:place:bar",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "take": "3"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "The Workman's Club",
+       "entity_id": "3C227412-8395-BB3F-67E7-5662A6CDFCCF",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.744,
+       "location": {
+        "lat": 53.3598,
+        "lon": -6.2683
+       },
+       "properties": {
+        "address": "384 Main St, Dublin",
+        "geocode": {
+         "name": "Dublin"
+        }
+       },
+       "query": {
+        "affinity": 0.95
+       }
+      },
+      {
+       "name": "Whelan's",
+       "entity_id": "A23BAA1D-6399-E969-9095-9EE756A5F3F8",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.844,
+       "location": {
+        "lat": 53.369800000000005,
+        "lon": -6.2763
+       },
+       "properties": {
+        "address": "738 Main St, Dublin",
+        "geocode": {
+         "name": "Dublin"
+        }
+       },
+       "query": {
+        "affinity": 0.89
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location.query": "Manchester",
+     "filter.tags": "urn:tag:category:place:bar",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "take": "3"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Night & Day Café",
+       "entity_id": "0EA75CBE-61C1-3176-7DC4-71EB56F728F8",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.789,
+       "location": {
+        "lat": 53.4908,
+        "lon": -2.2506
+       },
+       "properties": {
+        "address": "702 Main St, Manchester",
+        "geocode": {
+         "name": "Manchester"
+        }
+       },
+       "query": {
+        "affinity": 0.95
+       }
+      },
+      {
+       "name": "Gullivers",
+       "entity_id": "94D2F1C4-70C2-2B90-4AA2-4D33997EBE2F",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.715,
+       "location": {
+        "lat": 53.500800000000005,
+        "lon": -2.2586
+       },
+       "properties": {
+        "address": "326 Main St, Manchester",
+        "geocode": {
+         "name": "Manchester"
+        }
+       },
+       "query": {
+        "affinity": 0.89
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location.query": "Glasgow",
+     "filter.tags": "urn:tag:category:place:bar",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "take": "3"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Nice N Sleazy",
+       "entity_id": "0E67F5CD-37B1-AE7A-515F-935BEF26CBC9",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.891,
+       "location": {
+        "lat": 55.874199999999995,
+        "lon": -4.2598
+       },
+       "properties": {
+        "address": "573 Main St, Glasgow",
+        "geocode": {
+         "name": "Glasgow"
+        }
+       },
+       "query": {
+        "affinity": 0.95
+       }
+      },
+      {
+       "name": "The Hug and Pint",
+       "entity_id": "C13BDF28-6A17-2846-BB30-4DB650F5CE69",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.834,
+       "location": {
+        "lat": 55.8842,
+        "lon": -4.2678
+       },
+       "properties": {
+        "address": "560 Main St, Glasgow",
+        "geocode": {
+         "name": "Glasgow"
+        }
+       },
+       "query": {
+        "affinity": 0.89
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/trending",
+    "params": {
+     "filter.end_date": "2026-10-13",
+     "filter.start_date": "2026-04-14",
+     "filter.type": "urn:entity:artist",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "trending": [
+      {
+       "date": "2026-05-01",
+       "population_percentile": 80,
+       "population_rank": 2400,
+       "population_rank_velocity": 0,
+       "velocity_fold_change": 1,
+       "population_percent_delta": 0
+      },
+      {
+       "date": "2026-05-16",
+       "population_percentile": 81,
+       "population_rank": 2280,
+       "population_rank_velocity": 40,
+       "velocity_fold_change": 1.013,
+       "population_percent_delta": 1
+      },
+      {
+       "date": "2026-05-31",
+       "population_percentile": 83,
+       "population_rank": 2040,
+       "population_rank_velocity": 80,
+       "velocity_fold_change": 1.025,
+       "population_percent_delta": 2
+      },
+      {
+       "date": "2026-06-15",
+       "population_percentile": 84,
+       "population_rank": 1920,
+       "population_rank_velocity": 40,
+       "velocity_fold_change": 1.012,
+       "population_percent_delta": 1
+      },
+      {
+       "date": "2026-06-30",
+       "population_percentile": 86,
+       "population_rank": 1680,
+       "population_rank_velocity": 80,
+       "velocity_fold_change": 1.024,
+       "population_percent_delta": 2
+      },
+      {
+       "date": "2026-07-15",
+       "population_percentile": 86,
+       "population_rank": 1680,
+       "population_rank_velocity": 0,
+       "velocity_fold_change": 1,
+       "population_percent_delta": 0
+      },
+      {
+       "date": "2026-07-30",
+       "population_percentile": 87,
+       "population_rank": 1560,
+       "population_rank_velocity": 40,
+       "velocity_fold_change": 1.012,
+       "population_percent_delta": 1
+      },
+      {
+       "date": "2026-08-14",
+       "population_percentile": 88,
+       "population_rank": 1440,
+       "population_rank_velocity": 40,
+       "velocity_fold_change": 1.011,
+       "population_percent_delta": 1
+      },
+      {
+       "date": "2026-08-29",
+       "population_percentile": 88,
+       "population_rank": 1440,
+       "population_rank_velocity": 0,
+       "velocity_fold_change": 1,
+       "population_percent_delta": 0
+      },
+      {
+       "date": "2026-09-13",
+       "population_percentile": 89,
+       "population_rank": 1320,
+       "population_rank_velocity": 40,
+       "velocity_fold_change": 1.011,
+       "population_percent_delta": 1
+      },
+      {
+       "date": "2026-09-28",
+       "population_percentile": 89,
+       "population_rank": 1320,
+       "population_rank_velocity": 0,
+       "velocity_fold_change": 1,
+       "population_percent_delta": 0
+      },
+      {
+       "date": "2026-10-13",
+       "population_percentile": 90,
+       "population_rank": 1200,
+       "population_rank_velocity": 40,
+       "velocity_fold_change": 1.011,
+       "population_percent_delta": 1
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Birmingham",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Fontaines D.C.",
+       "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.931,
+       "properties": {},
+       "query": {
+        "affinity": 0.503
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Edinburgh",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Fontaines D.C.",
+       "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.931,
+       "properties": {},
+       "query": {
+        "affinity": 0.312
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Berlin",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Fontaines D.C.",
+       "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.931,
+       "properties": {},
+       "query": {
+        "affinity": 0.761
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Cologne",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Fontaines D.C.",
+       "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.931,
+       "properties": {},
+       "query": {
+        "affinity": 0.493
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Paris",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Fontaines D.C.",
+       "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.931,
+       "properties": {},
+       "query": {
+        "affinity": 0.721
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/search",
+    "params": {
+     "query": "Thee Oh Sees",
+     "take": "1",
+     "types": "urn:entity:artist"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": [
+     {
+      "name": "Thee Oh Sees",
+      "entity_id": "A36641A7-4A7C-18AF-EF7E-658BD8D4C7ED",
+      "type": "urn:entity",
+      "subtype": "urn:entity:artist",
+      "types": [
+       "urn:entity:artist"
+      ],
+      "popularity": 0.95,
+      "properties": {},
+      "tags": []
+     }
+    ]
+   }
+  },
+  {
+   "request": {
+    "path": "/search",
+    "params": {
+     "query": "Bleach",
+     "take": "1",
+     "types": "urn:entity:artist"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": []
+   }
+  },
+  {
+   "request": {
+    "path": "/search",
+    "params": {
+     "query": "The Men They Couldn’t Hang",
+     "take": "1",
+     "types": "urn:entity:artist"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": [
+     {
+      "name": "The Men They Couldn’t Hang",
+      "entity_id": "B650235C-7DD4-E206-DE23-6BAF9D3BC38A",
+      "type": "urn:entity",
+      "subtype": "urn:entity:artist",
+      "types": [
+       "urn:entity:artist"
+      ],
+      "popularity": 0.95,
+      "properties": {},
+      "tags": []
+     }
+    ]
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "A36641A7-4A7C-18AF-EF7E-658BD8D4C7ED,B650235C-7DD4-E206-DE23-6BAF9D3BC38A",
+     "filter.type": "urn:entity:artist",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "take": "2"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Thee Oh Sees",
+       "entity_id": "A36641A7-4A7C-18AF-EF7E-658BD8D4C7ED",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.95,
+       "properties": {},
+       "query": {
+        "affinity": 0.58
+       }
+      },
+      {
+       "name": "The Men They Couldn’t Hang",
+       "entity_id": "B650235C-7DD4-E206-DE23-6BAF9D3BC38A",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.95,
+       "properties": {},
+       "query": {
+        "affinity": 0.31
+       }
+      }
+     ]
+    }
+   }
+  }
+ ]
+}

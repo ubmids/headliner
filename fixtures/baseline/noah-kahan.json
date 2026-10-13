@@ -1,0 +1,29 @@
+{
+  "source": "recorded-llm",
+  "model": "qwen3-vl-4b-instruct-q4km",
+  "cities": [
+    "New York, NY",
+    "Los Angeles, CA",
+    "Chicago, IL",
+    "Boston, MA",
+    "Seattle, WA",
+    "Denver, CO",
+    "Toronto, ON",
+    "Vancouver, BC"
+  ],
+  "supportActs": [
+    "Lilith Saltman",
+    "Tayler Hall",
+    "Jesse Jo Stark"
+  ],
+  "sponsors": [
+    "Coca-Cola",
+    "Snickers",
+    "TikTok",
+    "Crate & Barrel",
+    "Pepsi"
+  ],
+  "reasoning": "Noah Kahan’s fanbase is strongest in major urban centers with high foot traffic and strong indie/alternative music scenes. Strategic partnerships with beverage and lifestyle brands amplify visibility and fan engagement across key markets.",
+  "recordedAt": "2026-10-13T23:23:49.324Z",
+  "prompt": "src/lib/agent/baseline.ts baselinePrompt(artist, region, 8, [])"
+}
