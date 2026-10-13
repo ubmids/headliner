@@ -673,36 +673,6 @@
     "params": {
      "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
      "filter.type": "urn:entity:artist",
-     "signal.location.query": "Dublin",
-     "take": "1"
-    }
-   },
-   "response": {
-    "success": true,
-    "duration": 41,
-    "results": {
-     "entities": [
-      {
-       "name": "Fontaines D.C.",
-       "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
-       "type": "urn:entity",
-       "subtype": "urn:entity:artist",
-       "popularity": 0.931,
-       "properties": {},
-       "query": {
-        "affinity": 0.951
-       }
-      }
-     ]
-    }
-   }
-  },
-  {
-   "request": {
-    "path": "/v2/insights",
-    "params": {
-     "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
-     "filter.type": "urn:entity:artist",
      "signal.location.query": "Manchester",
      "take": "1"
     }
@@ -733,6 +703,36 @@
     "params": {
      "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
      "filter.type": "urn:entity:artist",
+     "signal.location.query": "Dublin",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Fontaines D.C.",
+       "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.931,
+       "properties": {},
+       "query": {
+        "affinity": 0.951
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "filter.type": "urn:entity:artist",
      "signal.location.query": "Glasgow",
      "take": "1"
     }
@@ -751,6 +751,36 @@
        "properties": {},
        "query": {
         "affinity": 0.889
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "London",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Fontaines D.C.",
+       "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.931,
+       "properties": {},
+       "query": {
+        "affinity": 0.831
        }
       }
      ]
@@ -823,66 +853,6 @@
     "params": {
      "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
      "filter.type": "urn:entity:artist",
-     "signal.location.query": "Belfast",
-     "take": "1"
-    }
-   },
-   "response": {
-    "success": true,
-    "duration": 41,
-    "results": {
-     "entities": [
-      {
-       "name": "Fontaines D.C.",
-       "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
-       "type": "urn:entity",
-       "subtype": "urn:entity:artist",
-       "popularity": 0.931,
-       "properties": {},
-       "query": {
-        "affinity": 0.864
-       }
-      }
-     ]
-    }
-   }
-  },
-  {
-   "request": {
-    "path": "/v2/insights",
-    "params": {
-     "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
-     "filter.type": "urn:entity:artist",
-     "signal.location.query": "London",
-     "take": "1"
-    }
-   },
-   "response": {
-    "success": true,
-    "duration": 41,
-    "results": {
-     "entities": [
-      {
-       "name": "Fontaines D.C.",
-       "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
-       "type": "urn:entity",
-       "subtype": "urn:entity:artist",
-       "popularity": 0.931,
-       "properties": {},
-       "query": {
-        "affinity": 0.831
-       }
-      }
-     ]
-    }
-   }
-  },
-  {
-   "request": {
-    "path": "/v2/insights",
-    "params": {
-     "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
-     "filter.type": "urn:entity:artist",
      "signal.location.query": "Liverpool",
      "take": "1"
     }
@@ -901,6 +871,36 @@
        "properties": {},
        "query": {
         "affinity": 0.854
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Belfast",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Fontaines D.C.",
+       "entity_id": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.931,
+       "properties": {},
+       "query": {
+        "affinity": 0.864
        }
       }
      ]
@@ -943,7 +943,7 @@
     "params": {
      "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
      "filter.type": "urn:entity:artist",
-     "signal.location.query": "Nottingham",
+     "signal.location.query": "Amsterdam",
      "take": "1"
     }
    },
@@ -960,7 +960,7 @@
        "popularity": 0.931,
        "properties": {},
        "query": {
-        "affinity": 0.816
+        "affinity": 0.77
        }
       }
      ]
@@ -1003,7 +1003,7 @@
     "params": {
      "filter.results.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
      "filter.type": "urn:entity:artist",
-     "signal.location.query": "Amsterdam",
+     "signal.location.query": "Nottingham",
      "take": "1"
     }
    },
@@ -1020,7 +1020,7 @@
        "popularity": 0.931,
        "properties": {},
        "query": {
-        "affinity": 0.77
+        "affinity": 0.816
        }
       }
      ]
@@ -1382,23 +1382,223 @@
     "results": {
      "entities": [
       {
-       "name": "Leeds Music Hall",
-       "entity_id": "8348B97F-638C-3667-987B-DA0685F04332",
+       "name": "Placeholder venue A (Leeds)",
+       "entity_id": "DCAF3842-F980-83D1-92EF-D59A6F9B683D",
        "type": "urn:entity",
        "subtype": "urn:entity:place",
-       "popularity": 0.777,
+       "popularity": 0.838,
        "location": {
         "lat": 53.8108,
         "lon": -1.5571
        },
        "properties": {
-        "address": "866 Main St, Leeds",
+        "address": "698 Main St, Leeds",
         "geocode": {
          "name": "Leeds"
         }
        },
        "query": {
         "affinity": 0.95
+       }
+      },
+      {
+       "name": "Placeholder venue B (Leeds)",
+       "entity_id": "AF5B23D3-4E9E-2768-421B-00FD5E5FE285",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.731,
+       "location": {
+        "lat": 53.820800000000006,
+        "lon": -1.5651
+       },
+       "properties": {
+        "address": "754 Main St, Leeds",
+        "geocode": {
+         "name": "Leeds"
+        }
+       },
+       "query": {
+        "affinity": 0.89
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location.query": "London",
+     "filter.tags": "urn:tag:category:place:music_venue",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "take": "5"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Placeholder venue A (London)",
+       "entity_id": "CEF9E635-20BD-9090-A52B-2728135643FF",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.795,
+       "location": {
+        "lat": 51.517399999999995,
+        "lon": -0.1358
+       },
+       "properties": {
+        "address": "681 Main St, London",
+        "geocode": {
+         "name": "London"
+        }
+       },
+       "query": {
+        "affinity": 0.95
+       }
+      },
+      {
+       "name": "Placeholder venue B (London)",
+       "entity_id": "7A6F5483-9BAC-465E-3842-1FEDA8AE5BCC",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.834,
+       "location": {
+        "lat": 51.5274,
+        "lon": -0.14379999999999998
+       },
+       "properties": {
+        "address": "837 Main St, London",
+        "geocode": {
+         "name": "London"
+        }
+       },
+       "query": {
+        "affinity": 0.89
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location.query": "Liverpool",
+     "filter.tags": "urn:tag:category:place:music_venue",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "take": "5"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Placeholder venue A (Liverpool)",
+       "entity_id": "90F2A991-4F51-9150-1904-96A2030FF26B",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.735,
+       "location": {
+        "lat": 53.4184,
+        "lon": -2.9996
+       },
+       "properties": {
+        "address": "442 Main St, Liverpool",
+        "geocode": {
+         "name": "Liverpool"
+        }
+       },
+       "query": {
+        "affinity": 0.95
+       }
+      },
+      {
+       "name": "Placeholder venue B (Liverpool)",
+       "entity_id": "E254956E-FCC9-3B92-8E5D-29647F8969CF",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.898,
+       "location": {
+        "lat": 53.4284,
+        "lon": -3.0076
+       },
+       "properties": {
+        "address": "413 Main St, Liverpool",
+        "geocode": {
+         "name": "Liverpool"
+        }
+       },
+       "query": {
+        "affinity": 0.89
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location.query": "Belfast",
+     "filter.tags": "urn:tag:category:place:music_venue",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "take": "5"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Ulster Hall",
+       "entity_id": "0B8425DA-D49A-8914-08F0-BCE1090EF3E0",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.764,
+       "location": {
+        "lat": 54.607299999999995,
+        "lon": -5.9381
+       },
+       "properties": {
+        "address": "244 Main St, Belfast",
+        "geocode": {
+         "name": "Belfast"
+        }
+       },
+       "query": {
+        "affinity": 0.95
+       }
+      },
+      {
+       "name": "SSE Arena Belfast",
+       "entity_id": "B11AC793-7402-17EC-5814-72D9A2FDDC3D",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.822,
+       "location": {
+        "lat": 54.6173,
+        "lon": -5.9461
+       },
+       "properties": {
+        "address": "434 Main St, Belfast",
+        "geocode": {
+         "name": "Belfast"
+        }
+       },
+       "query": {
+        "affinity": 0.89
        }
       }
      ]

@@ -847,36 +847,6 @@
     "params": {
      "filter.results.entities": "EC19226C-5D0D-A976-269D-CF195B3ED419",
      "filter.type": "urn:entity:artist",
-     "signal.location.query": "Burlington, VT",
-     "take": "1"
-    }
-   },
-   "response": {
-    "success": true,
-    "duration": 41,
-    "results": {
-     "entities": [
-      {
-       "name": "Noah Kahan",
-       "entity_id": "EC19226C-5D0D-A976-269D-CF195B3ED419",
-       "type": "urn:entity",
-       "subtype": "urn:entity:artist",
-       "popularity": 0.962,
-       "properties": {},
-       "query": {
-        "affinity": 0.964
-       }
-      }
-     ]
-    }
-   }
-  },
-  {
-   "request": {
-    "path": "/v2/insights",
-    "params": {
-     "filter.results.entities": "EC19226C-5D0D-A976-269D-CF195B3ED419",
-     "filter.type": "urn:entity:artist",
      "signal.location.query": "Portland, ME",
      "take": "1"
     }
@@ -895,6 +865,36 @@
        "properties": {},
        "query": {
         "affinity": 0.896
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "EC19226C-5D0D-A976-269D-CF195B3ED419",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Burlington, VT",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Noah Kahan",
+       "entity_id": "EC19226C-5D0D-A976-269D-CF195B3ED419",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.962,
+       "properties": {},
+       "query": {
+        "affinity": 0.964
        }
       }
      ]
@@ -937,7 +937,7 @@
     "params": {
      "filter.results.entities": "EC19226C-5D0D-A976-269D-CF195B3ED419",
      "filter.type": "urn:entity:artist",
-     "signal.location.query": "Albany, NY",
+     "signal.location.query": "Minneapolis, MN",
      "take": "1"
     }
    },
@@ -954,7 +954,7 @@
        "popularity": 0.962,
        "properties": {},
        "query": {
-        "affinity": 0.874
+        "affinity": 0.79
        }
       }
      ]
@@ -997,7 +997,7 @@
     "params": {
      "filter.results.entities": "EC19226C-5D0D-A976-269D-CF195B3ED419",
      "filter.type": "urn:entity:artist",
-     "signal.location.query": "Minneapolis, MN",
+     "signal.location.query": "Denver, CO",
      "take": "1"
     }
    },
@@ -1014,7 +1014,67 @@
        "popularity": 0.962,
        "properties": {},
        "query": {
-        "affinity": 0.79
+        "affinity": 0.765
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "EC19226C-5D0D-A976-269D-CF195B3ED419",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Albany, NY",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Noah Kahan",
+       "entity_id": "EC19226C-5D0D-A976-269D-CF195B3ED419",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.962,
+       "properties": {},
+       "query": {
+        "affinity": 0.874
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "EC19226C-5D0D-A976-269D-CF195B3ED419",
+     "filter.type": "urn:entity:artist",
+     "signal.location.query": "Philadelphia, PA",
+     "take": "1"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Noah Kahan",
+       "entity_id": "EC19226C-5D0D-A976-269D-CF195B3ED419",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.962,
+       "properties": {},
+       "query": {
+        "affinity": 0.718
        }
       }
      ]
@@ -1057,66 +1117,6 @@
     "params": {
      "filter.results.entities": "EC19226C-5D0D-A976-269D-CF195B3ED419",
      "filter.type": "urn:entity:artist",
-     "signal.location.query": "Denver, CO",
-     "take": "1"
-    }
-   },
-   "response": {
-    "success": true,
-    "duration": 41,
-    "results": {
-     "entities": [
-      {
-       "name": "Noah Kahan",
-       "entity_id": "EC19226C-5D0D-A976-269D-CF195B3ED419",
-       "type": "urn:entity",
-       "subtype": "urn:entity:artist",
-       "popularity": 0.962,
-       "properties": {},
-       "query": {
-        "affinity": 0.765
-       }
-      }
-     ]
-    }
-   }
-  },
-  {
-   "request": {
-    "path": "/v2/insights",
-    "params": {
-     "filter.results.entities": "EC19226C-5D0D-A976-269D-CF195B3ED419",
-     "filter.type": "urn:entity:artist",
-     "signal.location.query": "Syracuse, NY",
-     "take": "1"
-    }
-   },
-   "response": {
-    "success": true,
-    "duration": 41,
-    "results": {
-     "entities": [
-      {
-       "name": "Noah Kahan",
-       "entity_id": "EC19226C-5D0D-A976-269D-CF195B3ED419",
-       "type": "urn:entity",
-       "subtype": "urn:entity:artist",
-       "popularity": 0.962,
-       "properties": {},
-       "query": {
-        "affinity": 0.828
-       }
-      }
-     ]
-    }
-   }
-  },
-  {
-   "request": {
-    "path": "/v2/insights",
-    "params": {
-     "filter.results.entities": "EC19226C-5D0D-A976-269D-CF195B3ED419",
-     "filter.type": "urn:entity:artist",
      "signal.location.query": "Grand Rapids, MI",
      "take": "1"
     }
@@ -1147,7 +1147,7 @@
     "params": {
      "filter.results.entities": "EC19226C-5D0D-A976-269D-CF195B3ED419",
      "filter.type": "urn:entity:artist",
-     "signal.location.query": "Madison, WI",
+     "signal.location.query": "Syracuse, NY",
      "take": "1"
     }
    },
@@ -1513,6 +1513,66 @@
    "request": {
     "path": "/v2/insights",
     "params": {
+     "filter.location.query": "Minneapolis, MN",
+     "filter.tags": "urn:tag:category:place:music_venue",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "EC19226C-5D0D-A976-269D-CF195B3ED419",
+     "take": "5"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Placeholder venue A (Minneapolis)",
+       "entity_id": "964AB9BF-EFDA-8D7F-3560-907EA9CBCC4C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.899,
+       "location": {
+        "lat": 44.9878,
+        "lon": -93.273
+       },
+       "properties": {
+        "address": "491 Main St, Minneapolis",
+        "geocode": {
+         "name": "Minneapolis"
+        }
+       },
+       "query": {
+        "affinity": 0.95
+       }
+      },
+      {
+       "name": "Placeholder venue B (Minneapolis)",
+       "entity_id": "4E9A13E4-7558-EDEB-00D7-651B262A69EE",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.817,
+       "location": {
+        "lat": 44.997800000000005,
+        "lon": -93.281
+       },
+       "properties": {
+        "address": "546 Main St, Minneapolis",
+        "geocode": {
+         "name": "Minneapolis"
+        }
+       },
+       "query": {
+        "affinity": 0.89
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
      "filter.location.query": "Albany, NY",
      "filter.tags": "urn:tag:category:place:music_venue",
      "filter.type": "urn:entity:place",
@@ -1559,6 +1619,126 @@
         "address": "510 Main St, Albany",
         "geocode": {
          "name": "Albany"
+        }
+       },
+       "query": {
+        "affinity": 0.89
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location.query": "Providence, RI",
+     "filter.tags": "urn:tag:category:place:music_venue",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "EC19226C-5D0D-A976-269D-CF195B3ED419",
+     "take": "5"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "The Strand",
+       "entity_id": "C73CDE79-B251-5926-0973-4BD9817D9723",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.839,
+       "location": {
+        "lat": 41.833999999999996,
+        "lon": -71.4208
+       },
+       "properties": {
+        "address": "343 Main St, Providence",
+        "geocode": {
+         "name": "Providence"
+        }
+       },
+       "query": {
+        "affinity": 0.95
+       }
+      },
+      {
+       "name": "Providence Performing Arts Center",
+       "entity_id": "83C94985-78CD-7BA8-8D10-C9AE300ABFF6",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.89,
+       "location": {
+        "lat": 41.844,
+        "lon": -71.42880000000001
+       },
+       "properties": {
+        "address": "500 Main St, Providence",
+        "geocode": {
+         "name": "Providence"
+        }
+       },
+       "query": {
+        "affinity": 0.89
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location.query": "Columbus, OH",
+     "filter.tags": "urn:tag:category:place:music_venue",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "EC19226C-5D0D-A976-269D-CF195B3ED419",
+     "take": "5"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Placeholder venue A (Columbus)",
+       "entity_id": "829FF8F2-410C-7DCA-79B9-FA83FF796DC0",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.863,
+       "location": {
+        "lat": 39.971199999999996,
+        "lon": -83.0068
+       },
+       "properties": {
+        "address": "387 Main St, Columbus",
+        "geocode": {
+         "name": "Columbus"
+        }
+       },
+       "query": {
+        "affinity": 0.95
+       }
+      },
+      {
+       "name": "Placeholder venue B (Columbus)",
+       "entity_id": "29F4FB68-2A8E-94F8-B12B-33F83F788CA0",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.71,
+       "location": {
+        "lat": 39.9812,
+        "lon": -83.01480000000001
+       },
+       "properties": {
+        "address": "107 Main St, Columbus",
+        "geocode": {
+         "name": "Columbus"
         }
        },
        "query": {
