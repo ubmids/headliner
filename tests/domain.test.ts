@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { CITIES, REGIONS, citiesInRegion, distanceKm, findCity, nearestCity, orderRoute } from "@/lib/geo";
-import { localOnlyBrands, median, scoreMarkets, scoreSupportActs, trendDirection, type Market, type SupportAct } from "@/lib/plan";
+import { localOnlyBrands, median, percentileOf, scoreMarkets, scoreSupportActs, trendDirection, type Market, type SupportAct } from "@/lib/plan";
 import { buildContrast } from "@/lib/contrast";
 import { briefCsv, templateBrief } from "@/lib/agent/brief";
 import { emptyPlan } from "@/lib/plan";
@@ -61,7 +61,17 @@ describe("market scoring", () => {
   it("scores markets with only a local signal without inventing volume", () => {
     const [m] = scoreMarkets([market("Only, TX", { localAffinity: 0.8 }), market("Other, TX", { localAffinity: 0.4 })]);
     expect(m.overIndex).toBe(0);
-    expect(m.score).toBe(100);
+    expect(m.score).toBe(80);
+  });
+  it("keeps Qloo's own scale: the coldest city is not rescaled to zero", () => {
+    const s = scoreMarkets([market("Warm, MA", { localAffinity: 0.9 }), market("Cool, BC", { localAffinity: 0.62 })]);
+    expect(s.find((m) => m.key === "Cool, BC")!.score).toBe(62);
+  });
+  it("percentiles use mid-ranks and handle ties", () => {
+    const p = percentileOf([0.1, 0.2, 0.2, 0.9]);
+    expect(p(0.1)).toBe(0.125);
+    expect(p(0.2)).toBe(0.5);
+    expect(p(0.9)).toBe(0.875);
   });
   it("median", () => {
     expect(median([3, 1, 2])).toBe(2);

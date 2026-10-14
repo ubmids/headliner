@@ -1069,86 +1069,6 @@
    "request": {
     "path": "/v2/insights",
     "params": {
-     "filter.location.query": "Dublin",
-     "filter.tags": "urn:tag:category:place:music_venue",
-     "filter.type": "urn:entity:place",
-     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
-     "take": "5"
-    }
-   },
-   "response": {
-    "success": true,
-    "duration": 41,
-    "results": {
-     "entities": [
-      {
-       "name": "3Arena",
-       "entity_id": "27D27253-CF37-A9E7-7D1A-0E04B8A6D007",
-       "type": "urn:entity",
-       "subtype": "urn:entity:place",
-       "popularity": 0.807,
-       "location": {
-        "lat": 53.3598,
-        "lon": -6.2683
-       },
-       "properties": {
-        "address": "384 Main St, Dublin",
-        "geocode": {
-         "name": "Dublin"
-        }
-       },
-       "query": {
-        "affinity": 0.95
-       }
-      },
-      {
-       "name": "Vicar Street",
-       "entity_id": "A83CBED7-F67D-0577-026E-7E6B5E9A6A29",
-       "type": "urn:entity",
-       "subtype": "urn:entity:place",
-       "popularity": 0.853,
-       "location": {
-        "lat": 53.369800000000005,
-        "lon": -6.2763
-       },
-       "properties": {
-        "address": "674 Main St, Dublin",
-        "geocode": {
-         "name": "Dublin"
-        }
-       },
-       "query": {
-        "affinity": 0.89
-       }
-      },
-      {
-       "name": "Olympia Theatre",
-       "entity_id": "D78627B5-8561-0489-9057-A6CAB2BF49C8",
-       "type": "urn:entity",
-       "subtype": "urn:entity:place",
-       "popularity": 0.855,
-       "location": {
-        "lat": 53.3798,
-        "lon": -6.2843
-       },
-       "properties": {
-        "address": "721 Main St, Dublin",
-        "geocode": {
-         "name": "Dublin"
-        }
-       },
-       "query": {
-        "affinity": 0.83
-       }
-      }
-     ]
-    }
-   }
-  },
-  {
-   "request": {
-    "path": "/v2/insights",
-    "params": {
      "filter.location.query": "Manchester",
      "filter.tags": "urn:tag:category:place:music_venue",
      "filter.type": "urn:entity:place",
@@ -1215,6 +1135,86 @@
         "address": "453 Main St, Manchester",
         "geocode": {
          "name": "Manchester"
+        }
+       },
+       "query": {
+        "affinity": 0.83
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location.query": "Dublin",
+     "filter.tags": "urn:tag:category:place:music_venue",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "take": "5"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "3Arena",
+       "entity_id": "27D27253-CF37-A9E7-7D1A-0E04B8A6D007",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.807,
+       "location": {
+        "lat": 53.3598,
+        "lon": -6.2683
+       },
+       "properties": {
+        "address": "384 Main St, Dublin",
+        "geocode": {
+         "name": "Dublin"
+        }
+       },
+       "query": {
+        "affinity": 0.95
+       }
+      },
+      {
+       "name": "Vicar Street",
+       "entity_id": "A83CBED7-F67D-0577-026E-7E6B5E9A6A29",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.853,
+       "location": {
+        "lat": 53.369800000000005,
+        "lon": -6.2763
+       },
+       "properties": {
+        "address": "674 Main St, Dublin",
+        "geocode": {
+         "name": "Dublin"
+        }
+       },
+       "query": {
+        "affinity": 0.89
+       }
+      },
+      {
+       "name": "Olympia Theatre",
+       "entity_id": "D78627B5-8561-0489-9057-A6CAB2BF49C8",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.855,
+       "location": {
+        "lat": 53.3798,
+        "lon": -6.2843
+       },
+       "properties": {
+        "address": "721 Main St, Dublin",
+        "geocode": {
+         "name": "Dublin"
         }
        },
        "query": {
@@ -1309,6 +1309,25 @@
    "request": {
     "path": "/v2/insights",
     "params": {
+     "filter.location.query": "London",
+     "filter.tags": "urn:tag:category:place:music_venue",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "take": "5"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": []
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
      "filter.location.query": "Bristol",
      "filter.tags": "urn:tag:category:place:music_venue",
      "filter.type": "urn:entity:place",
@@ -1380,108 +1399,7 @@
     "success": true,
     "duration": 41,
     "results": {
-     "entities": [
-      {
-       "name": "Placeholder venue A (Leeds)",
-       "entity_id": "DCAF3842-F980-83D1-92EF-D59A6F9B683D",
-       "type": "urn:entity",
-       "subtype": "urn:entity:place",
-       "popularity": 0.838,
-       "location": {
-        "lat": 53.8108,
-        "lon": -1.5571
-       },
-       "properties": {
-        "address": "698 Main St, Leeds",
-        "geocode": {
-         "name": "Leeds"
-        }
-       },
-       "query": {
-        "affinity": 0.95
-       }
-      },
-      {
-       "name": "Placeholder venue B (Leeds)",
-       "entity_id": "AF5B23D3-4E9E-2768-421B-00FD5E5FE285",
-       "type": "urn:entity",
-       "subtype": "urn:entity:place",
-       "popularity": 0.731,
-       "location": {
-        "lat": 53.820800000000006,
-        "lon": -1.5651
-       },
-       "properties": {
-        "address": "754 Main St, Leeds",
-        "geocode": {
-         "name": "Leeds"
-        }
-       },
-       "query": {
-        "affinity": 0.89
-       }
-      }
-     ]
-    }
-   }
-  },
-  {
-   "request": {
-    "path": "/v2/insights",
-    "params": {
-     "filter.location.query": "London",
-     "filter.tags": "urn:tag:category:place:music_venue",
-     "filter.type": "urn:entity:place",
-     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
-     "take": "5"
-    }
-   },
-   "response": {
-    "success": true,
-    "duration": 41,
-    "results": {
-     "entities": [
-      {
-       "name": "Placeholder venue A (London)",
-       "entity_id": "CEF9E635-20BD-9090-A52B-2728135643FF",
-       "type": "urn:entity",
-       "subtype": "urn:entity:place",
-       "popularity": 0.795,
-       "location": {
-        "lat": 51.517399999999995,
-        "lon": -0.1358
-       },
-       "properties": {
-        "address": "681 Main St, London",
-        "geocode": {
-         "name": "London"
-        }
-       },
-       "query": {
-        "affinity": 0.95
-       }
-      },
-      {
-       "name": "Placeholder venue B (London)",
-       "entity_id": "7A6F5483-9BAC-465E-3842-1FEDA8AE5BCC",
-       "type": "urn:entity",
-       "subtype": "urn:entity:place",
-       "popularity": 0.834,
-       "location": {
-        "lat": 51.5274,
-        "lon": -0.14379999999999998
-       },
-       "properties": {
-        "address": "837 Main St, London",
-        "geocode": {
-         "name": "London"
-        }
-       },
-       "query": {
-        "affinity": 0.89
-       }
-      }
-     ]
+     "entities": []
     }
    }
   },
@@ -1500,48 +1418,7 @@
     "success": true,
     "duration": 41,
     "results": {
-     "entities": [
-      {
-       "name": "Placeholder venue A (Liverpool)",
-       "entity_id": "90F2A991-4F51-9150-1904-96A2030FF26B",
-       "type": "urn:entity",
-       "subtype": "urn:entity:place",
-       "popularity": 0.735,
-       "location": {
-        "lat": 53.4184,
-        "lon": -2.9996
-       },
-       "properties": {
-        "address": "442 Main St, Liverpool",
-        "geocode": {
-         "name": "Liverpool"
-        }
-       },
-       "query": {
-        "affinity": 0.95
-       }
-      },
-      {
-       "name": "Placeholder venue B (Liverpool)",
-       "entity_id": "E254956E-FCC9-3B92-8E5D-29647F8969CF",
-       "type": "urn:entity",
-       "subtype": "urn:entity:place",
-       "popularity": 0.898,
-       "location": {
-        "lat": 53.4284,
-        "lon": -3.0076
-       },
-       "properties": {
-        "address": "413 Main St, Liverpool",
-        "geocode": {
-         "name": "Liverpool"
-        }
-       },
-       "query": {
-        "affinity": 0.89
-       }
-      }
-     ]
+     "entities": []
     }
    }
   },
@@ -1785,114 +1662,6 @@
      "filter.results.entities": "5D96F0A4-4D35-05FF-E29B-41E72FC87E49,65D37749-FCD2-938E-F9ED-531335EB379A,7B043FB3-9C58-43C9-9E32-4A9C5B4FEFF2,BB4C5E9F-64F1-3529-40B3-66C9F3FE3111,0203FAB9-B288-6848-1ECA-ADF8C2951056,056B474B-546B-F8F4-CDCF-291896C9D1A8,12231BCB-982F-D465-F9DF-F6A30EFC72A3,387591A3-CE7D-47F9-1466-DC054A488A2F",
      "filter.type": "urn:entity:artist",
      "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
-     "signal.location.query": "Dublin",
-     "take": "8"
-    }
-   },
-   "response": {
-    "success": true,
-    "duration": 41,
-    "results": {
-     "entities": [
-      {
-       "name": "The Murder Capital",
-       "entity_id": "65D37749-FCD2-938E-F9ED-531335EB379A",
-       "type": "urn:entity",
-       "subtype": "urn:entity:artist",
-       "popularity": 0.72,
-       "properties": {},
-       "query": {
-        "affinity": 0.871
-       }
-      },
-      {
-       "name": "Sprints",
-       "entity_id": "7B043FB3-9C58-43C9-9E32-4A9C5B4FEFF2",
-       "type": "urn:entity",
-       "subtype": "urn:entity:artist",
-       "popularity": 0.66,
-       "properties": {},
-       "query": {
-        "affinity": 0.854
-       }
-      },
-      {
-       "name": "English Teacher",
-       "entity_id": "5D96F0A4-4D35-05FF-E29B-41E72FC87E49",
-       "type": "urn:entity",
-       "subtype": "urn:entity:artist",
-       "popularity": 0.74,
-       "properties": {},
-       "query": {
-        "affinity": 0.796
-       }
-      },
-      {
-       "name": "Kneecap",
-       "entity_id": "BB4C5E9F-64F1-3529-40B3-66C9F3FE3111",
-       "type": "urn:entity",
-       "subtype": "urn:entity:artist",
-       "popularity": 0.82,
-       "properties": {},
-       "query": {
-        "affinity": 0.789
-       }
-      },
-      {
-       "name": "Squid",
-       "entity_id": "12231BCB-982F-D465-F9DF-F6A30EFC72A3",
-       "type": "urn:entity",
-       "subtype": "urn:entity:artist",
-       "popularity": 0.73,
-       "properties": {},
-       "query": {
-        "affinity": 0.714
-       }
-      },
-      {
-       "name": "Shame",
-       "entity_id": "0203FAB9-B288-6848-1ECA-ADF8C2951056",
-       "type": "urn:entity",
-       "subtype": "urn:entity:artist",
-       "popularity": 0.78,
-       "properties": {},
-       "query": {
-        "affinity": 0.693
-       }
-      },
-      {
-       "name": "Black Country, New Road",
-       "entity_id": "387591A3-CE7D-47F9-1466-DC054A488A2F",
-       "type": "urn:entity",
-       "subtype": "urn:entity:artist",
-       "popularity": 0.76,
-       "properties": {},
-       "query": {
-        "affinity": 0.683
-       }
-      },
-      {
-       "name": "Wet Leg",
-       "entity_id": "056B474B-546B-F8F4-CDCF-291896C9D1A8",
-       "type": "urn:entity",
-       "subtype": "urn:entity:artist",
-       "popularity": 0.86,
-       "properties": {},
-       "query": {
-        "affinity": 0.659
-       }
-      }
-     ]
-    }
-   }
-  },
-  {
-   "request": {
-    "path": "/v2/insights",
-    "params": {
-     "filter.results.entities": "5D96F0A4-4D35-05FF-E29B-41E72FC87E49,65D37749-FCD2-938E-F9ED-531335EB379A,7B043FB3-9C58-43C9-9E32-4A9C5B4FEFF2,BB4C5E9F-64F1-3529-40B3-66C9F3FE3111,0203FAB9-B288-6848-1ECA-ADF8C2951056,056B474B-546B-F8F4-CDCF-291896C9D1A8,12231BCB-982F-D465-F9DF-F6A30EFC72A3,387591A3-CE7D-47F9-1466-DC054A488A2F",
-     "filter.type": "urn:entity:artist",
-     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
      "signal.location.query": "Manchester",
      "take": "8"
     }
@@ -1988,6 +1757,114 @@
        "properties": {},
        "query": {
         "affinity": 0.656
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.results.entities": "5D96F0A4-4D35-05FF-E29B-41E72FC87E49,65D37749-FCD2-938E-F9ED-531335EB379A,7B043FB3-9C58-43C9-9E32-4A9C5B4FEFF2,BB4C5E9F-64F1-3529-40B3-66C9F3FE3111,0203FAB9-B288-6848-1ECA-ADF8C2951056,056B474B-546B-F8F4-CDCF-291896C9D1A8,12231BCB-982F-D465-F9DF-F6A30EFC72A3,387591A3-CE7D-47F9-1466-DC054A488A2F",
+     "filter.type": "urn:entity:artist",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "signal.location.query": "Dublin",
+     "take": "8"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "The Murder Capital",
+       "entity_id": "65D37749-FCD2-938E-F9ED-531335EB379A",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.72,
+       "properties": {},
+       "query": {
+        "affinity": 0.871
+       }
+      },
+      {
+       "name": "Sprints",
+       "entity_id": "7B043FB3-9C58-43C9-9E32-4A9C5B4FEFF2",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.66,
+       "properties": {},
+       "query": {
+        "affinity": 0.854
+       }
+      },
+      {
+       "name": "English Teacher",
+       "entity_id": "5D96F0A4-4D35-05FF-E29B-41E72FC87E49",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.74,
+       "properties": {},
+       "query": {
+        "affinity": 0.796
+       }
+      },
+      {
+       "name": "Kneecap",
+       "entity_id": "BB4C5E9F-64F1-3529-40B3-66C9F3FE3111",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.82,
+       "properties": {},
+       "query": {
+        "affinity": 0.789
+       }
+      },
+      {
+       "name": "Squid",
+       "entity_id": "12231BCB-982F-D465-F9DF-F6A30EFC72A3",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.73,
+       "properties": {},
+       "query": {
+        "affinity": 0.714
+       }
+      },
+      {
+       "name": "Shame",
+       "entity_id": "0203FAB9-B288-6848-1ECA-ADF8C2951056",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.78,
+       "properties": {},
+       "query": {
+        "affinity": 0.693
+       }
+      },
+      {
+       "name": "Black Country, New Road",
+       "entity_id": "387591A3-CE7D-47F9-1466-DC054A488A2F",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.76,
+       "properties": {},
+       "query": {
+        "affinity": 0.683
+       }
+      },
+      {
+       "name": "Wet Leg",
+       "entity_id": "056B474B-546B-F8F4-CDCF-291896C9D1A8",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.86,
+       "properties": {},
+       "query": {
+        "affinity": 0.659
        }
       }
      ]
@@ -2109,7 +1986,7 @@
      "filter.results.entities": "5D96F0A4-4D35-05FF-E29B-41E72FC87E49,65D37749-FCD2-938E-F9ED-531335EB379A,7B043FB3-9C58-43C9-9E32-4A9C5B4FEFF2,BB4C5E9F-64F1-3529-40B3-66C9F3FE3111,0203FAB9-B288-6848-1ECA-ADF8C2951056,056B474B-546B-F8F4-CDCF-291896C9D1A8,12231BCB-982F-D465-F9DF-F6A30EFC72A3,387591A3-CE7D-47F9-1466-DC054A488A2F",
      "filter.type": "urn:entity:artist",
      "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
-     "signal.location.query": "Bristol",
+     "signal.location.query": "London",
      "take": "8"
     }
    },
@@ -2119,28 +1996,6 @@
     "results": {
      "entities": [
       {
-       "name": "English Teacher",
-       "entity_id": "5D96F0A4-4D35-05FF-E29B-41E72FC87E49",
-       "type": "urn:entity",
-       "subtype": "urn:entity:artist",
-       "popularity": 0.74,
-       "properties": {},
-       "query": {
-        "affinity": 0.814
-       }
-      },
-      {
-       "name": "Sprints",
-       "entity_id": "7B043FB3-9C58-43C9-9E32-4A9C5B4FEFF2",
-       "type": "urn:entity",
-       "subtype": "urn:entity:artist",
-       "popularity": 0.66,
-       "properties": {},
-       "query": {
-        "affinity": 0.777
-       }
-      },
-      {
        "name": "The Murder Capital",
        "entity_id": "65D37749-FCD2-938E-F9ED-531335EB379A",
        "type": "urn:entity",
@@ -2148,18 +2003,7 @@
        "popularity": 0.72,
        "properties": {},
        "query": {
-        "affinity": 0.759
-       }
-      },
-      {
-       "name": "Kneecap",
-       "entity_id": "BB4C5E9F-64F1-3529-40B3-66C9F3FE3111",
-       "type": "urn:entity",
-       "subtype": "urn:entity:artist",
-       "popularity": 0.82,
-       "properties": {},
-       "query": {
-        "affinity": 0.724
+        "affinity": 0.787
        }
       },
       {
@@ -2170,7 +2014,18 @@
        "popularity": 0.78,
        "properties": {},
        "query": {
-        "affinity": 0.708
+        "affinity": 0.787
+       }
+      },
+      {
+       "name": "Kneecap",
+       "entity_id": "BB4C5E9F-64F1-3529-40B3-66C9F3FE3111",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.82,
+       "properties": {},
+       "query": {
+        "affinity": 0.739
        }
       },
       {
@@ -2181,7 +2036,18 @@
        "popularity": 0.73,
        "properties": {},
        "query": {
-        "affinity": 0.702
+        "affinity": 0.735
+       }
+      },
+      {
+       "name": "Sprints",
+       "entity_id": "7B043FB3-9C58-43C9-9E32-4A9C5B4FEFF2",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.66,
+       "properties": {},
+       "query": {
+        "affinity": 0.732
        }
       },
       {
@@ -2192,7 +2058,18 @@
        "popularity": 0.86,
        "properties": {},
        "query": {
-        "affinity": 0.671
+        "affinity": 0.729
+       }
+      },
+      {
+       "name": "English Teacher",
+       "entity_id": "5D96F0A4-4D35-05FF-E29B-41E72FC87E49",
+       "type": "urn:entity",
+       "subtype": "urn:entity:artist",
+       "popularity": 0.74,
+       "properties": {},
+       "query": {
+        "affinity": 0.717
        }
       },
       {
@@ -2203,7 +2080,7 @@
        "popularity": 0.76,
        "properties": {},
        "query": {
-        "affinity": 0.668
+        "affinity": 0.652
        }
       }
      ]
@@ -2434,76 +2311,6 @@
      "filter.tags": "urn:tag:genre:brand:food_beverage",
      "filter.type": "urn:entity:brand",
      "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
-     "signal.location.query": "Dublin",
-     "take": "6"
-    }
-   },
-   "response": {
-    "success": true,
-    "duration": 41,
-    "results": {
-     "entities": [
-      {
-       "name": "Tayto",
-       "entity_id": "97DD6E73-3B25-839D-52AC-315F57F7C66F",
-       "type": "urn:entity",
-       "subtype": "urn:entity:brand",
-       "popularity": 0.818,
-       "query": {
-        "affinity": 0.928
-       }
-      },
-      {
-       "name": "Club Orange",
-       "entity_id": "AE72B7A7-6D5F-CA3F-5522-919AD71E4214",
-       "type": "urn:entity",
-       "subtype": "urn:entity:brand",
-       "popularity": 0.916,
-       "query": {
-        "affinity": 0.868
-       }
-      },
-      {
-       "name": "Barry's Tea",
-       "entity_id": "31E5487A-FB7F-2FD4-C3A6-5888841011EA",
-       "type": "urn:entity",
-       "subtype": "urn:entity:brand",
-       "popularity": 0.879,
-       "query": {
-        "affinity": 0.828
-       }
-      },
-      {
-       "name": "Monster Energy",
-       "entity_id": "57932963-CFB1-5FF5-9112-61746F8CEE31",
-       "type": "urn:entity",
-       "subtype": "urn:entity:brand",
-       "popularity": 0.663,
-       "query": {
-        "affinity": 0.774
-       }
-      },
-      {
-       "name": "Greggs",
-       "entity_id": "36A05C35-E60B-1D19-062C-00E94AF54B10",
-       "type": "urn:entity",
-       "subtype": "urn:entity:brand",
-       "popularity": 0.669,
-       "query": {
-        "affinity": 0.723
-       }
-      }
-     ]
-    }
-   }
-  },
-  {
-   "request": {
-    "path": "/v2/insights",
-    "params": {
-     "filter.tags": "urn:tag:genre:brand:food_beverage",
-     "filter.type": "urn:entity:brand",
-     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
      "signal.location.query": "Manchester",
      "take": "6"
     }
@@ -2561,6 +2368,76 @@
        "popularity": 0.916,
        "query": {
         "affinity": 0.72
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:food_beverage",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "signal.location.query": "Dublin",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Tayto",
+       "entity_id": "97DD6E73-3B25-839D-52AC-315F57F7C66F",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.818,
+       "query": {
+        "affinity": 0.928
+       }
+      },
+      {
+       "name": "Club Orange",
+       "entity_id": "AE72B7A7-6D5F-CA3F-5522-919AD71E4214",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.916,
+       "query": {
+        "affinity": 0.868
+       }
+      },
+      {
+       "name": "Barry's Tea",
+       "entity_id": "31E5487A-FB7F-2FD4-C3A6-5888841011EA",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.879,
+       "query": {
+        "affinity": 0.828
+       }
+      },
+      {
+       "name": "Monster Energy",
+       "entity_id": "57932963-CFB1-5FF5-9112-61746F8CEE31",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.663,
+       "query": {
+        "affinity": 0.774
+       }
+      },
+      {
+       "name": "Greggs",
+       "entity_id": "36A05C35-E60B-1D19-062C-00E94AF54B10",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.669,
+       "query": {
+        "affinity": 0.723
        }
       }
      ]
@@ -2761,76 +2638,6 @@
      "filter.tags": "urn:tag:genre:brand:fashion",
      "filter.type": "urn:entity:brand",
      "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
-     "signal.location.query": "Dublin",
-     "take": "6"
-    }
-   },
-   "response": {
-    "success": true,
-    "duration": 41,
-    "results": {
-     "entities": [
-      {
-       "name": "Dr. Martens",
-       "entity_id": "128AE499-906D-C476-DF0E-24D2C64FCE91",
-       "type": "urn:entity",
-       "subtype": "urn:entity:brand",
-       "popularity": 0.761,
-       "query": {
-        "affinity": 0.93
-       }
-      },
-      {
-       "name": "Fred Perry",
-       "entity_id": "AC8A5E07-F503-7B09-1346-439FC47D6A9A",
-       "type": "urn:entity",
-       "subtype": "urn:entity:brand",
-       "popularity": 0.861,
-       "query": {
-        "affinity": 0.88
-       }
-      },
-      {
-       "name": "Stone Island",
-       "entity_id": "358D2870-D7DF-07EB-8866-7A8D6386F22E",
-       "type": "urn:entity",
-       "subtype": "urn:entity:brand",
-       "popularity": 0.719,
-       "query": {
-        "affinity": 0.826
-       }
-      },
-      {
-       "name": "Carhartt WIP",
-       "entity_id": "DE30051F-D18D-CE57-6C59-1D5D0A7FEF2E",
-       "type": "urn:entity",
-       "subtype": "urn:entity:brand",
-       "popularity": 0.763,
-       "query": {
-        "affinity": 0.763
-       }
-      },
-      {
-       "name": "Adidas Originals",
-       "entity_id": "76BF86CF-B6CB-623C-F144-3F54EB4E811E",
-       "type": "urn:entity",
-       "subtype": "urn:entity:brand",
-       "popularity": 0.764,
-       "query": {
-        "affinity": 0.722
-       }
-      }
-     ]
-    }
-   }
-  },
-  {
-   "request": {
-    "path": "/v2/insights",
-    "params": {
-     "filter.tags": "urn:tag:genre:brand:fashion",
-     "filter.type": "urn:entity:brand",
-     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
      "signal.location.query": "Manchester",
      "take": "6"
     }
@@ -2898,6 +2705,76 @@
        "popularity": 0.764,
        "query": {
         "affinity": 0.672
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:fashion",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "signal.location.query": "Dublin",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Dr. Martens",
+       "entity_id": "128AE499-906D-C476-DF0E-24D2C64FCE91",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.761,
+       "query": {
+        "affinity": 0.93
+       }
+      },
+      {
+       "name": "Fred Perry",
+       "entity_id": "AC8A5E07-F503-7B09-1346-439FC47D6A9A",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.861,
+       "query": {
+        "affinity": 0.88
+       }
+      },
+      {
+       "name": "Stone Island",
+       "entity_id": "358D2870-D7DF-07EB-8866-7A8D6386F22E",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.719,
+       "query": {
+        "affinity": 0.826
+       }
+      },
+      {
+       "name": "Carhartt WIP",
+       "entity_id": "DE30051F-D18D-CE57-6C59-1D5D0A7FEF2E",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.763,
+       "query": {
+        "affinity": 0.763
+       }
+      },
+      {
+       "name": "Adidas Originals",
+       "entity_id": "76BF86CF-B6CB-623C-F144-3F54EB4E811E",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.764,
+       "query": {
+        "affinity": 0.722
        }
       }
      ]
@@ -3078,6 +2955,76 @@
      "filter.tags": "urn:tag:genre:brand:alcoholic_beverages",
      "filter.type": "urn:entity:brand",
      "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "signal.location.query": "Manchester",
+     "take": "6"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "Guinness",
+       "entity_id": "6E3DB4C0-3504-4B0C-AFFD-C84040A28229",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.913,
+       "query": {
+        "affinity": 0.919
+       }
+      },
+      {
+       "name": "Jameson",
+       "entity_id": "33CB7491-7776-7738-D1F7-82E6FAF46245",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.783,
+       "query": {
+        "affinity": 0.875
+       }
+      },
+      {
+       "name": "Rockshore",
+       "entity_id": "E4EFB7F9-10DF-353A-E8F6-DAF7D5114BFD",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.788,
+       "query": {
+        "affinity": 0.818
+       }
+      },
+      {
+       "name": "Beavertown",
+       "entity_id": "54B9D96A-6EDB-6ED7-C388-B927ED3AE13C",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.668,
+       "query": {
+        "affinity": 0.768
+       }
+      },
+      {
+       "name": "Camden Town Brewery",
+       "entity_id": "9DA085DC-F17A-EAE7-33B0-9958E66C2787",
+       "type": "urn:entity",
+       "subtype": "urn:entity:brand",
+       "popularity": 0.718,
+       "query": {
+        "affinity": 0.719
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.tags": "urn:tag:genre:brand:alcoholic_beverages",
+     "filter.type": "urn:entity:brand",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
      "signal.location.query": "Dublin",
      "take": "6"
     }
@@ -3145,76 +3092,6 @@
        "popularity": 0.718,
        "query": {
         "affinity": 0.677
-       }
-      }
-     ]
-    }
-   }
-  },
-  {
-   "request": {
-    "path": "/v2/insights",
-    "params": {
-     "filter.tags": "urn:tag:genre:brand:alcoholic_beverages",
-     "filter.type": "urn:entity:brand",
-     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
-     "signal.location.query": "Manchester",
-     "take": "6"
-    }
-   },
-   "response": {
-    "success": true,
-    "duration": 41,
-    "results": {
-     "entities": [
-      {
-       "name": "Guinness",
-       "entity_id": "6E3DB4C0-3504-4B0C-AFFD-C84040A28229",
-       "type": "urn:entity",
-       "subtype": "urn:entity:brand",
-       "popularity": 0.913,
-       "query": {
-        "affinity": 0.919
-       }
-      },
-      {
-       "name": "Jameson",
-       "entity_id": "33CB7491-7776-7738-D1F7-82E6FAF46245",
-       "type": "urn:entity",
-       "subtype": "urn:entity:brand",
-       "popularity": 0.783,
-       "query": {
-        "affinity": 0.875
-       }
-      },
-      {
-       "name": "Rockshore",
-       "entity_id": "E4EFB7F9-10DF-353A-E8F6-DAF7D5114BFD",
-       "type": "urn:entity",
-       "subtype": "urn:entity:brand",
-       "popularity": 0.788,
-       "query": {
-        "affinity": 0.818
-       }
-      },
-      {
-       "name": "Beavertown",
-       "entity_id": "54B9D96A-6EDB-6ED7-C388-B927ED3AE13C",
-       "type": "urn:entity",
-       "subtype": "urn:entity:brand",
-       "popularity": 0.668,
-       "query": {
-        "affinity": 0.768
-       }
-      },
-      {
-       "name": "Camden Town Brewery",
-       "entity_id": "9DA085DC-F17A-EAE7-33B0-9958E66C2787",
-       "type": "urn:entity",
-       "subtype": "urn:entity:brand",
-       "popularity": 0.718,
-       "query": {
-        "affinity": 0.719
        }
       }
      ]
@@ -3343,66 +3220,6 @@
    "request": {
     "path": "/v2/insights",
     "params": {
-     "filter.location.query": "Dublin",
-     "filter.tags": "urn:tag:category:place:bar",
-     "filter.type": "urn:entity:place",
-     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
-     "take": "3"
-    }
-   },
-   "response": {
-    "success": true,
-    "duration": 41,
-    "results": {
-     "entities": [
-      {
-       "name": "The Workman's Club",
-       "entity_id": "3C227412-8395-BB3F-67E7-5662A6CDFCCF",
-       "type": "urn:entity",
-       "subtype": "urn:entity:place",
-       "popularity": 0.744,
-       "location": {
-        "lat": 53.3598,
-        "lon": -6.2683
-       },
-       "properties": {
-        "address": "384 Main St, Dublin",
-        "geocode": {
-         "name": "Dublin"
-        }
-       },
-       "query": {
-        "affinity": 0.95
-       }
-      },
-      {
-       "name": "Whelan's",
-       "entity_id": "A23BAA1D-6399-E969-9095-9EE756A5F3F8",
-       "type": "urn:entity",
-       "subtype": "urn:entity:place",
-       "popularity": 0.844,
-       "location": {
-        "lat": 53.369800000000005,
-        "lon": -6.2763
-       },
-       "properties": {
-        "address": "738 Main St, Dublin",
-        "geocode": {
-         "name": "Dublin"
-        }
-       },
-       "query": {
-        "affinity": 0.89
-       }
-      }
-     ]
-    }
-   }
-  },
-  {
-   "request": {
-    "path": "/v2/insights",
-    "params": {
      "filter.location.query": "Manchester",
      "filter.tags": "urn:tag:category:place:bar",
      "filter.type": "urn:entity:place",
@@ -3449,6 +3266,66 @@
         "address": "326 Main St, Manchester",
         "geocode": {
          "name": "Manchester"
+        }
+       },
+       "query": {
+        "affinity": 0.89
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "path": "/v2/insights",
+    "params": {
+     "filter.location.query": "Dublin",
+     "filter.tags": "urn:tag:category:place:bar",
+     "filter.type": "urn:entity:place",
+     "signal.interests.entities": "9E1A8B26-67A0-3EE6-2035-8683FED10A4C",
+     "take": "3"
+    }
+   },
+   "response": {
+    "success": true,
+    "duration": 41,
+    "results": {
+     "entities": [
+      {
+       "name": "The Workman's Club",
+       "entity_id": "3C227412-8395-BB3F-67E7-5662A6CDFCCF",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.744,
+       "location": {
+        "lat": 53.3598,
+        "lon": -6.2683
+       },
+       "properties": {
+        "address": "384 Main St, Dublin",
+        "geocode": {
+         "name": "Dublin"
+        }
+       },
+       "query": {
+        "affinity": 0.95
+       }
+      },
+      {
+       "name": "Whelan's",
+       "entity_id": "A23BAA1D-6399-E969-9095-9EE756A5F3F8",
+       "type": "urn:entity",
+       "subtype": "urn:entity:place",
+       "popularity": 0.844,
+       "location": {
+        "lat": 53.369800000000005,
+        "lon": -6.2763
+       },
+       "properties": {
+        "address": "738 Main St, Dublin",
+        "geocode": {
+         "name": "Dublin"
         }
        },
        "query": {

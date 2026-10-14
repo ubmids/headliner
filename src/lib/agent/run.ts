@@ -164,7 +164,7 @@ export async function runAgent(input: RunInput, deps: RunDeps): Promise<RunResul
     finalise(plan);
     if (!fatal) {
       // The fact-check can re-order the ranking; make sure every stop on the final route has venues.
-      const bare = plan.route.order.filter((k) => !plan.markets.find((m) => m.key === k)?.venues.length);
+      const bare = plan.route.order.filter((k) => !plan.markets.find((m) => m.key === k)?.venuesSearched);
       if (bare.length) {
         await exec("find_venues", { markets: bare }, `The final route includes ${bare.length} stop${bare.length > 1 ? "s" : ""} I haven't looked at venues for yet (${bare.map((k) => k.split(",")[0]).join(", ")}); filling those in.`);
       }

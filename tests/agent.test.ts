@@ -45,7 +45,9 @@ describe("agent, deterministic planner, fixture mode", () => {
     expect(p.artist?.name).toBe("Noah Kahan");
     expect(p.route.order).toHaveLength(8);
     expect(p.markets.some((m) => m.tier === "sleeper")).toBe(true);
-    expect(p.route.order.every((k) => p.markets.find((m) => m.key === k)!.venues.length > 0)).toBe(true);
+    // every stop was searched; a stop with no match says so instead of showing an invented name
+    expect(p.route.order.every((k) => p.markets.find((m) => m.key === k)!.venuesSearched)).toBe(true);
+    expect(p.markets.flatMap((m) => m.venues).some((v) => /placeholder/i.test(v.name))).toBe(false);
     expect(p.supportActs.length).toBeGreaterThan(3);
     expect(Object.keys(p.supportActs[0].perMarket).length).toBeGreaterThan(0);
     expect(p.supportActs.some((a) => a.sharedTags.length > 0)).toBe(true);

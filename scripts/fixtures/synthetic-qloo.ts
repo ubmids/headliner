@@ -190,7 +190,8 @@ export class SyntheticQloo {
       const table = isBar ? s.bars : s.venues;
       const key = Object.keys(table).find((k) => cityName(k) === city);
       const gaz = CITIES.find((c) => c.name === city);
-      const names = key ? table[key] : isBar ? [] : [`Placeholder venue A (${city})`, `Placeholder venue B (${city})`];
+      // Cities without seeded venues get no venues (the UI says "no Qloo venue match"), never invented names.
+      const names = key ? table[key] : [];
       return {
         entities: names.slice(0, take).map((n, i) =>
           entity(n, "urn:entity:place", {

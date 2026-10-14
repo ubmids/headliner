@@ -32,12 +32,14 @@ export interface Market {
   heatPopularity?: number;
   /** Artist affinity when Qloo is given this city as signal.location (0-1, from urn:entity:artist rank). */
   localAffinity?: number;
-  /** Blended 0-100 score used for ranking. */
+  /** Qloo affinity blend on Qloo's own scale, times 100 (not rescaled). Used to pick the route, never to grade it. */
   score: number;
-  /** Fan concentration minus fan volume, both normalised across markets. >0 = over-indexes for its size. */
+  /** Concentration percentile minus volume percentile within the region. >0 = over-indexes for its size. */
   overIndex: number;
   tier: MarketTier;
   venues: Venue[];
+  /** True once find_venues has asked Qloo about this market (so "no venues" means "no Qloo match"). */
+  venuesSearched?: boolean;
   localSpots: Venue[];
   sources: Array<"heatmap" | "rank">;
 }
@@ -112,51 +114,71 @@ export function emptyPlan(regionId: RegionId, dates: number, candidateCities: st
   };
 }
 
-function minMax(values: number[]): (v: number) => number {
-  const lo = Math.min(...values);
-  const hi = Math.max(...values);
-  return (v) => (hi - lo < 1e-9 ? 0.5 : (v - lo) / (hi - lo));
+/** Mid-rank percentile of v within a sample: 0.5/n for the lowest, (n-0.5)/n for the highest. Ties share a rank. */
+export function percentileOf(sample: number[]): (v: number) => number {
+  const n = sample.length;
+  return (v) => {
+    if (!n) return 0.5;
+    let below = 0;
+    let equal = 0;
+    for (const x of sample) {
+      if (x < v - 1e-12) below++;
+      else if (Math.abs(x - v) <= 1e-12) equal++;
+    }
+    return (below + Math.max(equal, 1) / 2) / n;
+  };
 }
 
 /**
  * Score and tier markets from whatever Qloo signals we have.
+ *
+ * The fan score is Qloo's own 0-1 affinity on Qloo's own scale (times 100), not rescaled: a city
+ * is never shown as "0" just because it is the coldest one in the run. It blends:
  * - concentration = heatmap affinity and/or location-conditioned artist affinity
  * - volume        = heatmap popularity
- * Tiers: anchor (both high), sleeper (concentration high, volume low: the secondary market
- * an LLM overlooks), volume (big but diluted), skip.
+ * Tiers compare each market with the rest of the region (percentiles):
+ * anchor (both high), sleeper (concentration high, volume low), volume (big but diluted), skip.
+ *
+ * Headliner picks its route with this score, so the score is NOT used to grade the route
+ * against a plain LLM. That is the outside referee's job (src/lib/referee).
  */
 export function scoreMarkets(markets: Market[], heatScale: HeatCity[] = []): Market[] {
   if (markets.length === 0) return markets;
-  // Scale against the whole region's heatmap when we have it, so "0" means "coldest city in the region",
-  // not "coldest of the handful we shortlisted".
-  const heat = [...heatScale.map((h) => h.affinity), ...markets.filter((m) => m.heatAffinity !== undefined).map((m) => m.heatAffinity!)];
-  const local = markets.filter((m) => m.localAffinity !== undefined).map((m) => m.localAffinity!);
-  const pop = [...heatScale.filter((h) => h.popularity !== undefined).map((h) => h.popularity!), ...markets.filter((m) => m.heatPopularity !== undefined).map((m) => m.heatPopularity!)];
-  const nHeat = heat.length ? minMax(heat) : () => 0.5;
-  const nLocal = local.length ? minMax(local) : () => 0.5;
-  const nPop = pop.length ? minMax(pop) : () => 0.5;
+  // Percentiles are taken over the whole region's heatmap when we have it, one value per city.
+  const heatByKey = new Map<string, { affinity: number; popularity?: number }>();
+  for (const h of heatScale) heatByKey.set(h.key, { affinity: h.affinity, popularity: h.popularity });
+  for (const m of markets) if (m.heatAffinity !== undefined && !heatByKey.has(m.key)) heatByKey.set(m.key, { affinity: m.heatAffinity, popularity: m.heatPopularity });
 
-  const scored = markets.map((m) => {
+  const raw = markets.map((m) => {
     const parts: Array<[number, number]> = [];
-    if (m.heatAffinity !== undefined) parts.push([nHeat(m.heatAffinity), 0.6]);
-    if (m.localAffinity !== undefined) parts.push([nLocal(m.localAffinity), m.heatAffinity !== undefined ? 0.4 : 1]);
+    if (m.heatAffinity !== undefined) parts.push([m.heatAffinity, 0.6]);
+    if (m.localAffinity !== undefined) parts.push([m.localAffinity, m.heatAffinity !== undefined ? 0.4 : 1]);
     const w = parts.reduce((s, [, wt]) => s + wt, 0);
-    const concentration = w ? parts.reduce((s, [v, wt]) => s + v * wt, 0) / w : 0;
-    const volume = m.heatPopularity !== undefined ? nPop(m.heatPopularity) : undefined;
+    return { m, concentration: w ? parts.reduce((s, [v, wt]) => s + v * wt, 0) / w : undefined };
+  });
+  const pConc = percentileOf(raw.filter((r) => r.concentration !== undefined).map((r) => r.concentration!));
+  const pops = [...heatByKey.values()].filter((h) => h.popularity !== undefined).map((h) => h.popularity!);
+  const pPop = percentileOf(pops);
+
+  const scored = raw.map(({ m, concentration }) => {
+    const conc = concentration ?? 0;
+    const volume = m.heatPopularity;
     // Concentration drives the decision; volume nudges it (a full room beats a passionate empty one).
-    const score = Math.round((volume === undefined ? concentration : 0.75 * concentration + 0.25 * volume) * 100);
-    const overIndex = volume === undefined ? 0 : Math.round((concentration - volume) * 100) / 100;
-    return { ...m, score, overIndex, concentration, volume };
+    const score = Math.round((volume === undefined ? conc : 0.75 * conc + 0.25 * volume) * 100);
+    const concPct = concentration === undefined ? 0 : pConc(concentration);
+    const volPct = volume === undefined || !pops.length ? undefined : pPop(volume);
+    const overIndex = volPct === undefined ? 0 : Math.round((concPct - volPct) * 100) / 100;
+    return { ...m, score, overIndex, concPct, volPct };
   });
 
   const medianScore = median(scored.map((m) => m.score));
   return scored
-    .map(({ concentration, volume, ...m }) => {
+    .map(({ concPct, volPct, ...m }) => {
       let tier: MarketTier;
-      if (volume === undefined) tier = m.score >= Math.max(55, medianScore) ? "anchor" : "skip";
-      else if (concentration >= 0.6 && volume >= 0.5) tier = "anchor";
-      else if (concentration >= 0.55 && m.overIndex >= 0.15) tier = "sleeper";
-      else if (volume >= 0.6) tier = "volume";
+      if (volPct === undefined) tier = concPct >= 0.5 && m.score >= medianScore ? "anchor" : "skip";
+      else if (concPct >= 0.6 && volPct >= 0.5) tier = "anchor";
+      else if (concPct >= 0.55 && m.overIndex >= 0.15) tier = "sleeper";
+      else if (volPct >= 0.6) tier = "volume";
       else tier = m.score >= medianScore ? "anchor" : "skip";
       return { ...m, tier };
     })

@@ -254,7 +254,7 @@ function Result({ result }: { result: RunResult }) {
                   <span className={`tier ${m.tier}`}>{m.tier}</span>
                 </td>
                 <td className="num">{m.score}</td>
-                <td className="small">{m.venues.length ? m.venues.slice(0, 3).map((v) => v.name).join(" · ") : <span className="muted">not in the venue search (top markets only)</span>}</td>
+                <td className="small">{m.venues.length ? m.venues.slice(0, 3).map((v) => v.name).join(" · ") : <span className="muted">{m.venuesSearched ? "no Qloo venue match" : "not searched"}</span>}</td>
               </tr>
             ))}
           </tbody>

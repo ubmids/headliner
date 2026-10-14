@@ -281,9 +281,10 @@ export const TOOLS: ToolDef[] = [
           take: 5,
         });
         m.venues = res.results.entities.map(toVenue);
+        m.venuesSearched = true;
       });
       return {
-        summary: markets.map((m) => `${m.city}: ${m.venues[0]?.name ?? "none found"}`).join("; ") + (venueTag ? "" : " (no venue tag found; results unfiltered)"),
+        summary: markets.map((m) => `${m.city}: ${m.venues[0]?.name ?? "no Qloo venue match"}`).join("; ") + (venueTag ? "" : " (no venue tag found; results unfiltered)"),
       };
     },
   },
