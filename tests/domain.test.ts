@@ -151,6 +151,6 @@ describe("brief", () => {
     p2.markets.find((m) => m.key === "Boston, MA")!.venues[0].name = "=HYPERLINK(\"x\")";
     const row = briefCsv(p2).split("\n")[1];
     expect(row).toContain(`"'=HYPERLINK(""x"")"`);
-    expect(row).toMatch(/,-0\.\d\d,|,0\.\d\d,/);
+    expect(row).toMatch(/,-?\d\.\d\d,/); // over_index stays numeric, no leading quote
   });
 });
