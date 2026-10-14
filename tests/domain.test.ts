@@ -146,4 +146,11 @@ describe("brief", () => {
     expect(csv[1]).toContain('"The ""Big"" Room, Hall"');
     expect(csv[1]).toContain("Food & drink: Brand");
   });
+  it("neutralises spreadsheet formulas but keeps negative numbers", () => {
+    const p2 = structuredClone(plan);
+    p2.markets.find((m) => m.key === "Boston, MA")!.venues[0].name = "=HYPERLINK(\"x\")";
+    const row = briefCsv(p2).split("\n")[1];
+    expect(row).toContain(`"'=HYPERLINK(""x"")"`);
+    expect(row).toMatch(/,-0\.\d\d,|,0\.\d\d,/);
+  });
 });

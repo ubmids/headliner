@@ -58,7 +58,9 @@ export function templateBrief(plan: TourPlan, contrast?: Contrast): BriefText {
 }
 
 function csvCell(v: unknown): string {
-  const s = v === undefined || v === null ? "" : String(v);
+  let s = v === undefined || v === null ? "" : String(v);
+  // Names come from external data: neutralise spreadsheet formulas (CSV injection).
+  if (/^[=+\-@]/.test(s) && !/^-?\d/.test(s)) s = `'${s}`;
   return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 }
 
