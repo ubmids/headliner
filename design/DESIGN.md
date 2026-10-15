@@ -105,7 +105,7 @@ Tier encoding: **anchor** solid ink disc, **sleeper** solid pink disc, **volume*
 | Body, tables, lists | Instrument Sans 400, 500, 600 | 15/22 body, 14/20 tables | A neutral grotesque with a slightly editorial tone; calm under loud headings |
 | Data, labels, trace, stamps | Space Mono 400, 700 | 12 to 13/18 | Monospace with character: reads like a ticket stub and an API log |
 
-All three are loaded with `next/font/google` (self hosted at build time, no runtime request to Google) and exposed as `--font-display`, `--font-body` and `--font-mono`. No Inter, no Arial Black, no system stack as the design.
+Google Fonts now ships Big Shoulders Display as the family "Big Shoulders" with an optical size axis (10 to 72); `next/font` loads it as `Big_Shoulders` with `axes: ["opsz"]`, and at display sizes the browser picks the Display cut automatically. All three are loaded with `next/font/google` (self hosted at build time, no runtime request to Google) and exposed as `--font-display`, `--font-body` and `--font-mono`. No Inter, no Arial Black, no system stack as the design.
 
 ### Spacing, radius, motion
 
