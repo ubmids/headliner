@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Headliner design directions</title>
+<meta name="description" content="Three visual directions for Headliner, the Qloo tour-planning agent, applied to its real screens and Devpost thumbnail.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;600&family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;600;800&family=Big+Shoulders+Display:wght@700;900&family=Instrument+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap">
+<style>
+:root {
+  color-scheme: light;
+  /* page chrome */
+  --pg-bg: #EDEDEA; --pg-surface: #FFFFFF; --pg-text: #141414; --pg-text-2: #4A4A45; --pg-line: #D0D0CA; --pg-pick: #2638C9; --pg-pick-ink: #FFFFFF;
+  /* Direction A: Advance sheet */
+  --a-paper: #F2F2EF; --a-sheet: #FFFFFF; --a-sunk: #E9E9E5; --a-ink: #111111; --a-ink-2: #44443F; --a-ink-3: #66665F; --a-hair: #D4D4CE;
+  --a-qloo: #2638C9; --a-qloo-ink: #1B2A9E; --a-qloo-tint: #E6E9FB; --a-on-qloo: #FFFFFF;
+  --a-llm: #C42A1C; --a-llm-ink: #A3200F; --a-llm-tint: #FBE7E4;
+  --a-neutral: #83837C; --a-skip: #C4C4BD; --a-on-ink: #FFFFFF; --a-stamp-bg: #FFF1C7; --a-stamp-ink: #6B4A00;
+  /* Direction B: Front of house */
+  --b-deck: #E9EBEE; --b-strip: #FFFFFF; --b-strip-2: #F3F4F6; --b-line: #D3D7DD; --b-text: #0F1114; --b-text-2: #464C55; --b-text-3: #626973;
+  --b-qloo: #A36D00; --b-qloo-text: #7A5200; --b-llm: #3F6FD6; --b-llm-text: #2A55B0; --b-neutral: #80868F; --b-off: #E1E4E8; --b-glow: transparent;
+  /* Direction C: Tour poster */
+  --c-paper: #FAFAF7; --c-sheet: #FFFFFF; --c-sunk: #F0F0EC; --c-ink: #0D0D0D; --c-ink-2: #3D3D3D; --c-ink-3: #616161;
+  --c-qloo: #E6007E; --c-qloo-text: #B00060; --c-qloo-tint: #FFE0F0; --c-llm: #0078BF; --c-llm-text: #005A91; --c-llm-tint: #DDEFFA; --c-neutral: #858585; --c-on-qloo: #FFFFFF;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --pg-bg: #0C0C0B; --pg-surface: #161615; --pg-text: #F1F1EC; --pg-text-2: #B5B5AE; --pg-line: #2E2E2A; --pg-pick: #A7B1FF; --pg-pick-ink: #0E0E0D;
+    --a-paper: #0E0E0D; --a-sheet: #181817; --a-sunk: #222220; --a-ink: #F1F1EC; --a-ink-2: #BDBDB5; --a-ink-3: #8F8F87; --a-hair: #34342F;
+    --a-qloo: #6878F2; --a-qloo-ink: #A7B1FF; --a-qloo-tint: #1E2340; --a-on-qloo: #0E0E0D;
+    --a-llm: #E5533F; --a-llm-ink: #FF9A8A; --a-llm-tint: #3A1C17;
+    --a-neutral: #75756E; --a-skip: #46463F; --a-on-ink: #0E0E0D; --a-stamp-bg: #2E2508; --a-stamp-ink: #F2D48A;
+    --b-deck: #0B0C0E; --b-strip: #15171B; --b-strip-2: #1E2126; --b-line: #2B2F36; --b-text: #E9EBEE; --b-text-2: #A9AFB9; --b-text-3: #868D99;
+    --b-qloo: #C08300; --b-qloo-text: #FFB733; --b-llm: #5A8CF0; --b-llm-text: #8FB0FF; --b-neutral: #6A717D; --b-off: #23262C; --b-glow: rgba(255, 183, 51, 0.35);
+    --c-paper: #111111; --c-sheet: #1A1A1A; --c-sunk: #232323; --c-ink: #F5F5F2; --c-ink-2: #C2C2BE; --c-ink-3: #929290;
+    --c-qloo: #E8429A; --c-qloo-text: #FF8CC6; --c-qloo-tint: #3A1428; --c-llm: #2E8AD8; --c-llm-text: #8CC8FF; --c-llm-tint: #10263A; --c-neutral: #77777A; --c-on-qloo: #111111;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --pg-bg: #0C0C0B; --pg-surface: #161615; --pg-text: #F1F1EC; --pg-text-2: #B5B5AE; --pg-line: #2E2E2A; --pg-pick: #A7B1FF; --pg-pick-ink: #0E0E0D;
+  --a-paper: #0E0E0D; --a-sheet: #181817; --a-sunk: #222220; --a-ink: #F1F1EC; --a-ink-2: #BDBDB5; --a-ink-3: #8F8F87; --a-hair: #34342F;
+  --a-qloo: #6878F2; --a-qloo-ink: #A7B1FF; --a-qloo-tint: #1E2340; --a-on-qloo: #0E0E0D;
+  --a-llm: #E5533F; --a-llm-ink: #FF9A8A; --a-llm-tint: #3A1C17;
+  --a-neutral: #75756E; --a-skip: #46463F; --a-on-ink: #0E0E0D; --a-stamp-bg: #2E2508; --a-stamp-ink: #F2D48A;
+  --b-deck: #0B0C0E; --b-strip: #15171B; --b-strip-2: #1E2126; --b-line: #2B2F36; --b-text: #E9EBEE; --b-text-2: #A9AFB9; --b-text-3: #868D99;
+  --b-qloo: #C08300; --b-qloo-text: #FFB733; --b-llm: #5A8CF0; --b-llm-text: #8FB0FF; --b-neutral: #6A717D; --b-off: #23262C; --b-glow: rgba(255, 183, 51, 0.35);
+  --c-paper: #111111; --c-sheet: #1A1A1A; --c-sunk: #232323; --c-ink: #F5F5F2; --c-ink-2: #C2C2BE; --c-ink-3: #929290;
+  --c-qloo: #E8429A; --c-qloo-text: #FF8CC6; --c-qloo-tint: #3A1428; --c-llm: #2E8AD8; --c-llm-text: #8CC8FF; --c-llm-tint: #10263A; --c-neutral: #77777A; --c-on-qloo: #111111;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--pg-bg); color: var(--pg-text); font-family: "Archivo", system-ui, sans-serif; font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+.page { max-width: 1240px; margin: 0 auto; padding: 32px 32px 80px; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* ---------- page chrome ---------- */
+.intro { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: start; border-bottom: 2px solid var(--pg-text); padding-bottom: 20px; margin-bottom: 24px; }
+.intro h1 { font-stretch: 70%; font-weight: 800; font-size: 44px; line-height: 1; margin: 0 0 10px; letter-spacing: -0.01em; }
+.intro p { margin: 0; max-width: 760px; color: var(--pg-text-2); }
+.themes { display: inline-flex; border: 1px solid var(--pg-line); background: var(--pg-surface); }
+.themes button { font: inherit; font-size: 13px; background: none; border: 0; color: var(--pg-text-2); padding: 7px 12px; cursor: pointer; }
+.themes button[aria-pressed="true"] { background: var(--pg-text); color: var(--pg-bg); }
+.toc { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 40px; }
+.toc a { display: block; color: inherit; text-decoration: none; background: var(--pg-surface); border-top: 3px solid var(--pg-text); padding: 14px 16px; }
+.toc a.rec { border-top-color: var(--pg-pick); }
+.toc b { display: block; font-stretch: 75%; font-size: 22px; font-weight: 800; line-height: 1.1; margin-bottom: 4px; }
+.toc span { color: var(--pg-text-2); font-size: 14px; }
+.pick { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; background: var(--pg-pick); color: var(--pg-pick-ink); padding: 2px 7px; margin-bottom: 8px; }
+.dir { margin: 0 0 72px; }
+.dir-head { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 24px; margin-bottom: 18px; }
+.dir-head h2 { font-stretch: 70%; font-weight: 800; font-size: 34px; line-height: 1.05; margin: 0 0 8px; }
+.dir-head h2 small { display: block; font-stretch: 100%; font-weight: 600; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pg-text-2); margin-bottom: 4px; }
+.dir-head p { margin: 0 0 8px; color: var(--pg-text-2); }
+.spec { font-size: 13px; color: var(--pg-text-2); }
+.spec dt { font-weight: 700; color: var(--pg-text); margin-top: 6px; }
+.spec dd { margin: 0; }
+.swatches { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.sw { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-family: "IBM Plex Mono", monospace; color: var(--pg-text-2); }
+.sw i { width: 18px; height: 18px; display: inline-block; border: 1px solid var(--pg-line); }
+.label-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin: 22px 0 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pg-text-2); }
+.frame { border: 1px solid var(--pg-line); overflow: hidden; }
+.thumbs { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.42fr); gap: 16px; align-items: start; }
+.thumb-small { font-size: 12px; color: var(--pg-text-2); }
+.thumb-small .mini { width: 100%; max-width: 300px; margin-bottom: 8px; }
+.verdict-note { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 16px; font-size: 14px; }
+.verdict-note div { background: var(--pg-surface); padding: 14px 16px; border-left: 3px solid var(--pg-line); }
+.verdict-note b { display: block; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+.verdict-note ul { margin: 0; padding-left: 18px; color: var(--pg-text-2); }
+.rec-box { background: var(--pg-surface); border-left: 4px solid var(--pg-pick); padding: 20px 24px; margin: 0 0 48px; }
+.rec-box h2 { font-stretch: 70%; font-weight: 800; font-size: 30px; margin: 0 0 8px; line-height: 1.05; }
+.rec-box ol { margin: 8px 0 0; padding-left: 20px; color: var(--pg-text-2); }
+.rec-box li { margin-bottom: 6px; }
+.rec-box li b { color: var(--pg-text); }
+
+/* =====================================================================
+   DIRECTION A: Advance sheet
+   ===================================================================== */
+.A { background: var(--a-paper); color: var(--a-ink); font-family: "Archivo", sans-serif; font-stretch: 100%; }
+.A .mono { font-family: "IBM Plex Mono", monospace; }
+.A-mast { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 24px; border-bottom: 2px solid var(--a-ink); flex-wrap: wrap; }
+.A-logo { font-stretch: 62%; font-weight: 800; font-size: 30px; letter-spacing: 0.01em; line-height: 1; text-transform: uppercase; }
+.A-logo span { font-stretch: 100%; font-weight: 400; font-size: 13px; text-transform: none; color: var(--a-ink-2); margin-left: 10px; letter-spacing: 0; }
+.A-stamp { font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 600; background: var(--a-stamp-bg); color: var(--a-stamp-ink); padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.A-meta { display: flex; gap: 14px; align-items: center; font-size: 12px; color: var(--a-ink-3); flex-wrap: wrap; }
+.A-run { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1.3fr) 90px auto; border-bottom: 1px solid var(--a-hair); background: var(--a-sheet); }
+.A-run label { display: block; padding: 10px 16px; border-right: 1px solid var(--a-hair); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--a-ink-3); }
+.A-run label b { display: block; font-size: 17px; letter-spacing: 0; text-transform: none; font-weight: 600; color: var(--a-ink); margin-top: 2px; }
+.A-btn { background: var(--a-ink); color: var(--a-on-ink); border: 0; font: inherit; font-weight: 700; font-size: 15px; padding: 0 22px; border-radius: 2px; margin: 8px; }
+.A-body { display: grid; grid-template-columns: minmax(0, 1fr) 300px; }
+.A-main { padding: 24px; min-width: 0; }
+.A-sec { border-top: 2px solid var(--a-ink); padding-top: 10px; margin-bottom: 28px; }
+.A-sec-h { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.A-kicker { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.A-src { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--a-ink-3); }
+.A-headline { font-stretch: 75%; font-weight: 800; font-size: 32px; line-height: 1.08; margin: 8px 0 16px; letter-spacing: -0.005em; }
+.A-headline em { font-style: normal; color: var(--a-qloo-ink); }
+.A-verdict { display: grid; grid-template-columns: 236px minmax(0, 1fr) minmax(0, 1fr); gap: 0; background: var(--a-sheet); border: 1px solid var(--a-hair); }
+.A-score { padding: 16px 20px; border-right: 1px solid var(--a-hair); min-width: 0; }
+.A-score .big { font-stretch: 62%; font-weight: 800; font-size: 64px; line-height: 0.9; letter-spacing: -0.01em; }
+.A-score .big .q { color: var(--a-qloo-ink); }
+.A-score .big .l { color: var(--a-llm-ink); text-decoration: line-through; text-decoration-thickness: 3px; }
+.A-score .big .vs { font-size: 22px; color: var(--a-ink-3); font-weight: 600; margin: 0 4px; }
+.A-score p { margin: 8px 0 0; font-size: 13px; color: var(--a-ink-2); }
+.A-score .facts { margin-top: 12px; border-top: 1px solid var(--a-hair); padding-top: 10px; font-size: 13px; }
+.A-score .facts div { display: grid; grid-template-columns: 34px 1fr; gap: 6px; margin-bottom: 6px; }
+.A-score .facts b { font-family: "IBM Plex Mono", monospace; font-size: 16px; }
+.A-col { padding: 14px 16px; min-width: 0; }
+.A-col + .A-col { border-left: 1px solid var(--a-hair); }
+.A-col h4 { margin: 0 0 2px; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+.A-col .who { font-size: 12px; color: var(--a-ink-3); margin-bottom: 8px; }
+.A-list { list-style: none; margin: 0; padding: 0; font-size: 14px; }
+.A-list li { display: grid; grid-template-columns: 22px minmax(0, 1fr) 34px; gap: 6px; align-items: center; padding: 4px 0; border-bottom: 1px solid var(--a-hair); }
+.A-list li:last-child { border-bottom: 0; }
+.A-list .v { font-family: "IBM Plex Mono", monospace; text-align: right; font-variant-numeric: tabular-nums; }
+.A-list .note { grid-column: 2 / 4; font-size: 12px; color: var(--a-llm-ink); margin-top: -2px; }
+.A-list li.weak .c { text-decoration: line-through; text-decoration-color: var(--a-llm); text-decoration-thickness: 2px; color: var(--a-ink-2); }
+.A-list li.new { background: var(--a-qloo-tint); }
+.A-list li.new .tag { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--a-qloo-ink); margin-left: 6px; }
+.A-ring { width: 16px; height: 16px; border-radius: 50%; border: 2px dashed var(--a-llm); }
+.A-disc { width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 600; }
+.A-disc.anchor { background: var(--a-ink); color: var(--a-on-ink); }
+.A-disc.sleeper { background: var(--a-qloo); color: var(--a-on-qloo); }
+.A-disc.volume { background: var(--a-neutral); color: var(--a-on-ink); }
+.A-disc.skip { border: 2px solid var(--a-skip); color: var(--a-ink-2); }
+.A-strip { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); margin: 14px 0 18px; position: relative; padding-top: 20px; }
+.A-strip::before { content: ""; position: absolute; left: 6.25%; right: 6.25%; top: 37px; height: 2px; background: var(--a-ink); }
+.A-stop { text-align: center; position: relative; }
+.A-stop .leg { position: absolute; left: 0; top: -20px; transform: translateX(-50%); font-family: "IBM Plex Mono", monospace; font-size: 11px; color: var(--a-ink-3); white-space: nowrap; }
+.A-stop .A-disc { width: 30px; height: 30px; margin: 0 auto 8px; font-size: 13px; position: relative; border: 3px solid var(--a-paper); box-sizing: content-box; }
+.A-stop .city { font-weight: 700; font-size: 14px; line-height: 1.15; }
+.A-stop .tier { font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--a-ink-3); }
+.A-stop .sc { font-family: "IBM Plex Mono", monospace; font-size: 13px; }
+.A-table { width: 100%; border-collapse: collapse; font-size: 14px; background: var(--a-sheet); }
+.A-table th { text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--a-ink-3); padding: 8px 10px; border-bottom: 1px solid var(--a-ink); }
+.A-table td { padding: 8px 10px; border-bottom: 1px solid var(--a-hair); vertical-align: middle; }
+.A-table td.n, .A-table th.n { text-align: right; font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
+.A-table .tierlbl { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.A-table .tierlbl .A-disc { width: 12px; height: 12px; }
+.A-table .muted { color: var(--a-ink-3); }
+.A-trace { border-left: 1px solid var(--a-hair); background: var(--a-sheet); padding: 16px; min-width: 0; }
+.A-trace h3 { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.A-trace .tm { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--a-ink-3); margin: 2px 0 12px; }
+.A-step { border-top: 1px solid var(--a-hair); padding: 10px 0; }
+.A-step .t { font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 600; }
+.A-step .t span { color: var(--a-ink-3); font-weight: 400; }
+.A-step p { margin: 3px 0 6px; font-size: 13px; color: var(--a-ink-2); }
+.A-call { font-family: "IBM Plex Mono", monospace; font-size: 11.5px; line-height: 1.45; background: var(--a-sunk); padding: 6px 8px; word-break: break-word; }
+.A-call .ep { color: var(--a-qloo-ink); font-weight: 600; }
+.A-call .r { color: var(--a-ink-2); display: block; margin-top: 2px; }
+.A-step.llm .t { color: var(--a-llm-ink); }
+
+/* A thumbnail */
+.thumb { aspect-ratio: 3 / 2; container-type: inline-size; position: relative; overflow: hidden; }
+.tA { background: var(--a-paper); color: var(--a-ink); font-family: "Archivo", sans-serif; padding: 4.5cqw 5cqw; display: grid; grid-template-rows: auto auto 1fr auto; }
+.tA .top { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 0.5cqw solid var(--a-ink); padding-bottom: 1.2cqw; }
+.tA .logo { font-stretch: 62%; font-weight: 800; font-size: 3.6cqw; text-transform: uppercase; letter-spacing: 0.02em; }
+.tA .qtag { font-family: "IBM Plex Mono", monospace; font-size: 2cqw; color: var(--a-ink-2); }
+.tA h3 { font-stretch: 62%; font-weight: 800; font-size: 7.6cqw; line-height: 0.95; margin: 2.2cqw 0 1.6cqw; text-transform: uppercase; letter-spacing: -0.005em; }
+.tA .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5cqw; }
+.tA .cols h4 { margin: 0 0 1cqw; font-size: 2.1cqw; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.tA .cols h4.l { color: var(--a-llm-ink); }
+.tA .cols h4.q { color: var(--a-qloo-ink); }
+.tA ol { list-style: none; margin: 0; padding: 0; font-stretch: 75%; font-weight: 700; font-size: 3.15cqw; line-height: 1.2; }
+.tA ol li { display: flex; justify-content: space-between; gap: 1cqw; border-bottom: 0.15cqw solid var(--a-hair); }
+.tA ol li .s { font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 2.5cqw; font-stretch: 100%; }
+.tA ol.l li.x .c { text-decoration: line-through; text-decoration-color: var(--a-llm); text-decoration-thickness: 0.45cqw; color: var(--a-ink-2); }
+.tA ol.q li.sl .c { color: var(--a-qloo-ink); }
+.tA .foot { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 2cqw; }
+.tA .foot .big { font-stretch: 62%; font-weight: 800; font-size: 9cqw; line-height: 0.85; }
+.tA .foot .big .q { color: var(--a-qloo-ink); }
+.tA .foot .big .l { color: var(--a-llm-ink); text-decoration: line-through; text-decoration-thickness: 0.6cqw; }
+.tA .foot .big .vs { font-size: 3.4cqw; color: var(--a-ink-3); margin: 0 1cqw; }
+.tA .foot .cap { font-size: 2cqw; color: var(--a-ink-2); text-align: right; max-width: 34cqw; line-height: 1.3; }
+.tA .foot .cap b { display: block; color: var(--a-ink); font-size: 2.3cqw; }
+
+/* =====================================================================
+   DIRECTION B: Front of house
+   ===================================================================== */
+.B { background: var(--b-deck); color: var(--b-text); font-family: "Barlow", sans-serif; }
+.B .mono { font-family: "JetBrains Mono", monospace; }
+.B-mast { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; background: var(--b-strip); border-bottom: 1px solid var(--b-line); gap: 12px; flex-wrap: wrap; }
+.B-logo { font-family: "Barlow Condensed", sans-serif; font-weight: 700; font-size: 26px; letter-spacing: 0.12em; text-transform: uppercase; }
+.B-leds { display: flex; gap: 14px; font-family: "Barlow Condensed", sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--b-text-2); flex-wrap: wrap; }
+.B-leds span { display: inline-flex; align-items: center; gap: 6px; }
+.B-leds i { width: 8px; height: 8px; border-radius: 50%; background: var(--b-qloo-text); box-shadow: 0 0 6px var(--b-glow); }
+.B-leds i.off { background: var(--b-neutral); box-shadow: none; }
+.B-run { display: flex; gap: 8px; padding: 10px 16px; border-bottom: 1px solid var(--b-line); flex-wrap: wrap; align-items: stretch; }
+.B-field { background: var(--b-strip-2); border: 1px solid var(--b-line); padding: 4px 10px; min-width: 0; }
+.B-field small { display: block; font-family: "Barlow Condensed", sans-serif; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--b-text-3); }
+.B-field b { font-weight: 600; font-size: 16px; }
+.B-go { background: var(--b-qloo-text); color: var(--b-deck); font-family: "Barlow Condensed", sans-serif; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border: 0; padding: 0 18px; font-size: 16px; border-radius: 2px; }
+.B-body { display: grid; grid-template-columns: minmax(0, 1fr) 290px; }
+.B-main { padding: 16px; min-width: 0; }
+.B-panel { background: var(--b-strip); border: 1px solid var(--b-line); margin-bottom: 14px; }
+.B-ph { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-bottom: 1px solid var(--b-line); gap: 10px; flex-wrap: wrap; }
+.B-ph h3 { margin: 0; font-family: "Barlow Condensed", sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+.B-ph .src { font-family: "JetBrains Mono", monospace; font-size: 11.5px; color: var(--b-text-3); }
+.B-banks { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.B-bank { padding: 12px; min-width: 0; }
+.B-bank + .B-bank { border-left: 1px solid var(--b-line); }
+.B-bank-h { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 10px; gap: 8px; }
+.B-bank-h .ch { font-family: "Barlow Condensed", sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+.B-bank-h .ch small { display: block; font-size: 12px; font-weight: 500; letter-spacing: 0.04em; color: var(--b-text-3); text-transform: none; }
+.B-readout { font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 44px; line-height: 0.9; }
+.B-bank.q .B-readout { color: var(--b-qloo-text); text-shadow: 0 0 18px var(--b-glow); }
+.B-bank.l .B-readout { color: var(--b-llm-text); }
+.B-meters { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 6px; }
+.B-meter { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; }
+.B-segs { display: flex; flex-direction: column-reverse; gap: 2px; width: 100%; max-width: 26px; }
+.B-segs i { display: block; height: 5px; background: var(--b-off); }
+.B-bank.q .B-segs i.on { background: var(--b-qloo); }
+.B-bank.l .B-segs i.on { background: var(--b-llm); }
+.B-meter .code { font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 600; }
+.B-meter .val { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--b-text-2); }
+.B-meter.miss .code { color: var(--b-qloo-text); }
+.B-meter.weak .code { color: var(--b-text-3); text-decoration: line-through; }
+.B-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--b-line); }
+.B-facts div { padding: 10px 12px; font-size: 13px; color: var(--b-text-2); }
+.B-facts div + div { border-left: 1px solid var(--b-line); }
+.B-facts b { display: block; font-family: "JetBrains Mono", monospace; font-size: 22px; color: var(--b-text); }
+.B-chan { width: 100%; border-collapse: collapse; font-size: 14px; }
+.B-chan th { font-family: "Barlow Condensed", sans-serif; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--b-text-3); text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--b-line); font-weight: 600; }
+.B-chan td { padding: 6px 10px; border-bottom: 1px solid var(--b-line); }
+.B-chan td.n { font-family: "JetBrains Mono", monospace; text-align: right; font-variant-numeric: tabular-nums; }
+.B-chan .no { font-family: "JetBrains Mono", monospace; color: var(--b-text-3); }
+.B-chan .tl { display: inline-flex; align-items: center; gap: 6px; font-family: "Barlow Condensed", sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+.B-chan .tl i { width: 9px; height: 9px; border-radius: 50%; }
+.B-chan .tl.anchor i { background: var(--b-text); }
+.B-chan .tl.sleeper i { background: var(--b-qloo-text); box-shadow: 0 0 6px var(--b-glow); }
+.B-chan .tl.volume i { background: var(--b-neutral); }
+.B-hbar { height: 8px; background: var(--b-off); position: relative; min-width: 60px; }
+.B-hbar i { position: absolute; inset: 0 auto 0 0; background: var(--b-qloo); }
+.B-log { background: var(--b-strip); border-left: 1px solid var(--b-line); padding: 12px; font-family: "JetBrains Mono", monospace; font-size: 11.5px; line-height: 1.55; min-width: 0; }
+.B-log h3 { font-family: "Barlow Condensed", sans-serif; font-size: 15px; letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 4px; }
+.B-log .meta { color: var(--b-text-3); margin-bottom: 10px; }
+.B-log .ln { border-top: 1px solid var(--b-line); padding: 7px 0; word-break: break-word; }
+.B-log .ln .k { color: var(--b-qloo-text); font-weight: 600; }
+.B-log .ln .d { color: var(--b-text-2); }
+.B-log .ln .ok { color: var(--b-text-3); }
+.B-log .ln.l .k { color: var(--b-llm-text); }
+/* B thumbnail */
+.tB { background: var(--b-deck); color: var(--b-text); font-family: "Barlow", sans-serif; padding: 4cqw 4.5cqw; display: grid; grid-template-rows: auto 1fr auto; }
+.tB .top { display: flex; justify-content: space-between; align-items: center; }
+.tB .logo { font-family: "Barlow Condensed", sans-serif; font-weight: 700; font-size: 3.4cqw; letter-spacing: 0.14em; text-transform: uppercase; }
+.tB .art { font-family: "Barlow Condensed", sans-serif; font-weight: 600; font-size: 2.4cqw; letter-spacing: 0.1em; text-transform: uppercase; color: var(--b-text-2); }
+.tB .banks { display: grid; grid-template-columns: 1fr 1fr; gap: 4cqw; align-items: end; margin-top: 3cqw; }
+.tB .bank h4 { margin: 0; font-family: "Barlow Condensed", sans-serif; font-size: 2.6cqw; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; }
+.tB .bank .rd { font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 13cqw; line-height: 0.9; margin: 0.5cqw 0 1.5cqw; }
+.tB .bank.q .rd { color: var(--b-qloo-text); text-shadow: 0 0 4cqw var(--b-glow); }
+.tB .bank.l .rd { color: var(--b-llm-text); }
+.tB .ms { display: grid; grid-template-columns: repeat(8, 1fr); gap: 0.9cqw; height: 13cqw; }
+.tB .ms div { display: flex; flex-direction: column-reverse; gap: 0.35cqw; }
+.tB .ms i { flex: 1; background: var(--b-off); }
+.tB .bank.q .ms i.on { background: var(--b-qloo); }
+.tB .bank.l .ms i.on { background: var(--b-llm); }
+.tB .codes { display: grid; grid-template-columns: repeat(8, 1fr); gap: 0.9cqw; font-family: "JetBrains Mono", monospace; font-size: 1.7cqw; text-align: center; margin-top: 0.8cqw; color: var(--b-text-2); }
+.tB .foot { display: flex; justify-content: space-between; font-family: "Barlow Condensed", sans-serif; font-size: 2.3cqw; letter-spacing: 0.08em; text-transform: uppercase; color: var(--b-text-2); border-top: 0.2cqw solid var(--b-line); padding-top: 1.5cqw; margin-top: 2.5cqw; }
+
+/* =====================================================================
+   DIRECTION C: Tour poster
+   ===================================================================== */
+.C { background: var(--c-paper); color: var(--c-ink); font-family: "Instrument Sans", sans-serif; }
+.C .mono { font-family: "Space Mono", monospace; }
+.C-mast { display: flex; justify-content: space-between; align-items: flex-end; padding: 18px 24px 12px; gap: 12px; flex-wrap: wrap; }
+.C-logo { font-family: "Big Shoulders Display", sans-serif; font-weight: 900; font-size: 52px; line-height: 0.82; text-transform: uppercase; letter-spacing: 0.005em; text-shadow: 3px 3px 0 var(--c-qloo); }
+.C-meta { font-family: "Space Mono", monospace; font-size: 12px; text-align: right; color: var(--c-ink-2); }
+.C-meta b { background: var(--c-qloo); color: var(--c-on-qloo); padding: 1px 6px; font-weight: 700; }
+.C-run { display: flex; align-items: stretch; margin: 0 24px; border: 3px solid var(--c-ink); flex-wrap: wrap; }
+.C-run div { padding: 8px 14px; border-right: 3px solid var(--c-ink); font-size: 13px; min-width: 0; }
+.C-run div small { display: block; font-family: "Space Mono", monospace; font-size: 11px; text-transform: uppercase; color: var(--c-ink-3); }
+.C-run div b { font-family: "Big Shoulders Display", sans-serif; font-weight: 900; font-size: 24px; text-transform: uppercase; line-height: 1; }
+.C-run button { margin-left: auto; background: var(--c-ink); color: var(--c-paper); border: 0; font-family: "Big Shoulders Display", sans-serif; font-weight: 900; font-size: 22px; text-transform: uppercase; padding: 0 22px; letter-spacing: 0.02em; }
+.C-body { padding: 24px; }
+.C-vs { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 0; align-items: stretch; }
+.C-poster { padding: 16px 18px 14px; min-width: 0; }
+.C-poster.l { background: var(--c-llm-tint); }
+.C-poster.q { background: var(--c-qloo-tint); }
+.C-poster h4 { margin: 0; font-family: "Space Mono", monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+.C-poster.l h4 { color: var(--c-llm-text); }
+.C-poster.q h4 { color: var(--c-qloo-text); }
+.C-poster .t { font-family: "Big Shoulders Display", sans-serif; font-weight: 900; font-size: 40px; line-height: 0.9; text-transform: uppercase; margin: 4px 0 10px; }
+.C-poster ol { list-style: none; margin: 0; padding: 0; }
+.C-poster li { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-family: "Big Shoulders Display", sans-serif; font-weight: 700; font-size: 25px; line-height: 1.12; text-transform: uppercase; }
+.C-poster li .s { font-family: "Space Mono", monospace; font-size: 13px; font-weight: 700; }
+.C-poster.l li.x .c { text-decoration: line-through; text-decoration-thickness: 3px; text-decoration-color: var(--c-llm); color: var(--c-ink-3); }
+.C-poster.q li.new .c { color: var(--c-qloo-text); }
+.C-poster li .c small { font-family: "Space Mono", monospace; font-size: 11px; font-weight: 400; margin-left: 6px; letter-spacing: 0; }
+.C-mid { display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 0 18px; background: var(--c-ink); color: var(--c-paper); text-align: center; }
+.C-mid .n { font-family: "Big Shoulders Display", sans-serif; font-weight: 900; font-size: 64px; line-height: 0.85; }
+.C-mid .n.q { color: var(--c-qloo); }
+.C-mid .n.l { color: var(--c-llm); }
+.C-mid small { font-family: "Space Mono", monospace; font-size: 11px; text-transform: uppercase; max-width: 90px; margin: 6px 0; }
+.C-h { font-family: "Big Shoulders Display", sans-serif; font-weight: 900; font-size: 30px; text-transform: uppercase; margin: 28px 0 8px; border-bottom: 3px solid var(--c-ink); line-height: 1; padding-bottom: 6px; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.C-h span { font-family: "Space Mono", monospace; font-weight: 400; font-size: 12px; text-transform: none; color: var(--c-ink-3); }
+.C-dates { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 28px; }
+.C-date { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; gap: 10px; align-items: baseline; border-bottom: 1px solid var(--c-ink); padding: 8px 0; }
+.C-date .no { font-family: "Space Mono", monospace; font-size: 13px; font-weight: 700; }
+.C-date .city { font-family: "Big Shoulders Display", sans-serif; font-weight: 900; font-size: 28px; line-height: 0.95; text-transform: uppercase; }
+.C-date .room { font-size: 13px; color: var(--c-ink-2); margin-top: 2px; }
+.C-date .sc { font-family: "Space Mono", monospace; font-size: 18px; font-weight: 700; text-align: right; }
+.C-date .tr { display: block; font-family: "Space Mono", monospace; font-size: 11px; font-weight: 400; text-transform: uppercase; }
+.C-date.sleeper .city { color: var(--c-qloo-text); }
+.C-date.sleeper .tr { background: var(--c-qloo); color: var(--c-on-qloo); padding: 0 4px; }
+.C-trace { margin-top: 24px; background: var(--c-ink); color: var(--c-paper); padding: 14px 16px; font-family: "Space Mono", monospace; font-size: 12px; line-height: 1.6; }
+.C-trace div { word-break: break-word; }
+.C-trace .k { color: var(--c-qloo); font-weight: 700; }
+.C-trace .l { color: var(--c-llm); font-weight: 700; }
+/* C thumbnail */
+.tC { background: var(--c-paper); color: var(--c-ink); padding: 4cqw; display: grid; grid-template-columns: 1.15fr 1fr; gap: 3cqw; }
+.tC .lft { display: flex; flex-direction: column; justify-content: space-between; min-width: 0; }
+.tC .art { font-family: "Big Shoulders Display", sans-serif; font-weight: 900; font-size: 11.5cqw; line-height: 0.8; text-transform: uppercase; text-shadow: 0.7cqw 0.7cqw 0 var(--c-qloo); }
+.tC .sub { font-family: "Space Mono", monospace; font-size: 1.9cqw; text-transform: uppercase; margin-top: 2cqw; }
+.tC .score { font-family: "Big Shoulders Display", sans-serif; font-weight: 900; font-size: 15cqw; line-height: 0.8; }
+.tC .score .q { color: var(--c-qloo); }
+.tC .score .l { color: var(--c-llm); font-size: 8cqw; text-decoration: line-through; text-decoration-thickness: 0.6cqw; }
+.tC .score small { display: block; font-family: "Space Mono", monospace; font-size: 1.8cqw; text-transform: uppercase; margin-top: 1.4cqw; }
+.tC .rt { background: var(--c-qloo-tint); padding: 2.6cqw 3cqw; min-width: 0; }
+.tC .rt h4 { margin: 0 0 1cqw; font-family: "Space Mono", monospace; font-size: 1.8cqw; text-transform: uppercase; color: var(--c-qloo-text); }
+.tC .rt ol { list-style: none; margin: 0; padding: 0; font-family: "Big Shoulders Display", sans-serif; font-weight: 900; font-size: 4.3cqw; line-height: 1.04; text-transform: uppercase; }
+.tC .rt li.new { color: var(--c-qloo-text); }
+.tC .rt .x { font-family: "Space Mono", monospace; font-size: 1.7cqw; margin-top: 1.6cqw; color: var(--c-llm-text); text-transform: uppercase; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 980px) {
+  .A-body, .B-body { grid-template-columns: minmax(0, 1fr); }
+  .A-trace { border-left: 0; border-top: 2px solid var(--a-ink); }
+  .B-log { border-left: 0; border-top: 1px solid var(--b-line); }
+  .A-verdict { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .A-score { grid-column: 1 / -1; border-right: 0; border-bottom: 1px solid var(--a-hair); display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0 24px; align-items: center; }
+  .A-score .facts { grid-column: 1 / -1; }
+  .thumbs { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 720px) {
+  .page { padding: 20px 16px 60px; }
+  .intro { grid-template-columns: minmax(0, 1fr); }
+  .intro h1 { font-size: 34px; }
+  .toc, .dir-head, .verdict-note { grid-template-columns: minmax(0, 1fr); }
+  .A-mast, .A-main { padding-left: 16px; padding-right: 16px; }
+  .A-run { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .A-run label:nth-child(2) { border-right: 0; }
+  .A-run label:nth-child(3) { border-top: 1px solid var(--a-hair); }
+  .A-btn { margin: 8px; min-height: 40px; }
+  .A-headline { font-size: 26px; }
+  .A-verdict { grid-template-columns: minmax(0, 1fr); }
+  .A-score { display: block; }
+  .A-col + .A-col { border-left: 0; border-top: 1px solid var(--a-hair); }
+  .A-strip { display: none; }
+  .A-table .hide-sm { display: none; }
+  .A-table td, .A-table th { padding: 7px 6px; }
+  .B-banks { grid-template-columns: minmax(0, 1fr); }
+  .B-bank + .B-bank { border-left: 0; border-top: 1px solid var(--b-line); }
+  .B-facts { grid-template-columns: minmax(0, 1fr); }
+  .B-facts div + div { border-left: 0; border-top: 1px solid var(--b-line); }
+  .B-chan .hide-sm { display: none; }
+  .C-logo { font-size: 40px; }
+  .C-run { margin: 0 16px; }
+  .C-run div { border-right: 0; border-bottom: 3px solid var(--c-ink); flex: 1 1 45%; }
+  .C-run button { width: 100%; padding: 10px; }
+  .C-run div:nth-child(3) { flex-basis: 100%; }
+  .C-body { padding: 16px; }
+  .C-vs { grid-template-columns: minmax(0, 1fr); }
+  .C-mid { flex-direction: row; gap: 12px; padding: 12px; }
+  .C-mid small { margin: 0; }
+  .C-dates { grid-template-columns: minmax(0, 1fr); }
+  .C-poster .t { font-size: 34px; }
+  .C-poster li { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="intro">
+    <div>
+      <h1>Headliner: three directions</h1>
+      <p>Each direction is applied to the same real screens (run bar, the with/without Qloo verdict, the routed tour, the reasoning trace) and to the Devpost thumbnail, using the Noah Kahan sample run in fixture mode: 62 Qloo requests, average fan score 83 for Headliner's route against 72 for the plain LLM's cities. Numbers are illustrative fixture values until the Qloo key is live. Use the switch to see each in light and dark.</p>
+    </div>
+    <div class="themes" role="group" aria-label="Theme">
+      <button type="button" data-t="auto" aria-pressed="true">Auto</button>
+      <button type="button" data-t="light" aria-pressed="false">Light</button>
+      <button type="button" data-t="dark" aria-pressed="false">Dark</button>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Directions">
+    <a href="#dir-a" class="rec"><span class="pick">Recommended</span><b>A. Advance sheet</b><span>The paper the industry already trusts. Ink, ultramarine for what Qloo found, red pencil on the LLM's answer.</span></a>
+    <a href="#dir-b"><b>B. Front of house</b><span>A mixing desk at show time. Every city is a channel meter, amber when Qloo drives it.</span></a>
+    <a href="#dir-c"><b>C. Tour poster</b><span>Riso gig poster type. The route is a date stack, Qloo prints in fluoro pink.</span></a>
+  </nav>
+
+  <aside class="rec-box" aria-label="Recommendation">
+    <h2>Pick A, Advance sheet</h2>
+    <ol>
+      <li><b>It looks like money decisions.</b> Promoters sign off tours on itineraries, holds sheets and settlement sheets, not dashboards. A ruled paper document says "tool you can route a tour on" to the Live Nation judge before a word is read.</li>
+      <li><b>The verdict reads in two seconds.</b> Red pencil through the LLM's cities and ultramarine on the cities only Qloo found is a correction mark everyone understands, including judges who never run the app.</li>
+      <li><b>It stands out in the gallery.</b> Most AI hackathon entries are dark gradient dashboards. A light, ruled page with one strong blue reads as a product, not a demo.</li>
+      <li><b>One system for app, brief and assets.</b> The printable brief is already white paper. A makes the app and the brief the same object, and the thumbnail is just the verdict at poster size.</li>
+      <li><b>Lowest legibility risk.</b> Dense tables at 13 to 15px on paper hold up in a 1080p video. B's dark meters look great but compress badly on YouTube; C's poster type is loud but costs density.</li>
+    </ol>
+  </aside>
+
+  <!-- ============================== A ============================== -->
+  <section class="dir" id="dir-a" aria-labelledby="a-h">
+    <div class="dir-head">
+      <div>
+        <h2 id="a-h"><small>Direction A · recommended</small>Advance sheet</h2>
+        <p>Headliner's output is the document a tour manager already carries: a ruled itinerary with stop numbers, rooms and drive legs. Qloo's findings print in ink and ultramarine. The plain LLM's answer gets marked up in red pencil. No cards, no gradients: sections open with a 2px rule like a day sheet.</p>
+        <p>References: Master Tour day sheets, Prism.fm settlement sheets, Pollstar charts, Resident Advisor listings.</p>
+      </div>
+      <dl class="spec">
+        <dt>Type</dt><dd>Archivo (condensed 62 to 75 for display, normal for body) and IBM Plex Mono for every number and API call.</dd>
+        <dt>Colour</dt><dd>Ink and paper, ultramarine = Qloo, red pencil = plain LLM. Tiers: anchor ink, sleeper ultramarine, volume grey, skip hollow, always labelled.</dd>
+        <dd class="swatches"><span class="sw"><i style="background:var(--a-paper)"></i>paper</span><span class="sw"><i style="background:var(--a-ink)"></i>ink</span><span class="sw"><i style="background:var(--a-qloo)"></i>qloo</span><span class="sw"><i style="background:var(--a-llm)"></i>llm</span><span class="sw"><i style="background:var(--a-neutral)"></i>volume</span></dd>
+      </dl>
+    </div>
+
+    <div class="label-row"><span>Result screen, desktop 1440 (top of page after a run)</span><span>fixture data</span></div>
+    <div class="frame A">
+      <div class="A-mast">
+        <div class="A-logo">Headliner<span>Tour decisions on taste data</span></div>
+        <div class="A-meta"><span class="A-stamp">Fixture data · illustrative</span><span class="mono">Qloo 62 req · 10 endpoint types</span></div>
+      </div>
+      <div class="A-run" role="group" aria-label="Run">
+        <label>Headliner<b>Noah Kahan</b></label>
+        <label>Region<b>US &amp; Canada</b></label>
+        <label>Dates<b class="mono">8</b></label>
+        <button class="A-btn" type="button">Plan the tour</button>
+      </div>
+      <div class="A-body">
+        <div class="A-main">
+          <section class="A-sec">
+            <div class="A-sec-h"><span class="A-kicker">Tour brief · Noah Kahan</span><span class="A-src">planner: deterministic</span></div>
+            <p class="A-headline">8 dates anchored on Boston, with <em>Burlington, VT</em> as the sleeper. Gregory Alan Isakov opens.</p>
+            <div class="A-verdict">
+              <div class="A-score">
+                <div class="big num"><span class="q">83</span><span class="vs">vs</span><span class="l">72</span></div>
+                <p>Average fan score, 0 to 100. Headliner's route against the plain LLM's cities, both scored by the same Qloo call.</p>
+                <div class="facts">
+                  <div><b>6</b><span>of 8 stops the LLM never named, 3 of them sleepers</span></div>
+                  <div><b>2</b><span>LLM openers Qloo can't find: Lilith Saltman, Tayler Hall</span></div>
+                </div>
+              </div>
+              <div class="A-col">
+                <h4 style="color:var(--a-llm-ink)">Without Qloo</h4>
+                <div class="who">Plain LLM, same question, no data. Scored afterwards by Qloo.</div>
+                <ul class="A-list" id="a-llm"></ul>
+              </div>
+              <div class="A-col">
+                <h4 style="color:var(--a-qloo-ink)">With Qloo</h4>
+                <div class="who">Headliner's routed tour, in order.</div>
+                <ul class="A-list" id="a-qloo"></ul>
+              </div>
+            </div>
+          </section>
+          <section class="A-sec">
+            <div class="A-sec-h"><span class="A-kicker">1 · Routing · 8 dates, 3,649 km</span><span class="A-src">/v2/insights · heatmap + 12 city affinity calls</span></div>
+            <div class="A-strip" id="a-strip" aria-label="Route strip"></div>
+            <table class="A-table" aria-label="Itinerary">
+              <thead><tr><th>#</th><th>Market</th><th>Tier</th><th class="n">Fan score</th><th class="hide-sm">Room (Qloo match)</th><th class="n hide-sm">Leg km</th></tr></thead>
+              <tbody id="a-rows"></tbody>
+            </table>
+          </section>
+        </div>
+        <aside class="A-trace" aria-label="Reasoning trace">
+          <h3>Reasoning trace</h3>
+          <div class="tm">62 requests · 5 endpoints · replayed</div>
+          <div id="a-trace"></div>
+        </aside>
+      </div>
+    </div>
+
+    <div class="label-row"><span>Devpost thumbnail, 3:2 (1500 x 1000 export)</span><span>and at 300 x 200</span></div>
+    <div class="thumbs">
+      <div class="frame"><div class="thumb tA" id="tA"></div></div>
+      <div class="thumb-small"><div class="frame mini"><div class="thumb tA" data-clone="tA"></div></div>Gallery size. The two lists, the strike and the 83 survive the downscale.</div>
+    </div>
+    <div class="verdict-note">
+      <div><b>What it takes</b><ul><li>Itinerary grammar: stop numbers, rooms, drive legs</li><li>A single correction metaphor for with/without</li><li>The app, brief and assets become one document</li></ul></div>
+      <div><b>Risk</b><ul><li>Light first can feel quieter in a dark demo video: dark mode is designed, not inverted</li><li>Needs discipline: one new hue breaks it</li></ul></div>
+    </div>
+  </section>
+
+  <!-- ============================== B ============================== -->
+  <section class="dir" id="dir-b" aria-labelledby="b-h">
+    <div class="dir-head">
+      <div>
+        <h2 id="b-h"><small>Direction B · dark first</small>Front of house</h2>
+        <p>The mixing desk and lighting console at show time. Each city is a channel with a segmented level meter; the Qloo bank glows amber, the LLM bank runs cold blue. Cities go by airport code, the way itineraries and road cases are labelled. The trace is a console log.</p>
+        <p>References: Bloomberg Terminal, Ableton Live, Teenage Engineering, DiGiCo and grandMA consoles. Best seen in dark mode.</p>
+      </div>
+      <dl class="spec">
+        <dt>Type</dt><dd>Barlow Condensed for channel labels (scribble strips), Barlow for body, JetBrains Mono for readouts and the log.</dd>
+        <dt>Colour</dt><dd>Near black deck, amber = Qloo, cold blue = plain LLM, unlit LED grey for empty segments.</dd>
+        <dd class="swatches"><span class="sw"><i style="background:var(--b-deck)"></i>deck</span><span class="sw"><i style="background:var(--b-strip)"></i>strip</span><span class="sw"><i style="background:var(--b-qloo-text)"></i>qloo</span><span class="sw"><i style="background:var(--b-llm)"></i>llm</span><span class="sw"><i style="background:var(--b-off)"></i>led off</span></dd>
+      </dl>
+    </div>
+
+    <div class="label-row"><span>Result screen, desktop 1440</span><span>fixture data</span></div>
+    <div class="frame B">
+      <div class="B-mast">
+        <div class="B-logo">Headliner</div>
+        <div class="B-leds"><span><i></i>Qloo fixture</span><span><i class="off"></i>Planner deterministic</span><span><i></i>62 req</span></div>
+      </div>
+      <div class="B-run">
+        <div class="B-field" style="flex:2 1 160px"><small>Headliner</small><b>Noah Kahan</b></div>
+        <div class="B-field" style="flex:1 1 120px"><small>Region</small><b>US &amp; Canada</b></div>
+        <div class="B-field" style="flex:0 1 70px"><small>Dates</small><b class="mono">8</b></div>
+        <button class="B-go" type="button">Plan tour</button>
+      </div>
+      <div class="B-body">
+        <div class="B-main">
+          <div class="B-panel">
+            <div class="B-ph"><h3>Without Qloo vs with Qloo</h3><span class="src">fan score 0 to 100, scored by Qloo</span></div>
+            <div class="B-banks">
+              <div class="B-bank l"><div class="B-bank-h"><div class="ch">Ch A · Without Qloo<small>Plain LLM, no data</small></div><div class="B-readout num">72</div></div><div class="B-meters" id="b-llm"></div></div>
+              <div class="B-bank q"><div class="B-bank-h"><div class="ch">Ch B · With Qloo<small>Headliner's routed tour</small></div><div class="B-readout num">83</div></div><div class="B-meters" id="b-qloo"></div></div>
+            </div>
+            <div class="B-facts">
+              <div><b>6 / 8</b>stops the LLM never named (lit amber codes)</div>
+              <div><b>5 / 8</b>LLM cities in Qloo's bottom half (struck codes)</div>
+              <div><b>2</b>LLM openers Qloo can't find</div>
+            </div>
+          </div>
+          <div class="B-panel">
+            <div class="B-ph"><h3>Routing · 8 dates · 3,649 km</h3><span class="src">heatmap + city affinity</span></div>
+            <table class="B-chan"><thead><tr><th>Ch</th><th>Market</th><th>Tier</th><th class="hide-sm">Level</th><th style="text-align:right">Fan</th><th class="hide-sm">Room</th></tr></thead><tbody id="b-rows"></tbody></table>
+          </div>
+        </div>
+        <aside class="B-log" aria-label="Reasoning trace">
+          <h3>Agent log</h3>
+          <div class="meta">62 req · 5 endpoints · replay</div>
+          <div id="b-log"></div>
+        </aside>
+      </div>
+    </div>
+
+    <div class="label-row"><span>Devpost thumbnail, 3:2</span><span>and at 300 x 200</span></div>
+    <div class="thumbs">
+      <div class="frame"><div class="thumb tB" id="tB"></div></div>
+      <div class="thumb-small"><div class="frame mini"><div class="thumb tB" data-clone="tB"></div></div>The two readouts carry it; the meters turn to texture at this size.</div>
+    </div>
+    <div class="verdict-note">
+      <div><b>What it takes</b><ul><li>Instant "this is a music tool" from the meters</li><li>Airport codes: real tour shorthand, very dense</li><li>Strong in a dark screen recording</li></ul></div>
+      <div><b>Risk</b><ul><li>Reads as a gimmick if overdone; meters are a metaphor, not real audio</li><li>Dark dense UI blurs under YouTube compression</li><li>Further from the printable brief</li></ul></div>
+    </div>
+  </section>
+
+  <!-- ============================== C ============================== -->
+  <section class="dir" id="dir-c" aria-labelledby="c-h">
+    <div class="dir-head">
+      <div>
+        <h2 id="c-h"><small>Direction C · loudest</small>Tour poster</h2>
+        <p>The tour announcement poster, printed on a risograph. The routed tour is a stack of dates in heavy condensed type. Qloo's route prints in fluoro pink, the LLM's in riso blue, and the two sit side by side as competing posters with the score between them.</p>
+        <p>References: Swiss concert posters (Müller-Brockmann, Swissted), DICE, tour announcement posts on Instagram.</p>
+      </div>
+      <dl class="spec">
+        <dt>Type</dt><dd>Big Shoulders Display 900 for cities and numbers, Instrument Sans for body, Space Mono for data and the trace.</dd>
+        <dt>Colour</dt><dd>Paper and black, fluoro pink = Qloo, riso blue = plain LLM, offset overprint on the wordmark.</dd>
+        <dd class="swatches"><span class="sw"><i style="background:var(--c-paper)"></i>paper</span><span class="sw"><i style="background:var(--c-ink)"></i>ink</span><span class="sw"><i style="background:var(--c-qloo)"></i>qloo</span><span class="sw"><i style="background:var(--c-llm)"></i>llm</span></dd>
+      </dl>
+    </div>
+
+    <div class="label-row"><span>Result screen, desktop 1440</span><span>fixture data</span></div>
+    <div class="frame C">
+      <div class="C-mast">
+        <div class="C-logo">Headliner</div>
+        <div class="C-meta"><b>FIXTURE DATA</b><br>Qloo 62 requests · 10 endpoint types</div>
+      </div>
+      <div class="C-run">
+        <div style="flex:2 1 160px"><small>Headliner</small><b>Noah Kahan</b></div>
+        <div style="flex:1 1 120px"><small>Region</small><b>US &amp; Canada</b></div>
+        <div style="flex:0 1 80px"><small>Dates</small><b>8</b></div>
+        <button type="button">Plan the tour</button>
+      </div>
+      <div class="C-body">
+        <div class="C-vs">
+          <div class="C-poster l"><h4>Without Qloo · plain LLM</h4><div class="t">The guess tour</div><ol id="c-llm"></ol></div>
+          <div class="C-mid"><span class="n q num">83</span><small>avg fan score</small><span class="n l num">72</span></div>
+          <div class="C-poster q"><h4>With Qloo · Headliner</h4><div class="t">The taste tour</div><ol id="c-qloo"></ol></div>
+        </div>
+        <div class="C-h">Routing · 8 dates<span>3,649 km · heatmap + city affinity</span></div>
+        <div class="C-dates" id="c-dates"></div>
+        <div class="C-trace" id="c-trace" aria-label="Reasoning trace"></div>
+      </div>
+    </div>
+
+    <div class="label-row"><span>Devpost thumbnail, 3:2</span><span>and at 300 x 200</span></div>
+    <div class="thumbs">
+      <div class="frame"><div class="thumb tC" id="tC"></div></div>
+      <div class="thumb-small"><div class="frame mini"><div class="thumb tC" data-clone="tC"></div></div>The loudest thumbnail of the three; the comparison is weaker because the LLM list shrinks to one line.</div>
+    </div>
+    <div class="verdict-note">
+      <div><b>What it takes</b><ul><li>Unmistakably live music, strong personality</li><li>The best single thumbnail for a scrolling gallery</li><li>City names as type are memorable on video</li></ul></div>
+      <div><b>Risk</b><ul><li>Poster type eats space: fewer rows per screen, weaker as a dense tool</li><li>Pink can read as consumer or playful to an investor panel</li><li>Hardest to keep legible on the data heavy sections</li></ul></div>
+    </div>
+  </section>
+
+</div>
+<script>
+(function () {
+  // Real fixture run: Noah Kahan, US & Canada, 8 dates (run 21426ae82ce2). Legs are straight-line km.
+  var route = [
+    { c: "Boston, MA", s: "Boston", code: "BOS", t: "anchor", f: 94, room: "MGM Music Hall at Fenway", leg: null, isNew: false },
+    { c: "Portsmouth, NH", s: "Portsmouth", code: "PSM", t: "sleeper", f: 82, room: "The Music Hall", leg: 83, isNew: true },
+    { c: "Portland, ME", s: "Portland", code: "PWM", t: "anchor", f: 85, room: "Thompson's Point", leg: 77, isNew: true },
+    { c: "Burlington, VT", s: "Burlington", code: "BTV", t: "sleeper", f: 83, room: "Higher Ground", leg: 253, isNew: true },
+    { c: "Albany, NY", s: "Albany", code: "ALB", t: "sleeper", f: 78, room: "MVP Arena", leg: 208, isNew: true },
+    { c: "Philadelphia, PA", s: "Philadelphia", code: "PHL", t: "volume", f: 79, room: null, leg: 323, isNew: true },
+    { c: "Minneapolis, MN", s: "Minneapolis", code: "MSP", t: "volume", f: 85, room: null, leg: 1582, isNew: true },
+    { c: "Denver, CO", s: "Denver", code: "DEN", t: "volume", f: 81, room: null, leg: 1124, isNew: false }
+  ];
+  var llm = [
+    { c: "New York, NY", code: "NYC", f: 75, rank: 11, weak: true },
+    { c: "Los Angeles, CA", code: "LAX", f: 64, rank: 19, weak: true },
+    { c: "Chicago, IL", code: "ORD", f: 78, rank: 9, weak: false },
+    { c: "Boston, MA", code: "BOS", f: 94, rank: 1, weak: false },
+    { c: "Seattle, WA", code: "SEA", f: 75, rank: 12, weak: true },
+    { c: "Denver, CO", code: "DEN", f: 81, rank: 6, weak: false },
+    { c: "Toronto, ON", code: "YYZ", f: 75, rank: 13, weak: true },
+    { c: "Vancouver, BC", code: "YVR", f: 32, rank: 20, weak: true }
+  ];
+  var trace = [
+    { n: 4, tool: "discover_markets", ms: 5, why: "No shortlist given, so start from Qloo's heatmap of where these fans concentrate.", ep: "/v2/insights", p: "filter.type=urn:heatmap filter.location=POLYGON(region) output.heatmap.boundary=urn:entity:locality take=50", r: "50 points, 14 cities. Hottest: Burlington 99, Portland 97, Portsmouth 95" },
+    { n: 5, tool: "rank_cities", ms: 1, why: "Confirm the heatmap with a second signal: the artist's affinity in each city.", ep: "/v2/insights", p: "filter.type=urn:entity:artist signal.location.query=Burlington, VT take=1", r: "scored 12 of 12 cities. Burlington 96, Boston 92" },
+    { n: 7, tool: "find_support_acts", ms: 0, why: "Openers these fans love, capped below the headliner's popularity.", ep: "/v2/insights", p: "filter.type=urn:entity:artist filter.popularity.max=0.94 feature.explainability=true take=10", r: "7 candidates. Gregory Alan Isakov, Caamp, Gracie Abrams" },
+    { n: 13, tool: "rank_cities", ms: 1, why: "Fact-check the plain LLM: score its 6 unscored cities with the same call.", ep: "/v2/insights", p: "filter.type=urn:entity:artist signal.location.query=Vancouver, BC take=1", r: "Vancouver 32, rank 20 of 20", llm: true }
+  ];
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (ch) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]; }); };
+  var $ = function (id) { return document.getElementById(id); };
+  var tierWord = { anchor: "Anchor", sleeper: "Sleeper", volume: "Volume", skip: "Skip" };
+
+  // ---------- A ----------
+  $("a-llm").innerHTML = llm.map(function (x) {
+    return '<li class="' + (x.weak ? "weak" : "") + '"><span class="A-ring" aria-hidden="true"></span><span class="c">' + esc(x.c) + '</span><span class="v">' + x.f + "</span>" +
+      (x.weak ? '<span class="note">rank ' + x.rank + " of 20</span>" : "") + "</li>";
+  }).join("");
+  $("a-qloo").innerHTML = route.map(function (x, i) {
+    return '<li class="' + (x.isNew ? "new" : "") + '"><span class="A-disc ' + x.t + '">' + (i + 1) + '</span><span class="c">' + esc(x.c) + (x.isNew ? '<span class="tag">new</span>' : "") + '</span><span class="v">' + x.f + "</span></li>";
+  }).join("");
+  $("a-strip").innerHTML = route.map(function (x, i) {
+    return '<div class="A-stop">' + (x.leg ? '<div class="leg">' + x.leg + " km</div>" : "") + '<div class="A-disc ' + x.t + '">' + (i + 1) + '</div><div class="city">' + esc(x.s) + '</div><div class="tier">' + tierWord[x.t] + '</div><div class="sc">' + x.f + "</div></div>";
+  }).join("");
+  $("a-rows").innerHTML = route.map(function (x, i) {
+    return "<tr><td class=\"n\">" + (i + 1) + "</td><td><b>" + esc(x.c) + '</b></td><td><span class="tierlbl"><span class="A-disc ' + x.t + '"></span>' + tierWord[x.t] + '</span></td><td class="n">' + x.f + '</td><td class="hide-sm">' + (x.room ? esc(x.room) : '<span class="muted">no Qloo venue match</span>') + '</td><td class="n hide-sm">' + (x.leg || "") + "</td></tr>";
+  }).join("");
+  $("a-trace").innerHTML = trace.map(function (s) {
+    return '<div class="A-step' + (s.llm ? " llm" : "") + '"><div class="t">' + s.n + ". " + s.tool + " <span>· " + s.ms + ' ms</span></div><p>' + esc(s.why) + '</p><div class="A-call"><span class="ep">GET ' + s.ep + "</span> " + esc(s.p) + '<span class="r">&rarr; ' + esc(s.r) + "</span></div></div>";
+  }).join("");
+  $("tA").innerHTML =
+    '<div class="top"><span class="logo">Headliner</span><span class="qtag">Built on Qloo taste data</span></div>' +
+    "<h3>Noah Kahan · 8 dates</h3>" +
+    '<div class="cols"><div><h4 class="l">Ask an LLM</h4><ol class="l">' +
+    llm.map(function (x) { return '<li class="' + (x.weak ? "x" : "") + '"><span class="c">' + esc(x.c.split(",")[0]) + '</span><span class="s">' + x.f + "</span></li>"; }).join("") +
+    '</ol></div><div><h4 class="q">Ask Qloo</h4><ol class="q">' +
+    route.map(function (x) { return '<li class="' + (x.t === "sleeper" ? "sl" : "") + '"><span class="c">' + esc(x.s) + '</span><span class="s">' + x.f + "</span></li>"; }).join("") +
+    "</ol></div></div>" +
+    '<div class="foot"><div class="big"><span class="q">83</span><span class="vs">vs</span><span class="l">72</span></div><div class="cap"><b>Average fan score</b>Same question. Qloo found 3 sleeper markets the LLM never named.</div></div>';
+
+  // ---------- B ----------
+  var meter = function (f, cls) {
+    var on = Math.round(f / 5), segs = "";
+    for (var i = 0; i < 20; i++) segs += '<i class="' + (i < on ? "on" : "") + '"></i>';
+    return segs;
+  };
+  $("b-llm").innerHTML = llm.map(function (x) {
+    return '<div class="B-meter' + (x.weak ? " weak" : "") + '" title="' + esc(x.c) + '"><div class="B-segs">' + meter(x.f) + '</div><span class="code">' + x.code + '</span><span class="val">' + x.f + "</span></div>";
+  }).join("");
+  $("b-qloo").innerHTML = route.map(function (x) {
+    return '<div class="B-meter' + (x.isNew ? " miss" : "") + '" title="' + esc(x.c) + '"><div class="B-segs">' + meter(x.f) + '</div><span class="code">' + x.code + '</span><span class="val">' + x.f + "</span></div>";
+  }).join("");
+  $("b-rows").innerHTML = route.map(function (x, i) {
+    return '<tr><td class="no">' + String(i + 1).padStart(2, "0") + "</td><td><b>" + x.code + '</b> <span style="color:var(--b-text-2)">' + esc(x.c) + '</span></td><td><span class="tl ' + x.t + '"><i></i>' + tierWord[x.t] + '</span></td><td class="hide-sm"><div class="B-hbar"><i style="width:' + x.f + '%"></i></div></td><td class="n">' + x.f + '</td><td class="hide-sm" style="color:var(--b-text-2)">' + (x.room ? esc(x.room) : "none matched") + "</td></tr>";
+  }).join("");
+  $("b-log").innerHTML = trace.map(function (s) {
+    return '<div class="ln' + (s.llm ? " l" : "") + '"><span class="k">[' + String(s.n).padStart(2, "0") + "] " + s.tool + '</span> <span class="ok">' + s.ms + 'ms</span><br><span class="d">GET ' + s.ep + " " + esc(s.p) + '</span><br><span class="ok">&rarr; ' + esc(s.r) + "</span></div>";
+  }).join("");
+  var tMeters = function (arr) {
+    return '<div class="ms">' + arr.map(function (x) { var on = Math.round(x.f / 10), h = ""; for (var i = 0; i < 10; i++) h += '<i class="' + (i < on ? "on" : "") + '"></i>'; return "<div>" + h + "</div>"; }).join("") + '</div><div class="codes">' + arr.map(function (x) { return "<span>" + x.code + "</span>"; }).join("") + "</div>";
+  };
+  $("tB").innerHTML =
+    '<div class="top"><span class="logo">Headliner</span><span class="art">Noah Kahan · 8 dates · US &amp; Canada</span></div>' +
+    '<div class="banks"><div class="bank l"><h4>Without Qloo</h4><div class="rd">72</div>' + tMeters(llm) + '</div><div class="bank q"><h4>With Qloo</h4><div class="rd">83</div>' + tMeters(route) + "</div></div>" +
+    '<div class="foot"><span>Average fan score, same question</span><span>Built on Qloo</span></div>';
+
+  // ---------- C ----------
+  $("c-llm").innerHTML = llm.map(function (x) {
+    return '<li class="' + (x.weak ? "x" : "") + '"><span class="c">' + esc(x.c.split(",")[0]) + '</span><span class="s">' + x.f + "</span></li>";
+  }).join("");
+  $("c-qloo").innerHTML = route.map(function (x) {
+    return '<li class="' + (x.isNew ? "new" : "") + '"><span class="c">' + esc(x.s) + (x.t === "sleeper" ? "<small>sleeper</small>" : "") + '</span><span class="s">' + x.f + "</span></li>";
+  }).join("");
+  $("c-dates").innerHTML = route.map(function (x, i) {
+    return '<div class="C-date ' + x.t + '"><span class="no">' + String(i + 1).padStart(2, "0") + '</span><div><div class="city">' + esc(x.s) + '</div><div class="room">' + (x.room ? esc(x.room) : "No Qloo venue match") + (x.leg ? " · " + x.leg + " km" : "") + '</div></div><div class="sc">' + x.f + '<span class="tr">' + tierWord[x.t] + "</span></div></div>";
+  }).join("");
+  $("c-trace").innerHTML = trace.map(function (s) {
+    return '<div><span class="' + (s.llm ? "l" : "k") + '">' + String(s.n).padStart(2, "0") + " " + s.tool + "</span> GET " + s.ep + " " + esc(s.p) + " &rarr; " + esc(s.r) + "</div>";
+  }).join("");
+  $("tC").innerHTML =
+    '<div class="lft"><div><div class="art">Noah<br>Kahan</div><div class="sub">8 dates · US &amp; Canada · routed on Qloo</div></div>' +
+    '<div class="score"><span class="q">83</span> <span class="l">72</span><small>Avg fan score: Qloo route vs plain LLM</small></div></div>' +
+    '<div class="rt"><h4>The taste tour</h4><ol>' + route.map(function (x) { return '<li class="' + (x.isNew ? "new" : "") + '">' + esc(x.s) + "</li>"; }).join("") + '</ol><div class="x">LLM picked LA, Vancouver, Seattle</div></div>';
+
+  // small thumbnail clones
+  document.querySelectorAll("[data-clone]").forEach(function (el) { el.innerHTML = $(el.getAttribute("data-clone")).innerHTML; el.setAttribute("aria-hidden", "true"); });
+
+  // theme switch
+  var root = document.documentElement, btns = document.querySelectorAll(".themes button");
+  var apply = function (t) {
+    if (t === "auto") root.removeAttribute("data-theme"); else root.setAttribute("data-theme", t);
+    btns.forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-t") === t)); });
+    try { localStorage.setItem("hl-theme", t); } catch (e) {}
+  };
+  var saved = null;
+  try { saved = localStorage.getItem("hl-theme"); } catch (e) {}
+  var q = new URLSearchParams(location.search).get("theme");
+  apply(q || saved || "auto");
+  btns.forEach(function (b) { b.addEventListener("click", function () { apply(b.getAttribute("data-t")); }); });
+})();
+</script>
+</body>
+</html>
