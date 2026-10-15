@@ -15,21 +15,28 @@ export default async function BriefPage({ params }: { params: Promise<{ id: stri
   return (
     <div className="brief-page">
       <style>{`
-        .brief-page { background:#fff; color:#141414; min-height:100vh; padding:32px; font-size:13px; }
+        .brief-page { --paper:#FFFFFF; --ink:#0D0D0D; --ink-2:#3D3D3D; --ink-3:#616161; --hair:#DADAD4; --qloo:#E6007E; --qloo-text:#B00060; --llm-text:#005A91;
+          background:var(--paper); color:var(--ink); min-height:100vh; padding:36px 32px; font-family:var(--font); font-size:13px; line-height:1.45; color-scheme: light; }
         .brief-page .wrap { max-width: 860px; margin: 0 auto; }
-        .brief-page h1 { font-family: var(--display); font-size: 26px; margin: 0; text-transform: uppercase; }
-        .brief-page h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color:#555; margin: 22px 0 6px; border-bottom: 2px solid #141414; padding-bottom: 4px; }
-        .brief-page .hl { font-size: 18px; font-weight: 700; margin: 10px 0; line-height: 1.3; }
+        .brief-page .wm { font-family: var(--display); font-weight: 900; font-size: 20px; text-transform: uppercase; text-shadow: 1.5px 1.5px 0 var(--qloo); }
+        .brief-page h1 { font-family: var(--display); font-weight: 900; font-size: 46px; line-height: .9; margin: 10px 0 6px; text-transform: uppercase; }
+        .brief-page h2 { font-family: var(--display); font-weight: 900; font-size: 22px; text-transform: uppercase; margin: 24px 0 6px; border-bottom: 3px solid var(--ink); padding-bottom: 3px; line-height: 1; }
+        .brief-page .hl { font-family: var(--display); font-weight: 800; font-size: 24px; text-transform: uppercase; margin: 14px 0 8px; line-height: 1.02; }
         .brief-page table { width:100%; border-collapse: collapse; }
-        .brief-page th, .brief-page td { text-align:left; padding:5px 6px; border-bottom:1px solid #ddd; vertical-align: top; }
-        .brief-page th { font-size: 11px; color:#555; text-transform: uppercase; }
-        .brief-page .meta { color:#555; font-size: 12px; }
-        .brief-page .pb { background:#141414; color:#fff; border:0; border-radius:8px; padding:8px 14px; float:right; }
-        .brief-page .src { margin-top: 24px; font-size: 11px; color: #666; }
-        .brief-page .fx { border:1px solid #c98500; background:#fff7e0; padding:6px 10px; border-radius:6px; margin:10px 0; }
+        .brief-page th, .brief-page td { text-align:left; padding:5px 6px; border-bottom:1px solid var(--hair); vertical-align: top; }
+        .brief-page th { font-family: var(--mono); font-weight: 400; font-size: 10px; color: var(--ink-3); text-transform: uppercase; border-bottom: 1px solid var(--ink); }
+        .brief-page td.n { font-family: var(--mono); text-align: right; font-variant-numeric: tabular-nums; }
+        .brief-page td.city { font-weight: 600; }
+        .brief-page tr.sleeper td.city, .brief-page tr.sleeper td.t { color: var(--qloo-text); }
+        .brief-page .meta { font-family: var(--mono); color: var(--ink-3); font-size: 11px; }
+        .brief-page .pb { background: var(--ink); color: var(--paper); border:0; border-radius:0; padding:8px 14px; float:right; font-family: var(--display); font-weight: 900; font-size: 16px; text-transform: uppercase; }
+        .brief-page .src { margin-top: 24px; font-family: var(--mono); font-size: 10px; color: var(--ink-3); border-top: 3px solid var(--ink); padding-top: 6px; }
+        .brief-page .fx { font-family: var(--mono); font-size: 11px; font-weight: 700; text-transform: uppercase; border: 2px solid var(--ink); display: inline-block; padding: 2px 8px; margin: 8px 0 0; }
+        .brief-page .llm { color: var(--llm-text); }
       `}</style>
       <div className="wrap">
         <PrintButton />
+        <div className="wm">Headliner</div>
         <h1>Tour brief · {plan.artist?.name}</h1>
         <div className="meta">
           Headliner · {plan.dates} dates · {route.length ? `${plan.route.km.toLocaleString("en-US")} km` : ""} · generated {new Date(r.createdAt).toUTCString()}
@@ -41,12 +48,12 @@ export default async function BriefPage({ params }: { params: Promise<{ id: stri
         <p>{brief.routing}</p>
         <table>
           <thead>
-            <tr><th>#</th><th>Market</th><th>Tier</th><th>Fan score</th><th>Venues (Qloo)</th><th>Hospitality partners</th></tr>
+            <tr><th style={{ textAlign: "right" }}>#</th><th>Market</th><th>Tier</th><th style={{ textAlign: "right" }}>Fan score</th><th>Venues (Qloo)</th><th>Hospitality partners</th></tr>
           </thead>
           <tbody>
             {route.map((m, i) => (
-              <tr key={m.key}>
-                <td>{i + 1}</td><td>{m.key}</td><td>{tierLabel(m.tier)}</td><td>{m.score}</td>
+              <tr key={m.key} className={m.tier}>
+                <td className="n">{i + 1}</td><td className="city">{m.key}</td><td className="t">{tierLabel(m.tier)}</td><td className="n">{m.score}</td>
                 <td>{m.venues.slice(0, 2).map((v) => v.name).join(", ") || "–"}</td>
                 <td>{m.localSpots.slice(0, 2).map((v) => v.name).join(", ") || "–"}</td>
               </tr>
@@ -57,12 +64,12 @@ export default async function BriefPage({ params }: { params: Promise<{ id: stri
         <h2>2 · Support act</h2>
         <p>{brief.support}</p>
         <table>
-          <thead><tr><th>Act</th><th>Fit</th><th>Shared taste</th><th>Best market</th></tr></thead>
+          <thead><tr><th>Act</th><th style={{ textAlign: "right" }}>Fit</th><th>Shared taste</th><th>Best market</th></tr></thead>
           <tbody>
             {plan.supportActs.slice(0, 4).map((a) => {
               const best = Object.entries(a.perMarket).sort((x, y) => y[1] - x[1])[0];
               return (
-                <tr key={a.id}><td>{a.name}</td><td>{a.fitScore}</td><td>{a.sharedTags.slice(0, 4).join(", ") || "–"}</td><td>{best ? best[0] : "–"}</td></tr>
+                <tr key={a.id}><td className="city">{a.name}</td><td className="n">{a.fitScore}</td><td>{a.sharedTags.slice(0, 4).join(", ") || "–"}</td><td>{best ? best[0] : "–"}</td></tr>
               );
             })}
           </tbody>
@@ -83,7 +90,7 @@ export default async function BriefPage({ params }: { params: Promise<{ id: stri
           <>
             <h2>Why not just ask an LLM?</h2>
             <p>{contrast.headline}</p>
-            <p className="meta">Plain LLM cities: {contrast.llmCities.map((c) => `${c.input}${c.score !== undefined ? ` (${c.score})` : ""}`).join(", ")}</p>
+            <p className="meta llm">Plain LLM cities: {contrast.llmCities.map((c) => `${c.input}${c.score !== undefined ? ` (${c.score})` : ""}`).join(", ")}</p>
           </>
         )}
         <div className="src">

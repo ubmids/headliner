@@ -4,18 +4,7 @@ import type { RunResult } from "@/lib/agent/run";
 
 type View = "side" | "without" | "with";
 
-function ScoreBar({ label, score, color, note, tip }: { label: string; score?: number; color: string; note?: string; tip?: string }) {
-  return (
-    <div className="bar-row" data-tip={tip}>
-      <span className="name" title={label}>
-        {label}
-      </span>
-      <div className="bar-track">{score !== undefined ? <div className="bar-fill" style={{ width: `${Math.max(score, 1)}%`, background: color }} /> : <span className="muted small">{note ?? "not scored"}</span>}</div>
-      <span className="val">{score ?? "–"}</span>
-    </div>
-  );
-}
-
+/** The verdict: the plain LLM's tour next to Headliner's, both scored on the same Qloo fan-score scale. */
 export default function ContrastView({ result }: { result: RunResult }) {
   const [view, setView] = useState<View>("side");
   const { baseline, contrast, plan } = result;
@@ -30,47 +19,54 @@ export default function ContrastView({ result }: { result: RunResult }) {
   const route = plan.route.order.map((k) => plan.markets.find((m) => m.key === k)!).filter(Boolean);
   const notFound = contrast.supportChecks.filter((s) => s.affinity === undefined);
   const scoredLlmActs = contrast.supportChecks.filter((s) => s.affinity !== undefined);
+  const weak = new Set(contrast.weakLlmPicks.map((w) => w.input));
+  const missed = new Set(contrast.missedByLlm.map((m) => m.market));
 
   const llmCol = (
     <div className="vs-col llm">
-      <h4>
-        <span className="swatch" style={{ background: "var(--llm)" }} /> Without Qloo
-      </h4>
-      <div className="who">
-        Plain LLM{baseline.model ? ` (${baseline.model})` : ""}, same question, no data{baseline.source === "recorded-llm" ? " · recorded answer" : ""}
-      </div>
-      <div className="small muted" style={{ marginBottom: 6 }}>
-        Its cities, scored afterwards by Qloo (fan score 0–100, relative to every city scored):
-      </div>
-      <div className="bars">
+      <p className="who">
+        Without Qloo · plain LLM{baseline.model ? ` (${baseline.model})` : ""}
+        {baseline.source === "recorded-llm" ? " · recorded answer" : ""}
+      </p>
+      <h4>The guess tour</h4>
+      <p className="how">Same question, no data. Its cities, scored afterwards by Qloo (fan score 0–100, relative to every city scored).</p>
+      <ol className="route-list" aria-label="Plain LLM cities with Qloo fan score">
         {contrast.llmCities.map((c) => (
-          <ScoreBar key={c.input} label={c.input} score={c.score} color="var(--llm)" note="not a Qloo market" tip={c.rank ? `Qloo rank ${c.rank} of ${plan.markets.length}${c.tier ? ` · ${c.tier}` : ""}` : undefined} />
+          <li key={c.input} className={c.score === undefined ? "nf" : weak.has(c.input) ? "weak" : ""} title={c.rank ? `Qloo rank ${c.rank} of ${plan.markets.length}${c.tier ? ` · ${c.tier}` : ""}` : undefined}>
+            <span className="c">{c.input.split(",")[0]}</span>
+            <span className="v">
+              {c.rank && weak.has(c.input) ? <small>rank {c.rank} of {plan.markets.length}</small> : null}
+              {c.score ?? <small>not a Qloo market</small>}
+            </span>
+          </li>
         ))}
-      </div>
-      <div className="small" style={{ marginTop: 10 }}>
+      </ol>
+      <div className="vs-extra">
         <b>Opener:</b> {baseline.supportActs.slice(0, 3).join(", ") || "–"}
         <br />
         <b>Sponsors:</b> {baseline.sponsors.slice(0, 5).join(", ") || "–"}
+        {baseline.reasoning && <q>{baseline.reasoning}</q>}
       </div>
-      {baseline.reasoning && <p className="small muted">“{baseline.reasoning}”</p>}
     </div>
   );
 
   const qlooCol = (
     <div className="vs-col qloo">
-      <h4>
-        <span className="swatch" style={{ background: "var(--qloo)" }} /> With Qloo
-      </h4>
-      <div className="who">Headliner agent, grounded in {result.calls.length} Qloo requests</div>
-      <div className="small muted" style={{ marginBottom: 6 }}>
-        The routed tour (fan score 0–100):
-      </div>
-      <div className="bars">
+      <p className="who">With Qloo · Headliner agent, {result.calls.length} Qloo requests</p>
+      <h4>The taste tour</h4>
+      <p className="how">The routed tour, in order (fan score 0–100). Pink: stops the plain LLM never named.</p>
+      <ol className="route-list" aria-label="Headliner route with Qloo fan score">
         {route.map((m) => (
-          <ScoreBar key={m.key} label={m.key} score={m.score} color="var(--qloo)" tip={`${m.tier} · over-index ${m.overIndex >= 0 ? "+" : ""}${Math.round(m.overIndex * 100)}`} />
+          <li key={m.key} className={missed.has(m.key) ? "new" : ""} title={`${m.tier} · over-index ${m.overIndex >= 0 ? "+" : ""}${Math.round(m.overIndex * 100)}`}>
+            <span className="c">
+              {m.key.split(",")[0]}
+              {m.tier === "sleeper" ? <small>sleeper</small> : null}
+            </span>
+            <span className="v">{m.score}</span>
+          </li>
         ))}
-      </div>
-      <div className="small" style={{ marginTop: 10 }}>
+      </ol>
+      <div className="vs-extra">
         <b>Opener:</b> {plan.supportActs.slice(0, 3).map((a) => `${a.name} (${a.fitScore})`).join(", ") || "–"}
         <br />
         <b>Sponsors:</b> {plan.sponsors.flatMap((c) => c.national.slice(0, 2).map((b) => b.name)).join(", ") || "–"}
@@ -78,13 +74,21 @@ export default function ContrastView({ result }: { result: RunResult }) {
     </div>
   );
 
+  const scores = (
+    <div className="score-col" aria-label="Average fan score">
+      <span className="n q">{contrast.qlooAvgScore ?? "–"}</span>
+      <small>avg fan score: Qloo route vs plain LLM</small>
+      <span className="n l">{contrast.llmAvgScore ?? "–"}</span>
+    </div>
+  );
+
   return (
     <section className="card" aria-labelledby="vs-h">
       <div className="section-head">
-        <div>
-          <h2 id="vs-h">Without Qloo vs with Qloo</h2>
-          <h3>Same question. One answer guesses, one asks the taste graph.</h3>
-        </div>
+        <h2 id="vs-h">
+          <span className="k">Same question. One answer guesses, one asks the taste graph.</span>
+          Without Qloo vs with Qloo
+        </h2>
         <div className="tabs" role="group" aria-label="Comparison view">
           <button aria-pressed={view === "without"} onClick={() => setView("without")}>
             Without Qloo
@@ -97,39 +101,44 @@ export default function ContrastView({ result }: { result: RunResult }) {
           </button>
         </div>
       </div>
-      <div className="callout">
-        <b>{contrast.headline}</b>
-      </div>
-      <div className="stat-row">
-        <div className="stat">
-          <div className="num">
-            <span style={{ color: "var(--seq-300)" }}>{contrast.qlooAvgScore ?? "–"}</span> <span className="muted" style={{ fontSize: 18 }}>vs</span> <span style={{ color: "#f0936b" }}>{contrast.llmAvgScore ?? "–"}</span>
-          </div>
-          <div className="lbl">average fan score: Qloo route vs plain-LLM cities</div>
+      <p className="callout">{contrast.headline}</p>
+      {view === "side" && (
+        <div className="vs">
+          {llmCol}
+          {scores}
+          {qlooCol}
         </div>
+      )}
+      {view === "without" && (
+        <div className="vs single">
+          {llmCol}
+          {scores}
+        </div>
+      )}
+      {view === "with" && (
+        <div className="vs single">
+          {qlooCol}
+          {scores}
+        </div>
+      )}
+      <div className="stat-row">
         <div className="stat">
           <div className="num">{contrast.missedByLlm.length}</div>
           <div className="lbl">of {route.length} Qloo tour stops the LLM never mentioned{contrast.missedByLlm.some((m) => m.tier === "sleeper") ? " (incl. sleeper markets)" : ""}</div>
         </div>
         <div className="stat">
-          <div className="num">{notFound.length ? notFound.length : contrast.weakLlmPicks.length}</div>
+          <div className="num">{contrast.weakLlmPicks.length}</div>
+          <div className="lbl">LLM cities in the bottom half of Qloo&apos;s ranking</div>
+        </div>
+        <div className="stat">
+          <div className="num">{notFound.length}</div>
           <div className="lbl">
-            {notFound.length
-              ? `LLM-suggested opener${notFound.length > 1 ? "s" : ""} Qloo can't find (${notFound.map((n) => n.name).join(", ")})`
-              : `LLM cities in the bottom half of Qloo's ranking`}
+            {notFound.length ? `LLM-suggested opener${notFound.length > 1 ? "s" : ""} Qloo can't find (${notFound.map((n) => n.name).join(", ")})` : "LLM-suggested openers Qloo can't find"}
           </div>
         </div>
       </div>
-      {view === "side" && (
-        <div className="vs">
-          {llmCol}
-          {qlooCol}
-        </div>
-      )}
-      {view === "without" && llmCol}
-      {view === "with" && qlooCol}
       {scoredLlmActs.length > 0 && contrast.qlooTopSupport && (
-        <p className="small muted" style={{ marginTop: 10 }}>
+        <p className="src-line">
           Opener check: the LLM&apos;s {scoredLlmActs.map((s) => `${s.name} (${Math.round(s.affinity! * 100)})`).join(", ")} vs Qloo&apos;s {contrast.qlooTopSupport.name} ({contrast.qlooTopSupport.fitScore}), audience
           overlap with the headliner&apos;s fans on the same Qloo scale.
         </p>

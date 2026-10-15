@@ -61,7 +61,7 @@ export default function TracePanel({ state, defaultMode }: { state: RunState; de
         </div>
       </div>
       <div className="trace-body" ref={bodyRef}>
-        {state.steps.length === 0 && <p className="muted small">Every Qloo request the agent makes appears here as it happens: endpoint, parameters and a summary of what came back.</p>}
+        {state.steps.length === 0 && <p className="empty">Every Qloo request the agent makes appears here as it happens: endpoint, parameters and a summary of what came back.</p>}
         {state.steps.map((s) => (
           <div key={s.id} className={`step ${s.status}`}>
             <div className="tool">
@@ -78,7 +78,7 @@ export default function TracePanel({ state, defaultMode }: { state: RunState; de
           </div>
         ))}
         {state.baseline && (
-          <div className="step done">
+          <div className="step done llm">
             <div className="tool">plain LLM (no tools)</div>
             <div className="thought">
               {state.baseline.source === "unavailable"

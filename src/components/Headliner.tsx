@@ -56,14 +56,17 @@ export default function Headliner({ mode }: { mode: Omit<RunMode, "planner"> & {
 
   return (
     <div className="shell">
-      <header className="topbar">
-        <div className="brand">
-          <h1>Headliner</h1>
-          <span className="tag">tour decisions on taste data, not guesswork</span>
+      <header className="mast">
+        <div>
+          <h1 className="wordmark">Headliner</h1>
+          <p className="tag">Tour decisions on taste data, not guesswork</p>
         </div>
-        <span className="powered">
-          powered by <b>Qloo</b> Taste AI
-        </span>
+        <div className="mast-right">
+          <span className={`stamp ${qlooMode === "live" ? "live" : ""}`}>{qlooMode === "live" ? "Live Qloo data" : "Fixture data · illustrative"}</span>
+          <span>
+            powered by <b>Qloo</b> Taste AI
+          </span>
+        </div>
       </header>
 
       <section className="hero no-print">
@@ -108,7 +111,7 @@ export default function Headliner({ mode }: { mode: Omit<RunMode, "planner"> & {
           <span>Try a sample:</span>
           {SAMPLES.map((s) => (
             <button key={s.artist} className="chip" type="button" onClick={() => sample(s)} disabled={running}>
-              {s.artist} <span className="muted">· {s.blurb}</span>
+              <b>{s.artist}</b> <span>{s.blurb}</span>
             </button>
           ))}
         </div>
@@ -116,8 +119,10 @@ export default function Headliner({ mode }: { mode: Omit<RunMode, "planner"> & {
 
       {qlooMode === "fixture" && (
         <div className="banner fixture" role="status">
-          <b>Fixture mode:</b> no Qloo API key is configured, so Qloo answers come from <b>recorded fixtures</b> in the documented response format. Names and scores are
-          illustrative placeholders, not Qloo data. Only the sample artists are covered. Set <code>QLOO_API_KEY</code> for live Qloo data on any artist.
+          <span>
+            <b>Fixture mode:</b> no Qloo API key is configured, so Qloo answers come from <b>recorded fixtures</b> in the documented response format. Names and scores are
+            illustrative placeholders, not Qloo data. Only the sample artists are covered. Set <code>QLOO_API_KEY</code> for live Qloo data on any artist.
+          </span>
         </div>
       )}
       {state.status === "error" && <div className="banner error">{state.error}</div>}
@@ -156,7 +161,7 @@ function Working({ calls, steps, baselineReady }: { calls: number; steps: number
   return (
     <div className="card empty-state" aria-live="polite">
       <h3>The agent is planning…</h3>
-      <p>
+      <p className="mono">
         {steps} steps · {calls} Qloo requests so far{baselineReady ? " · plain-LLM answer ready" : ""}. Follow along in the reasoning trace.
       </p>
     </div>
@@ -169,12 +174,12 @@ function Result({ result }: { result: RunResult }) {
   const [showLlm, setShowLlm] = useState(true);
   return (
     <>
+      <ContrastView result={result} />
+
       <section className="card" aria-labelledby="brief-h">
         <div className="section-head">
-          <div>
-            <h2 id="brief-h">Tour brief · {plan.artist?.name}</h2>
-          </div>
-          <span className="powered">
+          <h2 id="brief-h">Tour brief · {plan.artist?.name}</h2>
+          <span className="src">
             {result.mode.qloo === "live" ? "live Qloo data" : "fixture data"} · planner: {result.mode.planner === "llm" ? result.mode.model : "deterministic"}
           </span>
         </div>
@@ -203,16 +208,12 @@ function Result({ result }: { result: RunResult }) {
         </div>
       </section>
 
-      <ContrastView result={result} />
-
       <section className="card" aria-labelledby="route-h">
         <div className="section-head">
-          <div>
-            <h2 id="route-h">Decision 1 · Routing</h2>
-            <h3>
-              {route.length} dates, {plan.route.km.toLocaleString("en-US")} km
-            </h3>
-          </div>
+          <h2 id="route-h">
+            <span className="k">Decision 1 · Routing</span>
+            {route.length} dates, {plan.route.km.toLocaleString("en-US")} km
+          </h2>
           {result.baseline?.cities.length ? (
             <div className="tabs" role="group" aria-label="Map overlay">
               <button aria-pressed={showLlm} onClick={() => setShowLlm(true)}>
@@ -228,6 +229,31 @@ function Result({ result }: { result: RunResult }) {
           Fan score blends Qloo heatmap affinity (where fans concentrate) with the artist&apos;s location-aware affinity per city. <b>Sleeper</b> markets over-index for their size:
           smaller rooms that sell through.
         </p>
+        <div className="dates" role="list" aria-label="Routed tour, in order">
+          {route.map((m, i) => (
+            <div key={m.key} className={`date ${m.tier}`} role="listitem">
+              <span className="no">{String(i + 1).padStart(2, "0")}</span>
+              <div style={{ minWidth: 0 }}>
+                <div className="city" title={m.key}>
+                  {m.key.split(",")[0]}
+                  <span className="muted mono" style={{ fontSize: 12, fontWeight: 400, marginLeft: 6 }}>
+                    {m.key.split(",")[1]?.trim()}
+                  </span>
+                </div>
+                <div className="room">
+                  {m.venues.length ? m.venues.slice(0, 3).map((v) => v.name).join(" · ") : <span className="muted">{m.venuesSearched ? "no Qloo venue match" : "not searched"}</span>}
+                </div>
+              </div>
+              <div className="sc">
+                {m.score}
+                <span className={`tier ${m.tier}`}>
+                  <span className="swatch" />
+                  {m.tier}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
         <div className="map-wrap">
           <TourMap plan={plan} llmCities={showLlm ? (result.contrast?.llmCities ?? []) : []} regionId={plan.regionId} />
           <div>
@@ -235,30 +261,7 @@ function Result({ result }: { result: RunResult }) {
             <MarketBars markets={plan.markets.slice(0, 14)} routeKeys={plan.route.order} />
           </div>
         </div>
-        <table className="grid" style={{ marginTop: 14 }}>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Market</th>
-              <th>Tier</th>
-              <th className="num">Fan score</th>
-              <th>Best-fit venues (Qloo)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {route.map((m, i) => (
-              <tr key={m.key}>
-                <td>{i + 1}</td>
-                <td>{m.key}</td>
-                <td>
-                  <span className={`tier ${m.tier}`}>{m.tier}</span>
-                </td>
-                <td className="num">{m.score}</td>
-                <td className="small">{m.venues.length ? m.venues.slice(0, 3).map((v) => v.name).join(" · ") : <span className="muted">{m.venuesSearched ? "no Qloo venue match" : "not searched"}</span>}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="src-line">Qloo: /v2/insights heatmap (urn:heatmap) · artist affinity per city (signal.location.query) · places (urn:entity:place) for venues</div>
       </section>
 
       <SupportActs plan={plan} />

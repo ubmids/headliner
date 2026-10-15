@@ -11,7 +11,7 @@ const AGE_LABEL: Record<string, string> = {
   "55_and_older": "55+",
 };
 
-/** Diverging bars: positive = over-indexes (blue), negative = under-indexes (red), gray zero line. */
+/** Age skew: position encodes polarity (right of the zero line = over-indexes). Ink for over, neutral for under, signed number always shown. */
 function Diverging({ data }: { data: Record<string, number> }) {
   const max = Math.max(0.01, ...Object.values(data).map(Math.abs));
   return (
@@ -20,9 +20,9 @@ function Diverging({ data }: { data: Record<string, number> }) {
         <div key={k} className="bar-row" data-tip={`${AGE_LABEL[k] ?? k}: ${v > 0 ? "+" : ""}${v.toFixed(2)} vs average`} style={{ gridTemplateColumns: "60px 1fr 46px" }}>
           <span className="name">{AGE_LABEL[k] ?? k}</span>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 2px 1fr", alignItems: "center", height: 12 }}>
-            <div style={{ display: "flex", justifyContent: "flex-end" }}>{v < 0 && <div className="bar-fill" style={{ width: `${(Math.abs(v) / max) * 100}%`, background: "var(--div-neg)", borderRadius: "4px 0 0 4px" }} />}</div>
-            <div style={{ background: "var(--div-mid)", height: 16 }} />
-            <div>{v > 0 && <div className="bar-fill" style={{ width: `${(v / max) * 100}%`, background: "var(--qloo)" }} />}</div>
+            <div style={{ display: "flex", justifyContent: "flex-end" }}>{v < 0 && <div className="bar-fill" style={{ width: `${(Math.abs(v) / max) * 100}%`, background: "var(--neutral)" }} />}</div>
+            <div style={{ background: "var(--ink)", height: 16 }} />
+            <div>{v > 0 && <div className="bar-fill" style={{ width: `${(v / max) * 100}%`, background: "var(--ink)" }} />}</div>
           </div>
           <span className="val">
             {v > 0 ? "+" : ""}
@@ -60,11 +60,11 @@ function Spark({ points }: { points: Array<{ date: string; percentile: number }>
         role="img"
         aria-label="Audience popularity percentile over time"
       >
-        <path d={d} fill="none" stroke="var(--qloo)" strokeWidth={2} vectorEffect="non-scaling-stroke" />
-        {hover !== null && <line x1={x(hover)} x2={x(hover)} y1={0} y2={h} stroke="#555" strokeWidth={1} vectorEffect="non-scaling-stroke" />}
-        <circle cx={x(hover ?? points.length - 1)} cy={y(hp.percentile)} r={4} fill="var(--qloo)" stroke="#1a1a19" strokeWidth={2} />
+        <path d={d} fill="none" stroke="var(--ink)" strokeWidth={2} vectorEffect="non-scaling-stroke" />
+        {hover !== null && <line x1={x(hover)} x2={x(hover)} y1={0} y2={h} stroke="var(--ink-3)" strokeWidth={1} vectorEffect="non-scaling-stroke" />}
+        <circle cx={x(hover ?? points.length - 1)} cy={y(hp.percentile)} r={4} fill="var(--ink)" stroke="var(--paper)" strokeWidth={2} />
       </svg>
-      <div className="small muted">
+      <div className="small muted mono">
         {hp.date}: {hp.percentile.toFixed(0)}th percentile
       </div>
     </div>
@@ -75,9 +75,11 @@ export default function Audience({ plan }: { plan: TourPlan }) {
   if (!plan.tasteTags.length && !plan.demographics && !plan.trend) return null;
   return (
     <section className="card" aria-labelledby="au-h">
-      <h2 id="au-h">The audience behind the decisions</h2>
-      <div className="decisions">
-        <div className="decision">
+      <div className="section-head">
+        <h2 id="au-h">The audience behind the decisions</h2>
+      </div>
+      <div className="audience">
+        <div>
           <h4>Taste profile (Qloo)</h4>
           <div className="tags">
             {plan.tasteTags.slice(0, 10).map((t) => (
@@ -87,7 +89,7 @@ export default function Audience({ plan }: { plan: TourPlan }) {
             ))}
           </div>
         </div>
-        <div className="decision">
+        <div>
           <h4>Age skew vs average</h4>
           {plan.demographics ? <Diverging data={plan.demographics.age} /> : <p className="muted">No data.</p>}
           {plan.demographics && (
@@ -96,11 +98,12 @@ export default function Audience({ plan }: { plan: TourPlan }) {
             </p>
           )}
         </div>
-        <div className="decision">
+        <div>
           <h4>Momentum: {plan.trend?.direction ?? "n/a"}</h4>
           {plan.trend ? <Spark points={plan.trend.points} /> : <p className="muted">No trend data.</p>}
         </div>
       </div>
+      <div className="src-line">Qloo: /v2/insights tags (urn:tag) · demographics (urn:demographics) · /v2/trending</div>
     </section>
   );
 }
