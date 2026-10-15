@@ -15,6 +15,7 @@ async function main() {
     await page.goto(url, { waitUntil: "networkidle" });
     await page.waitForSelector("text=Tour brief", { timeout: 60000 }).catch(() => {});
     await page.waitForTimeout(2500); // map tiles
+    await page.addStyleTag({ content: "nextjs-portal { display: none !important; }" }); // hide the dev-mode indicator
     if (clip) {
       const el = page.locator(clip).first();
       await el.screenshot({ path: path.join(out, `${name}.png`) });
@@ -30,6 +31,17 @@ async function main() {
   await shoot("routing", noah, { width: 1280, height: 900 }, "section[aria-labelledby=route-h]");
   await shoot("trace", noah, { width: 1440, height: 1100 }, ".trace-card");
   await shoot("mobile", noah, { width: 390, height: 844 });
+  {
+    // The printable brief for the same run.
+    const page = await browser.newPage({ viewport: { width: 1100, height: 900 }, deviceScaleFactor: 1 });
+    await page.goto(noah, { waitUntil: "networkidle" });
+    const href = await page.locator('a[href^="/brief/"]').first().getAttribute("href", { timeout: 60000 });
+    await page.goto(`${base}${href}`, { waitUntil: "networkidle" });
+    await page.addStyleTag({ content: "nextjs-portal { display: none !important; }" });
+    await page.screenshot({ path: path.join(out, "brief.png"), fullPage: true });
+    await page.close();
+    console.log("wrote docs/img/brief.png");
+  }
   await shoot("childers-contrast", `${base}/?artist=${encodeURIComponent("Tyler Childers")}&region=north-america`, { width: 1280, height: 900 }, "section[aria-labelledby=vs-h]");
   await browser.close();
 }

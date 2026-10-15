@@ -17,7 +17,7 @@ An agent for tour promoters: it routes the tour, picks the opener and finds spon
 _(158 characters)_
 
 ## Thumbnail
-`docs/img/contrast.png`, cropped to 3:2 (the side-by-side "Without Qloo / With Qloo" panel). Re-shoot from live mode.
+`docs/gallery/thumbnail.png` (1500x1000, 3:2): both routes side by side and the average fan score pair, rendered from a real run by `scripts/assets.ts`. `docs/gallery/thumbnail-300.png` is the gallery-size check. Gallery images: `docs/gallery/01-verdict.png` to `06-brief.png`, in that order. Re-render all of them from live mode once the key is in (design rules: `design/DESIGN.md`, section 6).
 
 ## Try it out
 - Live demo: `https://headliner-qloo.fly.dev` (no login; click **Try a sample → Noah Kahan**)

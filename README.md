@@ -57,7 +57,7 @@ This answers the hackathon brief's line, *"If your submission would work the sam
 |---|---|
 | ![Routing](docs/img/routing.png) | ![Trace](docs/img/trace.png) |
 
-Full page: [desktop](docs/img/full-desktop.png) · [mobile](docs/img/mobile.png). All screenshots are from fixture mode (illustrative data).
+Full page: [desktop](docs/img/full-desktop.png) · [mobile](docs/img/mobile.png) · [printable brief](docs/img/brief.png). Devpost gallery and thumbnail: [`docs/gallery/`](docs/gallery). All screenshots are from fixture mode (illustrative data).
 
 ## Architecture
 
