@@ -2,7 +2,7 @@
 
 This file is binding. Any change to the UI, the printable brief, the README images, the Devpost gallery, the thumbnail or the video cards follows it. When code and this file disagree, fix the code or change this file in the same commit, with a reason.
 
-Status: Phase 1 (audit and directions). The direction is not picked yet. `design/directions.html` shows three; Direction A ("Advance sheet") is recommended and its tokens are in section 4. If Subomi picks B or C, swap section 4 for that direction's tokens from the appendix and keep everything else.
+Status: **Direction C, "Tour poster", picked by Subomi on 15 Oct 2026.** `design/directions.html` shows all three directions considered; only C is binding.
 
 ## 0. Who judges this, and what they score
 
@@ -36,145 +36,128 @@ What is already good and must survive: the two column result plus sticky trace, 
 
 ## 2. Principles (each one is testable)
 
-1. **The verdict is above the fold.** After a run, a 1440 by 900 screenshot shows the with/without numbers ("83 vs 72") and the cities the LLM missed, without scrolling. At 390 by 844 it is on the first or second screen. Every submission image includes it.
-2. **Two data colours, and only two.** One signal colour means "Qloo found this". One mark-up colour means "the plain LLM said this". Everything else is ink and neutrals. Tiers are told apart by fill and shape (solid, signal, hollow) plus a text label, never by hue alone. Test: no chart or status colour in the CSS outside the tokens in section 4.
-3. **Numbers look like a settlement sheet.** Every number uses tabular figures and right alignment in columns. Fan score is always 0 to 100, always called "fan score", and the scale is named once per view. Test: every numeric cell has `font-variant-numeric: tabular-nums`.
-4. **The route is the hero object.** Stops are shown in tour order with a stop number, city, tier, room and drive leg, the way an itinerary or a tour poster lists dates. The same list, in the same order, appears in the app, the printable brief and the thumbnail.
-5. **Every claim is one hop from its Qloo call.** Each decision block names its source (endpoint and request count) in a footnote line, and the trace sits beside the result on desktop. Test: each decision section ends with a source line.
-6. **Honest, not loud.** Fixture mode is a persistent stamp on the masthead and a footnote on each data block, at most 32px tall. It never looks like an error. It disappears in live mode.
-7. **Legible from the back of the room.** Data text is at least 13px, meta at least 12px, nothing below 11px. Text contrast at least 4.5:1, marks at least 3:1, in both themes. No horizontal page scroll at 390px.
+1. **The verdict is above the fold.** After a run, a 1440 by 900 screenshot shows the with/without numbers ("83 vs 72") and both routes, with the cities the LLM missed marked, without scrolling. At 390 by 844 the score pair is on the first screen. Every submission image includes it.
+2. **One pink, and it means Qloo.** Fluoro pink marks only what Qloo found: Qloo's route and score, sleeper markets, stops the LLM missed. Riso blue marks only what the plain LLM said. The one sanctioned non-data use of pink is the offset overprint on the HEADLINER wordmark, because the product is the "with Qloo" side. No pink buttons, pink backgrounds, pink stamps, pink icons or pink tints behind large areas. Test: every pink declaration in the CSS sits on a Qloo or sleeper selector, or on `.wordmark`.
+3. **Loud type, calm data.** Big Shoulders Display 900 is for the verdict numbers, city names in the route and the two route lists, section headings and the wordmark. Everything that is read rather than seen (tables, venue lists, the trace, captions, sponsor lists) is Instrument Sans or Space Mono at 13 to 15px on hairline rows. Test: no table cell and no trace line uses the display face.
+4. **Numbers look like a settlement sheet.** Every number in a column uses tabular figures and right alignment. Fan score is always 0 to 100, always called "fan score", and the scale is named once per view.
+5. **The route is the hero object.** Stops are shown in tour order as a date stack: stop number, city in poster type, tier, room, drive leg. The same list, in the same order, appears in the app, the printable brief and the thumbnail.
+6. **Every claim is one hop from its Qloo call.** Each decision section names its source (endpoint and request count) in a mono source line, and the trace sits beside the result on desktop.
+7. **Honest, not loud.** Fixture mode is an ink-outlined mono stamp in the masthead and a one line note, at most 32px tall. It never uses pink, never looks like an error, and disappears in live mode.
+8. **Legible from the back of the room.** Data text at least 13px, meta at least 12px, nothing below 11px. Text contrast at least 4.5:1 (3:1 only for display text at 24px and up), marks at least 3:1, in both themes. No horizontal page scroll at 390px.
 
 ## 3. Reference board
 
 | # | Product | Take | Avoid |
 |---|---|---|---|
-| 1 | **Master Tour** (Eventric), tour itineraries and day sheets | The day sheet grammar the industry already reads: date, city, venue, drive leg, in a strict ruled list | Dated enterprise chrome, tiny controls |
-| 2 | **Prism.fm**, promoter booking and settlement | Settlement sheet numerals, right aligned money columns, holds as a grid | Generic SaaS sidebar and card layout |
-| 3 | **Pollstar Boxoffice and Top Tours charts** | Ranked tables with no decoration, numbers as the headline | Ad cluttered web chrome |
-| 4 | **Resident Advisor** (ra.co) | Monochrome, type led listings, one accent, confident black and white | Low contrast tiny grey type |
-| 5 | **DICE** app | Bold artist names as typography, event rows that scan fast | Consumer gloss, dependence on photos |
-| 6 | **Swiss concert posters** (Müller-Brockmann's Tonhalle series, Mike Joyce's Swissted) | The tour date stack, a strict grid, type as image | Unreadable at thumbnail size when over styled |
-| 7 | **Bloomberg Terminal** | Density, every pixel carries data, amber on black for a console direction | Hostile to a first time viewer |
-| 8 | **NYT and FT graphics desks** (route maps, election needles) | Direct labels on the map, an annotated takeaway sentence above every chart | Long scrollytelling |
-| 9 | **Ableton Live** | Flat functional colour, hairline structure, small caps labels, a tool made for music people | Very small hit targets |
-| 10 | **Teenage Engineering** (OP-1, product pages) | Numbered parts, precise orange and grey, playful but exact | Novelty that costs clarity |
-| 11 | **Chartmetric** | Shows what the market already sees in music data | Card soup, rainbow charts: what we must not look like |
-| 12 | **Spotify Wrapped** | One huge number per frame, for video cards only | Gradients and blobs |
+| 1 | **Swiss concert posters** (Josef Müller-Brockmann's Tonhalle series) | A strict grid, type as the image, black plus one ink | Abstraction that hides the information |
+| 2 | **Swissted** (Mike Joyce) | Punk and indie gig bills reset as Swiss posters: proof that a date stack can be loud and orderly | Pastiche, decoration for its own sake |
+| 3 | **Riso printed gig posters** (any small press, e.g. Hato Press, Colorama) | Two flat inks, fluoro pink and blue, a slight misregistration on the headline only | Halftone noise and grain over data |
+| 4 | **Tour announcement posts** (the dates graphic every artist posts) | The universal format of a tour: artist, then cities in a stack | Photo backgrounds, script fonts |
+| 5 | **DICE** app | Bold artist and city names as typography, rows that scan fast | Consumer gloss |
+| 6 | **Resident Advisor** (ra.co) | Black and white confidence, dense listings under loud headings | Tiny low contrast grey |
+| 7 | **Pollstar Boxoffice and Top Tours charts** | Ranked tables with no decoration, numbers as the headline | Ad cluttered chrome |
+| 8 | **Master Tour** itineraries and day sheets | The data under the poster: room, drive leg, order of stops | Enterprise chrome |
+| 9 | **Prism.fm** settlement sheets | Right aligned tabular money columns, the register investors trust | SaaS sidebar and cards |
+| 10 | **NYT and FT graphics desks** | One annotated takeaway sentence above each chart, direct labels on maps | Long scrollytelling |
+| 11 | **Chartmetric** | Shows what music data tools look like today | Card soup and rainbow charts: what we must not look like |
+| 12 | **Spotify Wrapped** | One huge number per frame, for video cards | Gradients, blobs, a pink that means nothing |
 
-## 4. Tokens (Direction A, "Advance sheet", recommended)
+## 4. Tokens (Direction C, "Tour poster", picked by Subomi on 15 Oct 2026)
 
-The idea: Headliner's output is the document a tour manager already trusts, an advance sheet or itinerary on paper. Qloo's findings are printed in ink and ultramarine. The plain LLM's answer is marked up in red pencil.
+The idea: Headliner's answer is the tour poster you would announce, backed by the data sheet underneath. Two flat inks on paper. Qloo prints in fluoro pink, the plain LLM in riso blue, everything else in black.
 
 ### Colour
 
-Contrast is WCAG 2 relative luminance, computed (run `python3 design/contrast.py`; the ratios below are its output). Data colours were run through the dataviz palette validator (lightness band, chroma, CVD separation, normal vision floor) in both modes.
+Contrast is WCAG 2 relative luminance, computed with `python3 design/contrast.py` (the ratios below are its output). The pink and blue pair was run through the dataviz palette validator in both modes: lightness band, chroma floor, CVD separation and the normal vision floor all pass (light: protan ΔE 12.0, normal ΔE 33.0; dark: pass).
 
 | Token | Role | Light | Dark |
 |---|---|---|---|
-| `--paper` | page background | `#F2F2EF` | `#0E0E0D` |
-| `--sheet` | data surface | `#FFFFFF` | `#181817` |
-| `--sunk` | inset rows, inputs | `#E9E9E5` | `#222220` |
-| `--ink` | primary text, rules, anchor tier | `#111111` (16.8:1 on paper) | `#F1F1EC` (17.1:1) |
-| `--ink-2` | secondary text | `#44443F` (8.7:1) | `#BDBDB5` (10.2:1) |
-| `--ink-3` | meta text | `#66665F` (5.2:1 paper, 4.8:1 sunk) | `#8F8F87` (5.9:1 paper, 4.9:1 sunk) |
-| `--hair` | hairline rules | `#D4D4CE` | `#34342F` |
-| `--qloo` | "Qloo found this" marks, sleeper tier | `#2638C9` (7.5:1 paper) | `#6878F2` (5.1:1) |
-| `--qloo-ink` | Qloo text and links | `#1B2A9E` (10.0:1) | `#A7B1FF` (9.5:1) |
-| `--qloo-tint` | Qloo highlight band | `#E6E9FB` (qloo-ink on it 9.3:1) | `#1E2340` (7.6:1) |
-| `--llm` | "plain LLM said this" marks, red pencil | `#C42A1C` (5.1:1 paper) | `#E5533F` (5.2:1) |
-| `--llm-ink` | LLM text | `#A3200F` (6.8:1) | `#FF9A8A` (9.4:1) |
-| `--llm-tint` | LLM highlight band | `#FBE7E4` (llm-ink on it 6.4:1) | `#3A1C17` (7.5:1) |
-| `--neutral-mark` | volume tier, context marks | `#83837C` (3.4:1 paper) | `#75756E` (4.2:1) |
-| `--skip-mark` | skip tier (hollow outline) | `#C4C4BD` | `#46463F` |
-| `--stamp-bg` / `--stamp-ink` | fixture stamp | `#FFF1C7` / `#6B4A00` (7.2:1) | `#2E2508` / `#F2D48A` (10.5:1) |
+| `--paper` | page background | `#FAFAF7` | `#111111` |
+| `--sheet` | raised data surface (tables, inputs) | `#FFFFFF` | `#1A1A1A` |
+| `--sunk` | inset rows, map land | `#F0F0EC` | `#232323` |
+| `--ink` | text, rules, anchor tier, buttons | `#0D0D0D` (18.6:1 on paper) | `#F5F5F2` (17.3:1) |
+| `--ink-2` | secondary text | `#3D3D3D` (10.4:1) | `#C2C2BE` (10.6:1) |
+| `--ink-3` | meta text | `#616161` (5.9:1 paper, 5.4:1 sunk) | `#929290` (6.1:1 paper, 5.0:1 sunk) |
+| `--hair` | row hairlines | `#DADAD4` | `#2E2E2C` |
+| `--qloo` | Qloo marks, display text 24px and up, sleeper tier | `#E6007E` (4.3:1 paper, 4.5:1 sheet) | `#E8429A` (5.1:1 paper, 4.7:1 sheet) |
+| `--qloo-text` | Qloo text under 24px | `#B00060` (6.7:1 paper) | `#FF8CC6` (8.8:1) |
+| `--on-qloo` | text on a pink mark | `#FFFFFF` (4.5:1) | `#111111` (5.1:1) |
+| `--llm` | plain LLM marks, strikes, rings | `#0078BF` (4.5:1 paper) | `#2E8AD8` (5.2:1 paper) |
+| `--llm-text` | plain LLM text | `#005A91` (7.0:1) | `#8CC8FF` (10.6:1) |
+| `--neutral` | volume tier, context marks | `#858585` (3.5:1 paper, 3.7:1 sheet) | `#77777A` (4.2:1) |
+| `--skip` | skip tier (hollow ring) | `#BDBDB7` | `#45453F` |
+| `--panel` / `--panel-text` | the trace panel (an ink block) | `#0D0D0D` / `#F5F5F2` (17.8:1) | `#050505` / `#F5F5F2` (18.7:1) |
+| `--panel-text-2` | trace secondary text | `#B8B8B4` (9.8:1) | `#B8B8B4` (10.2:1) |
+| `--panel-text-3` | trace meta | `#8E8E8A` (5.9:1) | `#929290` (6.5:1) |
+| `--panel-qloo` | Qloo endpoints in the trace | `#FF5CAD` (6.8:1) | `#FF8CC6` (9.5:1) |
+| `--panel-llm` | plain LLM lines in the trace | `#5CB3FF` (8.7:1) | `#8CC8FF` (11.5:1) |
+| `--seq-1` to `--seq-5` | overlap heat cells, one neutral hue light to dark | `#E4E4DF` `#BDBDB7` `#6F6F6A` `#4A4A46` `#1F1F1D` (cell text 15.2, 10.3, 5.1, 8.9, 16.5:1) | `#2A2A28` `#45453F` `#8C8C86` `#BDBDB7` `#E8E8E3` (13.2, 8.8, 5.6, 10.0, 15.4:1) |
 
-Validator results: light pair `#2638C9 / #C42A1C` passes every check (protan ΔE 27.8, normal ΔE 37.2). Dark pair `#6878F2 / #E5533F` passes every check. The neutral marks are deliberately grey: they are context, not identity, and always carry a text label.
-
-Tier encoding: **anchor** solid ink disc, **sleeper** solid ultramarine disc, **volume** solid neutral disc, **skip** hollow ring. Each always has its word next to it. The plain LLM's picks are a red pencil ring or a red strike through, never a filled mark.
+Tier encoding: **anchor** solid ink disc, **sleeper** solid pink disc, **volume** solid neutral disc, **skip** hollow ring, each always with its word. The plain LLM's picks are a blue dashed ring, a blue strike through, or blue type; never a filled mark. Heat and sequential data use the neutral ramp, never pink, so pink stays a signal. The audience age chart encodes polarity by position (left or right of the zero line) with ink bars and a signed number; it uses no hue.
 
 ### Type
 
 | Role | Family | Size / line height | Why |
 |---|---|---|---|
-| Display (artist, verdict number) | Archivo, width 62 to 75, weight 800 | 40/40 desktop, 32/34 mobile | A grotesque built for print and screen with a real condensed width axis: tour poster and day sheet headers in one family, no second display face |
-| Section label | Archivo, width 100, weight 700, caps, tracking 0.08em | 12/16 | Day sheet column heads |
-| Body | Archivo, width 100, weight 400 | 15/22 | Same family keeps the page quiet |
-| Data, numbers, trace | IBM Plex Mono, 400 and 600 | 13/18, numbers 14 | Tabular by design, reads like a printed itinerary and an API log at once |
+| Wordmark | Big Shoulders Display 900, caps, pink offset overprint (3px right, 3px down) | 44 desktop, 34 mobile | The poster headline; the only decorative pink |
+| Verdict numbers | Big Shoulders Display 900 | 88/0.85 desktop, 64 mobile | Read from across a room and in a 300px thumbnail |
+| Route cities, section headings | Big Shoulders Display 800 to 900, caps | cities 26 to 30, headings 30 | The tour date stack. Condensed, so a long city still fits |
+| Body, tables, lists | Instrument Sans 400, 500, 600 | 15/22 body, 14/20 tables | A neutral grotesque with a slightly editorial tone; calm under loud headings |
+| Data, labels, trace, stamps | Space Mono 400, 700 | 12 to 13/18 | Monospace with character: reads like a ticket stub and an API log |
 
-Load from Google Fonts with `display=swap` via `next/font/google` (self hosts at build time, no runtime request): `Archivo` (axes `wdth`, `wght`) and `IBM Plex Mono` (400, 600). No Inter. Arial Black never appears.
+All three are loaded with `next/font/google` (self hosted at build time, no runtime request to Google) and exposed as `--font-display`, `--font-body` and `--font-mono`. No Inter, no Arial Black, no system stack as the design.
 
 ### Spacing, radius, motion
 
-- Spacing scale (px): 4, 8, 12, 16, 24, 32, 48, 64. Section gap 32 desktop, 24 mobile. Page gutter 32 desktop, 16 mobile.
-- Radius: 0 on sheets, tables and sections; 2px on inputs and buttons; stop number discs are circles. No pills except the fixture stamp.
-- Rules: a 2px ink rule opens each section (day sheet style), 1px hairlines between rows. No box shadows. No gradients.
-- Motion: only to show the agent working. Trace lines enter with a 120ms fade; the route strip draws left to right once (400ms ease-out) when a result lands. Respect `prefers-reduced-motion` (no draw, no fade). No hover lifts, no shimmer.
+- Spacing scale (px): 4, 8, 12, 16, 24, 32, 48, 64. Section gap 40 desktop, 28 mobile. Page gutter 32 desktop, 16 mobile.
+- Radius: 0 everywhere. Tier discs and stop numbers are circles.
+- Rules: a 3px ink rule under every section heading, 1px hairlines between data rows, a 3px ink frame around the run bar. No shadows (the wordmark overprint is a flat text shadow, not a blur). No gradients.
+- Motion: only to show the agent working. Trace lines fade in over 120ms. Nothing else moves. Respect `prefers-reduced-motion`.
 
 ## 5. Component and screen inventory
 
 Screens:
 
-1. **Home, empty**: masthead, run bar (artist, region, dates, optional cities, Plan the tour), three sample artists as itinerary rows ("Noah Kahan, folk-pop, US and Canada, 8 dates"), the trace placeholder.
-2. **Running**: run bar disabled, trace streaming, a progress line ("step 6 of ~13, 41 Qloo requests").
-3. **Result**: in this order. (a) Verdict strip: without vs with, avg fan score pair, missed cities, unfindable openers. (b) Brief headline and three decisions. (c) Routing: route strip, map, itinerary table. (d) Support act. (e) Sponsors and merch. (f) Audience.
-4. **Printable brief** `/brief/[id]`: the same tokens in light mode only, A4 and US Letter safe.
+1. **Home, empty**: masthead (wordmark, one line of who it's for, mode stamp), run bar (artist, region, dates, optional cities, Plan the tour), sample artists as a poster style bill (artist in display type, genre and region in mono), the trace panel placeholder.
+2. **Running**: run bar disabled, a "Planning" panel with steps and Qloo request counts, trace streaming.
+3. **Result**, in this order: (a) the verdict: "The guess tour" vs "The taste tour", the score pair between them, then the three facts; (b) the brief headline and the three decisions as a sheet; (c) routing: date stack, map, ranked markets; (d) support act; (e) sponsors and merch; (f) audience.
+4. **Printable brief** `/brief/[id]`: light tokens only, poster heading, calm tables, A4 and US Letter safe.
 5. **States**: fixture stamp, live stamp, replayed from cache, LLM unavailable, Qloo empty result, error.
-6. **Mobile** 390px: trace moves below the result and collapses to its last 5 lines with "show all".
+6. **Mobile** 390px: one column, trace below the result.
 
-Components: masthead with mode stamp; run bar; sample row; verdict strip (stat pair, missed list, opener check); score row (city, bar, number); tier mark and label; route strip (stops, drive legs in km); route map (Leaflet, tier discs, red pencil rings for LLM picks, numbered stops); itinerary table; opener cards and per market overlap grid (single hue ramp of `--qloo`); sponsor columns with local leads; audience tags, diverging age bars, momentum line; trace step and call line with source badges; primary and secondary button; segmented toggle; tooltip; source footnote; footer.
+Components: wordmark; mode stamp; run bar; sample bill; verdict (two route posters, score pair, fact row); decision sheet; date stack row; route map (Leaflet on a paper basemap: ink route, tier discs, blue dashed rings for LLM picks, numbered stops); ranked market rows; opener cards and the per market overlap grid (neutral ramp); sponsor columns with local leads; audience tags, age bars, momentum line; trace step and call line with mono source badges; primary (ink) and secondary (outlined) buttons; segmented toggle (outlined, ink when pressed); tooltip (ink box, paper text); source line; footer.
 
 ## 6. Submission assets
 
-All assets are rendered from the real app or from `design/` HTML with the tokens above. No stock photos, no AI images, no mock data that the app cannot produce.
+All assets are rendered from the running app by `scripts/assets.ts`: real screens, or poster layouts filled from a real run's JSON. No stock photos, no AI images, nothing the app cannot produce.
 
-- **Thumbnail** (Devpost, 3:2, export 1500 by 1000 PNG): artist name, the two route lists side by side (LLM's cities struck through in red pencil, Qloo's route in ink with sleeper stops in ultramarine), and the "83 vs 72" pair. At most 8 words of copy besides city names. Must read at 300 by 200: test by downscaling.
-- **Gallery images** (3:2, 1500 by 1000, up to 6): 1 the verdict, 2 route strip plus map, 3 the trace with one heatmap call highlighted, 4 opener overlap by market, 5 sponsors with local leads, 6 the printable brief. Each has a one line caption bar on top in the display face stating the takeaway, not the feature name ("Burlington, VT: the sleeper market the LLM never named").
-- **README hero**: gallery image 1. Keep the fixture caption until live data replaces it.
-- **Video cards** (1920 by 1080): title card is the thumbnail layout at 16:9. Lower thirds sit on a `--sheet` band with a 2px ink rule, Archivo 700 caps label plus a Plex Mono number, bottom left, 64px safe margin, on screen for at least 3 seconds. Every spoken number is also on screen. End card: "Headliner. Tour decisions on taste data, not guesswork." plus the live URL and "Built on Qloo".
-- **Fixture rule**: until the key is live, every asset that shows Qloo numbers carries the stamp "Fixture data, illustrative". Final assets are re-shot in live mode.
+- **Thumbnail** (Devpost 3:2, `docs/gallery/thumbnail.png`, 1500 by 1000): HEADLINER wordmark, artist, both route lists side by side ("Ask an LLM" in ink with blue strikes on the weak picks, "Ask Qloo" with pink on the cities only Qloo found), and the 83 vs 72 pair as the largest element. At 300 by 200 the score pair, both column heads and the strike marks must still read: check by downscaling (`docs/gallery/thumbnail-300.png`).
+- **Gallery images** (3:2, 1500 by 1000, `docs/gallery/01-…png` to `06-…png`): 1 verdict, 2 routing, 3 trace, 4 openers, 5 sponsors, 6 printable brief. Each has a caption band on top: the takeaway in display type ("Burlington, VT: the sleeper the LLM never named"), with a mono source line.
+- **README images** (`docs/img/`): re-shot by `scripts/screenshots.ts` in the new design. README hero = the verdict.
+- **Video cards** (1920 by 1080, `docs/video/`): title card (thumbnail layout at 16:9), lower third (transparent PNG: ink band, display label, mono number, 64px safe margin, at least 3 seconds on screen), end card ("Headliner. Tour decisions on taste data, not guesswork." plus the live URL slot and "Built on Qloo").
+- **Fixture rule**: until the key is live, every asset that shows Qloo numbers carries the mono stamp "FIXTURE DATA · ILLUSTRATIVE". Final assets are re-shot in live mode by re-running `scripts/assets.ts`.
 
 ## 7. Do and don't
 
 Do:
-- Lead with the verdict and the route.
-- Use ink, paper and two data colours.
+- Lead with the verdict and the two routes.
+- Keep pink for Qloo's signal and blue for the plain LLM.
+- Set data in Instrument Sans and Space Mono on hairlines; save poster type for what should be seen from across a room.
 - Name the source of every number.
 - Write labels the way a tour manager talks: "dates", "rooms", "drive", "opener", "sleeper".
 - Test at 1440 by 900, 1280 by 800 and 390 by 844 before every commit that touches UI.
 
 Don't:
-- No gradients, glows, glassmorphism or box shadows.
-- No rounded cards inside rounded cards. A section is a rule and a heading, not a box.
-- No emoji or decorative icons. Use stop numbers, tier marks and words.
-- No Inter, no system font stack as the design, no Arial Black.
-- No new hues for new features. Fold them into ink, neutrals or the two data colours.
-- No purple, no cream with terracotta.
-- No paragraph of marketing copy above the run bar. One line of who it is for is enough.
+- No pink buttons, pink stamps, pink backgrounds, pink tints or pink decoration (except the wordmark overprint).
+- No gradients, glows, blurs, shadows or rounded corners.
+- No cards inside cards. A section is a heading and a 3px rule.
+- No emoji or decorative icons. Use stop numbers, tier discs and words.
+- No poster type in tables, the trace or captions.
+- No Inter, no Arial Black, no system stack as the design.
+- No new hues for new features.
+- No paragraph of marketing copy above the run bar.
 - Never change scoring, data or behaviour in a design commit.
 
-## Appendix: tokens for the other directions
+## Appendix: directions not picked
 
-Both pass the same contrast and validator checks (computed 15 Oct 2026).
-
-**B, "Front of house"** (console, dark first). Fonts: Barlow Condensed 600 (labels, like scribble strips), Barlow 400 (body), JetBrains Mono (data).
-
-| Token | Dark | Light |
-|---|---|---|
-| deck (page) | `#0B0C0E` | `#E9EBEE` |
-| strip (surface) | `#15171B` | `#FFFFFF` |
-| strip-2 (inset) | `#1E2126` | `#F3F4F6` |
-| line | `#2B2F36` | `#D3D7DD` |
-| text / text-2 / text-3 | `#E9EBEE` 16.4:1, `#A9AFB9` 8.9:1, `#868D99` 4.8:1 on inset | `#0F1114` 15.8:1, `#464C55` 7.3:1, `#626973` 4.6:1 |
-| qloo mark / qloo text | `#C08300` / `#FFB733` 11.3:1 | `#A36D00` / `#7A5200` 5.8:1 |
-| llm mark / llm text | `#5A8CF0` / `#8FB0FF` 9.2:1 | `#3F6FD6` / `#2A55B0` 5.8:1 |
-| neutral mark / LED off | `#6A717D` / `#23262C` | `#80868F` / `#E1E4E8` |
-
-**C, "Tour poster"** (riso print, light first). Fonts: Big Shoulders Display 900 (poster type), Instrument Sans (body), Space Mono (data).
-
-| Token | Light | Dark |
-|---|---|---|
-| paper / sheet / sunk | `#FAFAF7` / `#FFFFFF` / `#F0F0EC` | `#111111` / `#1A1A1A` / `#232323` |
-| ink / ink-2 / ink-3 | `#0D0D0D` 18.6:1, `#3D3D3D` 10.4:1, `#616161` 5.9:1 | `#F5F5F2` 17.3:1, `#C2C2BE` 10.6:1, `#929290` 6.1:1 |
-| qloo (fluoro pink) mark / text | `#E6007E` / `#B00060` 6.7:1 | `#E8429A` / `#FF8CC6` 8.8:1 |
-| llm (riso blue) mark / text | `#0078BF` / `#005A91` 7.0:1 | `#2E8AD8` / `#8CC8FF` 10.6:1 |
-| neutral mark | `#858585` 3.5:1 | `#77777A` 4.2:1 |
+A ("Advance sheet") and B ("Front of house") are kept in `design/directions.html` for reference only. Their tokens are not binding.

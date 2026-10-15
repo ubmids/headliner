@@ -1,20 +1,48 @@
-"""WCAG 2 contrast ratios for the Headliner design tokens (design/DESIGN.md). Run: python3 design/contrast.py"""
+"""WCAG 2 contrast ratios for the Headliner design tokens (Direction C, design/DESIGN.md).
+Run: python3 design/contrast.py"""
+
+
 def lum(h):
-    h=h.lstrip('#'); r,g,b=[int(h[i:i+2],16)/255 for i in (0,2,4)]
-    f=lambda c: c/12.92 if c<=0.03928 else ((c+0.055)/1.055)**2.4
-    return 0.2126*f(r)+0.7152*f(g)+0.0722*f(b)
-def cr(a,b):
-    la,lb=sorted([lum(a),lum(b)],reverse=True); return (la+0.05)/(lb+0.05)
-S={
-"A light":dict(bg="#F2F2EF",sheet="#FFFFFF",sunk="#E9E9E5",text=["#111111","#44443F","#66665F","#1B2A9E","#A3200F"],marks=["#2638C9","#C42A1C","#83837C"],tint=[("#1B2A9E","#E6E9FB"),("#A3200F","#FBE7E4"),("#6B4A00","#FFF1C7"),("#FFFFFF","#2638C9"),("#FFFFFF","#111111")]),
-"A dark":dict(bg="#0E0E0D",sheet="#181817",sunk="#222220",text=["#F1F1EC","#BDBDB5","#8F8F87","#A7B1FF","#FF9A8A"],marks=["#6878F2","#E5533F","#75756E"],tint=[("#A7B1FF","#1E2340"),("#FF9A8A","#3A1C17"),("#F2D48A","#2E2508"),("#0E0E0D","#A7B1FF"),("#0E0E0D","#F1F1EC")]),
-"B dark":dict(bg="#0B0C0E",sheet="#15171B",sunk="#1E2126",text=["#E9EBEE","#A9AFB9","#868D99","#FFB733","#8FB0FF"],marks=["#C08300","#5A8CF0","#6A717D"],tint=[("#0B0C0E","#FFB733"),("#FFB733","#2A2006")]),
-"B light":dict(bg="#E9EBEE",sheet="#FFFFFF",sunk="#F3F4F6",text=["#0F1114","#464C55","#626973","#7A5200","#2A55B0"],marks=["#A36D00","#3F6FD6","#80868F"],tint=[("#0F1114","#FFB733"),("#7A5200","#FFF1D6")]),
-"C light":dict(bg="#FAFAF7",sheet="#FFFFFF",sunk="#F0F0EC",text=["#0D0D0D","#3D3D3D","#616161","#B00060","#005A91"],marks=["#E6007E","#0078BF","#858585"],tint=[("#B00060","#FFE0F0"),("#005A91","#DDEFFA"),("#FFFFFF","#E6007E"),("#0D0D0D","#E6007E")]),
-"C dark":dict(bg="#111111",sheet="#1A1A1A",sunk="#232323",text=["#F5F5F2","#C2C2BE","#929290","#FF8CC6","#8CC8FF"],marks=["#E8429A","#2E8AD8","#77777A"],tint=[("#FF8CC6","#3A1428"),("#8CC8FF","#10263A"),("#111111","#E8429A")]),
+    h = h.lstrip("#")
+    r, g, b = [int(h[i:i + 2], 16) / 255 for i in (0, 2, 4)]
+    f = lambda c: c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4
+    return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b)
+
+
+def cr(a, b):
+    la, lb = sorted([lum(a), lum(b)], reverse=True)
+    return (la + 0.05) / (lb + 0.05)
+
+
+MODES = {
+    "light": dict(
+        surfaces={"paper": "#FAFAF7", "sheet": "#FFFFFF", "sunk": "#F0F0EC"},
+        text={"ink": "#0D0D0D", "ink-2": "#3D3D3D", "ink-3": "#616161", "qloo-text": "#B00060", "llm-text": "#005A91"},
+        marks={"qloo": "#E6007E", "llm": "#0078BF", "neutral": "#858585"},
+        pairs=[("on-qloo", "#FFFFFF", "#E6007E"), ("button paper on ink", "#FAFAF7", "#0D0D0D"),
+               ("panel-text", "#F5F5F2", "#0D0D0D"), ("panel-text-2", "#B8B8B4", "#0D0D0D"), ("panel-text-3", "#8E8E8A", "#0D0D0D"),
+               ("panel-qloo", "#FF5CAD", "#0D0D0D"), ("panel-llm", "#5CB3FF", "#0D0D0D"),
+               ("seq-1", "#0D0D0D", "#E4E4DF"), ("seq-2", "#0D0D0D", "#BDBDB7"), ("seq-3", "#FFFFFF", "#6F6F6A"),
+               ("seq-4", "#FFFFFF", "#4A4A46"), ("seq-5", "#FFFFFF", "#1F1F1D")],
+    ),
+    "dark": dict(
+        surfaces={"paper": "#111111", "sheet": "#1A1A1A", "sunk": "#232323"},
+        text={"ink": "#F5F5F2", "ink-2": "#C2C2BE", "ink-3": "#929290", "qloo-text": "#FF8CC6", "llm-text": "#8CC8FF"},
+        marks={"qloo": "#E8429A", "llm": "#2E8AD8", "neutral": "#77777A"},
+        pairs=[("on-qloo", "#111111", "#E8429A"), ("button ink-bg", "#111111", "#F5F5F2"),
+               ("panel-text", "#F5F5F2", "#050505"), ("panel-text-2", "#B8B8B4", "#050505"), ("panel-text-3", "#929290", "#050505"),
+               ("panel-qloo", "#FF8CC6", "#050505"), ("panel-llm", "#8CC8FF", "#050505"),
+               ("seq-1", "#F5F5F2", "#2A2A28"), ("seq-2", "#F5F5F2", "#45453F"), ("seq-3", "#111111", "#8C8C86"),
+               ("seq-4", "#111111", "#BDBDB7"), ("seq-5", "#111111", "#E8E8E3")],
+    ),
 }
-for k,v in S.items():
-    print("==",k)
-    for surf in ("bg","sheet","sunk"):
-        print(f"  {surf} {v[surf]}: text "+" ".join(f"{t}:{cr(t,v[surf]):.2f}" for t in v["text"])+" | marks "+" ".join(f"{m}:{cr(m,v[surf]):.2f}" for m in v["marks"]))
-    print("  pairs "+" ".join(f"{a}/{b}:{cr(a,b):.2f}" for a,b in v["tint"]))
+
+if __name__ == "__main__":
+    for mode, v in MODES.items():
+        print(f"== {mode}")
+        for sn, sv in v["surfaces"].items():
+            t = " ".join(f"{k} {cr(c, sv):.2f}" for k, c in v["text"].items())
+            m = " ".join(f"{k} {cr(c, sv):.2f}" for k, c in v["marks"].items())
+            print(f"  on {sn} {sv}: text [{t}] marks [{m}]")
+        for n, a, b in v["pairs"]:
+            print(f"  {n}: {a} on {b} = {cr(a, b):.2f}")
