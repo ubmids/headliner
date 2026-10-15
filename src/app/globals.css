@@ -347,6 +347,13 @@ table.grid td.num, table.grid th.num { text-align: right; font-family: var(--mon
   .map { height: 320px; }
   .date .city { font-size: 24px; }
   .banner { flex-direction: column; gap: 4px; }
+  .lede { display: none; }
+  .mast .tag { margin-top: 6px; }
+  .samples { gap: 4px 12px; }
+  .chip b { font-size: 18px; }
+  .chip span { display: none; }
+  .callout { font-size: 14px; }
+  .card h2 .k { display: none; }
 }
 
 /* Print: the brief page */
