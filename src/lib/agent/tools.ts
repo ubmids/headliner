@@ -185,7 +185,7 @@ export const TOOLS: ToolDef[] = [
   {
     name: "discover_markets",
     description:
-      "Find where the headliner's fans concentrate across the tour region with a Qloo heatmap (/v2/insights filter.type=urn:heatmap, filter.location=<region polygon>, output.heatmap.boundary=urn:entity:locality). Use when no city list is given, or to find markets the promoter did not think of.",
+      "Find where the headliner's fans concentrate across the tour region with a Qloo heatmap (/v2/insights filter.type=urn:heatmap, filter.location=<region polygon>, output.heatmap.boundary=urn:geohash, folded into cities). Use when no city list is given, or to find markets the promoter did not think of.",
     parameters: { type: "object", properties: { limit: { type: "integer", description: "max cities to keep (default 14)" } } },
     async run(ctx, args) {
       const artist = requireArtist(ctx);
@@ -193,7 +193,8 @@ export const TOOLS: ToolDef[] = [
       const res = await ctx.client.heatmap({
         "signal.interests.entities": artist.id,
         "filter.location": ctx.region.wkt,
-        "output.heatmap.boundary": "urn:entity:locality",
+        // Geohash cells (the default boundary) come back in ~2 s; urn:entity:locality took ~50 s on the live API. Cells are folded into cities below.
+        "output.heatmap.boundary": "urn:geohash",
         take: 50,
       });
       // Points may arrive per city or per geohash: fold them into gazetteer cities.

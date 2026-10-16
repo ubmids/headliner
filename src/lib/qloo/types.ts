@@ -27,6 +27,10 @@ export type QlooEndpoint = (typeof QLOO_ENDPOINTS)[number];
 export type ParamValue = string | number | boolean | Array<string | number>;
 export type QlooParams = Record<string, ParamValue | undefined>;
 
+/** Qloo sometimes sends numbers as strings and optional strings as null: accept both, normalise to number | undefined. */
+const num = z.preprocess((v) => (v === null || v === "" ? undefined : typeof v === "string" ? Number(v) : v), z.number().optional());
+const str = z.string().nullish().transform((v) => v ?? undefined);
+
 const geo = z
   .object({ lat: z.number().optional(), lon: z.number().optional(), lng: z.number().optional() })
   .passthrough();
@@ -55,15 +59,15 @@ export const entitySchema = z
     location: geo.optional(),
     properties: z
       .object({
-        description: z.string().optional(),
-        short_description: z.string().optional(),
-        address: z.string().optional(),
+        description: str,
+        short_description: str,
+        address: str,
         image: z.object({ url: z.string() }).passthrough().optional(),
         geocode: z
           .object({
-            name: z.string().optional(),
-            admin1_region: z.string().optional(),
-            country_code: z.string().optional(),
+            name: str,
+            admin1_region: str,
+            country_code: str,
           })
           .passthrough()
           .optional(),
@@ -140,11 +144,11 @@ export const audienceSchema = z
 export const trendingPointSchema = z
   .object({
     date: z.string(),
-    population_percentile: z.number().optional(),
-    population_rank: z.number().optional(),
-    population_rank_velocity: z.number().optional(),
-    velocity_fold_change: z.number().optional(),
-    population_percent_delta: z.number().optional(),
+    population_percentile: num,
+    population_rank: num,
+    population_rank_velocity: num,
+    velocity_fold_change: num,
+    population_percent_delta: num,
   })
   .passthrough();
 export type TrendingPoint = z.infer<typeof trendingPointSchema>;

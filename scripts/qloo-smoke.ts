@@ -116,7 +116,8 @@ async function main() {
   await probe("GET /v2/insights filter.type=urn:demographics", () => c.demographics({ "signal.interests.entities": id }), (r) => r.results.demographics.length, (r) => JSON.stringify(r.results.demographics[0]?.query.age ?? {}));
 
   const region = REGIONS["north-america"];
-  const hm = await probe("GET /v2/insights urn:heatmap boundary=urn:entity:locality (region polygon)", () => c.heatmap({ "signal.interests.entities": id, "filter.location": region.wkt, "output.heatmap.boundary": "urn:entity:locality", take: 50 }), (r) => r.results.heatmap.length, (r) => `first: ${JSON.stringify(r.results.heatmap[0]).slice(0, 160)}`);
+  // The app uses geohash cells: urn:entity:locality over a whole region took ~50 s on the live API (16 Oct 2026).
+  const hm = await probe("GET /v2/insights urn:heatmap boundary=urn:geohash (region polygon)", () => c.heatmap({ "signal.interests.entities": id, "filter.location": region.wkt, "output.heatmap.boundary": "urn:geohash", take: 50 }), (r) => r.results.heatmap.length, (r) => `first: ${JSON.stringify(r.results.heatmap[0]).slice(0, 160)}`);
   if (!hm || hm.results.heatmap.length === 0) {
     await probe("FALLBACK heatmap default boundary (geohash)", () => c.heatmap({ "signal.interests.entities": id, "filter.location": region.wkt, take: 50 }), (r) => r.results.heatmap.length);
     await probe("FALLBACK heatmap filter.location.query=Boston", () => c.heatmap({ "signal.interests.entities": id, "filter.location.query": "Boston", take: 50 }), (r) => r.results.heatmap.length);

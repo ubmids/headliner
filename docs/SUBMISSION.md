@@ -82,7 +82,7 @@ GET https://hackathon.api.qloo.com/v2/insights
     ?filter.type=urn:heatmap
     &signal.interests.entities=<Noah Kahan entity ID>
     &filter.location=POLYGON((-125 24, -66 24, -66 50, -125 50, -125 24))
-    &output.heatmap.boundary=urn:entity:locality
+    &output.heatmap.boundary=urn:geohash
     &take=50
 X-Api-Key: <redacted>
 → results.heatmap[]: { location: {latitude, longitude}, query: {affinity, affinity_rank, popularity} }

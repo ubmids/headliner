@@ -197,7 +197,7 @@
     "params": {
      "filter.location": "POLYGON((-125 24, -66 24, -66 50, -125 50, -125 24))",
      "filter.type": "urn:heatmap",
-     "output.heatmap.boundary": "urn:entity:locality",
+     "output.heatmap.boundary": "urn:geohash",
      "signal.interests.entities": "38975284-2284-0E53-13FB-F039DC7AF544",
      "take": "50"
     }

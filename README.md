@@ -30,7 +30,7 @@ The agent plans its own sequence of Qloo calls (a tool-calling LLM, or a determi
 |---|---|
 | `GET /search` (`types=urn:entity:artist`) | resolve the headliner, and the plain LLM's suggested openers, to Qloo entity IDs |
 | `GET /v2/tags` (`filter.query`, `feature.semantic_search`) | find valid tag IDs for *music venue*, *bar*, and the sponsor categories |
-| `GET /v2/insights` `filter.type=urn:heatmap` + `filter.location` (region polygon) + `output.heatmap.boundary=urn:entity:locality` | where fans concentrate across the region (affinity vs popularity → over-index) |
+| `GET /v2/insights` `filter.type=urn:heatmap` + `filter.location` (region polygon) + `output.heatmap.boundary=urn:geohash` (cells folded into cities) | where fans concentrate across the region (affinity vs popularity → over-index) |
 | `GET /v2/insights` `filter.type=urn:entity:artist` + `filter.results.entities` + `signal.location.query` | the artist's affinity in each candidate city; support-act overlap per market |
 | `GET /v2/insights` `filter.type=urn:entity:artist` + `signal.interests.entities` + `filter.popularity.max` + `feature.explainability` | support-act candidates |
 | `GET /v2/insights` `filter.type=urn:entity:place` + `filter.location.query` + `filter.tags` | venues and hospitality partners whose patrons share the taste |
