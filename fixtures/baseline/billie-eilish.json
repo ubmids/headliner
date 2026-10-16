@@ -1,0 +1,27 @@
+{
+  "artist": "Billie Eilish",
+  "source": "recorded-llm",
+  "model": "claude-haiku-4-5-20251001",
+  "cities": [
+    "Los Angeles, CA",
+    "New York, NY",
+    "Toronto, ON",
+    "Chicago, IL",
+    "Houston, TX",
+    "Miami, FL",
+    "Seattle, WA",
+    "Vancouver, BC"
+  ],
+  "supportActs": [
+    "Clairo"
+  ],
+  "sponsors": [
+    "Apple Music",
+    "Monster Energy",
+    "Vans",
+    "Beats by Dre"
+  ],
+  "reasoning": "These eight cities represent the largest metro areas and strongest ticket-sales markets across North America, balancing coasts and mid-country demand while including her home market (LA) and major international hub (Toronto). Clairo as opener appeals to the same Gen-Z demographic, while sponsors align with Billie's brand aesthetic—tech-forward, youth-culture-focused, and alternative lifestyle positioning.",
+  "recordedAt": "2026-10-16T11:48:53.156Z",
+  "prompt": "src/lib/agent/baseline.ts baselinePrompt(artist, region, 8, [])"
+}

@@ -1,0 +1,27 @@
+{
+  "artist": "Chappell Roan",
+  "source": "recorded-llm",
+  "model": "claude-haiku-4-5-20251001",
+  "cities": [
+    "Los Angeles, CA",
+    "New York, NY",
+    "Chicago, IL",
+    "Toronto, ON",
+    "San Francisco, CA",
+    "Nashville, TN",
+    "Boston, MA",
+    "Seattle, WA"
+  ],
+  "supportActs": [
+    "Destroy Boys"
+  ],
+  "sponsors": [
+    "Live Nation",
+    "Monster Energy",
+    "Urban Outfitters",
+    "Converse"
+  ],
+  "reasoning": "This routing maximizes major markets with strong LGBTQ+ communities and indie/pop audiences where Chappell has demonstrated chart success, while minimizing travel with geographic clustering. The support act, sponsors, and merch partners align with her theatrical pop-punk aesthetic and fanbase demographics.",
+  "recordedAt": "2026-10-16T11:48:46.930Z",
+  "prompt": "src/lib/agent/baseline.ts baselinePrompt(artist, region, 8, [])"
+}

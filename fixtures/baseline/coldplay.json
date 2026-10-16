@@ -1,0 +1,27 @@
+{
+  "artist": "Coldplay",
+  "source": "recorded-llm",
+  "model": "claude-haiku-4-5-20251001",
+  "cities": [
+    "London, UK",
+    "Manchester, UK",
+    "Berlin, Germany",
+    "Paris, France",
+    "Amsterdam, Netherlands",
+    "Milan, Italy",
+    "Madrid, Spain",
+    "Dublin, Ireland"
+  ],
+  "supportActs": [
+    "Declan McKenna"
+  ],
+  "sponsors": [
+    "Apple Music",
+    "Adidas",
+    "Mastercard",
+    "Beats by Dre"
+  ],
+  "reasoning": "This routing maximizes arena capacity in major European markets with strong Coldplay fanbases, minimizes travel distances through logical geographic sequencing, and pairs them with rising UK artist Declan McKenna who appeals to their demographic. The sponsor mix targets tech/music (Apple, Beats), lifestyle/sportswear (Adidas), and financial services (Mastercard) brands with proven track records in music partnerships and budgets for premium arena sponsorships.",
+  "recordedAt": "2026-10-16T11:49:05.899Z",
+  "prompt": "src/lib/agent/baseline.ts baselinePrompt(artist, region, 8, [])"
+}

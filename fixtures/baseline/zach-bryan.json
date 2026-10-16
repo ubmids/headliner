@@ -1,0 +1,28 @@
+{
+  "artist": "Zach Bryan",
+  "source": "recorded-llm",
+  "model": "claude-haiku-4-5-20251001",
+  "cities": [
+    "Nashville, TN",
+    "Austin, TX",
+    "Denver, CO",
+    "Los Angeles, CA",
+    "Seattle, WA",
+    "Chicago, IL",
+    "New York, NY",
+    "Toronto, ON"
+  ],
+  "supportActs": [
+    "Colter Wall",
+    "Tyler Childers"
+  ],
+  "sponsors": [
+    "Wrangler",
+    "Jack Daniel's",
+    "Carhartt",
+    "Budweiser"
+  ],
+  "reasoning": "This routing prioritizes Zach Bryan's core fanbase in country/Americana strongholds (Nashville, Austin, Denver) while hitting major metros and Canada for maximum reach and ticket sales. The support acts and sponsors align with his authentic, working-class country brand and appeal to his demographic of 18-35 year old fans.",
+  "recordedAt": "2026-10-16T11:48:49.849Z",
+  "prompt": "src/lib/agent/baseline.ts baselinePrompt(artist, region, 8, [])"
+}

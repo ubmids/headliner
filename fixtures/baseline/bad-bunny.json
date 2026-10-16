@@ -1,0 +1,29 @@
+{
+  "artist": "Bad Bunny",
+  "source": "recorded-llm",
+  "model": "claude-haiku-4-5-20251001",
+  "cities": [
+    "New York, NY",
+    "Los Angeles, CA",
+    "Miami, FL",
+    "Houston, TX",
+    "Toronto, ON",
+    "Mexico City, MX",
+    "Chicago, IL",
+    "Las Vegas, NV"
+  ],
+  "supportActs": [
+    "Rauw Alejandro",
+    "Tainy"
+  ],
+  "sponsors": [
+    "Spotify",
+    "Monster Energy",
+    "Nike",
+    "Hennessy",
+    "PlayStation"
+  ],
+  "reasoning": "These eight cities represent the largest Latin and mainstream markets with highest ticket demand and revenue potential, strategically balancing major US metros with key Latin diaspora hubs and Canada's top market. The support acts are established reggaeton/trap latino artists who complement Bad Bunny's fanbase, while sponsors align with his demographic (18-35, urban, digital-native) and existing brand partnerships in music and lifestyle.",
+  "recordedAt": "2026-10-16T11:48:37.997Z",
+  "prompt": "src/lib/agent/baseline.ts baselinePrompt(artist, region, 8, [])"
+}

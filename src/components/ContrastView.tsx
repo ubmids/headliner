@@ -5,14 +5,21 @@ import type { RunResult } from "@/lib/agent/run";
 type View = "side" | "without" | "with";
 
 /** The verdict: the plain LLM's tour next to Headliner's, both scored on the same Qloo fan-score scale. */
-export default function ContrastView({ result }: { result: RunResult }) {
+export default function ContrastView({ result, recorded = [] }: { result: RunResult; recorded?: string[] }) {
   const [view, setView] = useState<View>("side");
   const { baseline, contrast, plan } = result;
   if (!baseline || baseline.source === "unavailable" || !contrast) {
     return (
       <section className="card">
         <h2>Without Qloo vs with Qloo</h2>
-        <p className="muted">No plain-LLM answer is available for this run{baseline?.note ? `: ${baseline.note}` : ""}. Configure LLM_BASE_URL / LLM_MODEL to enable the comparison.</p>
+        {recorded.length ? (
+          <p className="sub">
+            No plain-LLM answer for this artist. This demo host runs without an LLM key, so the &quot;without Qloo&quot; answers are recorded ahead of time (same prompt, Claude Haiku
+            4.5) for: {recorded.join(", ")}. Everything else on this page is live Qloo data.
+          </p>
+        ) : (
+          <p className="muted">No plain-LLM answer is available for this run{baseline?.note ? `: ${baseline.note}` : ""}. Configure LLM_BASE_URL / LLM_MODEL to enable the comparison.</p>
+        )}
       </section>
     );
   }
@@ -26,7 +33,7 @@ export default function ContrastView({ result }: { result: RunResult }) {
     <div className="vs-col llm">
       <p className="who">
         Without Qloo · plain LLM{baseline.model ? ` (${baseline.model})` : ""}
-        {baseline.source === "recorded-llm" ? " · recorded answer" : ""}
+        {baseline.source === "recorded-llm" ? ` · cached answer${baseline.recordedAt ? `, recorded ${baseline.recordedAt.slice(0, 10)}` : ""}` : ""}
       </p>
       <h4>The guess tour</h4>
       <p className="how">Same question, no data. Its cities, scored afterwards by Qloo (fan score 0–100, relative to every city scored).</p>

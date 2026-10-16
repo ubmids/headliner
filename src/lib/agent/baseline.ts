@@ -2,7 +2,7 @@
  * "Without Qloo": the same question answered by the plain LLM, no tools, no taste data.
  * In fixture mode (no LLM configured) a recorded baseline is served from fixtures/baseline/.
  */
-import { promises as fs } from "node:fs";
+import { promises as fs, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { REGIONS, type RegionId } from "../geo";
 import { extractJson, type LlmClient } from "../llm";
@@ -15,6 +15,8 @@ export interface Baseline {
   sponsors: string[];
   reasoning: string;
   note?: string;
+  /** When a recorded answer was made (recorded-llm only). */
+  recordedAt?: string;
 }
 
 export function slugify(s: string): string {
@@ -60,6 +62,20 @@ export async function liveBaseline(llm: LlmClient, artist: string, regionId: Reg
   const parsed = parseBaseline(res.content, llm.model);
   if (!parsed) throw new Error("The plain LLM did not return a usable plan.");
   return parsed;
+}
+
+/** Names of the artists with a recorded baseline, for the UI ("pre-recorded for: …"). */
+export function recordedArtists(root = process.cwd()): string[] {
+  try {
+    const dir = path.join(root, "fixtures", "baseline");
+    return readdirSync(dir)
+      .filter((f) => f.endsWith(".json"))
+      .map((f) => (JSON.parse(readFileSync(path.join(dir, f), "utf8")) as { artist?: string }).artist)
+      .filter((a): a is string => !!a)
+      .sort();
+  } catch {
+    return [];
+  }
 }
 
 export async function recordedBaseline(artist: string, root = process.cwd()): Promise<Baseline | undefined> {

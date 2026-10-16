@@ -1,0 +1,29 @@
+{
+  "artist": "Taylor Swift",
+  "source": "recorded-llm",
+  "model": "claude-haiku-4-5-20251001",
+  "cities": [
+    "New York, NY",
+    "Los Angeles, CA",
+    "Toronto, ON",
+    "Chicago, IL",
+    "Nashville, TN",
+    "Boston, MA",
+    "San Francisco, CA",
+    "Vancouver, BC"
+  ],
+  "supportActs": [
+    "Olivia Rodrigo"
+  ],
+  "sponsors": [
+    "Apple Music",
+    "Ticketmaster",
+    "Coca-Cola",
+    "Mercedes-Benz",
+    "Lover Beauty (cosmetics partnership)",
+    "Folklore Apparel (exclusive merch)"
+  ],
+  "reasoning": "This routing maximizes major metropolitan markets with strong Swiftie demographics while balancing coasts and including two Canadian dates for international reach. Pairing with Olivia Rodrigo creates generational appeal and cross-promotional synergy, while sponsors leverage music streaming, ticketing infrastructure, and lifestyle brands aligned with Taylor's fanbase and aesthetic.",
+  "recordedAt": "2026-10-16T11:49:02.550Z",
+  "prompt": "src/lib/agent/baseline.ts baselinePrompt(artist, region, 8, [])"
+}

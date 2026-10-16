@@ -1,0 +1,27 @@
+{
+  "artist": "Khruangbin",
+  "source": "recorded-llm",
+  "model": "claude-haiku-4-5-20251001",
+  "cities": [
+    "Austin, TX",
+    "Los Angeles, CA",
+    "San Francisco, CA",
+    "Denver, CO",
+    "Chicago, IL",
+    "New York, NY",
+    "Toronto, ON",
+    "Portland, OR"
+  ],
+  "supportActs": [
+    "Vulfpeck"
+  ],
+  "sponsors": [
+    "Fender",
+    "Bandcamp",
+    "Psycho Las Vegas",
+    "Patagonia"
+  ],
+  "reasoning": "This routing maximizes Khruangbin's core fanbase in music-forward cities with strong psychedelic/funk communities while minimizing travel backtracking across the continent. Vulfpeck shares the same instrumental funk-fusion audience, Fender aligns with their guitar-centric brand, and lifestyle sponsors like Patagonia match their eco-conscious ethos.",
+  "recordedAt": "2026-10-16T11:48:40.988Z",
+  "prompt": "src/lib/agent/baseline.ts baselinePrompt(artist, region, 8, [])"
+}

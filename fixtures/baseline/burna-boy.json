@@ -1,0 +1,28 @@
+{
+  "artist": "Burna Boy",
+  "source": "recorded-llm",
+  "model": "claude-haiku-4-5-20251001",
+  "cities": [
+    "London, UK",
+    "Manchester, UK",
+    "Amsterdam, Netherlands",
+    "Berlin, Germany",
+    "Paris, France",
+    "Brussels, Belgium",
+    "Dublin, Ireland",
+    "Stockholm, Sweden"
+  ],
+  "supportActs": [
+    "Wizkid",
+    "Rema"
+  ],
+  "sponsors": [
+    "Hennessy",
+    "Apple Music",
+    "Puma",
+    "Monster Energy"
+  ],
+  "reasoning": "This route maximizes major metropolitan markets with strong African diaspora populations and established Afrobeats audiences, while minimizing travel distances through strategic geographic clustering. The support acts are complementary Afrobeats stars who elevate the bill, and sponsors align with Burna Boy's premium lifestyle brand positioning and existing partnerships in the music/beverage/sportswear sectors.",
+  "recordedAt": "2026-10-16T11:48:43.976Z",
+  "prompt": "src/lib/agent/baseline.ts baselinePrompt(artist, region, 8, [])"
+}

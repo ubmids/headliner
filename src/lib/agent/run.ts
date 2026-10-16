@@ -1,4 +1,4 @@
-import { REGIONS, orderRoute, type RegionId } from "../geo";
+import { REGIONS, distanceKm, orderRoute, type RegionId } from "../geo";
 import type { ChatMessage, LlmClient, ToolSpec } from "../llm";
 import { emptyPlan, scoreMarkets, scoreSupportActs, type TourPlan } from "../plan";
 import type { QlooCallRecord, QlooClient } from "../qloo/client";
@@ -6,6 +6,9 @@ import { buildContrast, type Contrast } from "../contrast";
 import { liveBaseline, recordedBaseline, type Baseline } from "./baseline";
 import { FINISH_TOOL, TOOLS, scoreNamedArtists, toolByName, type ToolContext } from "./tools";
 import { templateBrief, type BriefText } from "./brief";
+
+/** Two cities closer than this are one touring market (one date). */
+export const SAME_MARKET_KM = 30;
 
 export interface RunInput {
   artist: string;
@@ -232,7 +235,13 @@ export function withFullRoute(text: string | undefined, plan: TourPlan): string 
 export function finalise(plan: TourPlan) {
   plan.markets = scoreMarkets(plan.markets, plan.heat);
   plan.supportActs = scoreSupportActs(plan.supportActs);
-  const picks = plan.markets.filter((m) => m.tier !== "skip").slice(0, plan.dates);
+  // One date per metro: live data put Brooklyn next to New York and Oakland next to San Francisco.
+  const picks: typeof plan.markets = [];
+  for (const m of plan.markets) {
+    if (picks.length >= plan.dates) break;
+    if (m.tier === "skip" || picks.some((p) => distanceKm(p, m) < SAME_MARKET_KM)) continue;
+    picks.push(m);
+  }
   const chosen = picks.length >= Math.min(3, plan.markets.length) ? picks : plan.markets.slice(0, plan.dates);
   const { order, km } = orderRoute(chosen);
   plan.route = { order: order.map((m) => m.key), km };

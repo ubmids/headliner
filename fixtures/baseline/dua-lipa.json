@@ -1,0 +1,27 @@
+{
+  "artist": "Dua Lipa",
+  "source": "recorded-llm",
+  "model": "claude-haiku-4-5-20251001",
+  "cities": [
+    "London, UK",
+    "Manchester, UK",
+    "Paris, France",
+    "Berlin, Germany",
+    "Amsterdam, Netherlands",
+    "Milan, Italy",
+    "Barcelona, Spain",
+    "Dublin, Ireland"
+  ],
+  "supportActs": [
+    "Arlo Parks"
+  ],
+  "sponsors": [
+    "Monster Energy",
+    "Fashion Nova",
+    "Apple Music",
+    "Beats by Dre"
+  ],
+  "reasoning": "This routing maximizes UK strongholds before moving through Europe's largest pop markets, minimizing travel while hitting premium venues with 15,000-20,000 capacity. The sponsor mix targets energy/lifestyle brands with strong youth demographics and fashion credibility that align with Dua's demographic and aesthetic.",
+  "recordedAt": "2026-10-16T11:49:12.355Z",
+  "prompt": "src/lib/agent/baseline.ts baselinePrompt(artist, region, 8, [])"
+}

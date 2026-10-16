@@ -6,10 +6,13 @@ import { FixtureStore } from "./qloo/fixtures";
 import { QlooClient, type QlooCallRecord } from "./qloo/client";
 import { llmFromEnv } from "./llm";
 import { normaliseInput, runAgent, type AgentEvent, type RunInput, type RunResult } from "./agent/run";
+import { recordedArtists } from "./agent/baseline";
 
 const dataDir = path.resolve(process.env.DATA_DIR || ".data");
 const qlooCache = new JsonCache(path.join(dataDir, "qloo"));
-const runCache = new JsonCache(path.join(dataDir, "runs"), 300);
+// seed/runs: finished live runs recorded before deploy (scripts/seed-runs.sh), shipped with the app but never committed
+// (Qloo data stays out of the public repo). Serverless instances start with an empty DATA_DIR, so judges still get instant replays.
+const runCache = new JsonCache(path.join(dataDir, "runs"), 300, path.resolve("seed", "runs"));
 const fixtures = FixtureStore.default();
 let activeRuns = 0;
 const MAX_ACTIVE_RUNS = Number(process.env.MAX_ACTIVE_RUNS || 3);
@@ -20,6 +23,8 @@ export function serverMode() {
     qloo: process.env.QLOO_API_KEY?.trim() ? ("live" as const) : ("fixture" as const),
     planner: llm ? ("llm" as const) : ("rules" as const),
     model: llm?.model,
+    /** Artists with a pre-recorded "without Qloo" answer (used when no LLM is configured, as on the demo host). */
+    recorded: llm ? [] : recordedArtists(),
   };
 }
 

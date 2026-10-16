@@ -1,0 +1,27 @@
+{
+  "artist": "Arctic Monkeys",
+  "source": "recorded-llm",
+  "model": "claude-haiku-4-5-20251001",
+  "cities": [
+    "London, UK",
+    "Manchester, UK",
+    "Glasgow, UK",
+    "Paris, France",
+    "Berlin, Germany",
+    "Amsterdam, Netherlands",
+    "Brussels, Belgium",
+    "Dublin, Ireland"
+  ],
+  "supportActs": [
+    "Fontaines D.C."
+  ],
+  "sponsors": [
+    "Budweiser",
+    "NME",
+    "Converse",
+    "Spotify"
+  ],
+  "reasoning": "This routing prioritizes Arctic Monkeys' UK strongholds (Manchester hometown, London, Glasgow) before hitting major European capitals with strong indie/alternative audiences and efficient logistics. The lineup pairs a critically-acclaimed Irish post-punk act as support, while sponsors align with the band's demographic and aesthetic—music media (NME), lifestyle brands (Converse), and streaming/beverage partners with proven festival/tour track records.",
+  "recordedAt": "2026-10-16T11:49:09.290Z",
+  "prompt": "src/lib/agent/baseline.ts baselinePrompt(artist, region, 8, [])"
+}

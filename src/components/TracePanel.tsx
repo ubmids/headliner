@@ -83,7 +83,7 @@ export default function TracePanel({ state, defaultMode }: { state: RunState; de
             <div className="thought">
               {state.baseline.source === "unavailable"
                 ? `No plain-LLM answer: ${state.baseline.note}`
-                : `Answered without Qloo${state.baseline.model ? ` (${state.baseline.model})` : ""}: ${state.baseline.cities.slice(0, 5).join(", ")}…`}
+                : `Answered without Qloo${state.baseline.model ? ` (${state.baseline.model}${state.baseline.source === "recorded-llm" ? ", cached answer" : ""})` : ""}: ${state.baseline.cities.slice(0, 5).join(", ")}…`}
             </div>
           </div>
         )}

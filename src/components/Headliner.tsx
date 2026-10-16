@@ -14,12 +14,12 @@ import Audience from "./Audience";
 const TourMap = dynamic(() => import("./TourMap"), { ssr: false, loading: () => <div className="map" /> });
 
 const SAMPLES: Array<{ artist: string; region: RegionId; blurb: string }> = [
-  { artist: "Noah Kahan", region: "north-america", blurb: "folk-pop, US & Canada" },
   { artist: "Tyler Childers", region: "north-america", blurb: "country, US & Canada" },
+  { artist: "Noah Kahan", region: "north-america", blurb: "folk-pop, US & Canada" },
   { artist: "Fontaines D.C.", region: "uk-europe", blurb: "post-punk, UK & Europe" },
 ];
 
-export default function Headliner({ mode }: { mode: Omit<RunMode, "planner"> & { planner: RunMode["planner"] } }) {
+export default function Headliner({ mode }: { mode: RunMode & { recorded?: string[] } }) {
   const { state, start } = useRun();
   const [artist, setArtist] = useState("");
   const [region, setRegion] = useState<RegionId>("north-america");
@@ -125,6 +125,15 @@ export default function Headliner({ mode }: { mode: Omit<RunMode, "planner"> & {
           </span>
         </div>
       )}
+      {qlooMode === "live" && (
+        <div className="banner" role="note">
+          <span>
+            <b>Live Qloo data:</b> every request in the trace goes to Qloo&apos;s hackathon API (responses and finished runs are cached server-side, so repeat runs replay
+            instantly). The plan comes from a {mode.planner === "llm" ? `tool-calling LLM (${mode.model})` : "deterministic planner running the same Qloo tools"}.
+            {mode.recorded?.length ? " The \"without Qloo\" answers are recorded ahead of time from Claude Haiku 4.5 with the same prompt, because this host has no LLM key." : ""}
+          </span>
+        </div>
+      )}
       {state.status === "error" && <div className="banner error">{state.error}</div>}
       {result?.error && <div className="banner error">{result.error}</div>}
 
@@ -132,7 +141,7 @@ export default function Headliner({ mode }: { mode: Omit<RunMode, "planner"> & {
         <main>
           {!result && state.status !== "running" && <Intro />}
           {!result && running && <Working calls={totalCalls} steps={state.steps.length} baselineReady={!!state.baseline} />}
-          {result && !result.error && <Result result={result} />}
+          {result && !result.error && <Result result={result} recorded={mode.recorded ?? []} />}
         </main>
         <aside className="trace">
           <TracePanel state={state} defaultMode={mode} />
@@ -168,13 +177,13 @@ function Working({ calls, steps, baselineReady }: { calls: number; steps: number
   );
 }
 
-function Result({ result }: { result: RunResult }) {
+function Result({ result, recorded }: { result: RunResult; recorded: string[] }) {
   const { plan, brief } = result;
   const route = plan.route.order.map((k) => plan.markets.find((m) => m.key === k)!).filter(Boolean);
   const [showLlm, setShowLlm] = useState(true);
   return (
     <>
-      <ContrastView result={result} />
+      <ContrastView result={result} recorded={recorded} />
 
       <section className="card" aria-labelledby="brief-h">
         <div className="section-head">

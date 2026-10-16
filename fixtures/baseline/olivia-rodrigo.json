@@ -1,0 +1,27 @@
+{
+  "artist": "Olivia Rodrigo",
+  "source": "recorded-llm",
+  "model": "claude-haiku-4-5-20251001",
+  "cities": [
+    "Los Angeles, CA",
+    "New York, NY",
+    "Toronto, ON",
+    "Chicago, IL",
+    "Atlanta, GA",
+    "Dallas, TX",
+    "San Francisco, CA",
+    "Vancouver, BC"
+  ],
+  "supportActs": [
+    "Gracie Abrams"
+  ],
+  "sponsors": [
+    "Spotify",
+    "Urban Outfitters",
+    "Monster Energy",
+    "Beats by Dre"
+  ],
+  "reasoning": "These eight cities represent the largest metro areas with strongest demographic alignment to Olivia's fanbase (Gen Z, predominantly female, high streaming engagement), ensuring sold-out arena shows and maximum revenue. Gracie Abrams as support provides complementary indie-pop appeal, while sponsors offer lifestyle/music credibility and significant activation opportunities across merch, social content, and venue integrations.",
+  "recordedAt": "2026-10-16T11:48:56.172Z",
+  "prompt": "src/lib/agent/baseline.ts baselinePrompt(artist, region, 8, [])"
+}

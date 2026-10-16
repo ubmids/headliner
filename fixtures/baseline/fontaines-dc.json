@@ -1,29 +1,28 @@
 {
+  "artist": "Fontaines D.C.",
   "source": "recorded-llm",
-  "model": "qwen3-vl-4b-instruct-q4km",
+  "model": "claude-haiku-4-5-20251001",
   "cities": [
-    "London, ENG",
-    "Birmingham, ENG",
-    "Manchester, ENG",
-    "Edinburgh, SCO",
-    "Glasgow, SCO",
-    "Berlin, GER",
-    "Cologne, GER",
-    "Paris, FRA"
+    "Dublin, Ireland",
+    "London, England",
+    "Berlin, Germany",
+    "Paris, France",
+    "Amsterdam, Netherlands",
+    "Manchester, England",
+    "Brussels, Belgium",
+    "Cork, Ireland"
   ],
   "supportActs": [
-    "Thee Oh Sees",
-    "Bleach",
-    "The Men They Couldn’t Hang"
+    "Squid",
+    "Dry Cleaning"
   ],
   "sponsors": [
-    "Sennheiser",
-    "Pepsi",
-    "Budweiser",
-    "Vans",
-    "Dewar’s"
+    "Guinness",
+    "Rough Trade Records",
+    "Converse",
+    "NME"
   ],
-  "reasoning": "Fontaines D.C. are a high-energy, UK-based indie rock act with strong European appeal, so prioritizing major UK cities ensures maximum fan engagement. The tour balances UK and European markets with key festival-friendly cities and iconic venues, while supporting acts complement their sound and broaden audience reach.",
-  "recordedAt": "2026-10-13T23:24:30.803Z",
+  "reasoning": "This routing prioritizes Fontaines D.C.'s Irish fanbase and UK strongholds while building momentum through key European cultural capitals where post-punk has strong appeal. The support acts share their angular post-punk aesthetic, while sponsors align with their indie-rock credibility and Irish heritage.",
+  "recordedAt": "2026-10-16T11:48:34.728Z",
   "prompt": "src/lib/agent/baseline.ts baselinePrompt(artist, region, 8, [])"
 }

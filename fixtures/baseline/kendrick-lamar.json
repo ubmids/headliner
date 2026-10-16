@@ -1,0 +1,30 @@
+{
+  "artist": "Kendrick Lamar",
+  "source": "recorded-llm",
+  "model": "claude-haiku-4-5-20251001",
+  "cities": [
+    "Los Angeles, CA",
+    "New York, NY",
+    "Chicago, IL",
+    "Houston, TX",
+    "Atlanta, GA",
+    "Toronto, ON",
+    "San Francisco, CA",
+    "Miami, FL"
+  ],
+  "supportActs": [
+    "SZA",
+    "Baby Keem",
+    "Syd"
+  ],
+  "sponsors": [
+    "Nike",
+    "Beats by Dre",
+    "Spotify",
+    "Monster Energy",
+    "Puma"
+  ],
+  "reasoning": "These eight cities represent Kendrick's strongest markets with the highest ticket demand, cultural relevance, and arena capacity, while the support acts blend established stars (SZA) with family/label connections (Baby Keem) and underground credibility (Syd). The sponsor mix targets lifestyle, audio, streaming, and energy brands that align with hip-hop culture and Kendrick's premium brand positioning.",
+  "recordedAt": "2026-10-16T11:49:15.504Z",
+  "prompt": "src/lib/agent/baseline.ts baselinePrompt(artist, region, 8, [])"
+}

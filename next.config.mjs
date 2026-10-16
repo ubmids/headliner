@@ -1,9 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "standalone",
+  // Docker/Fly use the standalone server; Vercel builds its own output.
+  output: process.env.VERCEL ? undefined : "standalone",
   reactStrictMode: true,
   poweredByHeader: false,
-  // Fixtures are read from disk at runtime; make sure they ship in the standalone bundle.
-  outputFileTracingIncludes: { "/api/**": ["./fixtures/**/*"] },
+  // Read from disk at runtime: recorded fixtures and baselines, plus seed/runs (live runs recorded before deploy, never committed).
+  outputFileTracingIncludes: { "/**": ["./fixtures/**/*", "./seed/runs/**/*"] },
 };
 export default nextConfig;

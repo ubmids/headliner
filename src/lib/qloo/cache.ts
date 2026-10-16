@@ -13,12 +13,14 @@ export class JsonCache {
   constructor(
     private dir: string | null,
     private maxEntries = 2000,
+    /** Read-only fallback (e.g. runs pre-recorded at deploy time and shipped with the app). */
+    private seedDir: string | null = null,
   ) {}
 
-  private file(key: string): string | null {
-    if (!this.dir) return null;
+  private file(key: string, dir = this.dir): string | null {
+    if (!dir) return null;
     const h = createHash("sha256").update(key).digest("hex").slice(0, 32);
-    return path.join(this.dir, `${h}.json`);
+    return path.join(dir, `${h}.json`);
   }
 
   async get<T>(key: string): Promise<T | undefined> {
@@ -28,16 +30,18 @@ export class JsonCache {
       this.mem.set(key, v);
       return v;
     }
-    const f = this.file(key);
-    if (!f) return undefined;
-    try {
-      const raw = JSON.parse(await fs.readFile(f, "utf8")) as { key: string; value: T };
-      if (raw.key !== key) return undefined;
-      this.remember(key, raw.value);
-      return raw.value;
-    } catch {
-      return undefined;
+    for (const f of [this.file(key), this.file(key, this.seedDir)]) {
+      if (!f) continue;
+      try {
+        const raw = JSON.parse(await fs.readFile(f, "utf8")) as { key: string; value: T };
+        if (raw.key !== key) continue;
+        this.remember(key, raw.value);
+        return raw.value;
+      } catch {
+        // not in this directory
+      }
     }
+    return undefined;
   }
 
   async set<T>(key: string, value: T): Promise<void> {

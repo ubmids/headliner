@@ -1,29 +1,27 @@
 {
+  "artist": "Noah Kahan",
   "source": "recorded-llm",
-  "model": "qwen3-vl-4b-instruct-q4km",
+  "model": "claude-haiku-4-5-20251001",
   "cities": [
-    "New York, NY",
-    "Los Angeles, CA",
-    "Chicago, IL",
     "Boston, MA",
-    "Seattle, WA",
-    "Denver, CO",
+    "New York, NY",
+    "Philadelphia, PA",
     "Toronto, ON",
-    "Vancouver, BC"
+    "Nashville, TN",
+    "Denver, CO",
+    "Portland, OR",
+    "Los Angeles, CA"
   ],
   "supportActs": [
-    "Lilith Saltman",
-    "Tayler Hall",
-    "Jesse Jo Stark"
+    "Adrianne Lenker"
   ],
   "sponsors": [
-    "Coca-Cola",
-    "Snickers",
-    "TikTok",
-    "Crate & Barrel",
-    "Pepsi"
+    "Patagonia",
+    "Subaru",
+    "Bon Appétit",
+    "Local coffee roasters (city-by-city)"
   ],
-  "reasoning": "Noah Kahan’s fanbase is strongest in major urban centers with high foot traffic and strong indie/alternative music scenes. Strategic partnerships with beverage and lifestyle brands amplify visibility and fan engagement across key markets.",
-  "recordedAt": "2026-10-13T23:23:49.324Z",
+  "reasoning": "Noah Kahan's fanbase is concentrated in Northeast markets and outdoor-oriented regions, with strong appeal in indie/folk communities and among 25-40 year old audiences who value authenticity and environmental consciousness. Patagonia and Subaru align with his Vermont roots and outdoor lifestyle brand, while Adrianne Lenker provides complementary indie-folk credibility and appeals to the same demographic.",
+  "recordedAt": "2026-10-16T11:48:28.460Z",
   "prompt": "src/lib/agent/baseline.ts baselinePrompt(artist, region, 8, [])"
 }

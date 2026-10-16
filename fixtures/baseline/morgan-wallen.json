@@ -1,0 +1,29 @@
+{
+  "artist": "Morgan Wallen",
+  "source": "recorded-llm",
+  "model": "claude-haiku-4-5-20251001",
+  "cities": [
+    "Nashville, TN",
+    "Atlanta, GA",
+    "Dallas, TX",
+    "Los Angeles, CA",
+    "Toronto, ON",
+    "Chicago, IL",
+    "New York, NY",
+    "Las Vegas, NV"
+  ],
+  "supportActs": [
+    "Hardy",
+    "Jelly Roll"
+  ],
+  "sponsors": [
+    "Bud Light",
+    "Wrangler",
+    "Carhartt",
+    "Chevrolet",
+    "Jack Daniel's"
+  ],
+  "reasoning": "This routing maximizes Morgan Wallen's core country fanbase across major metro areas and secondary markets with strong country radio presence, while minimizing travel costs through geographic clustering. The support acts (Hardy and Jelly Roll) align with his demographic and touring history, and sponsors represent authentic lifestyle brands that resonate with his audience of 18-45 year old country music fans.",
+  "recordedAt": "2026-10-16T11:48:59.288Z",
+  "prompt": "src/lib/agent/baseline.ts baselinePrompt(artist, region, 8, [])"
+}
