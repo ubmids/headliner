@@ -29,7 +29,7 @@ function Call({ c }: { c: QlooCallRecord }) {
       </span>
       <div className="res">
         <span className={`badge ${badge}`}>{c.source}</span>
-        {c.status === "empty" && <span className="badge empty">empty: check params</span>}
+        {c.status === "empty" && <span className="badge empty" title="Qloo returned no results. On a location-conditioned rank this means the artist does not rank there; elsewhere it can mean an ignored parameter (scripts/qloo-smoke.ts checks those).">empty</span>}
         {c.status === "error" ? <span>{c.error?.slice(0, 90)}</span> : <span>{c.resultCount} results</span>}
         <span className="muted">{c.durationMs} ms</span>
       </div>

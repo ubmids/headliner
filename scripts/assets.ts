@@ -200,7 +200,7 @@ async function main() {
       <div class="wm" style="font-size:230px;--o:9px">Headliner</div>
       <div>
         <div class="d" style="font-size:84px;line-height:1;border-top:6px solid var(--ink);padding-top:26px">Tour decisions on taste data,<br>not guesswork.</div>
-        <div class="m" style="font-size:30px;margin-top:34px;display:flex;justify-content:space-between"><span>headliner-qloo.fly.dev</span><span>Built on Qloo</span></div>
+        <div class="m" style="font-size:30px;margin-top:34px;display:flex;justify-content:space-between"><span>${esc(new URL(base).host)}</span><span>Built on Qloo</span></div>
       </div></div>`,
     path.join(videoDir, "end.png"),
     { width: 1920, height: 1080 },

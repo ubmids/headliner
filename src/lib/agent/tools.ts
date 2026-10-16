@@ -257,6 +257,9 @@ export const TOOLS: ToolDef[] = [
         summary:
           `Scored ${scored.length}/${markets.length} cities. ` +
           scored.slice(0, 6).map((m) => `${m.city} ${pct(m.localAffinity)}`).join(", ") +
+          (scored.length < markets.length
+            ? `. No city-level affinity from Qloo for ${markets.filter((m) => m.localAffinity === undefined).map((m) => m.city).join(", ")} (the artist doesn't rank there); those use the heatmap only`
+            : "") +
           (unknown.length ? `. Unknown city names: ${unknown.join(", ")}` : "") +
           (failed ? `. ${failed} lookups failed` : ""),
         data: scored.map((m) => ({ market: m.key, affinity: m.localAffinity })),
