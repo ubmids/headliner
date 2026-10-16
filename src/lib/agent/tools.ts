@@ -445,9 +445,13 @@ export const TOOLS: ToolDef[] = [
         "filter.start_date": iso(start),
         "filter.end_date": iso(end),
       });
-      const points = res.results.trending
-        .filter((p) => p.population_percentile !== undefined)
-        .map((p) => ({ date: p.date, percentile: p.population_percentile! }));
+      const raw = res.results.trending.filter((p) => p.population_percentile !== undefined);
+      // The live API sends population_percentile as rank / total (0-1, lower = more popular: rank 7,897 → 0.11),
+      // newest first. Normalise to a 0-100 popularity percentile (higher = more popular), oldest first.
+      const asFraction = raw.length > 0 && raw.every((p) => p.population_percentile! <= 1);
+      const points = raw
+        .map((p) => ({ date: p.date, percentile: asFraction ? (1 - p.population_percentile!) * 100 : p.population_percentile! }))
+        .sort((x, y) => x.date.localeCompare(y.date));
       ctx.plan.trend = { points, direction: trendDirection(points) };
       const last = points[points.length - 1];
       return { summary: `${points.length} data points; audience ${ctx.plan.trend.direction}${last ? `, now at the ${Math.round(last.percentile)}th percentile` : ""}.` };

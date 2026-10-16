@@ -12,7 +12,7 @@ import path from "node:path";
 import type { RunResult } from "../src/lib/agent/run";
 
 const base = process.argv[2] ?? "http://127.0.0.1:3077";
-const artist = process.argv[3] ?? "Noah Kahan";
+const artist = process.argv[3] ?? "Tyler Childers";
 const region = process.argv[4] ?? "north-america";
 const root = path.resolve(__dirname, "..");
 const galleryDir = path.join(root, "docs", "gallery");

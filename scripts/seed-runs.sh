@@ -9,11 +9,15 @@ cd "$(dirname "$0")/.."
 : "${QLOO_API_KEY:?set QLOO_API_KEY}"
 unset LLM_BASE_URL LLM_MODEL LLM_API_KEY
 PORT=${PORT:-3199}
+# Start from an empty seed: the server falls back to seed/runs, which would replay stale runs.
+rm -rf seed/runs
 DATA_DIR=$(mktemp -d)
 export DATA_DIR
+# Reuse cached Qloo responses from local runs (saves quota); runs themselves are recorded fresh.
+[ -d .data/qloo ] && cp -R .data/qloo "$DATA_DIR/qloo"
 npx next start -p "$PORT" -H 127.0.0.1 >/dev/null 2>&1 &
 SERVER=$!
-trap 'kill $SERVER 2>/dev/null || true; rm -rf "$DATA_DIR"' EXIT
+trap 'kill $SERVER 2>/dev/null || true; mkdir -p .data && cp -R "$DATA_DIR/qloo/." .data/qloo/ 2>/dev/null; rm -rf "$DATA_DIR"' EXIT
 for _ in $(seq 1 60); do curl -sf "http://127.0.0.1:$PORT/api/health" >/dev/null && break; sleep 1; done
 npx tsx scripts/warm-cache.ts "http://127.0.0.1:$PORT" \
   "Tyler Childers|north-america" "Noah Kahan|north-america" "Fontaines D.C.|uk-europe" \

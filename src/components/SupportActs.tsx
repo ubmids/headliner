@@ -1,16 +1,25 @@
 "use client";
 import type { TourPlan } from "@/lib/plan";
 
-/** Overlap heat: one neutral hue, light to dark (design/DESIGN.md --seq-1..5). Pink stays reserved for Qloo's signal. */
-function heatStyle(v: number) {
-  const i = Math.min(5, Math.max(1, Math.round((v - 0.6) / 0.07) + 1));
-  return { background: `var(--seq-${i})`, color: `var(--seq-${i}-text)` };
+/**
+ * Overlap heat: one neutral hue, light to dark (design/DESIGN.md --seq-1..5). Pink stays reserved for Qloo's signal.
+ * Steps are relative to the values in this table: live overlaps cluster at 0.95-0.99, so a fixed scale painted every cell the same.
+ */
+function heatScale(values: number[]) {
+  const lo = Math.min(...values);
+  const hi = Math.max(...values);
+  return (v: number) => {
+    const t = hi - lo < 1e-6 ? 1 : (v - lo) / (hi - lo);
+    const i = Math.min(5, Math.max(1, Math.round(t * 4) + 1));
+    return { background: `var(--seq-${i})`, color: `var(--seq-${i}-text)` };
+  };
 }
 
 export default function SupportActs({ plan }: { plan: TourPlan }) {
   const acts = plan.supportActs.slice(0, 6);
   const markets = [...new Set(acts.flatMap((a) => Object.keys(a.perMarket)))];
   if (!acts.length) return null;
+  const heatStyle = heatScale(acts.flatMap((a) => Object.values(a.perMarket)));
   return (
     <section className="card" aria-labelledby="sa-h">
       <div className="section-head">
@@ -69,8 +78,8 @@ export default function SupportActs({ plan }: { plan: TourPlan }) {
                   {markets.map((m) => (
                     <td key={m}>
                       {a.perMarket[m] !== undefined ? (
-                        <div className="cell-heat" style={heatStyle(a.perMarket[m])} title={`${a.name} in ${m}: ${Math.round(a.perMarket[m] * 100)}`}>
-                          {Math.round(a.perMarket[m] * 100)}
+                        <div className="cell-heat" style={heatStyle(a.perMarket[m])} title={`${a.name} in ${m}: ${(a.perMarket[m] * 100).toFixed(1)}`}>
+                          {(a.perMarket[m] * 100).toFixed(1)}
                         </div>
                       ) : (
                         <span className="muted">–</span>

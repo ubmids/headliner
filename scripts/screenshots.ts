@@ -25,16 +25,17 @@ async function main() {
     await page.close();
     console.log(`wrote docs/img/${name}.png`);
   };
-  const noah = `${base}/?artist=${encodeURIComponent("Noah Kahan")}&region=north-america`;
-  await shoot("full-desktop", noah, { width: 1440, height: 900 });
-  await shoot("contrast", noah, { width: 1280, height: 900 }, "section[aria-labelledby=vs-h]");
-  await shoot("routing", noah, { width: 1280, height: 900 }, "section[aria-labelledby=route-h]");
-  await shoot("trace", noah, { width: 1440, height: 1100 }, ".trace-card");
-  await shoot("mobile", noah, { width: 390, height: 844 });
+  // Hero artist: the sample with the strongest live with/without contrast.
+  const hero = `${base}/?artist=${encodeURIComponent(process.env.HERO ?? "Tyler Childers")}&region=north-america`;
+  await shoot("full-desktop", hero, { width: 1440, height: 900 });
+  await shoot("contrast", hero, { width: 1280, height: 900 }, "section[aria-labelledby=vs-h]");
+  await shoot("routing", hero, { width: 1280, height: 900 }, "section[aria-labelledby=route-h]");
+  await shoot("trace", hero, { width: 1440, height: 1100 }, ".trace-card");
+  await shoot("mobile", hero, { width: 390, height: 844 });
   {
     // The printable brief for the same run.
     const page = await browser.newPage({ viewport: { width: 1100, height: 900 }, deviceScaleFactor: 1 });
-    await page.goto(noah, { waitUntil: "networkidle" });
+    await page.goto(hero, { waitUntil: "networkidle" });
     const href = await page.locator('a[href^="/brief/"]').first().getAttribute("href", { timeout: 60000 });
     await page.goto(`${base}${href}`, { waitUntil: "networkidle" });
     await page.addStyleTag({ content: "nextjs-portal { display: none !important; }" });
@@ -42,7 +43,7 @@ async function main() {
     await page.close();
     console.log("wrote docs/img/brief.png");
   }
-  await shoot("childers-contrast", `${base}/?artist=${encodeURIComponent("Tyler Childers")}&region=north-america`, { width: 1280, height: 900 }, "section[aria-labelledby=vs-h]");
+  await shoot("noah-contrast", `${base}/?artist=${encodeURIComponent("Noah Kahan")}&region=north-america`, { width: 1280, height: 900 }, "section[aria-labelledby=vs-h]");
   await browser.close();
 }
 main().catch((e) => {

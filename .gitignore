@@ -11,3 +11,4 @@ fixtures/live/
 # Live runs recorded before a deploy (scripts/seed-runs.sh) ship with the deployment, never with the repo.
 seed/
 coverage/
+.vercel
