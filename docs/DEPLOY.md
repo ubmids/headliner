@@ -1,76 +1,70 @@
 # Deploying Headliner
 
-**Host: Fly.io**, one always-on machine (`auto_stop_machines = "off"`, `min_machines_running = 1`) with a 1 GB volume for the server-side cache. Why Fly: it bills per second (about US$3–4/month for a `shared-cpu-1x` 512 MB machine plus the volume), it never sleeps, and the config lives in the repo (`fly.toml`). Free tiers on Render and Railway put idle apps to sleep, and the rules require the demo to stay up through judging (2–16 Nov 2026) with no cold starts.
+**Host: Vercel** (Hobby plan, free), project `headliner-qloo`, production URL **https://headliner-qloo-eta.vercel.app**. Deployed from a local prebuilt build with the Vercel CLI. Git-triggered deployments are switched off in `vercel.json`, because a build from GitHub would not contain the pre-run demo artists (see below).
 
-The `Dockerfile` is host-agnostic, so the same image runs on Railway or Render (paid, always-on plan) if you prefer. The steps for those are at the end.
+## How it works on serverless
 
-## Environment variables
+- **Qloo is live.** `QLOO_API_KEY` is an encrypted (sensitive) Vercel environment variable, read only on the server. The key never reaches the browser: page HTML and every JS bundle were checked for it after deploy.
+- **Caches.** `DATA_DIR=/tmp/headliner` holds the Qloo response cache and finished runs per function instance (memory + `/tmp`). A fresh instance starts empty, so:
+- **Seed runs.** Before each deploy, `scripts/seed-runs.sh` runs the agent against live Qloo for 16 artists (the three samples plus a dozen judges might type) and writes the finished runs to `seed/runs/`. The run cache falls back to that directory, read only, so those artists replay instantly on any instance. `seed/` is gitignored: Qloo response data must not be published in a public repo, so it ships inside the deployment only. `next.config.mjs` traces it into the functions.
+- **The LLM side.** The demo host has no LLM key. The planner is the deterministic one (the same Qloo tools in a fixed order). The "without Qloo" answers are recorded ahead of time from Claude Haiku 4.5 with the app's exact prompt (`scripts/record-baselines.ts`, stored in `fixtures/baseline/`, which is LLM output, not Qloo data) and labelled "cached answer" in the UI. For an artist without a recorded answer, the comparison panel says so and lists the artists that have one.
+- **Duration.** `/api/run` streams NDJSON and allows 300 s (`vercel.json`); a cold live run takes about 15–25 s.
 
-| Variable | Required | Example | Notes |
-|---|---|---|---|
-| `QLOO_API_KEY` | yes, for live data | `(secret)` | Hackathon key from Qloo. Server-side only. Without it the app runs in **fixture mode** (sample artists only, banner shown) |
-| `QLOO_BASE_URL` | no | `https://hackathon.api.qloo.com` | Already set in `fly.toml`. The client refuses any other host |
-| `LLM_BASE_URL` | recommended | `https://api.openai.com/v1` | Any OpenAI-compatible chat-completions endpoint with tool calling |
-| `LLM_API_KEY` | with the above | `(secret)` | Sent as `Authorization: Bearer …` |
-| `LLM_MODEL` | with the above | `gpt-4.1-mini` | Any tool-calling model. Without `LLM_*` the agent uses the deterministic planner and the "without Qloo" panel shows the recorded LLM answer |
-| `DATA_DIR` | no | `/data` | Cache directory (Qloo responses + finished runs). Set in `fly.toml`, on the volume |
-| `MAX_ACTIVE_RUNS` | no | `3` | Concurrent fresh agent runs (protects the Qloo quota) |
+## Environment variables (Vercel, Production)
 
-Use a decent model for `LLM_MODEL`: the "without Qloo" column must be a fair answer from a capable LLM, not a strawman. The recorded baselines in `fixtures/baseline/` came from a small local model (Qwen3-VL 4B on llama.cpp). Re-record them with the production model (step 6).
+| Variable | Value | Notes |
+|---|---|---|
+| `QLOO_API_KEY` | (secret) | Added with `--sensitive`. Server-side only |
+| `QLOO_BASE_URL` | `https://hackathon.api.qloo.com` | The client refuses any other host |
+| `DATA_DIR` | `/tmp/headliner` | The only writable path on Vercel functions |
 
-## First deploy (about 15 minutes)
+Do **not** add `LLM_*` variables on the host: the owner's LLM key never goes on a server. (Setting them would also change the run-cache key, so the seed runs would stop matching.)
+
+## Redeploy (about 3 minutes)
 
 ```bash
-# 0. Install flyctl and log in
-curl -L https://fly.io/install.sh | sh
-fly auth login
-
-# 1. From the repo root: create the app from fly.toml without deploying yet
-fly launch --no-deploy --copy-config --name headliner-qloo --region iad
-#    (if the name is taken, pick another and update `app` in fly.toml)
-
-# 2. Volume for the cache (same region as the machine)
-fly volumes create headliner_data --region iad --size 1 --yes
-
-# 3. Secrets
-fly secrets set QLOO_API_KEY=... LLM_BASE_URL=https://api.openai.com/v1 LLM_API_KEY=... LLM_MODEL=gpt-4.1-mini
-
-# 4. Deploy
-fly deploy
-
-# 5. Verify: expect {"ok":true,"qloo":"live","planner":"llm","model":"..."}
-curl -s https://headliner-qloo.fly.dev/api/health
-fly status          # exactly 1 machine, state "started"
-fly scale count 1   # one machine (the cache volume is per machine)
-
-# 6. Before judging: smoke-test Qloo, re-record baselines with the production LLM, warm the cache
-QLOO_API_KEY=... scripts/qloo-smoke.sh
-LLM_BASE_URL=... LLM_API_KEY=... LLM_MODEL=... npx tsx scripts/record-baselines.ts && git commit -am "Re-record baselines with the production LLM" && fly deploy
-npx tsx scripts/warm-cache.ts https://headliner-qloo.fly.dev
+# 0. Once: Vercel CLI logged in, project linked (vercel link --project headliner-qloo)
+# 1. Load the Qloo key for local runs only (never commit it, never echo it)
+set -a; . ~/.config/hackathons/qloo.env; set +a; export QLOO_BASE_URL="$QLOO_API_URL"
+# 2. Optional: check every Qloo endpoint the app uses
+npx tsx scripts/qloo-smoke.ts --no-record
+# 3. Build, then pre-run the demo artists into seed/runs/ (needs the build; reuses .data/qloo to save quota)
+npm run build && scripts/seed-runs.sh
+# 4. Build for Vercel and deploy the prebuilt output (seed/runs is traced into the functions)
+vercel pull --yes --environment=production
+vercel build --prod && vercel deploy --prebuilt --prod
+# 5. Verify
+curl -s https://headliner-qloo-eta.vercel.app/api/health    # {"ok":true,"qloo":"live","planner":"rules","recorded":[...16 artists]}
 ```
 
-`warm-cache.ts` runs the agent for the three samples and about a dozen artists judges are likely to type. Finished runs are cached on the volume and replayed instantly, trace included.
+To record "without Qloo" answers for more artists (local only, through an OpenAI-compatible endpoint):
+
+```bash
+LLM_BASE_URL=http://127.0.0.1:8765/v1 LLM_MODEL=claude-haiku-4-5-20251001 npx tsx scripts/record-baselines.ts "Artist|north-america" "Band|uk-europe"
+```
+
+Then add the same artists to `scripts/seed-runs.sh` and redeploy.
+
+## Regenerating the submission assets
+
+```bash
+CHROME="/path/to/chrome" npx tsx scripts/assets.ts https://headliner-qloo-eta.vercel.app "Tyler Childers" north-america   # thumbnail, gallery, video cards
+CHROME="/path/to/chrome" npx tsx scripts/screenshots.ts https://headliner-qloo-eta.vercel.app                           # README images
+```
 
 ## Checks before 2 Nov (and once a week until 16 Nov)
 
-- `curl https://headliner-qloo.fly.dev/api/health` returns `"qloo":"live"`.
-- Open the site on a phone, click **Noah Kahan**: the brief appears in under 5 s (cached replay).
-- Type an artist that isn't cached: the trace streams, and the run finishes in about 20–60 s depending on the LLM.
-- `fly logs` shows no `Qloo 401/403/429`. If the quota runs low, ask in #api-help on the Qloo Discord (the dev guide says limits can be raised per user).
+- `curl https://headliner-qloo-eta.vercel.app/api/health` returns `"qloo":"live"`.
+- Open the site on a phone, click **Tyler Childers**: the brief appears in a few seconds (replay from the seed).
+- Type an artist that isn't seeded: the trace streams and the run finishes in about 15–25 s.
+- `vercel logs headliner-qloo-eta.vercel.app` shows no `Qloo 401/403/429`. If the quota runs low, ask in #api-help on the Qloo Discord.
 
-## Local production check (already verified on mmfarm, 13 Oct 2026)
+## Other hosts
+
+The `Dockerfile` and `fly.toml` still work for an always-on container (Fly.io about US$3–4 a month with a volume; Railway or Render on a paid plan). On those hosts the disk cache persists, so seed runs are optional: run `scripts/warm-cache.ts <url>` after deploying instead.
 
 ```bash
 npm ci && npm run build
 cp -r .next/static .next/standalone/.next/static && cp -r public .next/standalone/public
 cd .next/standalone && PORT=3077 DATA_DIR=/tmp/hl-data node server.js
-curl -s localhost:3077/api/health
 ```
-
-## Alternatives
-
-**Railway** (paid "Hobby" plan; services don't sleep): New Project → Deploy from GitHub repo → it detects the `Dockerfile`. Add the variables above, plus a volume mounted at `/data`. Set the health check path to `/api/health`.
-
-**Render** (needs a paid instance type; the free tier sleeps after 15 minutes): New → Web Service → Docker. Instance type Starter or above, Persistent Disk at `/data`, health check path `/api/health`, and the variables above.
-
-**Vercel** works for the UI, but serverless functions have no shared disk cache and cap function duration, so a slow LLM run can be cut off. Not recommended for this app.

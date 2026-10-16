@@ -4,7 +4,7 @@ Deadline **30 Oct 2026, 11:45 pm EDT** (31 Oct 03:45 UTC). Judging 2–16 Nov; w
 
 Fields below follow the standard Devpost "Enter a submission" form and the official rules' requirements (functional demo link, public repo with an open-source licence visible in the GitHub About section, text description). The hackathon-specific questions are only visible after logging in; check the form for extra questions and answer them from the sections below. The Qloo hackathon kit's submission guide (github.com/qloo/qloo-hackathon-kit, `docs/SUBMISSION.md`) asks for six things, all covered: problem statement, Qloo workflow and why, a redacted request-to-result example, screenshots, setup steps, and known limitations.
 
-> **Before pasting:** replace every `[[…]]` placeholder with live numbers from the deployed app once the Qloo key is in. Do not publish fixture numbers as Qloo findings.
+> All numbers below are from the live deployment (live Qloo data, 16 Oct 2026, Tyler Childers sample). The plain-LLM answers are cached Claude Haiku 4.5 answers to the app's prompt, and the text says so.
 
 ---
 
@@ -17,10 +17,10 @@ An agent for tour promoters: it routes the tour, picks the opener and finds spon
 _(158 characters)_
 
 ## Thumbnail
-`docs/gallery/thumbnail.png` (1500x1000, 3:2): both routes side by side and the average fan score pair, rendered from a real run by `scripts/assets.ts`. `docs/gallery/thumbnail-300.png` is the gallery-size check. Gallery images: `docs/gallery/01-verdict.png` to `06-brief.png`, in that order. Re-render all of them from live mode once the key is in (design rules: `design/DESIGN.md`, section 6).
+`docs/gallery/thumbnail.png` (1500x1000, 3:2): both routes side by side and the average fan score pair, rendered from a real run by `scripts/assets.ts`. `docs/gallery/thumbnail-300.png` is the gallery-size check. Gallery images: `docs/gallery/01-verdict.png` to `06-brief.png`, in that order. All rendered from the live deployment (design rules: `design/DESIGN.md`, section 6).
 
 ## Try it out
-- Live demo: `https://headliner-qloo.fly.dev` (no login; click **Try a sample → Noah Kahan**)
+- Live demo: `https://headliner-qloo-eta.vercel.app` (no login; click **Try a sample → Tyler Childers**)
 - Code: `https://github.com/ubmids/headliner` (MIT)
 
 ## Video
@@ -43,19 +43,22 @@ Headliner is an **agent for live-music promoters and tour planners**. Type an ar
 
 Every Qloo request (endpoint, parameters, result count, latency) streams into a **reasoning trace** as it happens.
 
-**Without Qloo / with Qloo.** The same question goes to the plain LLM with no tools. Headliner then **fact-checks** that answer with the same Qloo calls it used for its own plan. In [[live run, artist]], the LLM's cities averaged a fan score of [[X]] against [[Y]] for Headliner's route, and it never mentioned [[sleeper market]]. [[Keep only if the live run shows it: Some of its suggested openers don't exist in Qloo at all.]] The brief says it directly: *"If your submission would work the same without Qloo, you're building the wrong thing."* Headliner shows the gap as a number.
+**Without Qloo / with Qloo.** The same question goes to the plain LLM with no tools. Headliner then **fact-checks** that answer with the same Qloo calls it used for its own plan. For an 8-date Tyler Childers tour, the plain LLM (Claude Haiku 4.5, same prompt, no tools; the demo serves its recorded answer) sends him to Philadelphia, Boston and Toronto. Qloo scores those cities 75, 86 and 57 for his fans, and 5 of the LLM's 8 cities land in the bottom half of Qloo's ranking. Headliner's route averages a fan score of **96 against 86**, opens in Asheville, NC (98), a market the LLM never named, and picks Charley Crockett to open (fan overlap 98 vs 97 for the LLM's Colter Wall). The brief says it directly: *"If your submission would work the same without Qloo, you're building the wrong thing."* Headliner shows the gap as a number.
 
 ### How we built it
 - **Next.js 15 + TypeScript**, one app. The agent streams its events (steps, Qloo calls, the LLM baseline, the result) as NDJSON to a React UI with a Leaflet map and hand-built SVG charts.
 - **Agent:** 12 tools, each wrapping documented Qloo calls. An **OpenAI-compatible tool-calling loop** lets the LLM choose the next tool, and every call carries a one-sentence reason that becomes the trace. A deterministic planner runs the same tools when no LLM is configured. A coverage guard refuses to finish a brief until routing, support act and sponsors are each grounded in Qloo results.
 - **Qloo client:** typed endpoints validated with zod, the `hackathon.api.qloo.com` host enforced, retries on 429/5xx, empty-result flagging (Qloo silently ignores invalid parameters), and a server-side cache of responses and finished runs, so judges get instant replays.
 - **Qloo endpoints:** `/search`, `/v2/tags`, `/v2/insights` (heatmap, artist, place, brand, tag, demographics), `/v2/analysis/compare`, `/v2/trending`. About 60 requests per plan.
-- **Scoring:** fan score blends heatmap affinity with location-conditioned artist affinity, normalised across the whole region. Over-index = concentration minus volume (heatmap popularity).
-- **Tests:** 50 unit and integration tests (client, fixtures, scoring, contrast, CSV, the LLM loop with a scripted model, and the full agent on fixtures). One test asserts that every request uses only documented Qloo parameters.
+- **Scoring:** fan score blends heatmap affinity with location-conditioned artist affinity on Qloo's own 0-1 scale (times 100, not rescaled), so strong markets cluster in the 90s and a 10-point gap is large. Tiers compare each market with the rest of the region: over-index = concentration percentile minus volume (heatmap popularity) percentile.
+- **Deploy:** Vercel (free tier). Qloo calls are live from the server; 16 artists are pre-run before each deploy so judges get instant replays, and any other artist runs live in about 15–25 s.
+- **Tests:** 52 unit and integration tests (client, fixtures, scoring, contrast, CSV, the LLM loop with a scripted model, and the full agent on fixtures). One test asserts that every request uses only documented Qloo parameters.
 
 ### Challenges we ran into
 - **No API key for most of the build.** We wrote the client against the published reference and Qloo's own harness, then built a fixture mode by running the real agent against a schema-faithful stand-in. `scripts/qloo-smoke.sh` validated every call the moment the key arrived.
 - **Silent failures.** Qloo ignores invalid parameters, so a typo returns an empty list rather than an error. The client flags every empty result in the trace, and the smoke test checks that location parameters actually change the answer.
+- **Real data broke three assumptions.** The locality heatmap boundary took about 50 s per call live, so the agent now folds geohash cells (2 s) into cities. Trending percentiles came back as rank fractions (0.11 = top 11%), not 0-100. Two cities of one metro (New York and Brooklyn) both made the route, so the planner now books one date per metro.
+- **No LLM key on the host.** The plain-LLM answers are recorded ahead of time and labelled as cached in the UI; everything Qloo is live.
 - **Keeping the LLM honest.** Tools return Qloo IDs and scores. The brief's numbers come from tool results and are never generated, and the coverage guard catches a model that tries to finish early.
 
 ### Accomplishments that we're proud of
@@ -80,26 +83,27 @@ Ticketing and capacity data next to fan concentration (room-size recommendations
 ```
 GET https://hackathon.api.qloo.com/v2/insights
     ?filter.type=urn:heatmap
-    &signal.interests.entities=<Noah Kahan entity ID>
+    &signal.interests.entities=<Tyler Childers entity ID>
     &filter.location=POLYGON((-125 24, -66 24, -66 50, -125 50, -125 24))
     &output.heatmap.boundary=urn:geohash
     &take=50
 X-Api-Key: <redacted>
 → results.heatmap[]: { location: {latitude, longitude}, query: {affinity, affinity_rank, popularity} }
-→ folded to cities; affinity high + popularity low = "sleeper" market ([[live example]])
+→ 6,391 geohash cells, folded to cities; affinity high + popularity low = "sleeper" market
+  (live: Charlottesville, VA, fan score 93, over-indexes +0.26 for its size)
 ```
 
 ---
 
 ## Built with
-`qloo` · `qloo-insights-api` · `typescript` · `next.js` · `react` · `node.js` · `leaflet` · `natural-earth` · `zod` · `vitest` · `openai-compatible-api` · `llm-tool-calling` · `fly.io` · `docker`
+`qloo` · `qloo-insights-api` · `typescript` · `next.js` · `react` · `node.js` · `leaflet` · `natural-earth` · `zod` · `vitest` · `openai-compatible-api` · `llm-tool-calling` · `claude` · `vercel`
 
 ## Submission checklist (rules)
-- [ ] Functional demo link, externally hosted, free, no login, up until 16 Nov 23:45 EST
+- [x] Functional demo link, externally hosted, free, no login: https://headliner-qloo-eta.vercel.app (keep it up until 16 Nov 23:45 EST)
 - [ ] Public GitHub repo with all source, assets and instructions (`README.md`, `docs/DEPLOY.md`)
 - [ ] Open-source licence file (MIT) **visible in the GitHub About section** (GitHub detects `LICENSE` automatically once the repo is public; check the sidebar)
 - [ ] Text description (above), in English
 - [ ] Uses Qloo's API (Stage 1 pass/fail) and is agentic (tool-calling agent)
 - [ ] Video (optional per the rules, but judges "may judge on text, images and video")
-- [ ] Screenshots re-shot in live mode; no fixture numbers presented as Qloo data
+- [x] Screenshots re-shot in live mode; no fixture numbers presented as Qloo data
 - [ ] No API keys in the repo, screenshots or video

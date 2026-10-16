@@ -1,13 +1,17 @@
 # Headliner: tour decisions on Qloo taste data, not guesswork
 
-**Headliner is an agent for live-music promoters and tour planners. Give it an artist and it routes the tour, picks the opening act and lines up sponsors, using Qloo's taste graph. Every Qloo call it makes is shown in a live reasoning trace, and its plan sits next to a plain LLM's answer to the same question.** Ask a plain LLM to route a folk-pop tour and you get the usual big cities (New York, Los Angeles, Chicago) and the usual sponsors (Coca-Cola, Pepsi). Headliner asks **Qloo** where the fans actually concentrate. It finds the *sleeper* markets that over-index for their size, the opener whose fans overlap in each city, and the brands this audience buys. Then it scores the LLM's cities with the same Qloo calls, so the difference is measured rather than claimed.
+**Headliner is an agent for live-music promoters and tour planners. Give it an artist and it routes the tour, picks the opening act and lines up sponsors, using Qloo's taste graph. Every Qloo call it makes is shown in a live reasoning trace, and its plan sits next to a plain LLM's answer to the same question.** Ask a plain LLM (Claude Haiku 4.5) to route an 8-date Tyler Childers tour and it sends him to Philadelphia, Boston and Toronto. Qloo scores those cities 75, 86 and 57 for his fans; Headliner's route averages **96 vs 86** and starts in Asheville, NC, a market the LLM never named. Headliner asks **Qloo** where the fans actually concentrate. It finds the *sleeper* markets that over-index for their size, the opener whose fans overlap in each city, and the brands this audience buys. Then it scores the LLM's cities with the same Qloo calls, so the difference is measured rather than claimed.
 
-![Without Qloo vs with Qloo: the plain LLM's cities scored by Qloo, next to Headliner's routed tour (fixture mode: illustrative data)](docs/img/contrast.png)
-<sub>Screenshot from **fixture mode**. The plain-LLM column is a real recorded LLM answer. The Qloo numbers are illustrative placeholders in Qloo's documented response format, used until the hackathon API key is live.</sub>
+![Without Qloo vs with Qloo: the plain LLM's cities scored by Qloo, next to Headliner's routed tour for Tyler Childers](docs/img/contrast.png)
+<sub>Live Qloo data (hackathon API, 16 Oct 2026). The plain-LLM column is a cached answer from Claude Haiku 4.5 to the same prompt; see "What's live and what's cached" below.</sub>
 
-<!-- After the Qloo key arrives: run scripts/qloo-smoke.sh, then scripts/screenshots.ts against live mode, and replace the screenshots and the sentence above with the real numbers. -->
+**Live demo: https://headliner-qloo-eta.vercel.app** · no login · one click: **Try a sample → Tyler Childers**
 
-**Live demo:** _URL here after deploy_ · no login · one click: **Try a sample → Noah Kahan**
+### What's live and what's cached
+
+- **Qloo: live.** Every request in the trace goes to `hackathon.api.qloo.com`. Responses and finished runs are cached server-side, and 16 artists (the samples plus a dozen judges might type) are pre-run before each deploy so they replay instantly. Any other artist runs live, in about 15–25 s.
+- **Planner: deterministic** on the demo host (the same 12 Qloo tools in a fixed order). With `LLM_*` configured, a tool-calling LLM plans instead ([example run](docs/LLM_PLANNER_RUN.md)).
+- **"Without Qloo" answers: cached.** The demo host holds no LLM key, so the plain-LLM answers were recorded ahead of time from Claude Haiku 4.5 with the app's exact prompt (`fixtures/baseline/`, labelled "cached answer" in the UI) for those 16 artists. For other artists the comparison panel says so instead of inventing one.
 
 ---
 
@@ -57,13 +61,14 @@ This answers the hackathon brief's line, *"If your submission would work the sam
 |---|---|
 | ![Routing](docs/img/routing.png) | ![Trace](docs/img/trace.png) |
 
-Full page: [desktop](docs/img/full-desktop.png) · [mobile](docs/img/mobile.png) · [printable brief](docs/img/brief.png). Devpost gallery and thumbnail: [`docs/gallery/`](docs/gallery). All screenshots are from fixture mode (illustrative data).
+Full page: [desktop](docs/img/full-desktop.png) · [mobile](docs/img/mobile.png) · [printable brief](docs/img/brief.png). Devpost gallery and thumbnail: [`docs/gallery/`](docs/gallery). All screenshots are from the live deployment (live Qloo data).
 
 ## Architecture
 
 - **Next.js 15 + TypeScript**, one deployable app. `POST /api/run` streams agent events as NDJSON, and the UI renders the reasoning trace as they arrive.
 - **Agent** (`src/lib/agent/`): 12 Qloo-backed tools. With `LLM_*` set, an OpenAI-compatible tool-calling loop chooses the tools and writes the brief. Every tool call carries a one-line `reason` shown in the trace. Without an LLM, a deterministic planner runs the same tools. A coverage guard makes sure every decision in the brief is grounded in Qloo before the run finishes. [Example of a real LLM-planned run](docs/LLM_PLANNER_RUN.md).
 - **Qloo client** (`src/lib/qloo/`): typed endpoints with zod schemas, retries on 429/5xx, flags empty results (Qloo silently ignores invalid parameters), refuses any host other than `hackathon.api.qloo.com`, and caches responses server-side (memory + disk). Finished runs are cached too and replayed with their trace, so judging never waits.
+- **Deploy**: Vercel, from a local prebuilt build so the pre-run demo artists (`seed/runs/`, gitignored: Qloo data stays out of the repo) ship with the functions. See [docs/DEPLOY.md](docs/DEPLOY.md).
 - **Fixture mode**: with no `QLOO_API_KEY`, Qloo answers come from `fixtures/qloo/`, generated by running the real agent against a schema-faithful stand-in. They are **labelled as fixtures in the UI and the code**, and the names and scores in them are placeholders. `scripts/qloo-smoke.sh` re-records real fixtures into `fixtures/live/`, which is gitignored because Qloo data must not be published in a public repo.
 - **Map**: Leaflet over a self-hosted Natural Earth basemap, so no tile service can rate-limit or expire during judging.
 
@@ -73,7 +78,7 @@ Full page: [desktop](docs/img/full-desktop.png) · [mobile](docs/img/mobile.png)
 npm ci
 cp .env.example .env      # leave QLOO_API_KEY empty for fixture mode
 npm run dev               # http://localhost:3000, then click a sample artist
-npm test                  # 50 tests
+npm test                  # 52 tests
 ```
 
 With a key: `QLOO_API_KEY=... scripts/qloo-smoke.sh` checks every endpoint and parameter the app uses, then re-records fixtures. Deploy: see [docs/DEPLOY.md](docs/DEPLOY.md).
