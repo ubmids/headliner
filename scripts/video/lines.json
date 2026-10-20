@@ -1,0 +1,15 @@
+[
+ {"id": "intro", "text": "Hey, I'm Subomi. This is Headliner, my entry for the Qloo hackathon."},
+ {"id": "problem", "text": "So, a headline tour is a big bet. Rooms booked months ahead, an opening act, sponsors who want to know who's actually in the crowd. And a lot of that still comes down to gut feel."},
+ {"id": "what", "text": "Headliner is an agent that makes those calls from Qloo's taste graph. Where to play, who opens, and who pays. And it shows you what a plain LLM would have said instead."},
+ {"id": "click", "text": "Let me show you. I'll click Tyler Childers."},
+ {"id": "llm", "text": "On the left, a plain LLM. Claude Haiku, same question, no data, and yes, it's a cached answer. It sends Tyler to Philadelphia, Boston and Toronto. Qloo scores those seventy-five, eighty-six, fifty-seven."},
+ {"id": "qloo", "text": "On the right, the Qloo route. It opens in Asheville, a ninety-eight, which the LLM never named. Overall, ninety-six against eighty-six."},
+ {"id": "trace", "text": "Over here is the reasoning trace. Every line is a real Qloo call, with the reason it was made. A heatmap of where his fans are, then every city scored. Fifty-nine requests, replayed from cache here, so it's instant."},
+ {"id": "route", "text": "So, the routing. Asheville, Knoxville, Lexington, Louisville. Kind of the heartland you'd hope for, with real rooms from Qloo, like the Orange Peel and Rupp Arena."},
+ {"id": "map", "text": "The blue dashed rings are the LLM's picks. And that pink bar is a sleeper, Charlottesville. Fans over-index for its size, so you play a smaller room and sell it out."},
+ {"id": "support", "text": "Who opens? Artists his fans already love, kept below his popularity, then re-ranked city by city. Charley Crockett comes out on top, and Qloo's comparison shows why. Acoustic guitar, folk, blues, country."},
+ {"id": "sponsors", "text": "And who pays. Qloo shows what this crowd actually buys. Twisted Tea tour-wide, and local leads like Ole Smoky Distillery in Knoxville. You can't guess that."},
+ {"id": "brief", "text": "Then it all goes into a one-page brief and a spreadsheet, ready for the meeting."},
+ {"id": "close", "text": "So that's Headliner. Tour decisions on taste data, not guesswork. Thanks for watching."}
+]

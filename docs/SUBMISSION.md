@@ -24,7 +24,7 @@ _(158 characters)_
 - Code: `https://github.com/ubmids/headliner` (MIT)
 
 ## Video
-90–120 s, see `docs/DEMO_SCRIPT.md`. Upload unlisted to YouTube and paste the link.
+**Ready to upload:** `~/Desktop/hackathons/headliner-video/headliner-narrated.mp4` (2:33, 1080p, narrated in first person; captions in `headliner-narrated.srt` next to it; script in `docs/NARRATION.md`). Optional for this event ("Demo videos are not required", qloo.devpost.com), but judges may judge on text, images and video. Upload to YouTube as **Public or Unlisted** (not Private), add the SRT as English subtitles, paste the link.
 
 ---
 
@@ -89,7 +89,7 @@ GET https://hackathon.api.qloo.com/v2/insights
     &take=50
 X-Api-Key: <redacted>
 → results.heatmap[]: { location: {latitude, longitude}, query: {affinity, affinity_rank, popularity} }
-→ 6,391 geohash cells, folded to cities; affinity high + popularity low = "sleeper" market
+→ 10,846 geohash cells, folded to 14 cities; affinity high + popularity low = "sleeper" market
   (live: Charlottesville, VA, fan score 93, over-indexes +0.26 for its size)
 ```
 
@@ -104,6 +104,6 @@ X-Api-Key: <redacted>
 - [ ] Open-source licence file (MIT) **visible in the GitHub About section** (GitHub detects `LICENSE` automatically once the repo is public; check the sidebar)
 - [ ] Text description (above), in English
 - [ ] Uses Qloo's API (Stage 1 pass/fail) and is agentic (tool-calling agent)
-- [ ] Video (optional per the rules, but judges "may judge on text, images and video")
+- [x] Video made: `~/Desktop/hackathons/headliner-video/headliner-narrated.mp4` (optional per the rules; judges "may judge on text, images and video"). Upload and paste the link.
 - [x] Screenshots re-shot in live mode; no fixture numbers presented as Qloo data
 - [ ] No API keys in the repo, screenshots or video
